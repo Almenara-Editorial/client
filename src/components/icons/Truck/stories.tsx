@@ -1,13 +1,13 @@
-import { {{pascalCase name}} } from '.'
+import { Truck } from '.'
 import { Story, Meta } from '@storybook/react'
 
 export default {
-  title: '{{pascalCase name}}',
-  component: {{pascalCase name}},
+  title: 'Truck',
+  component: Truck,
   args: {
     title: 'React Avançado',
     description: 'Typescript, ReactJS, NextJS e Styled Components'
   }
 } as Meta
 
-export const Basic: Story = (args) => <{{pascalCase name}} {...args} />
+export const Basic: Story = (args) => <Truck {...args} />
