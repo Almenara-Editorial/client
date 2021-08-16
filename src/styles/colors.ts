@@ -2,7 +2,7 @@ export const colors = {
   'blue-100': 'rgba(229, 236, 255, 1)',
   'blue-200': 'rgba(178, 198, 255, 1)',
   'blue-300': 'rgba(102, 140, 255, 1)',
-  'blue-400': 'rgba(51, 102, 255, 1)',
+  'blue-400': '#1149F0',
   'blue-500': 'rgba(0, 55, 219, 1)',
   'blue-600': 'rgba(0, 42, 168, 1)',
   'blue-700': 'rgba(0, 29, 117, 1)',
@@ -27,5 +27,6 @@ export const colors = {
   'yellow-800': 'rgba(178, 119, 0, 1)',
   'yellow-900': 'rgba(153, 102, 0, 1)',
   red: 'rgba(255, 89, 100, 1)',
-  text: 'rgba(22, 24, 29, 1)'
+  text: 'rgba(22, 24, 29, 1)',
+  white: '#ffff'
 }

@@ -70,7 +70,7 @@ const GlobalStyles = createGlobalStyle`
     --title-light: 400;
     --title-regular: 600;
     --body-regular: 400;
-    --title-bold: 700;
+    --body-bold: 700;
 
     --color-primary-100: ${colors['blue-100']};
     --color-primary-200: ${colors['blue-200']};
@@ -100,6 +100,7 @@ const GlobalStyles = createGlobalStyle`
     --color-secondary-800: ${colors['yellow-800']};
     --color-secondary-900: ${colors['yellow-900']};
     --color-tertiary-500: ${colors['red']};
+    --white: ${colors.white};
   }
 
   * {
