@@ -2,12 +2,8 @@ import { ShopBagAdd } from '.'
 import { Story, Meta } from '@storybook/react'
 
 export default {
-  title: 'ShopBagAdd',
-  component: ShopBagAdd,
-  args: {
-    title: 'React Avançado',
-    description: 'Typescript, ReactJS, NextJS e Styled Components'
-  }
+  title: 'icons/ShopBagAdd',
+  component: ShopBagAdd
 } as Meta
 
 export const Basic: Story = (args) => <ShopBagAdd {...args} />

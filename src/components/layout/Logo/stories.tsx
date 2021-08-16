@@ -2,10 +2,10 @@ import { Logo } from '.'
 import { Story, Meta } from '@storybook/react'
 
 export default {
-  title: 'Logo',
+  title: 'icons/Logo',
   component: Logo,
   args: {
-    title: 'React Avançado',
+    title: 'icons/React Avançado',
     description: 'Typescript, ReactJS, NextJS e Styled Components'
   }
 } as Meta

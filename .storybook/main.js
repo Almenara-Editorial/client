@@ -6,7 +6,7 @@ module.exports = {
     return config;
   },
   stories: [
-    "../src/components/**/stories.tsx"
+    "../src/components/**/stories.ts?(x)"
   ],
   addons: [
     "@storybook/addon-essentials",
