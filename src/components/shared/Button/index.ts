@@ -4,7 +4,7 @@ type ButtonVariant = 'primary' | 'neutral'
 type ButtonColor = 'primary' | 'neutral' | 'background'
 type ButtonSize = 'rg-narrow' | 'rg-medium' | 'rg-wide' | 'rg-full' | 'sm-narrow' | 'sm-medium' | 'sm-wide' | 'sm-full'
 
-type ButtonProps = {
+export type ButtonProps = {
   size?: ButtonSize
   uppercase?: boolean
   outline?: boolean
@@ -18,17 +18,21 @@ export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outl
   'data-is-uppercase': uppercase,
   'data-is-outline': outline
 }))<ButtonProps>`
+  display: inline-block;
   width: var(--button-width);
   height: var(--button-height);
   padding-inline: var(--button-padding-x);
   border: 0;
   border-radius: var(--radius-md);
+  line-height: var(--button-height);
 
   background-color: var(--button-color);
   color: var(--color-white);
 
   font-size: var(--font-sm);
   font-weight: var(--body-bold);
+  text-decoration: none;
+  text-align: center;
 
   cursor: pointer;
   transition: all 0.1s linear;

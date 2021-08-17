@@ -99,7 +99,8 @@ const GlobalStyles = createGlobalStyle`
     --color-secondary-700: ${colors['yellow-700']};
     --color-secondary-800: ${colors['yellow-800']};
     --color-secondary-900: ${colors['yellow-900']};
-    --color-tertiary-500: ${colors['red']};
+    --color-tertiary-500: ${colors['red-500']};
+    --color-tertiary-400: ${colors['red-400']};
     --color-danger-300: ${colors['danger']};
     --color-white: ${colors.white};
     --color-text: ${colors['neutral-900']};
