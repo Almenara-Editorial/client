@@ -5,15 +5,7 @@ import * as React from 'react'
 export function Logo(props: React.SVGProps<SVGSVGElement>) {
   return (
     <Container>
-      <svg
-        width={150}
-        height={49}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        role="img"
-        aria-label="Almenara Editorial"
-        {...props}
-      >
+      <svg width={150} height={49} fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Almenara Editorial" {...props}>
         <path
           d="M14.142 44.843c-6.367.515-12.015-3.677-14.06-5.852a.082.082 0 01-.02-.037c-.05-.206-.113-.617.006-.778.122-.166 2.619 1.85 3.852 2.879 1.233 1.029 5.336 3.558 15.256 2.638 16.986-3 17.97-.383 21.725 1.15 3.753 1.532 3.381 2.003 2.254 3.283-1.127 1.281-4.958-2.484-7.365-4.433-2.408-1.948-13.67.504-21.648 1.15zM25.02 27.996c3.08-1.164 5.08-.82 5.745-.484a.076.076 0 01.042.075c-.024.248-.226.61-.897.411a.09.09 0 00-.017-.003c-3.704-.358-5.237.954-9.305 1.85-4.432.636-9.368-1.85-10.452-2.309-.81-.46-.273-1.171.81-.449 4.75 2.803 10.178 1.949 14.074.909z"
           fill="currentColor"

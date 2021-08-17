@@ -2,15 +2,7 @@ import styled from 'styled-components'
 
 type ButtonVariant = 'primary' | 'neutral'
 type ButtonColor = 'primary' | 'neutral' | 'background'
-type ButtonSize =
-  | 'rg-narrow'
-  | 'rg-medium'
-  | 'rg-wide'
-  | 'rg-full'
-  | 'sm-narrow'
-  | 'sm-medium'
-  | 'sm-wide'
-  | 'sm-full'
+type ButtonSize = 'rg-narrow' | 'rg-medium' | 'rg-wide' | 'rg-full' | 'sm-narrow' | 'sm-medium' | 'sm-wide' | 'sm-full'
 
 type ButtonProps = {
   size?: ButtonSize
@@ -20,14 +12,12 @@ type ButtonProps = {
   variant?: ButtonVariant
 }
 
-export const Button = styled.button.attrs<ButtonProps>(
-  ({ uppercase = true, outline, color = 'primary', size = 'rg-medium' }) => ({
-    'data-size': size,
-    'data-color': color,
-    'data-is-uppercase': uppercase,
-    'data-is-outline': outline
-  })
-)<ButtonProps>`
+export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outline, color = 'primary', size = 'rg-medium' }) => ({
+  'data-size': size,
+  'data-color': color,
+  'data-is-uppercase': uppercase,
+  'data-is-outline': outline
+}))<ButtonProps>`
   width: var(--button-width);
   height: var(--button-height);
   padding-inline: var(--button-padding-x);
@@ -35,7 +25,7 @@ export const Button = styled.button.attrs<ButtonProps>(
   border-radius: var(--radius-md);
 
   background-color: var(--button-color);
-  color: var(--white);
+  color: var(--color-white);
 
   font-size: var(--font-sm);
   font-weight: var(--body-bold);
@@ -49,8 +39,7 @@ export const Button = styled.button.attrs<ButtonProps>(
 
   &:focus {
     background-color: var(--button-color-focus);
-    box-shadow: 0px 0px 0px 4px #ffffff,
-      0px 0px 0px 8px var(--button-color-focus-outline);
+    box-shadow: 0px 0px 0px 4px #ffffff, 0px 0px 0px 8px var(--button-color-focus-outline);
   }
 
   &[data-is-outline='true'] {
@@ -60,12 +49,12 @@ export const Button = styled.button.attrs<ButtonProps>(
 
     &:hover {
       background-color: var(--button-color-hover);
-      color: var(--white);
+      color: var(--color-white);
     }
 
     &:focus {
       background-color: var(--button-color-focus);
-      color: var(--white);
+      color: var(--color-white);
     }
   }
 

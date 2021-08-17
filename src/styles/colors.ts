@@ -27,6 +27,7 @@ export const colors = {
   'yellow-800': 'rgba(178, 119, 0, 1)',
   'yellow-900': 'rgba(153, 102, 0, 1)',
   red: 'rgba(255, 89, 100, 1)',
+  danger: '#D70128',
   text: 'rgba(22, 24, 29, 1)',
   white: '#ffff'
 }

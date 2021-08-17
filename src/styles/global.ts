@@ -100,7 +100,9 @@ const GlobalStyles = createGlobalStyle`
     --color-secondary-800: ${colors['yellow-800']};
     --color-secondary-900: ${colors['yellow-900']};
     --color-tertiary-500: ${colors['red']};
-    --white: ${colors.white};
+    --color-danger-300: ${colors['danger']};
+    --color-white: ${colors.white};
+    --color-text: ${colors['neutral-900']};
   }
 
   * {
@@ -121,7 +123,8 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: var(--color-text);
   }
 `
 
