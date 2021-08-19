@@ -49,6 +49,7 @@ const GlobalStyles = createGlobalStyle`
     --space-xs: 1.2rem;
     --space-sm: 1.4rem;
     --space-rg: 1.6rem;
+    --space-md: 1.8rem;
     --space-lg: 2.4rem;
     --space-xl: 3.2rem;
     --space-2xl: 4rem;
@@ -103,7 +104,14 @@ const GlobalStyles = createGlobalStyle`
     --color-tertiary-400: ${colors['red-400']};
     --color-danger-300: ${colors['danger']};
     --color-white: ${colors.white};
+    --color-background: ${colors.background};
     --color-text: ${colors['neutral-900']};
+
+    --input-border-color: var(--color-neutral-200);
+    --input-disabled-background: var(--color-neutral-100);
+    --input-focus-border-color: var(--color-primary-500);
+    --input-padding-x: var(--space-md);
+    --input-label-color: var(--color-neutral-300);
   }
 
   * {

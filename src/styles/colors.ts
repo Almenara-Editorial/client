@@ -30,5 +30,6 @@ export const colors = {
   'red-400': '#FF7C84',
   danger: '#D70128',
   text: 'rgba(22, 24, 29, 1)',
-  white: '#ffff'
+  white: '#ffff',
+  background: '#ffff'
 }
