@@ -4,9 +4,35 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-sm);
 
-  font-size: 1.6rem;
-  font-weight: var(--body-bold);
+  input,
+  & {
+    font: inherit;
+    font-size: 1.6rem;
+    text-align: center;
+    font-weight: var(--body-bold);
+  }
+
+  input {
+    width: 100%;
+    height: 3.2rem;
+    border: 0;
+    border-bottom: 1px solid var(--input-label-color);
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  span {
+    width: 100%;
+    text-align: center;
+    user-select: none;
+    cursor: text;
+  }
 
   button {
     padding: 1rem;
@@ -20,12 +46,18 @@ export const Container = styled.div`
 
     cursor: pointer;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: var(--color-neutral-50);
     }
 
-    &:active {
+    &:active:not(:disabled) {
       background-color: var(--color-neutral-100);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      border: 0;
+      color: var(--color-neutral-300);
     }
   }
 `

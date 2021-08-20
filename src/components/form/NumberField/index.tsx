@@ -1,5 +1,6 @@
 import { Minus, Plus } from '@/components/icons'
-import { InputHTMLAttributes, useEffect, useState } from 'react'
+import { useOnClickOutside } from '@/hooks'
+import { ChangeEvent, InputHTMLAttributes, useEffect, useRef, useState } from 'react'
 import { Container } from './styles'
 
 type NumberFieldProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -10,17 +11,34 @@ type NumberFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export const NumberField = ({ value: initialValue = 0, min, max, onChange }: NumberFieldProps) => {
   const [value, setValue] = useState(Number(initialValue))
+  const [isInput, setIsInput] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
+  useOnClickOutside<HTMLInputElement>(inputRef, () => setIsInput(false))
+
+  function setNewValue(value: number) {
+    if ((typeof max === 'number' && value > max) || (typeof min === 'number' && value < min)) return
+
+    setValue(value)
+  }
 
   function handleAdd() {
     if (typeof max === 'number' && value === max) return
 
-    setValue((value) => value + 1)
+    setNewValue(value + 1)
   }
 
   function handleSub() {
     if (typeof min === 'number' && value === min) return
 
-    setValue((value) => value - 1)
+    setNewValue(value - 1)
+  }
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    setNewValue(Number(e.target.value))
+  }
+
+  function handleChangeToInput() {
+    setIsInput(true)
   }
 
   useEffect(() => {
@@ -29,11 +47,15 @@ export const NumberField = ({ value: initialValue = 0, min, max, onChange }: Num
 
   return (
     <Container>
-      <button onClick={handleSub}>
+      <button onClick={handleSub} disabled={min === value}>
         <Minus />
       </button>
-      <span>{value}</span>
-      <button onClick={handleAdd}>
+      {isInput ? (
+        <input type="number" ref={inputRef} value={value} onChange={handleChange} />
+      ) : (
+        <span onClick={handleChangeToInput}>{value}</span>
+      )}
+      <button onClick={handleAdd} disabled={max === value}>
         <Plus />
       </button>
     </Container>
