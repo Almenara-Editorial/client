@@ -16,6 +16,7 @@
     "build-storybook": "build-storybook -s ./public"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.0",
     "next": "^11.0.1",
     "next-pwa": "^5.2.23",
     "plop": "^2.7.4",

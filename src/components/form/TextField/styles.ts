@@ -3,11 +3,11 @@ import { Label } from '../Label'
 
 export const Input = styled.input`
   width: 100%;
-  height: 5.1rem;
+  height: var(--input-height);
   padding-inline: var(--input-padding-x);
   box-shadow: 0 0 0 1px var(--input-border-color);
   border: 0;
-  border-radius: var(--radius-md);
+  border-radius: var(--input-border-radius);
 
   font-size: 1.6rem;
   color: var(--color-text);

@@ -112,6 +112,8 @@ const GlobalStyles = createGlobalStyle`
     --input-focus-border-color: var(--color-primary-500);
     --input-padding-x: var(--space-md);
     --input-label-color: var(--color-neutral-300);
+    --input-height: 5.1rem;
+    --input-border-radius: var(--radius-md);
   }
 
   * {
