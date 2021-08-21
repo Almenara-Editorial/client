@@ -1,3 +1,4 @@
+import { FieldGroup } from '@/components/form/FieldGroup'
 import styled from 'styled-components'
 
 type ButtonVariant = 'primary' | 'neutral'
@@ -23,6 +24,7 @@ export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outl
   height: var(--button-height);
   padding-inline: var(--button-padding-x);
   border: 0;
+  box-shadow: 0 0 0 1px var(--button-color);
   border-radius: var(--radius-md);
   line-height: var(--button-height);
 
@@ -41,9 +43,22 @@ export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outl
     background-color: var(--button-color-hover);
   }
 
-  &:focus {
+  &:focus,
+  &:active {
     background-color: var(--button-color-focus);
     box-shadow: 0px 0px 0px 4px #ffffff, 0px 0px 0px 8px var(--button-color-focus-outline);
+  }
+
+  &:focus-visible {
+    background-color: var(--button-color-hover);
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:active {
+    background-color: var(--button-color-active);
+    outline: none;
+    box-shadow: none;
   }
 
   &[data-is-outline='true'] {
@@ -67,6 +82,7 @@ export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outl
     --button-color-hover: var(--color-primary-400);
     --button-color-focus: var(--color-primary-500);
     --button-color-focus-outline: var(--color-primary-200);
+    --button-color-active: var(--color-primary-600);
   }
 
   &[data-is-outline='true'][data-color='primary'] {
@@ -119,5 +135,12 @@ export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outl
     color: var(--color-neutral-400);
     border: 0;
     pointer-events: none;
+  }
+
+  ${FieldGroup} & {
+    z-index: var(--layer-base);
+    --button-width: fit-content;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 `

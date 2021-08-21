@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { FieldGroup } from '../FieldGroup'
 import { Label } from '../Label'
 
 export const Input = styled.input`
@@ -17,13 +18,16 @@ export const Input = styled.input`
     box-shadow: 0 0 0 2px var(--input-focus-border-color);
   }
 
-  &[type='search']::placeholder {
-    font: inherit;
-    opacity: 1;
-    color: var(--input-label-color);
+  &[type='search'],
+  &[data-hidden-placeholder='false'] {
+    ::placeholder {
+      font: inherit;
+      opacity: 1;
+      color: var(--input-label-color);
+    }
   }
 
-  &:not([type='search']) {
+  &:not([type='search'])[data-hidden-placeholder='true'] {
     ::placeholder {
       color: transparent;
     }
@@ -91,6 +95,11 @@ export const Input = styled.input`
     ~ button {
       display: none;
     }
+  }
+
+  ${FieldGroup} & {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 `
 

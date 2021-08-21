@@ -12,7 +12,7 @@ export const Basic: Story = (args) => {
       <TextField label="Default Text Field" {...args} />
       <TextField label="Password Field" type="password" {...args} />
       <TextField label="Disabled Field" disabled {...args} />
-      <TextField label="Search Field" type="search" {...args} />
+      <TextField placeholder="Search Field" type="search" {...args} />
     </div>
   )
 }
