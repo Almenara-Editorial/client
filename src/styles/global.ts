@@ -61,6 +61,11 @@ const GlobalStyles = createGlobalStyle`
     --layer-modal: 40;
     --layer-top: 50;
 
+    --font-title: "Roboto Slab", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-body: "Noto Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
     --font-xs: 1.2rem;
     --font-sm: 1.4rem;
     --font-rg: 1.6rem;
@@ -102,6 +107,7 @@ const GlobalStyles = createGlobalStyle`
     --color-secondary-900: ${colors['yellow-900']};
     --color-tertiary-500: ${colors['red-500']};
     --color-tertiary-400: ${colors['red-400']};
+    --color-success-300: ${colors['success-300']};
     --color-danger-300: ${colors['danger']};
     --color-white: ${colors.white};
     --color-background: ${colors.background};

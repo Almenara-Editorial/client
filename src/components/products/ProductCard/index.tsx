@@ -1,8 +1,27 @@
-import { Container } from './styles'
+import { Container, OffPercentage } from './styles'
+import { Button, ButtonProps } from '@/components/shared'
+import { ProductCardName, ProductCardPrice, ProductCardThumbnail } from '@/components/products'
+import { ProductCardModel } from '@/models'
 
-export const ProductCard = () => (
+export type ProductCardProps = {
+  product: ProductCardModel
+  withBuyButton?: boolean
+  buyButtonProps?: Pick<ButtonProps, 'outline'>
+  withAddToCartButton?: boolean
+  offPercentage?: number
+}
+
+export const ProductCard = ({ product, withBuyButton, buyButtonProps, offPercentage }: ProductCardProps) => (
   <Container>
-    <h1>ProductCard</h1>
+    {offPercentage && <OffPercentage>-{offPercentage}%</OffPercentage>}
+    <ProductCardThumbnail src={product.thumbnailSrc} />
+    <ProductCardName name={product.name} />
+    <ProductCardPrice price={product.price} />
+    {withBuyButton && (
+      <Button size="sm-full" {...buyButtonProps}>
+        Comprar agora
+      </Button>
+    )}
   </Container>
 )
 

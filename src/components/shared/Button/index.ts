@@ -13,7 +13,7 @@ export type ButtonProps = {
   variant?: ButtonVariant
 }
 
-export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outline, color = 'primary', size = 'rg-medium' }) => ({
+export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outline, color = 'primary', size = 'rg-full' }) => ({
   'data-size': size,
   'data-color': color,
   'data-is-uppercase': uppercase,
