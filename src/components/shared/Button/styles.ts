@@ -1,24 +1,16 @@
 import { FieldGroup } from '@/components/form/FieldGroup'
 import styled from 'styled-components'
+import { ButtonProps } from '.'
 
-type ButtonVariant = 'primary' | 'neutral'
-type ButtonColor = 'primary' | 'neutral' | 'background'
-type ButtonSize = 'rg-narrow' | 'rg-medium' | 'rg-wide' | 'rg-full' | 'sm-narrow' | 'sm-medium' | 'sm-wide' | 'sm-full'
-
-export type ButtonProps = {
-  size?: ButtonSize
-  uppercase?: boolean
-  outline?: boolean
-  color?: ButtonColor
-  variant?: ButtonVariant
-}
-
-export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outline, color = 'primary', size = 'rg-full' }) => ({
-  'data-size': size,
-  'data-color': color,
-  'data-is-uppercase': uppercase,
-  'data-is-outline': outline
-}))<ButtonProps>`
+export const Container = styled.button.attrs<ButtonProps>(
+  ({ uppercase = true, outline, color = 'primary', size = 'rg-full', isLoading }) => ({
+    'data-size': size,
+    'data-color': color,
+    'data-is-uppercase': uppercase,
+    'data-is-outline': outline,
+    'data-is-loading': isLoading
+  })
+)<ButtonProps>`
   display: inline-block;
   width: var(--button-width);
   height: var(--button-height);
@@ -33,6 +25,7 @@ export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outl
 
   font-size: var(--font-sm);
   font-weight: var(--body-bold);
+  line-height: 0;
   text-decoration: none;
   text-align: center;
 
@@ -45,8 +38,10 @@ export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outl
 
   &:focus,
   &:active {
-    background-color: var(--button-color-focus);
     box-shadow: 0px 0px 0px 4px #ffffff, 0px 0px 0px 8px var(--button-color-focus-outline);
+  }
+  &:focus {
+    background-color: var(--button-color-focus);
   }
 
   &:focus-visible {
@@ -82,7 +77,7 @@ export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outl
     --button-color-hover: var(--color-primary-400);
     --button-color-focus: var(--color-primary-500);
     --button-color-focus-outline: var(--color-primary-200);
-    --button-color-active: var(--color-primary-600);
+    --button-color-active: var(--color-primary-500);
   }
 
   &[data-is-outline='true'][data-color='primary'] {
@@ -94,6 +89,10 @@ export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outl
     --button-color-hover: var(--color-neutral-800);
     --button-color-focus: var(--color-neutral-900);
     --button-color-focus-outline: var(--color-neutral-200);
+    --button-color-active: var(--color-neutral-900);
+    --button-color-loading: var(--color-neutral-900); //
+    --button-text-color: var(--color-neutral-900);
+    --button-text-color-loading: var(--color-white);
   }
 
   &[data-is-outline='true'][data-color='neutral'] {
@@ -130,10 +129,26 @@ export const Button = styled.button.attrs<ButtonProps>(({ uppercase = true, outl
     text-transform: uppercase;
   }
 
+  &[data-is-loading='true'] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    pointer-events: none;
+
+    background-color: var(--button-color-loading, --button-color);
+    color: var(--button-text-color-loading, --button-text-color);
+
+    i {
+      font-size: 1.8rem;
+    }
+  }
+
   &:disabled {
     background-color: var(--color-neutral-200);
     color: var(--color-neutral-400);
     border: 0;
+    box-shadow: 0 0 0 2px var(--color-neutral-200);
     pointer-events: none;
   }
 
