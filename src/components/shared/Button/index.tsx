@@ -14,6 +14,7 @@ export type ButtonProps = HTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant
   isLoading?: boolean
   disabled?: boolean
+  as?: React.ElementType | string
 }
 
 export function Button({ isLoading, children, ...rest }: ButtonProps) {

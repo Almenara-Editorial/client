@@ -11,21 +11,22 @@ export const Container = styled.button.attrs<ButtonProps>(
     'data-is-loading': isLoading
   })
 )<ButtonProps>`
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: var(--button-width);
   height: var(--button-height);
   padding-inline: var(--button-padding-x);
   border: 0;
   box-shadow: 0 0 0 1px var(--button-color);
   border-radius: var(--radius-md);
-  line-height: var(--button-height);
+  line-height: 100%;
 
   background-color: var(--button-color);
   color: var(--color-white);
 
   font-size: var(--font-sm);
   font-weight: var(--body-bold);
-  line-height: 0;
   text-decoration: none;
   text-align: center;
 
@@ -130,9 +131,6 @@ export const Container = styled.button.attrs<ButtonProps>(
   }
 
   &[data-is-loading='true'] {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 0.4rem;
     pointer-events: none;
 
