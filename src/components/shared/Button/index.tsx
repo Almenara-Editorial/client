@@ -3,7 +3,7 @@ import { HTMLAttributes } from 'react'
 import { Container } from './styles'
 
 type ButtonVariant = 'primary' | 'neutral'
-type ButtonColor = 'primary' | 'neutral' | 'background'
+type ButtonColor = 'primary' | 'neutral' | 'background' | 'white'
 type ButtonSize = 'rg-narrow' | 'rg-medium' | 'rg-wide' | 'rg-full' | 'sm-narrow' | 'sm-medium' | 'sm-wide' | 'sm-full'
 
 export type ButtonProps = HTMLAttributes<HTMLButtonElement> & {

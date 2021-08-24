@@ -1,4 +1,5 @@
 import { FieldGroup } from '@/components/form/FieldGroup'
+import { media } from '@/utils'
 import styled from 'styled-components'
 import { ButtonProps } from '.'
 
@@ -15,6 +16,7 @@ export const Container = styled.button.attrs<ButtonProps>(
   align-items: center;
   justify-content: center;
   width: var(--button-width);
+  min-width: var(--button-width);
   height: var(--button-height);
   padding-inline: var(--button-padding-x);
   border: 0;
@@ -96,6 +98,17 @@ export const Container = styled.button.attrs<ButtonProps>(
     --button-text-color-loading: var(--color-white);
   }
 
+  &[data-color='white'] {
+    --button-color: var(--color-white);
+    --button-color-hover: rgba(255, 255, 255, 0.1);
+    --button-color-focus: rgba(255, 255, 255, 0.1);
+    --button-color-focus-outline: rgba(255, 255, 255, 0.1);
+    --button-color-active: var(--color-white);
+    --button-color-loading: var(--color-white); //
+    --button-text-color: var(--color-white);
+    --button-text-color-loading: var(--color-white);
+  }
+
   &[data-is-outline='true'][data-color='neutral'] {
     --button-color-hover: var(--color-neutral-900);
   }
@@ -111,7 +124,7 @@ export const Container = styled.button.attrs<ButtonProps>(
   }
 
   &[data-size$='narrow'] {
-    --button-width: 20rem;
+    --button-width: 22rem;
   }
 
   &[data-size$='medium'] {
@@ -156,4 +169,10 @@ export const Container = styled.button.attrs<ButtonProps>(
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
+
+  ${media.lessThan('medium')`
+    &[data-size] {
+      --button-width: 100%;
+    }
+  `}
 `
