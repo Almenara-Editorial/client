@@ -1,3 +1,4 @@
+import { QuantityBuy } from '@/components/products/SingleProductBuyPanel/styles'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -59,5 +60,9 @@ export const Container = styled.div`
       border: 0;
       color: var(--color-neutral-300);
     }
+  }
+
+  ${QuantityBuy} & {
+    width: 15.5rem;
   }
 `

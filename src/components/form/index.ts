@@ -1,2 +1,7 @@
 export * from './Label'
 export * from './TextField'
+export * from './Checkbox'
+export * from './FieldGroup'
+export * from './Label'
+export * from './Select'
+export * from './NumberField'
