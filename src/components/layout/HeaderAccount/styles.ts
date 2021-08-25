@@ -10,4 +10,8 @@ export const Container = styled.div`
   > i {
     font-size: 2.4rem;
   }
+
+  > div > span {
+    white-space: nowrap;
+  }
 `

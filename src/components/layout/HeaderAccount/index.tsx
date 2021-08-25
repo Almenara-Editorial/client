@@ -12,7 +12,7 @@ export const HeaderAccount = ({ fullName }: HeaderAccountProps) => (
       <Person />
     </i>
     <div>
-      Olá, {fullName}
+      <span>Olá, {fullName}</span>
       <HeaderAccountDropdown
         links={[
           { title: 'Seus Pedidos', url: '/seus-pedidos' },

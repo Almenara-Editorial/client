@@ -12,7 +12,7 @@ export const Wrapper = styled(DefaultWrapper)`
   gap: var(--space-md);
   min-height: 8.7rem;
 
-  > div {
+  > div:first-child {
     flex: 5 0 54.3rem;
   }
 `
