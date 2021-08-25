@@ -39,7 +39,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   :root{
-    --grid-container:  144rem;
+    --grid-container:  124rem;
     --grid-gutter: 3.2rem;
 
     --radius-sm: 0.2rem;

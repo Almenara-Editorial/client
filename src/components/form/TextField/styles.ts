@@ -5,6 +5,7 @@ import { Label } from '../Label'
 export const Input = styled.input`
   width: 100%;
   height: var(--input-height);
+  max-height: var(--input-height);
   padding-inline: var(--input-padding-x);
   box-shadow: 0 0 0 1px var(--input-border-color);
   border: 0;
@@ -106,4 +107,5 @@ export const Input = styled.input`
 export const Container = styled.div`
   width: 100%;
   position: relative;
+  height: fit-content;
 `

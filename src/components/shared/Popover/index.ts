@@ -15,8 +15,9 @@ const animation = keyframes`
 export const Popover = styled.div`
   position: absolute;
   top: calc(100% + var(--space-sm));
+  right: 0;
 
-  width: 100%;
+  min-width: 100%;
   border-radius: var(--radius-lg);
 
   background-color: var(--color-background);
