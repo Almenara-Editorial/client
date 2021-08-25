@@ -31,3 +31,7 @@ Object.defineProperty(NextImage, "default", {
     />
   ),
 });
+
+const modalRoot = document.createElement('div');
+modalRoot.setAttribute('id', 'modal-portal');
+document.body.append(modalRoot);

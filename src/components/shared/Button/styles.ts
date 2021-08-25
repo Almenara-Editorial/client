@@ -123,6 +123,10 @@ export const Container = styled.button.attrs<ButtonProps>(
     --button-padding-x: 2.4rem;
   }
 
+  &[data-size$='smallest'] {
+    --button-width: 12.4rem;
+  }
+
   &[data-size$='narrow'] {
     --button-width: 22rem;
   }
