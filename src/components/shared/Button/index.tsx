@@ -1,4 +1,5 @@
 import { Loading } from '@/components/animations'
+import { Checkmark } from '@/components/icons'
 import { HTMLAttributes } from 'react'
 import { Container } from './styles'
 
@@ -23,17 +24,23 @@ export type ButtonProps = HTMLAttributes<HTMLButtonElement> & {
   color?: ButtonColor
   variant?: ButtonVariant
   isLoading?: boolean
+  isSuccess?: boolean
   disabled?: boolean
   as?: React.ElementType | string
 }
 
-export function Button({ isLoading, children, ...rest }: ButtonProps) {
+export function Button({ isLoading, isSuccess, children, ...rest }: ButtonProps) {
   return (
-    <Container {...rest} isLoading={isLoading} aria-busy={isLoading}>
+    <Container {...rest} isLoading={isLoading} isSuccess={isSuccess} aria-busy={isLoading}>
       {children}
       {isLoading && (
         <i>
           <Loading aria-label="Carregando" />
+        </i>
+      )}
+      {!isLoading && isSuccess && (
+        <i>
+          <Checkmark />
         </i>
       )}
     </Container>

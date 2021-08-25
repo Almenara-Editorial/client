@@ -1,6 +1,6 @@
+import { SingleProductModel } from '@/models'
 import { NumberField } from '@/components/form'
 import { Button, Hr } from '@/components/shared'
-import { SingleProductModel } from '@/models'
 import { SingleProductPrice, SingleProductTitle, SelectAddressButton, ButtonWishlist } from '..'
 import { Container, Bottom, QuantityBuy } from './styles'
 

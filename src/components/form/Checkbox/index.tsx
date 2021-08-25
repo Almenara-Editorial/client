@@ -2,20 +2,20 @@ import { Checkmark } from '@/components/icons'
 import { InputHTMLAttributes } from 'react'
 import { Container } from './styles'
 
-type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & {
-  checked: boolean
+type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'> & {
+  value: boolean
   onChange?: (value: boolean) => void
 }
 
-export const Checkbox = ({ checked, children, onChange, ...rest }: CheckboxProps) => {
+export const Checkbox = ({ value, children, onChange, ...rest }: CheckboxProps) => {
   function handleChange() {
-    onChange && onChange(!checked)
+    onChange && onChange(!value)
   }
 
   return (
     <Container>
-      <input type="checkbox" className="sr-only" onChange={handleChange} checked={checked} {...rest} />
-      <span>{checked && <Checkmark />}</span>
+      <input type="checkbox" className="sr-only" onChange={handleChange} checked={value} {...rest} />
+      <span>{value && <Checkmark />}</span>
       {children}
     </Container>
   )

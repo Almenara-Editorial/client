@@ -4,12 +4,13 @@ import styled from 'styled-components'
 import { ButtonProps } from '.'
 
 export const Container = styled.button.attrs<ButtonProps>(
-  ({ uppercase = true, outline, color = 'primary', size = 'rg-full', isLoading }) => ({
+  ({ uppercase = true, outline, color = 'primary', size = 'rg-full', isLoading, isSuccess }) => ({
     'data-size': size,
     'data-color': color,
     'data-is-uppercase': uppercase,
     'data-is-outline': outline,
-    'data-is-loading': isLoading
+    'data-is-loading': isLoading,
+    'data-is-success': isSuccess
   })
 )<ButtonProps>`
   display: inline-flex;
@@ -79,6 +80,8 @@ export const Container = styled.button.attrs<ButtonProps>(
     --button-color: var(--color-primary-500);
     --button-color-hover: var(--color-primary-400);
     --button-color-focus: var(--color-primary-500);
+    --button-color-loading: var(--color-primary-500);
+    --button-text-color-loading: var(--color-white);
     --button-color-focus-outline: var(--color-primary-200);
     --button-color-active: var(--color-primary-500);
   }
@@ -93,7 +96,7 @@ export const Container = styled.button.attrs<ButtonProps>(
     --button-color-focus: var(--color-neutral-900);
     --button-color-focus-outline: var(--color-neutral-200);
     --button-color-active: var(--color-neutral-900);
-    --button-color-loading: var(--color-neutral-900); //
+    --button-color-loading: var(--color-neutral-900);
     --button-text-color: var(--color-neutral-900);
     --button-text-color-loading: var(--color-white);
   }
@@ -107,6 +110,10 @@ export const Container = styled.button.attrs<ButtonProps>(
     --button-color-loading: var(--color-white); //
     --button-text-color: var(--color-white);
     --button-text-color-loading: var(--color-white);
+  }
+
+  &[data-is-success='true'] {
+    --button-color: var(--color-success-300);
   }
 
   &[data-is-outline='true'][data-color='neutral'] {
@@ -147,16 +154,19 @@ export const Container = styled.button.attrs<ButtonProps>(
     text-transform: uppercase;
   }
 
-  &[data-is-loading='true'] {
+  &[data-is-loading='true'],
+  &[data-is-success='true'] {
     gap: 0.4rem;
     pointer-events: none;
-
-    background-color: var(--button-color-loading, --button-color);
-    color: var(--button-text-color-loading, --button-text-color);
 
     i {
       font-size: 1.8rem;
     }
+  }
+
+  &[data-is-loading='true'] {
+    background-color: var(--button-color-loading, --button-color);
+    color: var(--button-text-color-loading, --button-text-color);
   }
 
   &:disabled {
