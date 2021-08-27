@@ -1,4 +1,4 @@
-import { Container as CartProductCardContainer } from '@/components/products/CartProductCard/styles'
+import { Container as CartProductCardContainer } from '@/components/cart/CartProductCard/styles'
 import styled from 'styled-components'
 
 export const Container = styled.div`

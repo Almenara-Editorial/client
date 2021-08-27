@@ -1,4 +1,5 @@
-type ProductModel = {
+export type ProductModel = {
+  id: string
   name: string
   slug: string
   price: number
@@ -13,5 +14,3 @@ export type ProductCardModel = Pick<ProductModel, 'name' | 'price' | 'slug'> & {
 export type SingleProductModel = ProductModel & {
   installments?: string
 }
-
-export type CartProductCardModel = ProductCardModel

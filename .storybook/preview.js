@@ -1,5 +1,7 @@
 import GlobalStyles from "../src/styles/global"
-import * as NextImage from "next/image";
+import { CartContext } from "../src/contexts"
+import * as nextImage from 'next/image';
+import * as cartProviderValues from "./mock"
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -13,23 +15,16 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <>
+    <CartContext.Provider value={cartProviderValues}>
       <GlobalStyles />
       <Story />
-    </>
+    </CartContext.Provider>
   ),
 ];
 
-const OriginalNextImage = NextImage.default;
-
-Object.defineProperty(NextImage, "default", {
+Object.defineProperty(nextImage, 'default', {
   configurable: true,
-  value: (props) => (
-    <OriginalNextImage
-      {...props}
-      unoptimized
-    />
-  ),
+  value: ({objectFit, ...rest}) => <img style={{objectFit}} {...rest} />
 });
 
 const modalRoot = document.createElement('div');

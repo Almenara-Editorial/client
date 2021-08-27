@@ -1,7 +1,6 @@
 import { CartProductCardModel } from '@/models'
-import { ProductCardName, ProductCardThumbnail, ProductCardPrice } from '@/components/products'
+import { ProductCardName, ProductCardThumbnail, ProductCardPrice, ButtonAddToCart } from '@/components/products'
 import { Container, Text } from './styles'
-import ButtonAddToCart from '../ButtonAddToCart'
 
 export type CartProductCardProps = {
   product: CartProductCardModel

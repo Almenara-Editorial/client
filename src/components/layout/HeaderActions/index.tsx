@@ -1,4 +1,5 @@
-import { FavoritesLink, HeaderAccount, HeaderAccountProps, CartButton } from '..'
+import { CartButton } from '@/components/cart'
+import { FavoritesLink, HeaderAccount, HeaderAccountProps } from '..'
 import { Container } from './styles'
 
 type HeaderActionsProps = HeaderAccountProps

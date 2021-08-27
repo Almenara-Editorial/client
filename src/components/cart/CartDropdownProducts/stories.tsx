@@ -1,13 +1,13 @@
-import { HeaderActions } from '.'
+import { CartDropdownProducts } from '.'
 import { Story, Meta } from '@storybook/react'
 
 export default {
-  title: 'HeaderActions',
-  component: HeaderActions,
+  title: 'CartDropdownProducts',
+  component: CartDropdownProducts,
   args: {
     title: 'React Avançado',
     description: 'Typescript, ReactJS, NextJS e Styled Components'
   }
 } as Meta
 
-export const Basic: Story = (args) => <HeaderActions fullName="Full name" {...args} />
+export const Basic: Story = (args) => <CartDropdownProducts {...args} />

@@ -4,10 +4,11 @@ import styled from 'styled-components'
 
 export type AnchorProps = HTMLAttributes<HTMLAnchorElement> & {
   size?: 'sm' | 'rg' | 'lg' | 'xl'
-  color?: 'neutral' | 'tertiary'
+  color?: 'neutral' | 'tertiary' | 'light'
 }
 
-export const Anchor = styled.a.attrs<AnchorProps>(({ size = 'rg' }) => ({
+export const Anchor = styled.a.attrs<AnchorProps>(({ size = 'rg', color = 'neutral' }) => ({
+  'data-color': color,
   style: { '--link-size': `var(--font-${size})` }
 }))<AnchorProps>`
   display: inline-block;
@@ -30,6 +31,11 @@ export const Anchor = styled.a.attrs<AnchorProps>(({ size = 'rg' }) => ({
   &[data-color='neutral'] {
     --link-color: var(--color-neutral-900);
     --link-color-hover: var(--color-neutral-800);
+  }
+
+  &[data-color='light'] {
+    --link-color: var(--color-neutral-500);
+    --link-color-hover: var(--color-neutral-400);
   }
 
   &[data-color='tertiary'] {
