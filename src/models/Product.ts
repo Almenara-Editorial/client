@@ -4,13 +4,17 @@ export type ProductModel = {
   slug: string
   price: number
   stock: number
-  imageSrc: string
+  imageSrc?: string
 }
 
-export type ProductCardModel = Pick<ProductModel, 'name' | 'price' | 'slug'> & {
-  thumbnailSrc: string
+type SeeMoreModel = {
+  name: string
+  url: string
 }
 
+export type ProductsCardsGroupModel = { id: string; title: string; products: ProductCardModel[]; seeMore?: SeeMoreModel }
+
+export type ProductCardModel = Pick<ProductModel, 'id' | 'name' | 'price' | 'slug' | 'imageSrc'>
 export type SingleProductModel = ProductModel & {
   installments?: string
 }

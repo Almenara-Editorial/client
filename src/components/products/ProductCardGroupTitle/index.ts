@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 
-export const SectionTitle = styled.div`
+export const ProductCardGroupTitle = styled.div`
   display: flex;
   align-items: center;
+  min-width: 100%;
+  margin-bottom: var(--space-xl);
 
   font-family: var(--font-title);
   font-size: 3.2rem;

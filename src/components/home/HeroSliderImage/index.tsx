@@ -3,7 +3,7 @@ import { Container } from './styles'
 
 export type HeroSliderImageModel = {
   src: string
-  url: string
+  url?: string | null
 }
 
 type HeroSliderImageProps = {

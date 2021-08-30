@@ -5,7 +5,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
   max-width: 21.2rem;
 `
 
@@ -23,4 +22,12 @@ export const OffPercentage = styled.span`
   font-weight: var(--body-bold);
   color: var(--color-white);
   background-color: var(--color-success-300);
+`
+export const Text = styled.div`
+  padding-inline: var(--space-lg);
+  padding-bottom: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
 `

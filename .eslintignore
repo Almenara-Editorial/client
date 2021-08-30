@@ -1,3 +1,5 @@
-react-slick.css
 node_modules
-.next
+**/.next/**
+**/_next/**
+**/dist/**
+**/__tmp__/**

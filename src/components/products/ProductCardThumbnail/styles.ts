@@ -2,7 +2,7 @@ import { Container as CartProductCardContainer } from '@/components/cart/CartPro
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  padding: 3.2rem;
+  padding: 1.8rem;
 
   ${CartProductCardContainer} & {
     padding: 2.4rem;

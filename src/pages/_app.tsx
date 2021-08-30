@@ -1,19 +1,31 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import { ApolloProvider } from '@apollo/client'
 
 import GlobalStyles from '@/styles/global'
+import { useApollo } from '@/utils/apollo'
+import { Layout } from '@/components/layout'
+import { CartProvider } from '@/contexts'
+
+import '@/styles/react-slick.css'
 
 function App({ Component, pageProps }: AppProps) {
+  const client = useApollo(pageProps?.initialApolloState)
+
   return (
-    <>
-      <Head>
-        <title>React Avançado Boilerplate</title>
-        <link rel="shortcut icon" href="/img/icon-512.png" />
-        <link rel="apple-touch-icon" href="/img/icon-512.png" />
-      </Head>
-      <GlobalStyles />
-      <Component {...pageProps} />
-    </>
+    <ApolloProvider client={client}>
+      <CartProvider>
+        <Head>
+          <title>React Avançado Boilerplate</title>
+          <link rel="shortcut icon" href="/img/icon-512.png" />
+          <link rel="apple-touch-icon" href="/img/icon-512.png" />
+        </Head>
+        <GlobalStyles />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </CartProvider>
+    </ApolloProvider>
   )
 }
 

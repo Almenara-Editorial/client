@@ -1,0 +1,2069 @@
+"""Direct the client to resolve this field locally, either from the cache or local resolvers."""
+directive @client(
+  """
+  When true, the client will never use the cache for this value. See
+  https://www.apollographql.com/docs/react/essentials/local-state/#forcing-resolvers-with-clientalways-true
+  """
+  always: Boolean
+) on FIELD | FRAGMENT_DEFINITION | INLINE_FRAGMENT
+
+"""
+Export this locally resolved field as a variable to be used in the remainder of this query. See
+https://www.apollographql.com/docs/react/essentials/local-state/#using-client-fields-as-variables
+"""
+directive @export(
+  """The variable name to export this field as."""
+  as: String!
+) on FIELD
+
+"""
+Specify a custom store key for this result. See
+https://www.apollographql.com/docs/react/advanced/caching/#the-connection-directive
+"""
+directive @connection(
+  """Specify the store key."""
+  key: String!
+  """An array of query argument names to include in the generated custom store key."""
+  filter: [String!]
+) on FIELD
+
+input FileInfoInput {
+  name: String
+  alternativeText: String
+  caption: String
+}
+
+type UsersPermissionsMe {
+  id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+input UsersPermissionsRegisterInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+  user: UsersPermissionsMe!
+}
+
+type UserPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+type AssinaturasNewletter {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  email: String!
+}
+
+type AssinaturasNewletterConnection {
+  values: [AssinaturasNewletter]
+  groupBy: AssinaturasNewletterGroupBy
+  aggregate: AssinaturasNewletterAggregator
+}
+
+type AssinaturasNewletterAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type AssinaturasNewletterGroupBy {
+  id: [AssinaturasNewletterConnectionId]
+  created_at: [AssinaturasNewletterConnectionCreated_at]
+  updated_at: [AssinaturasNewletterConnectionUpdated_at]
+  name: [AssinaturasNewletterConnectionName]
+  email: [AssinaturasNewletterConnectionEmail]
+}
+
+type AssinaturasNewletterConnectionId {
+  key: ID
+  connection: AssinaturasNewletterConnection
+}
+
+type AssinaturasNewletterConnectionCreated_at {
+  key: DateTime
+  connection: AssinaturasNewletterConnection
+}
+
+type AssinaturasNewletterConnectionUpdated_at {
+  key: DateTime
+  connection: AssinaturasNewletterConnection
+}
+
+type AssinaturasNewletterConnectionName {
+  key: String
+  connection: AssinaturasNewletterConnection
+}
+
+type AssinaturasNewletterConnectionEmail {
+  key: String
+  connection: AssinaturasNewletterConnection
+}
+
+input AssinaturasNewletterInput {
+  name: String!
+  email: String!
+  created_by: ID
+  updated_by: ID
+}
+
+input editAssinaturasNewletterInput {
+  name: String
+  email: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createAssinaturasNewletterInput {
+  data: AssinaturasNewletterInput
+}
+
+type createAssinaturasNewletterPayload {
+  assinaturasNewletter: AssinaturasNewletter
+}
+
+input updateAssinaturasNewletterInput {
+  where: InputID
+  data: editAssinaturasNewletterInput
+}
+
+type updateAssinaturasNewletterPayload {
+  assinaturasNewletter: AssinaturasNewletter
+}
+
+input deleteAssinaturasNewletterInput {
+  where: InputID
+}
+
+type deleteAssinaturasNewletterPayload {
+  assinaturasNewletter: AssinaturasNewletter
+}
+
+type Autor {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  livros(sort: String, limit: Int, start: Int, where: JSON): [Livro!]!
+}
+
+type AutorConnection {
+  values: [Autor]
+  groupBy: AutorGroupBy
+  aggregate: AutorAggregator
+}
+
+type AutorAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type AutorGroupBy {
+  id: [AutorConnectionId]
+  created_at: [AutorConnectionCreated_at]
+  updated_at: [AutorConnectionUpdated_at]
+  name: [AutorConnectionName]
+}
+
+type AutorConnectionId {
+  key: ID
+  connection: AutorConnection
+}
+
+type AutorConnectionCreated_at {
+  key: DateTime
+  connection: AutorConnection
+}
+
+type AutorConnectionUpdated_at {
+  key: DateTime
+  connection: AutorConnection
+}
+
+type AutorConnectionName {
+  key: String
+  connection: AutorConnection
+}
+
+input AutorInput {
+  name: String!
+  livros: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editAutorInput {
+  name: String
+  livros: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createAutorInput {
+  data: AutorInput
+}
+
+type createAutorPayload {
+  autor: Autor
+}
+
+input updateAutorInput {
+  where: InputID
+  data: editAutorInput
+}
+
+type updateAutorPayload {
+  autor: Autor
+}
+
+input deleteAutorInput {
+  where: InputID
+}
+
+type deleteAutorPayload {
+  autor: Autor
+}
+
+type BannerHero {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  image: UploadFile
+  url: String!
+}
+
+type BannerHeroConnection {
+  values: [BannerHero]
+  groupBy: BannerHeroGroupBy
+  aggregate: BannerHeroAggregator
+}
+
+type BannerHeroAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type BannerHeroGroupBy {
+  id: [BannerHeroConnectionId]
+  created_at: [BannerHeroConnectionCreated_at]
+  updated_at: [BannerHeroConnectionUpdated_at]
+  image: [BannerHeroConnectionImage]
+  url: [BannerHeroConnectionUrl]
+}
+
+type BannerHeroConnectionId {
+  key: ID
+  connection: BannerHeroConnection
+}
+
+type BannerHeroConnectionCreated_at {
+  key: DateTime
+  connection: BannerHeroConnection
+}
+
+type BannerHeroConnectionUpdated_at {
+  key: DateTime
+  connection: BannerHeroConnection
+}
+
+type BannerHeroConnectionImage {
+  key: ID
+  connection: BannerHeroConnection
+}
+
+type BannerHeroConnectionUrl {
+  key: String
+  connection: BannerHeroConnection
+}
+
+input BannerHeroInput {
+  image: ID
+  url: String!
+  created_by: ID
+  updated_by: ID
+}
+
+input editBannerHeroInput {
+  image: ID
+  url: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createBannerHeroInput {
+  data: BannerHeroInput
+}
+
+type createBannerHeroPayload {
+  bannerHero: BannerHero
+}
+
+input updateBannerHeroInput {
+  where: InputID
+  data: editBannerHeroInput
+}
+
+type updateBannerHeroPayload {
+  bannerHero: BannerHero
+}
+
+input deleteBannerHeroInput {
+  where: InputID
+}
+
+type deleteBannerHeroPayload {
+  bannerHero: BannerHero
+}
+
+type BannerTopo {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  image: UploadFile
+  url: String!
+}
+
+input BannerTopoInput {
+  image: ID
+  url: String!
+  created_by: ID
+  updated_by: ID
+}
+
+input editBannerTopoInput {
+  image: ID
+  url: String
+  created_by: ID
+  updated_by: ID
+}
+
+input updateBannerTopoInput {
+  data: editBannerTopoInput
+}
+
+type updateBannerTopoPayload {
+  bannerTopo: BannerTopo
+}
+
+type deleteBannerTopoPayload {
+  bannerTopo: BannerTopo
+}
+
+type Cabecalho {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  logo: UploadFile
+  headerLink: [ComponentPageHeaderLink]
+}
+
+input CabecalhoInput {
+  logo: ID
+  headerLink: [ComponentPageHeaderLinkInput]
+  created_by: ID
+  updated_by: ID
+}
+
+input editCabecalhoInput {
+  logo: ID
+  headerLink: [editComponentPageHeaderLinkInput]
+  created_by: ID
+  updated_by: ID
+}
+
+input updateCabecalhoInput {
+  data: editCabecalhoInput
+}
+
+type updateCabecalhoPayload {
+  cabecalho: Cabecalho
+}
+
+type deleteCabecalhoPayload {
+  cabecalho: Cabecalho
+}
+
+type Categorias {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  slug: String!
+  published_at: DateTime
+  livros(sort: String, limit: Int, start: Int, where: JSON): [Livro!]!
+}
+
+type CategoriasConnection {
+  values: [Categorias]
+  groupBy: CategoriasGroupBy
+  aggregate: CategoriasAggregator
+}
+
+type CategoriasAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type CategoriasGroupBy {
+  id: [CategoriasConnectionId]
+  created_at: [CategoriasConnectionCreated_at]
+  updated_at: [CategoriasConnectionUpdated_at]
+  name: [CategoriasConnectionName]
+  slug: [CategoriasConnectionSlug]
+  published_at: [CategoriasConnectionPublished_at]
+}
+
+type CategoriasConnectionId {
+  key: ID
+  connection: CategoriasConnection
+}
+
+type CategoriasConnectionCreated_at {
+  key: DateTime
+  connection: CategoriasConnection
+}
+
+type CategoriasConnectionUpdated_at {
+  key: DateTime
+  connection: CategoriasConnection
+}
+
+type CategoriasConnectionName {
+  key: String
+  connection: CategoriasConnection
+}
+
+type CategoriasConnectionSlug {
+  key: String
+  connection: CategoriasConnection
+}
+
+type CategoriasConnectionPublished_at {
+  key: DateTime
+  connection: CategoriasConnection
+}
+
+input CategoriaInput {
+  name: String!
+  slug: String!
+  livros: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editCategoriaInput {
+  name: String
+  slug: String
+  livros: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createCategoriaInput {
+  data: CategoriaInput
+}
+
+type createCategoriaPayload {
+  categoria: Categorias
+}
+
+input updateCategoriaInput {
+  where: InputID
+  data: editCategoriaInput
+}
+
+type updateCategoriaPayload {
+  categoria: Categorias
+}
+
+input deleteCategoriaInput {
+  where: InputID
+}
+
+type deleteCategoriaPayload {
+  categoria: Categorias
+}
+
+type Cupons {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  code: String!
+  freeShipping: Boolean
+  percentage: Int
+  expirationDate: DateTime
+  isActive: Boolean!
+}
+
+type CuponsConnection {
+  values: [Cupons]
+  groupBy: CuponsGroupBy
+  aggregate: CuponsAggregator
+}
+
+type CuponsAggregator {
+  count: Int
+  totalCount: Int
+  sum: CuponsAggregatorSum
+  avg: CuponsAggregatorAvg
+  min: CuponsAggregatorMin
+  max: CuponsAggregatorMax
+}
+
+type CuponsAggregatorSum {
+  percentage: Float
+}
+
+type CuponsAggregatorAvg {
+  percentage: Float
+}
+
+type CuponsAggregatorMin {
+  percentage: Float
+}
+
+type CuponsAggregatorMax {
+  percentage: Float
+}
+
+type CuponsGroupBy {
+  id: [CuponsConnectionId]
+  created_at: [CuponsConnectionCreated_at]
+  updated_at: [CuponsConnectionUpdated_at]
+  code: [CuponsConnectionCode]
+  freeShipping: [CuponsConnectionFreeShipping]
+  percentage: [CuponsConnectionPercentage]
+  expirationDate: [CuponsConnectionExpirationDate]
+  isActive: [CuponsConnectionIsActive]
+}
+
+type CuponsConnectionId {
+  key: ID
+  connection: CuponsConnection
+}
+
+type CuponsConnectionCreated_at {
+  key: DateTime
+  connection: CuponsConnection
+}
+
+type CuponsConnectionUpdated_at {
+  key: DateTime
+  connection: CuponsConnection
+}
+
+type CuponsConnectionCode {
+  key: String
+  connection: CuponsConnection
+}
+
+type CuponsConnectionFreeShipping {
+  key: Boolean
+  connection: CuponsConnection
+}
+
+type CuponsConnectionPercentage {
+  key: Int
+  connection: CuponsConnection
+}
+
+type CuponsConnectionExpirationDate {
+  key: DateTime
+  connection: CuponsConnection
+}
+
+type CuponsConnectionIsActive {
+  key: Boolean
+  connection: CuponsConnection
+}
+
+input CuponInput {
+  code: String!
+  freeShipping: Boolean
+  percentage: Int
+  expirationDate: DateTime
+  isActive: Boolean
+  created_by: ID
+  updated_by: ID
+}
+
+input editCuponInput {
+  code: String
+  freeShipping: Boolean
+  percentage: Int
+  expirationDate: DateTime
+  isActive: Boolean
+  created_by: ID
+  updated_by: ID
+}
+
+input createCuponInput {
+  data: CuponInput
+}
+
+type createCuponPayload {
+  cupon: Cupons
+}
+
+input updateCuponInput {
+  where: InputID
+  data: editCuponInput
+}
+
+type updateCuponPayload {
+  cupon: Cupons
+}
+
+input deleteCuponInput {
+  where: InputID
+}
+
+type deleteCuponPayload {
+  cupon: Cupons
+}
+
+type Home {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  productGroup: [ComponentHomeProductGroup]
+  banner: [ComponentHomeBanner]
+}
+
+input HomeInput {
+  productGroup: [ComponentHomeProductGroupInput!]
+  banner: [ComponentHomeBannerInput]
+  created_by: ID
+  updated_by: ID
+}
+
+input editHomeInput {
+  productGroup: [editComponentHomeProductGroupInput]
+  banner: [editComponentHomeBannerInput]
+  created_by: ID
+  updated_by: ID
+}
+
+input updateHomeInput {
+  data: editHomeInput
+}
+
+type updateHomePayload {
+  home: Home
+}
+
+type deleteHomePayload {
+  home: Home
+}
+
+type Livro {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  slug: String!
+  description: String!
+  particulars: String
+  price: Float!
+  image: UploadFile
+  autor: Autor
+  published_at: DateTime
+  categorias(sort: String, limit: Int, start: Int, where: JSON): [Categorias!]!
+}
+
+type LivroConnection {
+  values: [Livro]
+  groupBy: LivroGroupBy
+  aggregate: LivroAggregator
+}
+
+type LivroAggregator {
+  count: Int
+  totalCount: Int
+  sum: LivroAggregatorSum
+  avg: LivroAggregatorAvg
+  min: LivroAggregatorMin
+  max: LivroAggregatorMax
+}
+
+type LivroAggregatorSum {
+  price: Float
+}
+
+type LivroAggregatorAvg {
+  price: Float
+}
+
+type LivroAggregatorMin {
+  price: Float
+}
+
+type LivroAggregatorMax {
+  price: Float
+}
+
+type LivroGroupBy {
+  id: [LivroConnectionId]
+  created_at: [LivroConnectionCreated_at]
+  updated_at: [LivroConnectionUpdated_at]
+  name: [LivroConnectionName]
+  slug: [LivroConnectionSlug]
+  description: [LivroConnectionDescription]
+  particulars: [LivroConnectionParticulars]
+  price: [LivroConnectionPrice]
+  image: [LivroConnectionImage]
+  autor: [LivroConnectionAutor]
+  published_at: [LivroConnectionPublished_at]
+}
+
+type LivroConnectionId {
+  key: ID
+  connection: LivroConnection
+}
+
+type LivroConnectionCreated_at {
+  key: DateTime
+  connection: LivroConnection
+}
+
+type LivroConnectionUpdated_at {
+  key: DateTime
+  connection: LivroConnection
+}
+
+type LivroConnectionName {
+  key: String
+  connection: LivroConnection
+}
+
+type LivroConnectionSlug {
+  key: String
+  connection: LivroConnection
+}
+
+type LivroConnectionDescription {
+  key: String
+  connection: LivroConnection
+}
+
+type LivroConnectionParticulars {
+  key: String
+  connection: LivroConnection
+}
+
+type LivroConnectionPrice {
+  key: Float
+  connection: LivroConnection
+}
+
+type LivroConnectionImage {
+  key: ID
+  connection: LivroConnection
+}
+
+type LivroConnectionAutor {
+  key: ID
+  connection: LivroConnection
+}
+
+type LivroConnectionPublished_at {
+  key: DateTime
+  connection: LivroConnection
+}
+
+input LivroInput {
+  name: String!
+  slug: String!
+  description: String!
+  particulars: String
+  price: Float
+  image: ID
+  autor: ID
+  categorias: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editLivroInput {
+  name: String
+  slug: String
+  description: String
+  particulars: String
+  price: Float
+  image: ID
+  autor: ID
+  categorias: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createLivroInput {
+  data: LivroInput
+}
+
+type createLivroPayload {
+  livro: Livro
+}
+
+input updateLivroInput {
+  where: InputID
+  data: editLivroInput
+}
+
+type updateLivroPayload {
+  livro: Livro
+}
+
+input deleteLivroInput {
+  where: InputID
+}
+
+type deleteLivroPayload {
+  livro: Livro
+}
+
+type Pedido {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  user: UsersPermissionsUser
+  totalInCents: Long!
+  paymentIntentId: String
+  cardBrand: String
+  cardLastFour: String
+  books(sort: String, limit: Int, start: Int, where: JSON): [Livro!]!
+}
+
+type PedidoConnection {
+  values: [Pedido]
+  groupBy: PedidoGroupBy
+  aggregate: PedidoAggregator
+}
+
+type PedidoAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type PedidoGroupBy {
+  id: [PedidoConnectionId]
+  created_at: [PedidoConnectionCreated_at]
+  updated_at: [PedidoConnectionUpdated_at]
+  user: [PedidoConnectionUser]
+  totalInCents: [PedidoConnectionTotalInCents]
+  paymentIntentId: [PedidoConnectionPaymentIntentId]
+  cardBrand: [PedidoConnectionCardBrand]
+  cardLastFour: [PedidoConnectionCardLastFour]
+}
+
+type PedidoConnectionId {
+  key: ID
+  connection: PedidoConnection
+}
+
+type PedidoConnectionCreated_at {
+  key: DateTime
+  connection: PedidoConnection
+}
+
+type PedidoConnectionUpdated_at {
+  key: DateTime
+  connection: PedidoConnection
+}
+
+type PedidoConnectionUser {
+  key: ID
+  connection: PedidoConnection
+}
+
+type PedidoConnectionTotalInCents {
+  key: ID
+  connection: PedidoConnection
+}
+
+type PedidoConnectionPaymentIntentId {
+  key: String
+  connection: PedidoConnection
+}
+
+type PedidoConnectionCardBrand {
+  key: String
+  connection: PedidoConnection
+}
+
+type PedidoConnectionCardLastFour {
+  key: String
+  connection: PedidoConnection
+}
+
+input PedidoInput {
+  books: [ID]
+  user: ID
+  totalInCents: Long!
+  paymentIntentId: String
+  cardBrand: String
+  cardLastFour: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editPedidoInput {
+  books: [ID]
+  user: ID
+  totalInCents: Long
+  paymentIntentId: String
+  cardBrand: String
+  cardLastFour: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createPedidoInput {
+  data: PedidoInput
+}
+
+type createPedidoPayload {
+  pedido: Pedido
+}
+
+input updatePedidoInput {
+  where: InputID
+  data: editPedidoInput
+}
+
+type updatePedidoPayload {
+  pedido: Pedido
+}
+
+input deletePedidoInput {
+  where: InputID
+}
+
+type deletePedidoPayload {
+  pedido: Pedido
+}
+
+type Podcast {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String!
+  url: String!
+  published_at: DateTime
+}
+
+type PodcastConnection {
+  values: [Podcast]
+  groupBy: PodcastGroupBy
+  aggregate: PodcastAggregator
+}
+
+type PodcastAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type PodcastGroupBy {
+  id: [PodcastConnectionId]
+  created_at: [PodcastConnectionCreated_at]
+  updated_at: [PodcastConnectionUpdated_at]
+  title: [PodcastConnectionTitle]
+  url: [PodcastConnectionUrl]
+  published_at: [PodcastConnectionPublished_at]
+}
+
+type PodcastConnectionId {
+  key: ID
+  connection: PodcastConnection
+}
+
+type PodcastConnectionCreated_at {
+  key: DateTime
+  connection: PodcastConnection
+}
+
+type PodcastConnectionUpdated_at {
+  key: DateTime
+  connection: PodcastConnection
+}
+
+type PodcastConnectionTitle {
+  key: String
+  connection: PodcastConnection
+}
+
+type PodcastConnectionUrl {
+  key: String
+  connection: PodcastConnection
+}
+
+type PodcastConnectionPublished_at {
+  key: DateTime
+  connection: PodcastConnection
+}
+
+input PodcastInput {
+  title: String!
+  url: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPodcastInput {
+  title: String
+  url: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createPodcastInput {
+  data: PodcastInput
+}
+
+type createPodcastPayload {
+  podcast: Podcast
+}
+
+input updatePodcastInput {
+  where: InputID
+  data: editPodcastInput
+}
+
+type updatePodcastPayload {
+  podcast: Podcast
+}
+
+input deletePodcastInput {
+  where: InputID
+}
+
+type deletePodcastPayload {
+  podcast: Podcast
+}
+
+type PoliticaDePrivacidade {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  body: String!
+  version: Float!
+  published_at: DateTime
+}
+
+type PoliticaDePrivacidadeConnection {
+  values: [PoliticaDePrivacidade]
+  groupBy: PoliticaDePrivacidadeGroupBy
+  aggregate: PoliticaDePrivacidadeAggregator
+}
+
+type PoliticaDePrivacidadeAggregator {
+  count: Int
+  totalCount: Int
+  sum: PoliticaDePrivacidadeAggregatorSum
+  avg: PoliticaDePrivacidadeAggregatorAvg
+  min: PoliticaDePrivacidadeAggregatorMin
+  max: PoliticaDePrivacidadeAggregatorMax
+}
+
+type PoliticaDePrivacidadeAggregatorSum {
+  version: Float
+}
+
+type PoliticaDePrivacidadeAggregatorAvg {
+  version: Float
+}
+
+type PoliticaDePrivacidadeAggregatorMin {
+  version: Float
+}
+
+type PoliticaDePrivacidadeAggregatorMax {
+  version: Float
+}
+
+type PoliticaDePrivacidadeGroupBy {
+  id: [PoliticaDePrivacidadeConnectionId]
+  created_at: [PoliticaDePrivacidadeConnectionCreated_at]
+  updated_at: [PoliticaDePrivacidadeConnectionUpdated_at]
+  body: [PoliticaDePrivacidadeConnectionBody]
+  version: [PoliticaDePrivacidadeConnectionVersion]
+  published_at: [PoliticaDePrivacidadeConnectionPublished_at]
+}
+
+type PoliticaDePrivacidadeConnectionId {
+  key: ID
+  connection: PoliticaDePrivacidadeConnection
+}
+
+type PoliticaDePrivacidadeConnectionCreated_at {
+  key: DateTime
+  connection: PoliticaDePrivacidadeConnection
+}
+
+type PoliticaDePrivacidadeConnectionUpdated_at {
+  key: DateTime
+  connection: PoliticaDePrivacidadeConnection
+}
+
+type PoliticaDePrivacidadeConnectionBody {
+  key: String
+  connection: PoliticaDePrivacidadeConnection
+}
+
+type PoliticaDePrivacidadeConnectionVersion {
+  key: Float
+  connection: PoliticaDePrivacidadeConnection
+}
+
+type PoliticaDePrivacidadeConnectionPublished_at {
+  key: DateTime
+  connection: PoliticaDePrivacidadeConnection
+}
+
+input PoliticaDePrivacidadeInput {
+  body: String!
+  version: Float!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPoliticaDePrivacidadeInput {
+  body: String
+  version: Float
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createPoliticaDePrivacidadeInput {
+  data: PoliticaDePrivacidadeInput
+}
+
+type createPoliticaDePrivacidadePayload {
+  politicaDePrivacidade: PoliticaDePrivacidade
+}
+
+input updatePoliticaDePrivacidadeInput {
+  where: InputID
+  data: editPoliticaDePrivacidadeInput
+}
+
+type updatePoliticaDePrivacidadePayload {
+  politicaDePrivacidade: PoliticaDePrivacidade
+}
+
+input deletePoliticaDePrivacidadeInput {
+  where: InputID
+}
+
+type deletePoliticaDePrivacidadePayload {
+  politicaDePrivacidade: PoliticaDePrivacidade
+}
+
+type Rodape {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  logo: UploadFile
+  links: [ComponentPageLinks]
+  Social: [ComponentPageSocialLink]
+}
+
+input RodapeInput {
+  logo: ID
+  links: [ComponentPageLinkInput]
+  Social: [ComponentPageSocialLinkInput]
+  created_by: ID
+  updated_by: ID
+}
+
+input editRodapeInput {
+  logo: ID
+  links: [editComponentPageLinkInput]
+  Social: [editComponentPageSocialLinkInput]
+  created_by: ID
+  updated_by: ID
+}
+
+input updateRodapeInput {
+  data: editRodapeInput
+}
+
+type updateRodapePayload {
+  rodape: Rodape
+}
+
+type deleteRodapePayload {
+  rodape: Rodape
+}
+
+type TermosDeUso {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  body: String!
+  version: Float!
+  published_at: DateTime
+}
+
+type TermosDeUsoConnection {
+  values: [TermosDeUso]
+  groupBy: TermosDeUsoGroupBy
+  aggregate: TermosDeUsoAggregator
+}
+
+type TermosDeUsoAggregator {
+  count: Int
+  totalCount: Int
+  sum: TermosDeUsoAggregatorSum
+  avg: TermosDeUsoAggregatorAvg
+  min: TermosDeUsoAggregatorMin
+  max: TermosDeUsoAggregatorMax
+}
+
+type TermosDeUsoAggregatorSum {
+  version: Float
+}
+
+type TermosDeUsoAggregatorAvg {
+  version: Float
+}
+
+type TermosDeUsoAggregatorMin {
+  version: Float
+}
+
+type TermosDeUsoAggregatorMax {
+  version: Float
+}
+
+type TermosDeUsoGroupBy {
+  id: [TermosDeUsoConnectionId]
+  created_at: [TermosDeUsoConnectionCreated_at]
+  updated_at: [TermosDeUsoConnectionUpdated_at]
+  body: [TermosDeUsoConnectionBody]
+  version: [TermosDeUsoConnectionVersion]
+  published_at: [TermosDeUsoConnectionPublished_at]
+}
+
+type TermosDeUsoConnectionId {
+  key: ID
+  connection: TermosDeUsoConnection
+}
+
+type TermosDeUsoConnectionCreated_at {
+  key: DateTime
+  connection: TermosDeUsoConnection
+}
+
+type TermosDeUsoConnectionUpdated_at {
+  key: DateTime
+  connection: TermosDeUsoConnection
+}
+
+type TermosDeUsoConnectionBody {
+  key: String
+  connection: TermosDeUsoConnection
+}
+
+type TermosDeUsoConnectionVersion {
+  key: Float
+  connection: TermosDeUsoConnection
+}
+
+type TermosDeUsoConnectionPublished_at {
+  key: DateTime
+  connection: TermosDeUsoConnection
+}
+
+input TermosDeUsoInput {
+  body: String!
+  version: Float!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editTermosDeUsoInput {
+  body: String
+  version: Float
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createTermosDeUsoInput {
+  data: TermosDeUsoInput
+}
+
+type createTermosDeUsoPayload {
+  termosDeUso: TermosDeUso
+}
+
+input updateTermosDeUsoInput {
+  where: InputID
+  data: editTermosDeUsoInput
+}
+
+type updateTermosDeUsoPayload {
+  termosDeUso: TermosDeUso
+}
+
+input deleteTermosDeUsoInput {
+  where: InputID
+}
+
+type deleteTermosDeUsoPayload {
+  termosDeUso: TermosDeUso
+}
+
+type I18NLocale {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String
+  code: String
+}
+
+input LocaleInput {
+  name: String
+  code: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editLocaleInput {
+  name: String
+  code: String
+  created_by: ID
+  updated_by: ID
+}
+
+type UploadFile {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph!]!
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+  groupBy: UploadFileGroupBy
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileAggregator {
+  count: Int
+  totalCount: Int
+  sum: UploadFileAggregatorSum
+  avg: UploadFileAggregatorAvg
+  min: UploadFileAggregatorMin
+  max: UploadFileAggregatorMax
+}
+
+type UploadFileAggregatorSum {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorAvg {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMin {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMax {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileGroupBy {
+  id: [UploadFileConnectionId]
+  created_at: [UploadFileConnectionCreated_at]
+  updated_at: [UploadFileConnectionUpdated_at]
+  name: [UploadFileConnectionName]
+  alternativeText: [UploadFileConnectionAlternativeText]
+  caption: [UploadFileConnectionCaption]
+  width: [UploadFileConnectionWidth]
+  height: [UploadFileConnectionHeight]
+  formats: [UploadFileConnectionFormats]
+  hash: [UploadFileConnectionHash]
+  ext: [UploadFileConnectionExt]
+  mime: [UploadFileConnectionMime]
+  size: [UploadFileConnectionSize]
+  url: [UploadFileConnectionUrl]
+  previewUrl: [UploadFileConnectionPreviewUrl]
+  provider: [UploadFileConnectionProvider]
+  provider_metadata: [UploadFileConnectionProvider_metadata]
+}
+
+type UploadFileConnectionId {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionAlternativeText {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCaption {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionWidth {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHeight {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionFormats {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: Float
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionPreviewUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider_metadata {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+input FileInput {
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editFileInput {
+  name: String
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String
+  ext: String
+  mime: String
+  size: Float
+  url: String
+  previewUrl: String
+  provider: String
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input deleteFileInput {
+  where: InputID
+}
+
+type deleteFilePayload {
+  file: UploadFile
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission!]!
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser!]!
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+  groupBy: UsersPermissionsRoleGroupBy
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsRoleGroupBy {
+  id: [UsersPermissionsRoleConnectionId]
+  name: [UsersPermissionsRoleConnectionName]
+  description: [UsersPermissionsRoleConnectionDescription]
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsRoleConnectionId {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUser {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+  privacyPolicy: PoliticaDePrivacidade
+  termsOfUse: TermosDeUso
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+  groupBy: UsersPermissionsUserGroupBy
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsUserGroupBy {
+  id: [UsersPermissionsUserConnectionId]
+  created_at: [UsersPermissionsUserConnectionCreated_at]
+  updated_at: [UsersPermissionsUserConnectionUpdated_at]
+  username: [UsersPermissionsUserConnectionUsername]
+  email: [UsersPermissionsUserConnectionEmail]
+  provider: [UsersPermissionsUserConnectionProvider]
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+  blocked: [UsersPermissionsUserConnectionBlocked]
+  role: [UsersPermissionsUserConnectionRole]
+  privacyPolicy: [UsersPermissionsUserConnectionPrivacyPolicy]
+  termsOfUse: [UsersPermissionsUserConnectionTermsOfUse]
+}
+
+type UsersPermissionsUserConnectionId {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCreated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUpdated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionProvider {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionPrivacyPolicy {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionTermsOfUse {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  privacyPolicy: ID
+  termsOfUse: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  privacyPolicy: ID
+  termsOfUse: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+type ComponentHomeBanner {
+  id: ID!
+  url: String
+  image: UploadFile
+}
+
+input ComponentHomeBannerInput {
+  url: String
+  image: ID
+}
+
+input editComponentHomeBannerInput {
+  id: ID
+  url: String
+  image: ID
+}
+
+type ComponentHomeProductGroup {
+  id: ID!
+  title: String!
+  link: ComponentPageHeaderLink
+  livros(sort: String, limit: Int, start: Int, where: JSON): [Livro!]!
+}
+
+input ComponentHomeProductGroupInput {
+  title: String!
+  livros: [ID]
+  link: ComponentPageHeaderLinkInput
+}
+
+input editComponentHomeProductGroupInput {
+  id: ID
+  title: String
+  livros: [ID]
+  link: editComponentPageHeaderLinkInput
+}
+
+type ComponentPageHeaderLink {
+  id: ID!
+  name: String
+  url: String
+}
+
+input ComponentPageHeaderLinkInput {
+  name: String
+  url: String
+}
+
+input editComponentPageHeaderLinkInput {
+  id: ID
+  name: String
+  url: String
+}
+
+type ComponentPageLinks {
+  id: ID!
+  link: [ComponentPageHeaderLink]
+  title: String
+}
+
+input ComponentPageLinkInput {
+  link: [ComponentPageHeaderLinkInput]
+  title: String
+}
+
+input editComponentPageLinkInput {
+  id: ID
+  link: [editComponentPageHeaderLinkInput]
+  title: String
+}
+
+type ComponentPageSocialLink {
+  id: ID!
+  url: String!
+  logo: UploadFile
+}
+
+input ComponentPageSocialLinkInput {
+  url: String!
+  logo: ID
+}
+
+input editComponentPageSocialLinkInput {
+  id: ID
+  url: String
+  logo: ID
+}
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | AssinaturasNewletter | AssinaturasNewletterConnection | AssinaturasNewletterAggregator | AssinaturasNewletterGroupBy | AssinaturasNewletterConnectionId | AssinaturasNewletterConnectionCreated_at | AssinaturasNewletterConnectionUpdated_at | AssinaturasNewletterConnectionName | AssinaturasNewletterConnectionEmail | createAssinaturasNewletterPayload | updateAssinaturasNewletterPayload | deleteAssinaturasNewletterPayload | Autor | AutorConnection | AutorAggregator | AutorGroupBy | AutorConnectionId | AutorConnectionCreated_at | AutorConnectionUpdated_at | AutorConnectionName | createAutorPayload | updateAutorPayload | deleteAutorPayload | BannerHero | BannerHeroConnection | BannerHeroAggregator | BannerHeroGroupBy | BannerHeroConnectionId | BannerHeroConnectionCreated_at | BannerHeroConnectionUpdated_at | BannerHeroConnectionImage | BannerHeroConnectionUrl | createBannerHeroPayload | updateBannerHeroPayload | deleteBannerHeroPayload | BannerTopo | updateBannerTopoPayload | deleteBannerTopoPayload | Cabecalho | updateCabecalhoPayload | deleteCabecalhoPayload | Categorias | CategoriasConnection | CategoriasAggregator | CategoriasGroupBy | CategoriasConnectionId | CategoriasConnectionCreated_at | CategoriasConnectionUpdated_at | CategoriasConnectionName | CategoriasConnectionSlug | CategoriasConnectionPublished_at | createCategoriaPayload | updateCategoriaPayload | deleteCategoriaPayload | Cupons | CuponsConnection | CuponsAggregator | CuponsAggregatorSum | CuponsAggregatorAvg | CuponsAggregatorMin | CuponsAggregatorMax | CuponsGroupBy | CuponsConnectionId | CuponsConnectionCreated_at | CuponsConnectionUpdated_at | CuponsConnectionCode | CuponsConnectionFreeShipping | CuponsConnectionPercentage | CuponsConnectionExpirationDate | CuponsConnectionIsActive | createCuponPayload | updateCuponPayload | deleteCuponPayload | Home | updateHomePayload | deleteHomePayload | Livro | LivroConnection | LivroAggregator | LivroAggregatorSum | LivroAggregatorAvg | LivroAggregatorMin | LivroAggregatorMax | LivroGroupBy | LivroConnectionId | LivroConnectionCreated_at | LivroConnectionUpdated_at | LivroConnectionName | LivroConnectionSlug | LivroConnectionDescription | LivroConnectionParticulars | LivroConnectionPrice | LivroConnectionImage | LivroConnectionAutor | LivroConnectionPublished_at | createLivroPayload | updateLivroPayload | deleteLivroPayload | Pedido | PedidoConnection | PedidoAggregator | PedidoGroupBy | PedidoConnectionId | PedidoConnectionCreated_at | PedidoConnectionUpdated_at | PedidoConnectionUser | PedidoConnectionTotalInCents | PedidoConnectionPaymentIntentId | PedidoConnectionCardBrand | PedidoConnectionCardLastFour | createPedidoPayload | updatePedidoPayload | deletePedidoPayload | Podcast | PodcastConnection | PodcastAggregator | PodcastGroupBy | PodcastConnectionId | PodcastConnectionCreated_at | PodcastConnectionUpdated_at | PodcastConnectionTitle | PodcastConnectionUrl | PodcastConnectionPublished_at | createPodcastPayload | updatePodcastPayload | deletePodcastPayload | PoliticaDePrivacidade | PoliticaDePrivacidadeConnection | PoliticaDePrivacidadeAggregator | PoliticaDePrivacidadeAggregatorSum | PoliticaDePrivacidadeAggregatorAvg | PoliticaDePrivacidadeAggregatorMin | PoliticaDePrivacidadeAggregatorMax | PoliticaDePrivacidadeGroupBy | PoliticaDePrivacidadeConnectionId | PoliticaDePrivacidadeConnectionCreated_at | PoliticaDePrivacidadeConnectionUpdated_at | PoliticaDePrivacidadeConnectionBody | PoliticaDePrivacidadeConnectionVersion | PoliticaDePrivacidadeConnectionPublished_at | createPoliticaDePrivacidadePayload | updatePoliticaDePrivacidadePayload | deletePoliticaDePrivacidadePayload | Rodape | updateRodapePayload | deleteRodapePayload | TermosDeUso | TermosDeUsoConnection | TermosDeUsoAggregator | TermosDeUsoAggregatorSum | TermosDeUsoAggregatorAvg | TermosDeUsoAggregatorMin | TermosDeUsoAggregatorMax | TermosDeUsoGroupBy | TermosDeUsoConnectionId | TermosDeUsoConnectionCreated_at | TermosDeUsoConnectionUpdated_at | TermosDeUsoConnectionBody | TermosDeUsoConnectionVersion | TermosDeUsoConnectionPublished_at | createTermosDeUsoPayload | updateTermosDeUsoPayload | deleteTermosDeUsoPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionPrivacyPolicy | UsersPermissionsUserConnectionTermsOfUse | createUserPayload | updateUserPayload | deleteUserPayload | ComponentHomeBanner | ComponentHomeProductGroup | ComponentPageHeaderLink | ComponentPageLinks | ComponentPageSocialLink
+
+input InputID {
+  id: ID!
+}
+
+enum PublicationState {
+  LIVE
+  PREVIEW
+}
+
+type AdminUser {
+  id: ID!
+  username: String
+  firstname: String!
+  lastname: String!
+}
+
+type Query {
+  assinaturasNewletter(id: ID!, publicationState: PublicationState): AssinaturasNewletter
+  assinaturasNewletters(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [AssinaturasNewletter!]!
+  assinaturasNewlettersConnection(sort: String, limit: Int, start: Int, where: JSON): AssinaturasNewletterConnection
+  autor(id: ID!, publicationState: PublicationState): Autor
+  autors(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Autor!]!
+  autorsConnection(sort: String, limit: Int, start: Int, where: JSON): AutorConnection
+  bannerHero(id: ID!, publicationState: PublicationState): BannerHero
+  bannerHeroes(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [BannerHero!]!
+  bannerHeroesConnection(sort: String, limit: Int, start: Int, where: JSON): BannerHeroConnection
+  bannerTopo(publicationState: PublicationState): BannerTopo
+  cabecalho(publicationState: PublicationState): Cabecalho
+  categoria(id: ID!, publicationState: PublicationState): Categorias
+  categorias(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Categorias!]!
+  categoriasConnection(sort: String, limit: Int, start: Int, where: JSON): CategoriasConnection
+  cupon(id: ID!, publicationState: PublicationState): Cupons
+  cupons(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Cupons!]!
+  cuponsConnection(sort: String, limit: Int, start: Int, where: JSON): CuponsConnection
+  home(publicationState: PublicationState): Home
+  livro(id: ID!, publicationState: PublicationState): Livro
+  livros(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Livro!]!
+  livrosConnection(sort: String, limit: Int, start: Int, where: JSON): LivroConnection
+  pedido(id: ID!, publicationState: PublicationState): Pedido
+  pedidos(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Pedido!]!
+  pedidosConnection(sort: String, limit: Int, start: Int, where: JSON): PedidoConnection
+  podcast(id: ID!, publicationState: PublicationState): Podcast
+  podcasts(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Podcast!]!
+  podcastsConnection(sort: String, limit: Int, start: Int, where: JSON): PodcastConnection
+  politicaDePrivacidade(id: ID!, publicationState: PublicationState): PoliticaDePrivacidade
+  politicaDePrivacidades(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [PoliticaDePrivacidade!]!
+  politicaDePrivacidadesConnection(sort: String, limit: Int, start: Int, where: JSON): PoliticaDePrivacidadeConnection
+  rodape(publicationState: PublicationState): Rodape
+  termosDeUso(id: ID!, publicationState: PublicationState): TermosDeUso
+  termosDeUsos(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [TermosDeUso!]!
+  termosDeUsosConnection(sort: String, limit: Int, start: Int, where: JSON): TermosDeUsoConnection
+  files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile!]!
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+  role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
+  """Retrieve all the existing roles. You can't apply filters on this query."""
+  roles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsRole!]!
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+  user(id: ID!, publicationState: PublicationState): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsUser!]!
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+  me: UsersPermissionsMe
+}
+
+type Mutation {
+  createAssinaturasNewletter(input: createAssinaturasNewletterInput): createAssinaturasNewletterPayload
+  updateAssinaturasNewletter(input: updateAssinaturasNewletterInput): updateAssinaturasNewletterPayload
+  deleteAssinaturasNewletter(input: deleteAssinaturasNewletterInput): deleteAssinaturasNewletterPayload
+  createAutor(input: createAutorInput): createAutorPayload
+  updateAutor(input: updateAutorInput): updateAutorPayload
+  deleteAutor(input: deleteAutorInput): deleteAutorPayload
+  createBannerHero(input: createBannerHeroInput): createBannerHeroPayload
+  updateBannerHero(input: updateBannerHeroInput): updateBannerHeroPayload
+  deleteBannerHero(input: deleteBannerHeroInput): deleteBannerHeroPayload
+  updateBannerTopo(input: updateBannerTopoInput): updateBannerTopoPayload
+  deleteBannerTopo: deleteBannerTopoPayload
+  updateCabecalho(input: updateCabecalhoInput): updateCabecalhoPayload
+  deleteCabecalho: deleteCabecalhoPayload
+  createCategoria(input: createCategoriaInput): createCategoriaPayload
+  updateCategoria(input: updateCategoriaInput): updateCategoriaPayload
+  deleteCategoria(input: deleteCategoriaInput): deleteCategoriaPayload
+  createCupon(input: createCuponInput): createCuponPayload
+  updateCupon(input: updateCuponInput): updateCuponPayload
+  deleteCupon(input: deleteCuponInput): deleteCuponPayload
+  updateHome(input: updateHomeInput): updateHomePayload
+  deleteHome: deleteHomePayload
+  createLivro(input: createLivroInput): createLivroPayload
+  updateLivro(input: updateLivroInput): updateLivroPayload
+  deleteLivro(input: deleteLivroInput): deleteLivroPayload
+  createPedido(input: createPedidoInput): createPedidoPayload
+  updatePedido(input: updatePedidoInput): updatePedidoPayload
+  deletePedido(input: deletePedidoInput): deletePedidoPayload
+  createPodcast(input: createPodcastInput): createPodcastPayload
+  updatePodcast(input: updatePodcastInput): updatePodcastPayload
+  deletePodcast(input: deletePodcastInput): deletePodcastPayload
+  createPoliticaDePrivacidade(input: createPoliticaDePrivacidadeInput): createPoliticaDePrivacidadePayload
+  updatePoliticaDePrivacidade(input: updatePoliticaDePrivacidadeInput): updatePoliticaDePrivacidadePayload
+  deletePoliticaDePrivacidade(input: deletePoliticaDePrivacidadeInput): deletePoliticaDePrivacidadePayload
+  updateRodape(input: updateRodapeInput): updateRodapePayload
+  deleteRodape: deleteRodapePayload
+  createTermosDeUso(input: createTermosDeUsoInput): createTermosDeUsoPayload
+  updateTermosDeUso(input: updateTermosDeUsoInput): updateTermosDeUsoPayload
+  deleteTermosDeUso(input: deleteTermosDeUsoInput): deleteTermosDeUsoPayload
+  """Delete one file"""
+  deleteFile(input: deleteFileInput): deleteFilePayload
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  upload(refId: ID, ref: String, field: String, source: String, info: FileInfoInput, file: Upload!): UploadFile!
+  multipleUpload(refId: ID, ref: String, field: String, source: String, files: [Upload]!): [UploadFile]!
+  updateFileInfo(id: ID!, info: FileInfoInput!): UploadFile!
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+  forgotPassword(email: String!): UserPermissionsPasswordPayload
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+
+"""The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."""
+scalar JSON
+
+"""A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."""
+scalar DateTime
+
+"""A time string with format: HH:mm:ss.SSS"""
+scalar Time
+
+"""A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."""
+scalar Date
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload

@@ -1,4 +1,4 @@
-import { CartButton } from '@/components/cart'
+import { CartDropdown } from '@/components/cart'
 import { FavoritesLink, HeaderAccount, HeaderAccountProps } from '..'
 import { Container } from './styles'
 
@@ -8,6 +8,6 @@ export const HeaderActions = ({ fullName }: HeaderActionsProps) => (
   <Container>
     <FavoritesLink />
     <HeaderAccount fullName={fullName} />
-    <CartButton />
+    <CartDropdown />
   </Container>
 )
