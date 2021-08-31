@@ -8,8 +8,24 @@ export const QUERY_BOOKS = gql`
       slug
       price
       image {
-        url
+        src: url
         formats
+      }
+    }
+  }
+`
+export const QUERY_BOOK = gql`
+  query QueryBookBySlug($slug: String) {
+    livros(where: { slug: $slug }) {
+      id
+      name
+      slug
+      price
+      stock
+      description
+      image {
+        src: url
+        label: alternativeText
       }
     }
   }

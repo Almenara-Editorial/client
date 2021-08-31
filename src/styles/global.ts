@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     font-display: swap;
     src: local(''),
-        url('fonts/roboto-slab-v13-latin-regular.woff2') format('woff2');
+        url('/fonts/roboto-slab-v13-latin-regular.woff2') format('woff2');
   }
 
   @font-face {
@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 600;
     font-display: swap;
     src: local(''),
-        url('fonts/roboto-slab-v13-latin-600.woff2') format('woff2');
+        url('/fonts/roboto-slab-v13-latin-600.woff2') format('woff2');
   }
 
   @font-face {
@@ -26,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     font-display: swap;
     src: local(''),
-        url('fonts/noto-sans-v14-latin-regular.woff2') format('woff2');
+        url('/fonts/noto-sans-v14-latin-regular.woff2') format('woff2');
   }
 
   @font-face {
@@ -35,7 +35,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 700;
     font-display: swap;
     src: local(''),
-        url('fonts/noto-sans-v14-latin-700.woff2') format('woff2');
+        url('/fonts/noto-sans-v14-latin-700.woff2') format('woff2');
   }
 
   :root{

@@ -1,4 +1,5 @@
 import { Container as SelectAddressButton } from '@/components/products/SelectAddressButton/styles'
+import { Container as ProductCard } from '@/components/products/ProductCard/styles'
 import { HTMLAttributes } from 'react'
 import styled from 'styled-components'
 
@@ -49,5 +50,14 @@ export const Anchor = styled.a.attrs<AnchorProps>(({ size = 'rg', color = 'neutr
     gap: 0.4rem;
 
     font-weight: var(--body-regular);
+  }
+
+  ${ProductCard} & {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transform: none;
+    color: inherit;
   }
 `

@@ -16,21 +16,21 @@ export const NumberField = ({ value: initialValue = 0, min, max, onChange }: Num
   useOnClickOutside<HTMLInputElement>(inputRef, () => setIsInput(false))
 
   function setNewValue(value: number) {
-    if ((typeof max === 'number' && value > max) || (typeof min === 'number' && value < min)) return
+    const newValue = typeof max === 'number' && value >= max ? max : typeof min === 'number' && value <= min ? min : value
 
-    setValue(value)
+    setValue(newValue)
   }
 
   function handleAdd() {
-    if (typeof max === 'number' && value === max) return
+    const newValue = typeof max === 'number' && value >= max ? max : value + 1
 
-    setNewValue(value + 1)
+    setNewValue(newValue)
   }
 
   function handleSub() {
-    if (typeof min === 'number' && value === min) return
+    const newValue = typeof min === 'number' && value <= min ? min : value - 1
 
-    setNewValue(value - 1)
+    setNewValue(newValue)
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {

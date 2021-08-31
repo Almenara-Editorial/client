@@ -9,7 +9,7 @@
 
 export interface QueryBooks_livros_image {
   __typename: "UploadFile";
-  url: string;
+  src: string;
   formats: any | null;
 }
 

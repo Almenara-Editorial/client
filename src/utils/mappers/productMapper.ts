@@ -1,18 +1,32 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { QueryBooks_livros } from '@/graphql/generated/QueryBooks'
 import { QueryHome_home_productGroup } from '@/graphql/generated/QueryHome'
+import { QueryProductBySlug_livros } from '@/graphql/generated/QueryProductBySlug'
 import { ProductModel, ProductsCardsGroupModel } from '@/models'
 import { getImageUrl } from '../get-image-url'
 
-export function productsMapper(products: QueryBooks_livros[] | null | undefined): ProductModel[] {
-  if (!products) return []
+export function productMapper(products: QueryProductBySlug_livros[]) {
+  const product = products[0]
+
+  return {
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    slug: product.slug,
+    imageSrc: getImageUrl(product.image?.src),
+    stock: product.stock
+  }
+}
+
+export function productsMapper(products: QueryBooks_livros[] | null | undefined): ProductModel[] | void {
+  if (!products) return
 
   return products.map((product) => ({
     id: product.id,
     name: product.name,
     price: product.price,
     slug: product.slug,
-    imageSrc: getImageUrl(product.image?.formats.small?.url || product.image?.url),
+    imageSrc: getImageUrl(product.image?.formats.small?.url || product.image?.src),
     stock: 1000
   }))
 }
