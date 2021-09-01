@@ -28,4 +28,7 @@ export interface QueryBooks {
 
 export interface QueryBooksVariables {
   limit?: number | null;
+  start?: number | null;
+  where?: any | null;
+  sort?: string | null;
 }

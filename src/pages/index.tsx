@@ -21,7 +21,8 @@ export async function getStaticProps() {
     revalidate: 60,
     props: {
       slides: bannersMapper(data.home?.banner),
-      productsGroups: productsGroupsMapper(data.home?.productGroup)
+      productsGroups: productsGroupsMapper(data.home?.productGroup),
+      initialApolloState: apolloClient.cache.extract()
     }
   }
 }

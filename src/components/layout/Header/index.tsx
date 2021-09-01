@@ -1,5 +1,6 @@
 import { TextField } from '@/components/form'
-import { Logo, HeaderActions } from '..'
+import { HeaderActions } from '../HeaderActions'
+import { Logo } from '../Logo'
 import { Container, Wrapper } from './styles'
 
 export const Header = () => (

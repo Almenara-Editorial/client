@@ -7,21 +7,19 @@ import { Container } from './styles'
 export const CartDropdownProducts = () => {
   const { products } = useCart()
 
-  if (!products || products.length === 0)
-    return (
-      <Container>
-        <EmptyCartImage />
-        <span>Nada por aqui.</span>
-      </Container>
-    )
+  // if (!products || products.length === 0)
+  //   return (
+  //     <Container>
+  //       <EmptyCartImage />
+  //       <span>Nada por aqui.</span>
+  //     </Container>
+  //   )
 
   return (
     <>
       <Container>
         {products.map((product) => (
-          <Menu.Item key={product.id}>
-            <CartDropdownProduct product={product} />
-          </Menu.Item>
+          <Menu.Item key={product.id}>{() => <CartDropdownProduct product={product} />}</Menu.Item>
         ))}
       </Container>
       <Hr space="lg" />

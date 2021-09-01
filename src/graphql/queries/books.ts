@@ -1,8 +1,9 @@
-import { gql } from '@apollo/client'
+import { gql, QueryHookOptions, useQuery } from '@apollo/client'
+import { QueryBooks, QueryBooksVariables } from '../generated/QueryBooks'
 
 export const QUERY_BOOKS = gql`
-  query QueryBooks($limit: Int) {
-    livros(limit: $limit) {
+  query QueryBooks($limit: Int, $start: Int, $where: JSON, $sort: String) {
+    livros(limit: $limit, start: $start, where: $where, sort: $sort) {
       id
       name
       slug
@@ -30,3 +31,7 @@ export const QUERY_BOOK = gql`
     }
   }
 `
+
+export function useQueryProducs(options?: QueryHookOptions<QueryBooks, QueryBooksVariables>) {
+  return useQuery<QueryBooks, QueryBooksVariables>(QUERY_BOOKS, options)
+}

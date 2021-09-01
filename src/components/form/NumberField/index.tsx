@@ -3,14 +3,14 @@ import { useOnClickOutside } from '@/hooks'
 import { ChangeEvent, InputHTMLAttributes, useEffect, useRef, useState } from 'react'
 import { Container } from './styles'
 
-type NumberFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+type NumberFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & {
   min?: number
   max?: number
   onChange?: (value: number) => void
 }
 
 export const NumberField = ({ value: initialValue = 0, min, max, onChange }: NumberFieldProps) => {
-  const [value, setValue] = useState(Number(initialValue))
+  const [value, setValue] = useState(Number(initialValue || min))
   const [isInput, setIsInput] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   useOnClickOutside<HTMLInputElement>(inputRef, () => setIsInput(false))

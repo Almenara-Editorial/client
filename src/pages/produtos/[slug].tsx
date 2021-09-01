@@ -4,24 +4,17 @@ import { QUERY_BOOK } from '@/graphql/queries'
 import { initializeApollo } from '@/utils'
 import { productMapper } from '@/utils/mappers'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { useRouter } from 'next/dist/client/router'
 
 type ProductProps = ProductTemplateProps
 
 export default function Product({ product }: ProductProps) {
-  const router = useRouter()
-
-  if (router.isFallback) {
-    return <div>Carregando</div>
-  }
-
   return <ProductTemplate product={product} />
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = [] as string[]
 
-  return { paths, fallback: true }
+  return { paths, fallback: 'blocking' }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -41,7 +34,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     revalidate: 60,
     props: {
-      product: productMapper(data.livros)
+      product: productMapper(data.livros),
+      initialApolloState: apolloClient.cache.extract()
     }
   }
 }

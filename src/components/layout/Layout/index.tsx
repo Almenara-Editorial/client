@@ -1,5 +1,5 @@
 import { Header } from '..'
-import { Main } from './styles'
+import { Container, Main } from './styles'
 
 type LayoutProps = {
   children: React.ReactNode
@@ -7,9 +7,9 @@ type LayoutProps = {
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <>
+    <Container>
       <Header />
       <Main>{children}</Main>
-    </>
+    </Container>
   )
 }
