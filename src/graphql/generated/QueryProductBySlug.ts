@@ -20,6 +20,7 @@ export interface QueryProductBySlug_livros {
   slug: string;
   price: number;
   stock: number;
+  particulars: string;
   description: string;
   image: QueryProductBySlug_livros_image | null;
 }

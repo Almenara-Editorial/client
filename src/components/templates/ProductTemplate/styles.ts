@@ -8,3 +8,5 @@ export const Main = styled.div`
   gap: var(--space-xl);
   padding-block: 4.8rem;
 `
+
+export const Infos = styled.div``

@@ -8,6 +8,7 @@ type CartContextData = {
   products: CartProductModel[]
   totals: CartTotalModel
   addProductToCart: (item: CartItemModel) => void
+  removeProductFromCart: (id: string) => void
   isInCart: (id: string) => CartItemModel | undefined
   loading: boolean
 }
@@ -29,11 +30,22 @@ export function CartProvider({ children }: CartProviderProps) {
     }
   })
   const products = cartProductsMapper(data?.livros, cartItems)
-  const totals: CartTotalModel = { products: 0 }
+  const totals: CartTotalModel = {
+    products: products.map((product) => product.price * product.quantity).reduce((total, curr) => curr + total, 0)
+  }
 
-  const addProductToCart = useCallback((item: CartItemModel) => {
-    setCartItems((state) => [...state.filter((cartItem) => cartItem.id !== item.id), item])
+  const removeProductFromCart = useCallback((id: string) => {
+    setCartItems((state) => [...state.filter((cartItem) => cartItem.id !== id)])
   }, [])
+
+  const addProductToCart = useCallback(
+    (item: CartItemModel) => {
+      if (item.quantity < 1) return removeProductFromCart(item.id)
+
+      setCartItems((state) => [...state.filter((cartItem) => cartItem.id !== item.id), item])
+    },
+    [removeProductFromCart]
+  )
 
   const isInCart = useCallback(
     (id: CartItemModel['id']) => {
@@ -43,7 +55,9 @@ export function CartProvider({ children }: CartProviderProps) {
   )
 
   return (
-    <CartContext.Provider value={{ cartItems, products, totals, addProductToCart, isInCart, loading }}>{children}</CartContext.Provider>
+    <CartContext.Provider value={{ cartItems, products, totals, addProductToCart, removeProductFromCart, isInCart, loading }}>
+      {children}
+    </CartContext.Provider>
   )
 }
 

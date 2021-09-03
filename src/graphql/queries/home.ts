@@ -1,6 +1,9 @@
 import { gql } from '@apollo/client'
+import { FOOTER_FRAGMENT } from '../fragments'
 
 export const QUERY_HOME = gql`
+  ${FOOTER_FRAGMENT}
+
   query QueryHome {
     home {
       banner {
@@ -27,6 +30,10 @@ export const QUERY_HOME = gql`
           url
         }
       }
+    }
+
+    rodape {
+      ...Footer
     }
   }
 `

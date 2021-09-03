@@ -4,8 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 47.2rem;
-  overflow-y: hidden;
+  padding-right: 2.4rem;
 
   > span {
     display: block;

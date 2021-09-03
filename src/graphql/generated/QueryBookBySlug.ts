@@ -20,6 +20,7 @@ export interface QueryBookBySlug_livros {
   slug: string;
   price: number;
   stock: number;
+  particulars: string | null;
   description: string;
   image: QueryBookBySlug_livros_image | null;
 }

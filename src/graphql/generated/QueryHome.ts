@@ -53,6 +53,26 @@ export interface QueryHome_home {
   productGroup: (QueryHome_home_productGroup | null)[] | null;
 }
 
+export interface QueryHome_rodape_links_link {
+  __typename: "ComponentPageHeaderLink";
+  id: string;
+  name: string | null;
+  url: string | null;
+}
+
+export interface QueryHome_rodape_links {
+  __typename: "ComponentPageLinks";
+  id: string;
+  title: string | null;
+  link: (QueryHome_rodape_links_link | null)[] | null;
+}
+
+export interface QueryHome_rodape {
+  __typename: "Rodape";
+  links: (QueryHome_rodape_links | null)[] | null;
+}
+
 export interface QueryHome {
   home: QueryHome_home | null;
+  rodape: QueryHome_rodape | null;
 }

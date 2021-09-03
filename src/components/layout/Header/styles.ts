@@ -22,5 +22,10 @@ export const Wrapper = styled(DefaultWrapper)`
 
   > div:first-child {
     flex: 5 0 54.3rem;
+
+    > a {
+      display: block;
+      width: fit-content;
+    }
   }
 `

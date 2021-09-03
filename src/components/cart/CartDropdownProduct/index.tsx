@@ -11,7 +11,7 @@ export type CartDropdownProductProps = {
 }
 
 export const CartDropdownProduct = ({ product }: CartDropdownProductProps) => {
-  const { addProductToCart } = useCart()
+  const { addProductToCart, removeProductFromCart } = useCart()
 
   const handleChange = useCallback(
     (quantity: number) => {
@@ -30,7 +30,7 @@ export const CartDropdownProduct = ({ product }: CartDropdownProductProps) => {
         <ProductPrice>{formatToCurrency(product.price)}</ProductPrice>
         <NumberField value={product.quantity} onChange={handleChange} />
         <div>
-          <Anchor as="button" size="sm" color="light">
+          <Anchor as="button" size="sm" color="light" onClick={() => removeProductFromCart(product.id)}>
             Remover
           </Anchor>
         </div>

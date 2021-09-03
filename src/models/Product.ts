@@ -5,6 +5,8 @@ export type ProductModel = {
   price: number
   stock: number
   imageSrc: string
+  description: string
+  particulars: string
 }
 
 type SeeMoreModel = {

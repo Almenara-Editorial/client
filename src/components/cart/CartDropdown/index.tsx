@@ -6,7 +6,7 @@ import { Button, Hr } from '@/components/shared'
 import { useCart } from '@/contexts'
 
 export const CartDropdown = () => {
-  const { products } = useCart()
+  const { cartItems } = useCart()
 
   return (
     <Menu>
@@ -15,7 +15,7 @@ export const CartDropdown = () => {
         <Menu.Items as={Popover}>
           <CartDropdownProducts />
           <CartDropdownTotal />
-          {products?.length > 0 && (
+          {cartItems?.length > 0 && (
             <>
               <Hr space="lg" />
               <Button>Continuar para o checkout</Button>

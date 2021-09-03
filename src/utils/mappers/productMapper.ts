@@ -14,11 +14,13 @@ export function productMapper(products: QueryProductBySlug_livros[]) {
     price: product.price,
     slug: product.slug,
     imageSrc: getImageUrl(product.image?.src),
-    stock: product.stock
+    stock: product.stock,
+    description: product.description,
+    particulars: product.particulars
   }
 }
 
-export function productsMapper(products: QueryBooks_livros[] | null | undefined): ProductModel[] {
+export function productsMapper(products: QueryBooks_livros[] | null | undefined): Omit<ProductModel, 'particulars' | 'description'>[] {
   if (!products) return []
 
   return products.map((product) => ({

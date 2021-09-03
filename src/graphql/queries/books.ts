@@ -23,6 +23,7 @@ export const QUERY_BOOK = gql`
       slug
       price
       stock
+      particulars
       description
       image {
         src: url

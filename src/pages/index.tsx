@@ -2,7 +2,7 @@ import { HomeTemplate, HomeTemplateProps } from '@/components/templates'
 import { QueryHome } from '@/graphql/generated/QueryHome'
 import { QUERY_HOME } from '@/graphql/queries'
 import { initializeApollo } from '@/utils'
-import { productsGroupsMapper, bannersMapper } from '@/utils/mappers'
+import { productsGroupsMapper, bannersMapper, footerMapper } from '@/utils/mappers'
 
 type HomeProps = HomeTemplateProps
 
@@ -22,7 +22,8 @@ export async function getStaticProps() {
     props: {
       slides: bannersMapper(data.home?.banner),
       productsGroups: productsGroupsMapper(data.home?.productGroup),
-      initialApolloState: apolloClient.cache.extract()
+      initialApolloState: apolloClient.cache.extract(),
+      footer: data.rodape ? footerMapper(data.rodape) : null
     }
   }
 }
