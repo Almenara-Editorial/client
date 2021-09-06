@@ -1,18 +1,17 @@
 import { gql, QueryHookOptions, useQuery } from '@apollo/client'
-import { FOOTER_FRAGMENT } from '../fragments'
+import { BOOK_FRAGMENT, FOOTER_FRAGMENT } from '../fragments'
 import { QueryBooks, QueryBooksVariables } from '../generated/QueryBooks'
 
 export const QUERY_BOOKS = gql`
+  ${BOOK_FRAGMENT}
+  ${FOOTER_FRAGMENT}
+
   query QueryBooks($limit: Int, $start: Int, $where: JSON, $sort: String) {
     livros(limit: $limit, start: $start, where: $where, sort: $sort) {
-      id
-      name
-      slug
-      price
-      image {
-        src: url
-        formats
-      }
+      ...Book
+    }
+    rodape {
+      ...Footer
     }
   }
 `

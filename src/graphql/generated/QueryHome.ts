@@ -22,7 +22,7 @@ export interface QueryHome_home_banner {
 
 export interface QueryHome_home_productGroup_livros_image {
   __typename: "UploadFile";
-  url: string;
+  src: string;
   formats: any | null;
 }
 

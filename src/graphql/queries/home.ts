@@ -1,8 +1,9 @@
 import { gql } from '@apollo/client'
-import { FOOTER_FRAGMENT } from '../fragments'
+import { FOOTER_FRAGMENT, BOOK_FRAGMENT } from '../fragments'
 
 export const QUERY_HOME = gql`
   ${FOOTER_FRAGMENT}
+  ${BOOK_FRAGMENT}
 
   query QueryHome {
     home {
@@ -16,14 +17,7 @@ export const QUERY_HOME = gql`
         id
         title
         livros {
-          id
-          name
-          slug
-          price
-          image {
-            url
-            formats
-          }
+          ...Book
         }
         link {
           name

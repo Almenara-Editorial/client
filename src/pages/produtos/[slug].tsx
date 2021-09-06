@@ -4,11 +4,19 @@ import { QUERY_BOOK } from '@/graphql/queries'
 import { initializeApollo } from '@/utils'
 import { footerMapper, productMapper } from '@/utils/mappers'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import Head from 'next/head'
 
 type ProductProps = ProductTemplateProps
 
 export default function Product({ product }: ProductProps) {
-  return <ProductTemplate product={product} />
+  return (
+    <>
+      <Head>
+        <title>{product.name} - Almenara Editorial</title>
+      </Head>
+      <ProductTemplate product={product} />
+    </>
+  )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

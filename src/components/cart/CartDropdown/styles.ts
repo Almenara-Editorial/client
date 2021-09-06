@@ -11,4 +11,5 @@ export const Container = styled.div`
 export const Popover = styled(DefaultPopover)`
   width: 39.5rem;
   padding: var(--space-lg);
+  max-height: 80vh;
 `

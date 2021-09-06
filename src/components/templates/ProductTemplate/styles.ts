@@ -9,4 +9,6 @@ export const Main = styled.div`
   padding-block: 4.8rem;
 `
 
-export const Infos = styled.div``
+export const Infos = styled.div`
+  padding-block: 4.8rem;
+`

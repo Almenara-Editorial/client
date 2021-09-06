@@ -17,6 +17,8 @@ export async function getStaticProps() {
     query: QUERY_HOME
   })
 
+  console.log(JSON.stringify(data, null, 2))
+
   return {
     revalidate: 60,
     props: {

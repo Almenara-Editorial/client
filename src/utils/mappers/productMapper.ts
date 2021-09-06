@@ -2,7 +2,6 @@
 import { QueryBookBySlug_livros } from '@/graphql/generated/QueryBookBySlug'
 import { QueryBooks_livros } from '@/graphql/generated/QueryBooks'
 import { QueryHome_home_productGroup } from '@/graphql/generated/QueryHome'
-import { QueryProductBySlug_livros } from '@/graphql/generated/QueryProductBySlug'
 import { CartItemModel, CartProductModel, ProductModel, ProductsCardsGroupModel } from '@/models'
 import { getImageUrl } from '../get-image-url'
 
@@ -59,7 +58,7 @@ export function productsGroupsMapper(productsGroups: (QueryHome_home_productGrou
       name: product.name,
       price: product.price,
       slug: product.slug,
-      imageSrc: getImageUrl(product.image?.formats.small?.url || product.image?.url) || '#'
+      imageSrc: getImageUrl(product.image?.formats.small?.url || product.image?.src) || '#'
     })),
     ...(group?.link && {
       seeMore: {
