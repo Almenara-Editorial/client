@@ -8,7 +8,6 @@ type LayoutProps = {
 }
 
 export function Layout({ children, footer }: LayoutProps) {
-  console.log(footer)
   return (
     <Container>
       <Header />

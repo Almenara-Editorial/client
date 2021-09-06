@@ -3,25 +3,34 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { ENUM_COMPONENTPAGESOCIAL_NAME } from "./globalTypes";
+
 // ====================================================
-// GraphQL fragment: FooterFragment
+// GraphQL fragment: Footer
 // ====================================================
 
-export interface FooterFragment_links_link {
+export interface Footer_links_link {
   __typename: "ComponentPageHeaderLink";
   id: string;
   name: string | null;
   url: string | null;
 }
 
-export interface FooterFragment_links {
+export interface Footer_links {
   __typename: "ComponentPageLinks";
   id: string;
   title: string | null;
-  link: (FooterFragment_links_link | null)[] | null;
+  link: (Footer_links_link | null)[] | null;
 }
 
-export interface FooterFragment {
+export interface Footer_social {
+  __typename: "ComponentPageSocial";
+  name: ENUM_COMPONENTPAGESOCIAL_NAME;
+  url: string;
+}
+
+export interface Footer {
   __typename: "Rodape";
-  links: (FooterFragment_links | null)[] | null;
+  links: (Footer_links | null)[] | null;
+  social: (Footer_social | null)[] | null;
 }

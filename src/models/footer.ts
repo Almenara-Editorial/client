@@ -4,6 +4,11 @@ export type LinkModel = {
   url: string
 }
 
+export type SocialModel = {
+  name: string
+  url: string
+}
+
 export type LinkGroupModel = {
   id: string
   title: string
@@ -12,4 +17,5 @@ export type LinkGroupModel = {
 
 export type FooterModel = {
   linksGroups: LinkGroupModel[]
+  social: SocialModel[]
 }

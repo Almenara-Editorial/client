@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { ENUM_COMPONENTPAGESOCIAL_NAME } from "./globalTypes";
+
 // ====================================================
 // GraphQL query operation: QueryHome
 // ====================================================
@@ -67,9 +69,16 @@ export interface QueryHome_rodape_links {
   link: (QueryHome_rodape_links_link | null)[] | null;
 }
 
+export interface QueryHome_rodape_social {
+  __typename: "ComponentPageSocial";
+  name: ENUM_COMPONENTPAGESOCIAL_NAME;
+  url: string;
+}
+
 export interface QueryHome_rodape {
   __typename: "Rodape";
   links: (QueryHome_rodape_links | null)[] | null;
+  social: (QueryHome_rodape_social | null)[] | null;
 }
 
 export interface QueryHome {

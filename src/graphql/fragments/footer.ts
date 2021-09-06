@@ -11,5 +11,9 @@ export const FOOTER_FRAGMENT = gql`
         url
       }
     }
+    social {
+      name
+      url
+    }
   }
 `

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { FooterFragment } from '@/graphql/generated/FooterFragment'
+import { Footer } from '@/graphql/generated/Footer'
 
-export function footerMapper(data: FooterFragment) {
+export function footerMapper(data: Footer) {
   return {
     linksGroups: data.links?.map((group) => ({
       id: group!.id,
@@ -11,6 +11,7 @@ export function footerMapper(data: FooterFragment) {
         url: link?.url
       })),
       title: group!.title!
-    }))
+    })),
+    social: data.social
   }
 }

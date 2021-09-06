@@ -7,6 +7,13 @@
 // START Enums and Input Objects
 //==============================================================
 
+export enum ENUM_COMPONENTPAGESOCIAL_NAME {
+  email = "email",
+  facebook = "facebook",
+  instagram = "instagram",
+  whatsapp = "whatsapp",
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================
