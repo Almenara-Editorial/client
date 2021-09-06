@@ -1,4 +1,5 @@
 import { gql, QueryHookOptions, useQuery } from '@apollo/client'
+import { FOOTER_FRAGMENT } from '../fragments'
 import { QueryBooks, QueryBooksVariables } from '../generated/QueryBooks'
 
 export const QUERY_BOOKS = gql`
@@ -16,6 +17,7 @@ export const QUERY_BOOKS = gql`
   }
 `
 export const QUERY_BOOK = gql`
+  ${FOOTER_FRAGMENT}
   query QueryBookBySlug($slug: String) {
     livros(where: { slug: $slug }) {
       id
@@ -29,6 +31,9 @@ export const QUERY_BOOK = gql`
         src: url
         label: alternativeText
       }
+    }
+    rodape {
+      ...Footer
     }
   }
 `

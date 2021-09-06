@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { QueryBookBySlug_livros } from '@/graphql/generated/QueryBookBySlug'
 import { QueryBooks_livros } from '@/graphql/generated/QueryBooks'
 import { QueryHome_home_productGroup } from '@/graphql/generated/QueryHome'
 import { QueryProductBySlug_livros } from '@/graphql/generated/QueryProductBySlug'
 import { CartItemModel, CartProductModel, ProductModel, ProductsCardsGroupModel } from '@/models'
 import { getImageUrl } from '../get-image-url'
 
-export function productMapper(products: QueryProductBySlug_livros[]) {
+export function productMapper(products: QueryBookBySlug_livros[]) {
   const product = products[0]
 
   return {
