@@ -10,7 +10,7 @@ export type ProductsCardsGroupProps = {
 
 export const ProductsCardsGroup = ({ productGroup }: ProductsCardsGroupProps) => (
   <Container>
-    <ProductCardGroupTitle>{productGroup.title}</ProductCardGroupTitle>
+    {productGroup?.title && <ProductCardGroupTitle>{productGroup.title}</ProductCardGroupTitle>}
     <Products>
       {productGroup.products.map((product) => (
         <ProductCard key={product.id} product={product} />

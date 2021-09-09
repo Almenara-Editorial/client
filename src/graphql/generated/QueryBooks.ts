@@ -50,9 +50,16 @@ export interface QueryBooks_rodape {
   social: (QueryBooks_rodape_social | null)[] | null;
 }
 
+export interface QueryBooks_categorias {
+  __typename: "Categorias";
+  name: string;
+  slug: string;
+}
+
 export interface QueryBooks {
   livros: QueryBooks_livros[];
   rodape: QueryBooks_rodape | null;
+  categorias: QueryBooks_categorias[];
 }
 
 export interface QueryBooksVariables {

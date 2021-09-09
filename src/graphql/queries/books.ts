@@ -1,9 +1,10 @@
 import { gql, QueryHookOptions, useQuery } from '@apollo/client'
-import { BOOK_FRAGMENT, FOOTER_FRAGMENT } from '../fragments'
+import { BOOK_FRAGMENT, FOOTER_FRAGMENT, CATEGORY_FRAGMENT } from '../fragments'
 import { QueryBooks, QueryBooksVariables } from '../generated/QueryBooks'
 
 export const QUERY_BOOKS = gql`
   ${BOOK_FRAGMENT}
+  ${CATEGORY_FRAGMENT}
   ${FOOTER_FRAGMENT}
 
   query QueryBooks($limit: Int, $start: Int, $where: JSON, $sort: String) {
@@ -12,6 +13,9 @@ export const QUERY_BOOKS = gql`
     }
     rodape {
       ...Footer
+    }
+    categorias {
+      ...Category
     }
   }
 `
@@ -37,6 +41,8 @@ export const QUERY_BOOK = gql`
   }
 `
 
-export function useQueryProducs(options?: QueryHookOptions<QueryBooks, QueryBooksVariables>) {
+export function useQueryProducs(
+  options?: QueryHookOptions<QueryBooks, QueryBooksVariables>
+) {
   return useQuery<QueryBooks, QueryBooksVariables>(QUERY_BOOKS, options)
 }

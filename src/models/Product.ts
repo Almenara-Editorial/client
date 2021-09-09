@@ -14,7 +14,7 @@ type SeeMoreModel = {
   url: string
 }
 
-export type ProductsCardsGroupModel = { id: string; title: string; products: ProductCardModel[]; seeMore?: SeeMoreModel }
+export type ProductsCardsGroupModel = { id: string; title?: string; products: ProductCardModel[]; seeMore?: SeeMoreModel }
 
 export type ProductCardModel = Pick<ProductModel, 'id' | 'name' | 'price' | 'slug' | 'imageSrc'>
 export type SingleProductModel = ProductModel & {
