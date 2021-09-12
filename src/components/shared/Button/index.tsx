@@ -1,6 +1,6 @@
 import { Loading } from '@/components/animations'
 import { Checkmark } from '@/components/icons'
-import { HTMLAttributes } from 'react'
+import { forwardRef, ForwardRefRenderFunction, HTMLAttributes } from 'react'
 import { Container } from './styles'
 
 type ButtonVariant = 'primary' | 'neutral'
@@ -29,9 +29,18 @@ export type ButtonProps = HTMLAttributes<HTMLButtonElement> & {
   as?: React.ElementType | string
 }
 
-export function Button({ isLoading, isSuccess, children, ...rest }: ButtonProps) {
+export const ButtonFn: ForwardRefRenderFunction<
+  HTMLButtonElement,
+  ButtonProps
+> = ({ isLoading, isSuccess, children, ...rest }, ref) => {
   return (
-    <Container {...rest} isLoading={isLoading} isSuccess={isSuccess} aria-busy={isLoading}>
+    <Container
+      {...rest}
+      ref={ref}
+      isLoading={isLoading}
+      isSuccess={isSuccess}
+      aria-busy={isLoading}
+    >
       {children}
       {isLoading && (
         <i>
@@ -46,3 +55,5 @@ export function Button({ isLoading, isSuccess, children, ...rest }: ButtonProps)
     </Container>
   )
 }
+
+export const Button = forwardRef(ButtonFn)

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 type HrProps = {
-  space?: 'md' | 'lg' | '2xl'
+  space?: 'md' | 'lg' | 'xl' | '2xl'
 }
 export const Hr = styled.hr.attrs<HrProps>(({ space }) => ({
   'data-space': space
@@ -13,6 +13,10 @@ export const Hr = styled.hr.attrs<HrProps>(({ space }) => ({
 
   &[data-space='2xl'] {
     margin-block: var(--space-2xl);
+  }
+
+  &[data-space='xl'] {
+    margin-block: var(--space-xl);
   }
 
   &[data-space='lg'] {

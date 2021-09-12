@@ -17,7 +17,7 @@ export const Wrapper = styled(DefaultWrapper)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-xl);
   min-height: 8.7rem;
 
   > div:first-child {
@@ -27,5 +27,9 @@ export const Wrapper = styled(DefaultWrapper)`
       display: block;
       width: fit-content;
     }
+  }
+
+  > form {
+    width: 42.4rem;
   }
 `

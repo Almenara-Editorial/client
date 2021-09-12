@@ -6,9 +6,9 @@ import { EmptyCartImage, CartDropdownProduct } from '..'
 import { Container } from './styles'
 
 export const CartDropdownProducts = () => {
-  const { products, cartItems, loading } = useCart()
+  const { products, loading } = useCart()
 
-  if (!cartItems || cartItems.length === 0)
+  if (!products || products.length === 0)
     return (
       <Container>
         <EmptyCartImage />
@@ -21,7 +21,9 @@ export const CartDropdownProducts = () => {
       <CustomScrollbar as={Container} autoHeight autoHeightMin="30rem">
         <Container>
           {products.map((product) => (
-            <Menu.Item key={product.id}>{() => <CartDropdownProduct product={product} />}</Menu.Item>
+            <Menu.Item key={product.id}>
+              {() => <CartDropdownProduct product={product} />}
+            </Menu.Item>
           ))}
         </Container>
       </CustomScrollbar>

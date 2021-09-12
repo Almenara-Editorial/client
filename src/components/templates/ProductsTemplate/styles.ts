@@ -7,4 +7,5 @@ export const Main = styled(Wrapper).attrs({ as: 'section' })`
   display: flex;
   gap: 3.2rem;
   padding: 4.8rem 0;
+  border-top: 1px solid var(--color-neutral-200);
 `

@@ -7,7 +7,16 @@ export const QUERY_BOOKS = gql`
   ${CATEGORY_FRAGMENT}
   ${FOOTER_FRAGMENT}
 
-  query QueryBooks($limit: Int, $start: Int, $where: JSON, $sort: String) {
+  query QueryBooks(
+    $limit: Int
+    $start: Int
+    $where: JSON
+    $sort: String
+    $recommended: JSON
+  ) {
+    recommended: livros(where: $recommended) {
+      ...Book
+    }
     livros(limit: $limit, start: $start, where: $where, sort: $sort) {
       ...Book
     }

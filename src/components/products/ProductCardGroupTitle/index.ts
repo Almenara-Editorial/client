@@ -1,6 +1,16 @@
 import styled from 'styled-components'
 
-export const ProductCardGroupTitle = styled.div`
+type ProductCardGroupTitleProps = {
+  size?: 'sm' | 'lg'
+  align?: 'left' | 'center'
+}
+
+export const ProductCardGroupTitle = styled.div.attrs<ProductCardGroupTitleProps>(
+  ({ size, align = 'center' }) => ({
+    'data-size': size,
+    'data-align': align
+  })
+)<ProductCardGroupTitleProps>`
   display: flex;
   align-items: center;
   min-width: 100%;
@@ -26,5 +36,16 @@ export const ProductCardGroupTitle = styled.div`
 
   &:after {
     margin-left: var(--space-xl);
+  }
+
+  &[data-align='left'] {
+    &:before {
+      content: none;
+      background-color: red;
+    }
+  }
+
+  &[data-size='sm'] {
+    font-size: 1.8rem;
   }
 `

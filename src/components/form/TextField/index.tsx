@@ -10,7 +10,12 @@ type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   type?: 'text' | 'password' | 'search'
 }
 
-export const TextField = ({ label, type = 'text', placeholder, ...rest }: TextFieldProps) => {
+export const TextField = ({
+  label,
+  type = 'text',
+  placeholder,
+  ...rest
+}: TextFieldProps) => {
   const [fieldType, setFieldType] = useState<TextFieldProps['type']>(type)
   const isShowingPassword = fieldType === 'text'
 
@@ -20,9 +25,18 @@ export const TextField = ({ label, type = 'text', placeholder, ...rest }: TextFi
 
   return (
     <Container>
-      <Input type={fieldType} {...rest} placeholder={placeholder || label} data-hidden-placeholder={!!label} />
+      <Input
+        type={fieldType}
+        {...rest}
+        placeholder={placeholder || label}
+        data-hidden-placeholder={!!label}
+      />
       {label && type !== 'search' && <Label>{label}</Label>}
-      {type === 'password' && <button onClick={togglePasswordVisibility}>{isShowingPassword ? <EyeInvisible /> : <Eye />}</button>}
+      {type === 'password' && (
+        <button onClick={togglePasswordVisibility}>
+          {isShowingPassword ? <EyeInvisible /> : <Eye />}
+        </button>
+      )}
       {type === 'search' && (
         <button>
           <Search />

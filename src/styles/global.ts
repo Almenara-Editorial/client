@@ -55,6 +55,8 @@ const GlobalStyles = createGlobalStyle`
     --space-2xl: 4rem;
     --space-3xl: 4.8rem;
 
+    --header-height: 8.7rem;
+
     --layer-base: 10;
     --layer-header: 30;
     --layer-overlay: 20;

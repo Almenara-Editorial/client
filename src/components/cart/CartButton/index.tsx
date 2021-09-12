@@ -5,9 +5,12 @@ import { Container } from './styles'
 
 type CartButtonProps = HTMLAttributes<HTMLButtonElement>
 
-export const CartButtonFn: ForwardRefRenderFunction<HTMLButtonElement, CartButtonProps> = (props, ref) => {
-  const { products } = useCart()
-  const cartLength = products?.length
+export const CartButtonFn: ForwardRefRenderFunction<
+  HTMLButtonElement,
+  CartButtonProps
+> = (props, ref) => {
+  const { cartItems } = useCart()
+  const cartLength = cartItems?.length || 0
 
   return (
     <Container {...props} ref={ref}>

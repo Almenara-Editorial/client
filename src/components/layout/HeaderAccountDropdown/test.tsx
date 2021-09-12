@@ -6,7 +6,9 @@ describe('<HeaderAccountDropdown />', () => {
   it('should render the heading', () => {
     const { container } = render(<HeaderAccountDropdown />)
 
-    expect(screen.getByRole('heading', { name: /HeaderAccountDropdown/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /HeaderAccountDropdown/i })
+    ).toBeInTheDocument()
 
     expect(container.firstChild).toMatchSnapshot()
   })
