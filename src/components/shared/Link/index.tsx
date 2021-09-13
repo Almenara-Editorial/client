@@ -8,7 +8,13 @@ export type LinkProps = Omit<NextLinkProps, 'as'> &
     as?: string | React.ElementType
   }
 
-export const Link = ({ children, size = 'rg', as = Anchor, color = 'neutral', ...rest }: LinkProps) => {
+export const Link = ({
+  children,
+  size = 'rg',
+  as = Anchor,
+  color = 'neutral',
+  ...rest
+}: LinkProps) => {
   return (
     <NextLink {...rest} passHref>
       <UnstyledAnchor color={color} size={size} as={as}>

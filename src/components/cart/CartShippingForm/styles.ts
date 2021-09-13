@@ -1,0 +1,9 @@
+import styled from 'styled-components'
+
+export const Container = styled.div``
+
+export const Row = styled.div`
+  display: flex;
+  gap: 1.8rem;
+  align-items: center;
+`

@@ -1,4 +1,4 @@
-import { Hr } from '@/components/shared'
+import { Hr, Loader } from '@/components/shared'
 import { CustomScrollbar } from '@/components/shared/CustomScrollbar'
 import { useCart } from '@/contexts'
 import { Menu } from '@headlessui/react'
@@ -6,7 +6,14 @@ import { EmptyCartImage, CartDropdownProduct } from '..'
 import { Container } from './styles'
 
 export const CartDropdownProducts = () => {
-  const { products, loading } = useCart()
+  const { products, isLoading } = useCart()
+
+  if (isLoading.products)
+    return (
+      <Container>
+        <Loader message="Carregando seus produtos" />
+      </Container>
+    )
 
   if (!products || products.length === 0)
     return (

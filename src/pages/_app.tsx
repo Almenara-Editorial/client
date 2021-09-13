@@ -16,7 +16,7 @@ function App({ Component, pageProps }: AppProps) {
     <ApolloProvider client={client}>
       <CartProvider>
         <Head>
-          <title>React Avançado Boilerplate</title>
+          <title>Loja Almenara Editorial</title>
           <link rel="shortcut icon" href="/img/icon-512.png" />
           <link rel="apple-touch-icon" href="/img/icon-512.png" />
         </Head>

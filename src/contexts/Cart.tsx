@@ -1,18 +1,33 @@
 import { useQueryProducs } from '@/graphql/queries'
-import { CartItemModel, CartProductModel, CartTotalModel } from '@/models'
+import {
+  CartItemModel,
+  CartProductModel,
+  CartTotalModel,
+  ShippingOptionModel
+} from '@/models'
+import { loadShippingOptionsByZipCode } from '@/services'
 import { cartProductsMapper } from '@/utils/mappers'
-import { createContext, useCallback, useContext, useState } from 'react'
-import { useLocalStorage } from 'react-use'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState
+} from 'react'
+
+type IsLoadingItems = 'products' | 'shipping'
 
 type CartContextData = {
   cartItems: CartItemModel[] | undefined
+  shippingOptions: ShippingOptionModel[]
   products: CartProductModel[]
   totals: CartTotalModel
   addProductToCart: (item: CartItemModel) => void
   removeProductFromCart: (id: string) => void
   resetCart: () => void
   isInCart: (id: string) => CartItemModel | undefined
-  loading: boolean
+  loadShippingOptions: (zipCode: string) => void
+  isLoading: Record<IsLoadingItems, boolean>
 }
 
 type CartProviderProps = {
@@ -22,8 +37,15 @@ type CartProviderProps = {
 export const CartContext = createContext({} as CartContextData)
 
 export function CartProvider({ children }: CartProviderProps) {
-  const [cartItems, setCartItems, resetCart] = useState<CartItemModel[]>([])
-  const { data, loading } = useQueryProducs({
+  const [cartItems, setCartItems] = useState<CartItemModel[]>([])
+  const [shippingOptions, setShippingOptions] = useState<ShippingOptionModel[]>(
+    []
+  )
+  const [isLoading, setIsLoading] = useState({
+    products: false,
+    shipping: false
+  })
+  const { data, loading: loadingProducts } = useQueryProducs({
     skip: !cartItems?.length,
     variables: {
       where: {
@@ -31,6 +53,7 @@ export function CartProvider({ children }: CartProviderProps) {
       }
     }
   })
+
   const products = cartItems ? cartProductsMapper(data?.livros, cartItems) : []
   const productsTotal = products
     .map((product) => product.price * product.quantity)
@@ -54,8 +77,6 @@ export function CartProvider({ children }: CartProviderProps) {
   const addProductToCart = useCallback(
     (item: CartItemModel) => {
       setCartItems((state) => {
-        console.log(state ? state.push(item) : [item])
-
         return [
           ...(state ? state.filter((cartItem) => cartItem.id !== item.id) : []),
           item
@@ -65,12 +86,41 @@ export function CartProvider({ children }: CartProviderProps) {
     [setCartItems]
   )
 
+  const resetCart = useCallback(() => {
+    setCartItems([])
+  }, [])
+
   const isInCart = useCallback(
     (id: CartItemModel['id']) => {
       return cartItems?.find((item) => item.id === id)
     },
     [cartItems]
   )
+
+  const updateIsLoading = useCallback(
+    (key: keyof typeof isLoading, value: boolean) => {
+      setIsLoading((state) => ({ ...state, [key]: value }))
+    },
+    []
+  )
+
+  const loadShippingOptions = useCallback(
+    async (zipCode: string) => {
+      updateIsLoading('shipping', true)
+      const options = await loadShippingOptionsByZipCode({
+        zipCode,
+        cart: cartItems
+      })
+
+      updateIsLoading('shipping', false)
+      setShippingOptions(options)
+    },
+    [cartItems, updateIsLoading]
+  )
+
+  useEffect(() => {
+    updateIsLoading('products', loadingProducts)
+  }, [updateIsLoading, loadingProducts])
 
   return (
     <CartContext.Provider
@@ -80,9 +130,11 @@ export function CartProvider({ children }: CartProviderProps) {
         totals,
         addProductToCart,
         removeProductFromCart,
+        loadShippingOptions,
+        shippingOptions,
         isInCart,
         resetCart,
-        loading
+        isLoading
       }}
     >
       {children}

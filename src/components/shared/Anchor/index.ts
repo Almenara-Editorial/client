@@ -1,6 +1,7 @@
 import { Container as SelectAddressButton } from '@/components/products/SelectAddressButton/styles'
 import { Container as ProductCard } from '@/components/products/ProductCard/styles'
 import { HTMLAttributes } from 'react'
+import { Container as CartSummary } from '@/components/cart/CartSummary/styles'
 import styled from 'styled-components'
 
 export type AnchorProps = HTMLAttributes<HTMLAnchorElement> & {
@@ -8,10 +9,12 @@ export type AnchorProps = HTMLAttributes<HTMLAnchorElement> & {
   color?: 'neutral' | 'tertiary' | 'light'
 }
 
-export const Anchor = styled.a.attrs<AnchorProps>(({ size = 'rg', color = 'neutral' }) => ({
-  'data-color': color,
-  style: { '--link-size': `var(--font-${size})` }
-}))<AnchorProps>`
+export const Anchor = styled.a.attrs<AnchorProps>(
+  ({ size = 'rg', color = 'neutral' }) => ({
+    'data-color': color,
+    style: { '--link-size': `var(--font-${size})` }
+  })
+)<AnchorProps>`
   display: inline-block;
 
   font-size: var(--link-size);
@@ -59,5 +62,13 @@ export const Anchor = styled.a.attrs<AnchorProps>(({ size = 'rg', color = 'neutr
     text-decoration: none;
     transform: none;
     color: inherit;
+  }
+
+  ${CartSummary} & {
+    display: block;
+    width: fit-content;
+    font-size: var(--font-sm);
+    text-align: center;
+    margin: 2.4rem auto 0 auto;
   }
 `

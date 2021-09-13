@@ -3,7 +3,6 @@ import { Checkmark } from '@/components/icons'
 import { forwardRef, ForwardRefRenderFunction, HTMLAttributes } from 'react'
 import { Container } from './styles'
 
-type ButtonVariant = 'primary' | 'neutral'
 type ButtonColor = 'primary' | 'neutral' | 'background' | 'white'
 type ButtonSize =
   | 'rg-smallest'
@@ -22,7 +21,6 @@ export type ButtonProps = HTMLAttributes<HTMLButtonElement> & {
   uppercase?: boolean
   outline?: boolean
   color?: ButtonColor
-  variant?: ButtonVariant
   isLoading?: boolean
   isSuccess?: boolean
   disabled?: boolean

@@ -8,8 +8,8 @@ import { filterMapper } from '@/utils/mappers/fillterMapper'
 
 type CartProps = CartTemplateProps
 
-export default function Cart({ products }: CartProps) {
-  return <CartTemplate />
+export default function Cart({ recommended }: CartProps) {
+  return <CartTemplate recommended={recommended} />
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -20,12 +20,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     query: QUERY_BOOKS,
     variables: {
       limit: 12,
-      where
+      where,
+      recommended: {
+        categorias: {
+          slug: ['recomendado']
+        }
+      }
     }
   })
 
   return {
     props: {
+      recommended: productsMapper(data.recommended),
       products: productsMapper(data.livros),
       filters: filterMapper({ categories: data.categorias }),
       initialApolloState: apolloClient.cache.extract(),
