@@ -1,4 +1,9 @@
-import React, { InputHTMLAttributes, useState } from 'react'
+import React, {
+  forwardRef,
+  ForwardRefRenderFunction,
+  InputHTMLAttributes,
+  useState
+} from 'react'
 
 import { Label } from '@/components/form'
 
@@ -10,40 +15,37 @@ type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   type?: 'text' | 'password' | 'search'
 }
 
-export const TextField = ({
-  label,
-  type = 'text',
-  placeholder,
-  ...rest
-}: TextFieldProps) => {
-  const [fieldType, setFieldType] = useState<TextFieldProps['type']>(type)
-  const isShowingPassword = fieldType === 'text'
+const TextFieldFn: ForwardRefRenderFunction<HTMLInputElement, TextFieldProps> =
+  ({ label, type = 'text', placeholder, ...rest }, ref) => {
+    const [fieldType, setFieldType] = useState<TextFieldProps['type']>(type)
+    const isShowingPassword = fieldType === 'text'
 
-  function togglePasswordVisibility() {
-    setFieldType((state) => (state === 'password' ? 'text' : 'password'))
+    function togglePasswordVisibility() {
+      setFieldType((state) => (state === 'password' ? 'text' : 'password'))
+    }
+
+    return (
+      <Container>
+        <Input
+          type={fieldType}
+          ref={ref}
+          {...rest}
+          placeholder={placeholder || label}
+          data-hidden-placeholder={!!label}
+        />
+        {label && type !== 'search' && <Label>{label}</Label>}
+        {type === 'password' && (
+          <button type="button" onClick={togglePasswordVisibility}>
+            {isShowingPassword ? <EyeInvisible /> : <Eye />}
+          </button>
+        )}
+        {type === 'search' && (
+          <button>
+            <Search />
+          </button>
+        )}
+      </Container>
+    )
   }
 
-  return (
-    <Container>
-      <Input
-        type={fieldType}
-        {...rest}
-        placeholder={placeholder || label}
-        data-hidden-placeholder={!!label}
-      />
-      {label && type !== 'search' && <Label>{label}</Label>}
-      {type === 'password' && (
-        <button onClick={togglePasswordVisibility}>
-          {isShowingPassword ? <EyeInvisible /> : <Eye />}
-        </button>
-      )}
-      {type === 'search' && (
-        <button>
-          <Search />
-        </button>
-      )}
-    </Container>
-  )
-}
-
-export default TextField
+export const TextField = forwardRef(TextFieldFn)

@@ -9,10 +9,12 @@ export const CartShippingForm = () => {
   const { loadShippingOptions } = useCart()
   const [zipCode, setZipCode] = useState('')
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
 
-    loadShippingOptions(zipCode)
+    await loadShippingOptions(zipCode).catch((error) =>
+      console.log(error.response)
+    )
   }
 
   return (

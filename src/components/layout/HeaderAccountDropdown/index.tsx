@@ -1,9 +1,10 @@
 import { Menu } from '@headlessui/react'
 
 import { CaretDown } from '@/components/icons'
-import { Hr, Popover } from '@/components/shared'
+import { Hr, Popover, Link as DefaultLink } from '@/components/shared'
 
 import { Container, Button, List, Link } from './styles'
+import { signOut } from 'next-auth/client'
 
 type Link = {
   title: string
@@ -15,7 +16,9 @@ export type HeaderAccountDropdownProps = {
   links: Link[]
 }
 
-export const HeaderAccountDropdown = ({ links }: HeaderAccountDropdownProps) => {
+export const HeaderAccountDropdown = ({
+  links
+}: HeaderAccountDropdownProps) => {
   return (
     <Menu as={Container}>
       <Menu.Button as={Button}>
@@ -30,10 +33,10 @@ export const HeaderAccountDropdown = ({ links }: HeaderAccountDropdownProps) => 
             <Menu.Item key={link.url}>
               {({ active }) => (
                 <li>
-                  <Link className={`${active && 'bg-blue-500'}`} href="/account-settings">
+                  <DefaultLink as={Link} href="/account-settings">
                     {link.title}
                     {link.subtitle && <span>{link.subtitle}</span>}
-                  </Link>
+                  </DefaultLink>
                 </li>
               )}
             </Menu.Item>
@@ -42,7 +45,7 @@ export const HeaderAccountDropdown = ({ links }: HeaderAccountDropdownProps) => 
           <Menu.Item>
             {({ active }) => (
               <li>
-                <Link className={`${active && 'bg-blue-500'}`} href="#">
+                <Link as="button" onClick={() => signOut()}>
                   Sair
                 </Link>
               </li>

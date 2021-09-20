@@ -11,7 +11,7 @@ export const Basic: Story = () => {
   const [checked, setIsChecked] = useState(false)
 
   return (
-    <Checkbox checked={checked} onChange={setIsChecked}>
+    <Checkbox value={true} checked={checked} onChange={setIsChecked}>
       Manter-me conectado
     </Checkbox>
   )

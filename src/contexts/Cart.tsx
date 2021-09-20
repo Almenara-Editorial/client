@@ -26,7 +26,7 @@ type CartContextData = {
   removeProductFromCart: (id: string) => void
   resetCart: () => void
   isInCart: (id: string) => CartItemModel | undefined
-  loadShippingOptions: (zipCode: string) => void
+  loadShippingOptions: (zipCode: string) => Promise<void>
   isLoading: Record<IsLoadingItems, boolean>
 }
 

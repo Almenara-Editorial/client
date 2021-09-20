@@ -28,6 +28,8 @@ export const colors = {
   'yellow-900': 'rgba(153, 102, 0, 1)',
   'red-500': 'rgba(255, 89, 100, 1)',
   'red-400': '#FF7C84',
+  'success-100': '#edf8ee',
+  'success-200': '#a3dba9',
   'success-300': '#4AB855',
   danger: '#D70128',
   text: 'rgba(22, 24, 29, 1)',

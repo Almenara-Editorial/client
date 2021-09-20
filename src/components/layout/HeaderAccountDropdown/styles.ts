@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import { Link as DefaultLink } from '@/components/shared'
-
 export const Container = styled.div`
   position: relative;
   font-size: var(--font-sm);
@@ -32,12 +30,17 @@ export const List = styled.ul`
   padding: 1.2rem;
 `
 
-export const Link = styled(DefaultLink).attrs({ as: 'a' })`
+export const Link = styled.a`
   display: block;
   text-decoration: none;
   padding: 1.2rem;
   color: var(--color-text);
   border-radius: var(--radius-sm);
+  border: 0;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
 
   &:hover {
     background-color: var(--color-neutral-50);

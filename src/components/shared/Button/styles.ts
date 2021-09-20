@@ -4,7 +4,14 @@ import styled from 'styled-components'
 import { ButtonProps } from '.'
 
 export const Container = styled.button.attrs<ButtonProps>(
-  ({ uppercase = true, outline, color = 'primary', size = 'rg-full', isLoading, isSuccess }) => ({
+  ({
+    uppercase = true,
+    outline,
+    color = 'primary',
+    size = 'rg-full',
+    isLoading,
+    isSuccess
+  }) => ({
     'data-size': size,
     'data-color': color,
     'data-is-uppercase': uppercase,
@@ -42,7 +49,8 @@ export const Container = styled.button.attrs<ButtonProps>(
 
   &:focus,
   &:active {
-    box-shadow: 0px 0px 0px 4px #ffffff, 0px 0px 0px 8px var(--button-color-focus-outline);
+    box-shadow: 0px 0px 0px 4px #ffffff,
+      0px 0px 0px 8px var(--button-color-focus-outline);
   }
   &:focus {
     background-color: var(--button-color-focus);
@@ -112,10 +120,6 @@ export const Container = styled.button.attrs<ButtonProps>(
     --button-text-color-loading: var(--color-white);
   }
 
-  &[data-is-success='true'] {
-    --button-color: var(--color-success-300);
-  }
-
   &[data-is-outline='true'][data-color='neutral'] {
     --button-color-hover: var(--color-neutral-900);
   }
@@ -167,6 +171,13 @@ export const Container = styled.button.attrs<ButtonProps>(
   &[data-is-loading='true'] {
     background-color: var(--button-color-loading, --button-color);
     color: var(--button-text-color-loading, --button-text-color);
+  }
+
+  &[data-is-success='true'] {
+    --button-color: var(--color-success-300);
+    --button-color-focus: var(--color-success-300);
+    --button-color-hover: var(--color-success-300);
+    --button-color-focus-outline: var(--color-success-100);
   }
 
   &:disabled {

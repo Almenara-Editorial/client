@@ -1,24 +1,43 @@
+import { LoginModal } from '@/components/auth'
+import { SigninButton } from '@/components/auth/SigninButton'
 import { Person } from '@/components/icons'
+import { Loader } from '@/components/shared'
+import { useModal } from '@/hooks'
+import { useSession } from 'next-auth/client'
 import { HeaderAccountDropdown } from '..'
 import { Container } from './styles'
 
-export type HeaderAccountProps = {
-  fullName: string
-}
+export const HeaderAccount = () => {
+  const [session, loading] = useSession()
+  const modal = useModal()
 
-export const HeaderAccount = ({ fullName }: HeaderAccountProps) => (
-  <Container>
-    <i>
-      <Person />
-    </i>
-    <div>
-      <span>Olá, {fullName}</span>
-      <HeaderAccountDropdown
-        links={[
-          { title: 'Seus Pedidos', url: '/seus-pedidos' },
-          { title: 'Configurações', subtitle: 'Dados de usuário, endereços, métodos de pagamentos.', url: '/minha-conta' }
-        ]}
-      />
-    </div>
-  </Container>
-)
+  return (
+    <Container>
+      <LoginModal {...modal} />
+      <i>
+        <Person />
+      </i>
+      {loading && (
+        <div>
+          <Loader />
+        </div>
+      )}
+      {!session && !loading && <SigninButton onClick={modal.openModal} />}
+      {session && (
+        <div>
+          <span>Olá, {session?.user?.name}</span>
+          <HeaderAccountDropdown
+            links={[
+              { title: 'Seus Pedidos', url: '/seus-pedidos' },
+              {
+                title: 'Configurações',
+                subtitle: 'Dados de usuário, endereços, métodos de pagamentos.',
+                url: '/minha-conta'
+              }
+            ]}
+          />
+        </div>
+      )}
+    </Container>
+  )
+}

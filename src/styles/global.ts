@@ -59,7 +59,7 @@ const GlobalStyles = createGlobalStyle`
 
     --layer-base: 10;
     --layer-header: 30;
-    --layer-overlay: 20;
+    --layer-overlay: 35;
     --layer-modal: 40;
     --layer-top: 50;
 
@@ -110,6 +110,7 @@ const GlobalStyles = createGlobalStyle`
     --color-secondary-900: ${colors['yellow-900']};
     --color-tertiary-500: ${colors['red-500']};
     --color-tertiary-400: ${colors['red-400']};
+    --color-success-100: ${colors['success-100']};
     --color-success-300: ${colors['success-300']};
     --color-danger-300: ${colors['danger']};
     --color-white: ${colors.white};
