@@ -14,6 +14,12 @@ export enum ENUM_COMPONENTPAGESOCIAL_NAME {
   whatsapp = "whatsapp",
 }
 
+export interface UsersPermissionsRegisterInput {
+  username: string;
+  email: string;
+  password: string;
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

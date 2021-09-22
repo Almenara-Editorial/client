@@ -39,12 +39,11 @@ export const Input = styled.input`
       left: var(--input-padding-x);
       z-index: var(--layer-base);
       transform: translateY(-50%);
-
+      margin-bottom: 0;
       color: var(--input-label-color);
-
       font-size: 1.6rem;
-
       transition: all 0.2s;
+      will-change: font-size, transform, top;
       pointer-events: none;
     }
   }
@@ -80,12 +79,12 @@ export const Input = styled.input`
   &:focus,
   &:not(:placeholder-shown) {
     ~ ${Label} {
-      top: 0;
-      transform: translate(-1rem, -50%);
       padding-inline: 1rem;
+      top: 0 !important;
+      transform: translate(-1rem, -50%) !important;
       color: var(--input-label-color);
       background-color: var(--color-background);
-      font-size: var(--font-sm);
+      font-size: var(--font-sm) !important;
     }
   }
 

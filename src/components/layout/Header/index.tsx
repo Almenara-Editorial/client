@@ -35,7 +35,7 @@ export const Header = () => {
             value={searchTerm}
           />
         </form>
-        <HeaderActions fullName="Maria José" />
+        <HeaderActions />
       </Wrapper>
     </Container>
   )

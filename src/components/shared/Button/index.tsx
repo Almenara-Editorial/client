@@ -17,6 +17,7 @@ type ButtonSize =
   | 'sm-full'
 
 export type ButtonProps = HTMLAttributes<HTMLButtonElement> & {
+  type?: 'button' | 'submit'
   size?: ButtonSize
   uppercase?: boolean
   outline?: boolean

@@ -5,5 +5,5 @@ export const Container = styled.div`
 `
 
 export const Main = styled.main`
-  padding-top: 8.7rem;
+  padding-top: var(--header-height);
 `

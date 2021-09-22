@@ -18,7 +18,7 @@ export const Wrapper = styled(DefaultWrapper)`
   justify-content: space-between;
   align-items: center;
   gap: var(--space-xl);
-  min-height: 8.7rem;
+  min-height: var(--header-height);
 
   > div:first-child {
     flex: 5 0 54.3rem;
