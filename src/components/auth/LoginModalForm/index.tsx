@@ -26,8 +26,8 @@ export const LoginModalForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(handleSignin)}>
-      <TextField {...register('email')} />
-      <TextField type="password" {...register('password')} />
+      <TextField label="Email ou usuário" {...register('email')} />
+      <TextField label="Senha" type="password" {...register('password')} />
       <Row>
         {/* <Checkbox value={false}>Manter-me conectado</Checkbox> */}
         <Link href="#">Esqueceu a sua senha?</Link>
