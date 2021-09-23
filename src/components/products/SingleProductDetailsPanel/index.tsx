@@ -1,9 +1,15 @@
+import { forwardRef, ForwardRefRenderFunction } from 'react'
 import { Container } from './styles'
 
 type SingleProductDetailsPanelProps = {
   content: string
 }
 
-export const SingleProductDetailsPanel = ({ content }: SingleProductDetailsPanelProps) => {
-  return <Container dangerouslySetInnerHTML={{ __html: content }} />
+const SingleProductDetailsPanelFn: ForwardRefRenderFunction<
+  HTMLDivElement,
+  SingleProductDetailsPanelProps
+> = ({ content }, ref) => {
+  return <Container ref={ref} dangerouslySetInnerHTML={{ __html: content }} />
 }
+
+export const SingleProductDetailsPanel = forwardRef(SingleProductDetailsPanelFn)

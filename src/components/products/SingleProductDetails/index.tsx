@@ -8,12 +8,26 @@ type SingleProductDetailsProps = {
   particulars: string
 }
 
-export const SingleProductDetails = ({ description, particulars }: SingleProductDetailsProps) => {
+export const SingleProductDetails = ({
+  description,
+  particulars
+}: SingleProductDetailsProps) => {
   return (
     <Tab.Group as={Container} defaultIndex={0}>
       <Tab.List as={TabList}>
-        <Tab as={Fragment}>{({ selected }) => <SingleProductDetailsTab active={selected} title="Descrição" />}</Tab>
-        <Tab as={Fragment}>{({ selected }) => <SingleProductDetailsTab active={selected} title="Características" />}</Tab>
+        <Tab as={Fragment}>
+          {({ selected }) => (
+            <SingleProductDetailsTab active={selected} title="Descrição" />
+          )}
+        </Tab>
+        <Tab as={Fragment}>
+          {({ selected }) => (
+            <SingleProductDetailsTab
+              active={selected}
+              title="Características"
+            />
+          )}
+        </Tab>
       </Tab.List>
       <Tab.Panels>
         <Tab.Panel as={SingleProductDetailsPanel} content={description} />

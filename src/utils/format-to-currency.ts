@@ -1,5 +1,5 @@
 export function formatToCurrency(number: number) {
   if (!number) return
 
-  return `R$ ${number.toFixed(2).replace('.', ',')}`
+  return `R$ ${number.toLocaleString('pt-BR')}`
 }

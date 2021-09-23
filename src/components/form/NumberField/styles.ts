@@ -19,20 +19,14 @@ export const Container = styled.div`
     width: 100%;
     height: 3.2rem;
     border: 0;
-    border-bottom: 1px solid var(--input-label-color);
+    border-bottom: 1px solid transparent;
     -webkit-appearance: none;
     -moz-appearance: textfield;
   }
 
   input:focus {
     outline: none;
-  }
-
-  span {
-    width: 100%;
-    text-align: center;
-    user-select: none;
-    cursor: text;
+    border-color: var(--input-label-color);
   }
 
   button {

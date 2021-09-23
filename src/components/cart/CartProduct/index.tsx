@@ -6,6 +6,7 @@ import {
 } from '@/components/products'
 import { useCart } from '@/contexts'
 import { CartProductModel } from '@/models'
+import { useCallback } from 'react'
 import { Container, Info, Actions, RemoveButton } from './styles'
 
 type CartProductProps = {
@@ -13,7 +14,14 @@ type CartProductProps = {
 }
 
 export const CartProduct = ({ product }: CartProductProps) => {
-  const { removeProductFromCart } = useCart()
+  const { removeProductFromCart, addProductToCart } = useCart()
+
+  const handleChange = useCallback(
+    (quantity: number) => {
+      addProductToCart({ id: product.id, quantity })
+    },
+    [addProductToCart, product.id]
+  )
 
   return (
     <Container>
@@ -23,7 +31,7 @@ export const CartProduct = ({ product }: CartProductProps) => {
         <ProductCardPrice price={product.price} />
       </Info>
       <Actions>
-        <NumberField min={1} value={product.quantity} />
+        <NumberField min={1} onChange={handleChange} value={product.quantity} />
         <RemoveButton onClick={() => removeProductFromCart(product.id)}>
           Remover
         </RemoveButton>

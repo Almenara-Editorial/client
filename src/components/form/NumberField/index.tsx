@@ -1,12 +1,6 @@
 import { Minus, Plus } from '@/components/icons'
 import { useOnClickOutside } from '@/hooks'
-import {
-  ChangeEvent,
-  InputHTMLAttributes,
-  useEffect,
-  useRef,
-  useState
-} from 'react'
+import { ChangeEvent, InputHTMLAttributes, useRef, useState } from 'react'
 import { Container } from './styles'
 
 type NumberFieldProps = Omit<
@@ -25,9 +19,7 @@ export const NumberField = ({
   onChange
 }: NumberFieldProps) => {
   const [value, setValue] = useState(Number(initialValue || min))
-  const [isInput, setIsInput] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  useOnClickOutside<HTMLInputElement>(inputRef, () => setIsInput(false))
 
   function setNewValue(value: number) {
     const newValue =
@@ -58,25 +50,18 @@ export const NumberField = ({
     setNewValue(Number(e.target.value))
   }
 
-  function handleChangeToInput() {
-    setIsInput(true)
-  }
-
   return (
     <Container>
       <button onClick={handleSub} disabled={min === value}>
         <Minus />
       </button>
-      {isInput ? (
-        <input
-          type="number"
-          ref={inputRef}
-          value={value}
-          onChange={handleChange}
-        />
-      ) : (
-        <span onClick={handleChangeToInput}>{value}</span>
-      )}
+      <input
+        type="number"
+        ref={inputRef}
+        value={value}
+        onChange={handleChange}
+      />
+
       <button onClick={handleAdd} disabled={max === value}>
         <Plus />
       </button>

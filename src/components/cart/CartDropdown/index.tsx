@@ -1,33 +1,32 @@
 import { Popover, Container } from './styles'
-import { Menu } from '@headlessui/react'
+import { Popover as HeadlessPopover } from '@headlessui/react'
 import { CartButton } from '@/components/cart'
 import { CartDropdownProducts, CartDropdownTotal } from '..'
-import { Button, Hr } from '@/components/shared'
+import { ButtonLink, Hr } from '@/components/shared'
 import { useCart } from '@/contexts'
-import { useRouter } from 'next/router'
+import { Fragment } from 'react'
 
 export const CartDropdown = () => {
   const { cartItems } = useCart()
-  const router = useRouter()
 
   return (
-    <Menu>
+    <HeadlessPopover as={Fragment}>
       <Container>
-        <Menu.Button as={CartButton} />
-        <Menu.Items as={Popover}>
+        <HeadlessPopover.Button as={CartButton} />
+        <HeadlessPopover.Panel as={Popover}>
           <CartDropdownProducts />
           <CartDropdownTotal />
           {cartItems && cartItems?.length > 0 && (
             <>
               <Hr space="lg" />
-              <Button onClick={() => router.push('/carrinho')}>
+              <HeadlessPopover.Button href="/carrinho" as={ButtonLink}>
                 Ir para carrinho
-              </Button>
+              </HeadlessPopover.Button>
             </>
           )}
-        </Menu.Items>
+        </HeadlessPopover.Panel>
       </Container>
-    </Menu>
+    </HeadlessPopover>
   )
 }
 

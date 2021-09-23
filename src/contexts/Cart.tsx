@@ -1,4 +1,5 @@
 import { useQueryProducs } from '@/graphql/queries'
+import { useLocalStorage } from '@/hooks'
 import {
   CartItemModel,
   CartProductModel,
@@ -37,7 +38,10 @@ type CartProviderProps = {
 export const CartContext = createContext({} as CartContextData)
 
 export function CartProvider({ children }: CartProviderProps) {
-  const [cartItems, setCartItems] = useState<CartItemModel[]>([])
+  const [cartItems, setCartItems] = useLocalStorage<CartItemModel[]>(
+    'ALM_CART',
+    []
+  )
   const [shippingOptions, setShippingOptions] = useState<ShippingOptionModel[]>(
     []
   )
