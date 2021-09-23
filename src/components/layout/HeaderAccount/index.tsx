@@ -1,4 +1,4 @@
-import { LoginModal } from '@/components/auth'
+import { SignInModal } from '@/components/auth'
 import { SigninButton } from '@/components/auth/SigninButton'
 import { Person } from '@/components/icons'
 import { Loader } from '@/components/shared'
@@ -13,7 +13,7 @@ export const HeaderAccount = () => {
 
   return (
     <Container>
-      <LoginModal {...modal} />
+      <SignInModal {...modal} />
       <i>
         <Person />
       </i>

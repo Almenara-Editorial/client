@@ -1,4 +1,4 @@
-export * from './LoginModal'
-export * from './LoginModalHeader'
-export * from './LoginModalForm'
+export * from './SignInModal'
+export * from './SignInModalHeader'
+export * from './SignInForm'
 export * from './SignUpForm'

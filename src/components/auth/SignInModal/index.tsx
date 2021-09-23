@@ -1,14 +1,14 @@
 import { UseModalData } from '@/hooks'
 import { Link, Modal } from '@/components/shared'
-import { LoginModalHeader, LoginModalForm } from '..'
+import { SignInModalHeader, SignInForm } from '..'
 import { Container, NewAccountLink } from './styles'
 import { useSession } from 'next-auth/client'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-type LoginModalProps = UseModalData
+type SignInModalProps = UseModalData
 
-export const LoginModal = (props: LoginModalProps) => {
+export const SignInModal = (props: SignInModalProps) => {
   const [session] = useSession()
   const router = useRouter()
 
@@ -25,8 +25,8 @@ export const LoginModal = (props: LoginModalProps) => {
 
   return (
     <Modal as={Container} {...props}>
-      <LoginModalHeader />
-      <LoginModalForm />
+      <SignInModalHeader />
+      <SignInForm />
       <NewAccountLink>
         Não tem uma conta? <Link href="/criar-conta">Crie agora.</Link>
       </NewAccountLink>
@@ -34,4 +34,4 @@ export const LoginModal = (props: LoginModalProps) => {
   )
 }
 
-export default LoginModal
+export default SignInModal

@@ -5,16 +5,16 @@ import { signIn, useSession } from 'next-auth/client'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 
-type LoginModalFormValues = {
+type SignInFormValues = {
   email: string
   password: string
 }
 
-export const LoginModalForm = () => {
+export const SignInForm = () => {
   const [isSigningIn, setIsSigningIn] = useState(false)
   const [session] = useSession()
   const { handleSubmit, register } = useForm()
-  async function handleSignin(values: LoginModalFormValues) {
+  async function handleSignin(values: SignInFormValues) {
     setIsSigningIn(true)
     await signIn('credentials', {
       ...values,

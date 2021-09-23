@@ -49,9 +49,11 @@ export const Title = styled.h2`
   margin-bottom: 2.4rem;
   font-family: var(--font-title);
   font-size: var(--font-xl);
-  font-weight: var(--title-bold);
+  font-weight: var(--title-regular);
 `
 
 export const Subtitle = styled.h3`
   margin-bottom: 3.2rem;
+  font-size: var(--font-sm);
+  font-weight: var(--body-regular);
 `
