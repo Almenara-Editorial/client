@@ -26,11 +26,11 @@ export const SignInForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(handleSignin)}>
-      <TextField label="Email ou usuário" {...register('email')} />
+      <TextField label="E-mail ou usuário" {...register('email')} />
       <TextField label="Senha" type="password" {...register('password')} />
       <Row>
         {/* <Checkbox value={false}>Manter-me conectado</Checkbox> */}
-        <Link href="#">Esqueceu a sua senha?</Link>
+        <Link href="/recuperar-senha">Esqueceu a sua senha?</Link>
       </Row>
       <Button size="rg-full" isLoading={isSigningIn} isSuccess={!!session}>
         {session ? `Olá ${session?.user?.name}` : 'Entrar'}

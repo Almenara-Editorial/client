@@ -12,6 +12,7 @@ export type AnchorProps = HTMLAttributes<HTMLAnchorElement> & {
 export const Anchor = styled.a.attrs<AnchorProps>(
   ({ size = 'rg', color = 'neutral' }) => ({
     'data-color': color,
+    tabIndex: '0',
     style: { '--link-size': `var(--font-${size})` }
   })
 )<AnchorProps>`
@@ -30,6 +31,11 @@ export const Anchor = styled.a.attrs<AnchorProps>(
   &:hover {
     color: var(--link-color-hover);
     transform: translateY(-0.2rem);
+  }
+
+  &:focus {
+    outline: 1px dashed;
+    outline-offset: 2px;
   }
 
   &[data-color='neutral'] {

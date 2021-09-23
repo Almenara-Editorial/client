@@ -1,3 +1,4 @@
+import { Image } from '@/components/shared'
 import {
   Container,
   Banner,
@@ -16,7 +17,9 @@ type AuthLayoutProps = {
 export function AuthLayout({ title, subtitle, children }: AuthLayoutProps) {
   return (
     <Container>
-      <Banner />
+      <Banner>
+        <Image src="/img/auth-bg.png" layout="fill" />
+      </Banner>
       <Content>
         <div>
           <FormContainer>

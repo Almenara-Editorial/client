@@ -2,10 +2,10 @@ import { commonDataMapper, initializeApollo, parseQueryToWhere } from '@/utils'
 import { GetServerSideProps } from 'next'
 import { QUERY_BOOKS } from '@/graphql/queries'
 import { QueryBooks, QueryBooksVariables } from '@/graphql/generated/QueryBooks'
-import { SignUpTemplate } from '@/components/templates'
+import { RecoveryPasswordTemplate } from '@/components/templates'
 
-export default function SignUp() {
-  return <SignUpTemplate />
+export default function RecoveryPassword() {
+  return <RecoveryPasswordTemplate />
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
