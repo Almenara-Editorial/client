@@ -2,16 +2,15 @@ import { TextField } from '@/components/form'
 import { Form } from './styles'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/shared'
-import { UsersPermissionsRegisterInput } from '@/graphql/generated/globalTypes'
 import { MUTATION_REGISTER } from '@/graphql/mutations/register'
 import { useMutation } from '@apollo/client'
 import { signIn } from 'next-auth/client'
 
 type SignUpFormValues = {
-  name: string
+  username: string
   email: string
   password: string
-  retypePassword: string
+  confirmPassword: string
 }
 
 export const SignUpForm = () => {
@@ -29,7 +28,7 @@ export const SignUpForm = () => {
     }
   })
 
-  async function handleSignUp(values: UsersPermissionsRegisterInput) {
+  async function onSubmit(values: SignUpFormValues) {
     const user = await createUser({
       variables: {
         input: {
@@ -44,14 +43,14 @@ export const SignUpForm = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit(handleSignUp)}>
-      <TextField label="Nome" {...register('username')} />
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <TextField label="Usuário" {...register('username')} />
       <TextField label="E-mail" {...register('email')} />
       <TextField label="Senha" type="password" {...register('password')} />
       <TextField
         label="Confirme a senha"
         type="password"
-        {...register('retypePassword')}
+        {...register('confirmPassword')}
       />
       <Button type="submit" isLoading={loading}>
         Confirmar

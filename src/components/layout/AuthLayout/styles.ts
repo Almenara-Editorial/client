@@ -43,7 +43,7 @@ export const Banner = styled.div`
   left: 0;
   height: 100%;
   width: calc(50vw - 3.2rem);
-  background: gray;
+  background: transparent;
 `
 export const Title = styled.h2`
   margin-bottom: 2.4rem;
