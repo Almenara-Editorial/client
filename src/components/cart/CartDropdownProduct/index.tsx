@@ -3,7 +3,7 @@ import { Anchor, Image } from '@/components/shared'
 import { useCart } from '@/contexts'
 import { CartProductModel } from '@/models'
 import { formatToCurrency } from '@/utils'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import {
   Container,
   Details,
@@ -18,6 +18,7 @@ export type CartDropdownProductProps = {
 
 export const CartDropdownProduct = ({ product }: CartDropdownProductProps) => {
   const { addProductToCart, removeProductFromCart } = useCart()
+  const [isRemoving, setIsRemoving] = useState(false)
 
   const handleChange = useCallback(
     (quantity: number) => {
@@ -26,8 +27,13 @@ export const CartDropdownProduct = ({ product }: CartDropdownProductProps) => {
     [addProductToCart, product.id]
   )
 
+  function handleRemoveProduct() {
+    setIsRemoving(true)
+    removeProductFromCart(product.id)
+  }
+
   return (
-    <Container>
+    <Container data-removing={isRemoving}>
       <Thumbnail>
         <Image
           src={product.imageSrc}
@@ -46,7 +52,7 @@ export const CartDropdownProduct = ({ product }: CartDropdownProductProps) => {
             type="button"
             size="sm"
             color="light"
-            onClick={() => removeProductFromCart(product.id)}
+            onClick={handleRemoveProduct}
           >
             Remover
           </Anchor>

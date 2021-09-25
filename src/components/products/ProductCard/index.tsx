@@ -1,6 +1,10 @@
 import { Container, OffPercentage, Text } from './styles'
 import { Button, ButtonProps, Link } from '@/components/shared'
-import { ProductCardName, ProductCardPrice, ProductCardThumbnail } from '@/components/products'
+import {
+  ProductCardName,
+  ProductCardPrice,
+  ProductCardThumbnail
+} from '@/components/products'
 import { ProductCardModel } from '@/models'
 
 export type ProductCardProps = {
@@ -11,7 +15,12 @@ export type ProductCardProps = {
   offPercentage?: number
 }
 
-export const ProductCard = ({ product, withBuyButton, buyButtonProps, offPercentage }: ProductCardProps) => (
+export const ProductCard = ({
+  product,
+  withBuyButton,
+  buyButtonProps,
+  offPercentage
+}: ProductCardProps) => (
   <Container>
     <Link href={`/produtos/${product.slug}`}>
       {offPercentage && <OffPercentage>-{offPercentage}%</OffPercentage>}

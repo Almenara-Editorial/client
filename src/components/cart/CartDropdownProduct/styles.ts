@@ -4,9 +4,16 @@ export const Container = styled.div`
   display: flex;
   gap: var(--space-sm);
   width: 100%;
+  opacity: 1;
+  transition: opacity 0.2s;
+  will-change: opacity;
 
   & + & {
     margin-top: var(--space-lg);
+  }
+
+  &[data-removing='true'] {
+    opacity: 0.8;
   }
 `
 
