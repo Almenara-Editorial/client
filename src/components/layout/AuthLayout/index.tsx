@@ -18,7 +18,7 @@ export function AuthLayout({ title, subtitle, children }: AuthLayoutProps) {
   return (
     <Container>
       <Banner>
-        <Image src="/img/auth-bg.png" layout="fill" />
+        <Image src="/img/auth-bg.png" layout="fill" objectFit="cover" />
       </Banner>
       <Content>
         <div>

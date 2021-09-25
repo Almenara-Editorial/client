@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-export const Form = styled.form`
+export const Fields = styled.div`
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: var(--space-lg);
 `
 
 export const Row = styled.div`

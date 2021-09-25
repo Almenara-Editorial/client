@@ -6,6 +6,7 @@ export const Container = styled.div`
   position: relative;
   left: 0;
 
+  padding-block: 3.2rem;
   min-height: calc(100vh - var(--header-height));
 `
 

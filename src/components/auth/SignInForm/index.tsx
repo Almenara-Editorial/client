@@ -1,9 +1,12 @@
-import { TextField } from '@/components/form'
 import { Button, Link } from '@/components/shared'
-import { Form, Row } from './styles'
+import { Fields, Row } from './styles'
 import { signIn, useSession } from 'next-auth/client'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
+import { schema } from './schema'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { ErrorMessage } from '@/components/form/ErrorMessage'
+import { RHFForm, RHFTextField } from '@/components/hook-form'
 
 type SignInFormValues = {
   email: string
@@ -11,30 +14,39 @@ type SignInFormValues = {
 }
 
 export const SignInForm = () => {
+  const [signInError, setSignInError] = useState<string | null>(null)
   const [isSigningIn, setIsSigningIn] = useState(false)
   const [session] = useSession()
-  const { handleSubmit, register } = useForm()
-  async function handleSignin(values: SignInFormValues) {
+  const formMethods = useForm<SignInFormValues>({
+    resolver: yupResolver(schema)
+  })
+  async function onSubmit(values: SignInFormValues) {
     setIsSigningIn(true)
     await signIn('credentials', {
       ...values,
       redirect: false
-      // callbackUrl: `${window.location.origin}${query?.callbackUrl || ''}`
+    }).catch((error) => {
+      setSignInError(error.response.data.message[0].messages[0].id)
     })
     setIsSigningIn(false)
   }
 
   return (
-    <Form onSubmit={handleSubmit(handleSignin)}>
-      <TextField label="E-mail ou usuário" {...register('email')} />
-      <TextField label="Senha" type="password" {...register('password')} />
-      <Row>
-        {/* <Checkbox value={false}>Manter-me conectado</Checkbox> */}
-        <Link href="/recuperar-senha">Esqueceu a sua senha?</Link>
-      </Row>
-      <Button size="rg-full" isLoading={isSigningIn} isSuccess={!!session}>
-        {session ? `Olá ${session?.user?.name}` : 'Entrar'}
-      </Button>
-    </Form>
+    <RHFForm {...formMethods} onSubmit={onSubmit}>
+      <Fields>
+        <RHFTextField label="E-mail ou usuário" name="email" />
+        <RHFTextField label="Senha" type="password" name="password" />
+        <Row>
+          {/* <Checkbox value={false}>Manter-me conectado</Checkbox> */}
+          <Link href="/recuperar-senha">Esqueceu a sua senha?</Link>
+        </Row>
+        <div>
+          <Button size="rg-full" isLoading={isSigningIn} isSuccess={!!session}>
+            {session ? `Olá ${session?.user?.name}` : 'Entrar'}
+          </Button>
+          {signInError && <ErrorMessage error={signInError} />}
+        </div>
+      </Fields>
+    </RHFForm>
   )
 }

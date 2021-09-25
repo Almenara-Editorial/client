@@ -3,11 +3,12 @@ import { Container } from './styles'
 
 type ErrorMessageProps = {
   error: string
+  align?: 'center' | 'left' | 'right'
 }
 
-export function ErrorMessage({ error }: ErrorMessageProps) {
+export function ErrorMessage({ error, align = 'left' }: ErrorMessageProps) {
   return (
-    <Container>
+    <Container data-align={align}>
       <i>
         <CircleInfo />
       </i>

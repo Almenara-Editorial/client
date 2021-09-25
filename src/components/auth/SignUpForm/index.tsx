@@ -7,6 +7,9 @@ import { useMutation } from '@apollo/client'
 import { signIn } from 'next-auth/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { schema } from './schema'
+import { useState } from 'react'
+import { ErrorMessage } from '@/components/form/ErrorMessage'
+import { getFormErrorMessageById } from '@/utils'
 
 type SignUpFormValues = {
   username: string
@@ -16,13 +19,20 @@ type SignUpFormValues = {
 }
 
 export const SignUpForm = () => {
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const formMethods = useForm<SignUpFormValues>({
     resolver: yupResolver(schema)
   })
   const { handleSubmit, getValues } = formMethods
   const [createUser, { error, loading }] = useMutation(MUTATION_REGISTER, {
-    onError: (err) => console.log(err),
+    onError: (err) => {
+      const errorId =
+        err?.graphQLErrors[0]?.extensions?.exception.data.message[0].messages[0]
+          .id
+      errorId && setSubmitError(getFormErrorMessageById(errorId))
+    },
     onCompleted: () => {
+      setSubmitError(null)
       !error &&
         signIn('credentials', {
           email: getValues('email'),
@@ -56,9 +66,12 @@ export const SignUpForm = () => {
           type="password"
           name="confirmPassword"
         />
-        <Button type="submit" isLoading={loading}>
-          Confirmar
-        </Button>
+        <div>
+          <Button type="submit" isLoading={loading}>
+            Confirmar
+          </Button>
+          {submitError && <ErrorMessage align="center" error={submitError} />}
+        </div>
       </Fields>
     </RHFForm>
   )
