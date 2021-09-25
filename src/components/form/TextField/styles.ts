@@ -103,8 +103,10 @@ export const Input = styled.input`
   }
 `
 
-export const Container = styled.div`
+export const FieldContainer = styled.div`
   width: 100%;
   position: relative;
   height: fit-content;
 `
+
+export const Container = styled.div``
