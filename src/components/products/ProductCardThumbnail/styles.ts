@@ -1,4 +1,5 @@
 import { Container as CartProductsGroup } from '@/components/cart/CartProductsGroup/styles'
+import { Container as CheckoutProductCard } from '@/components/checkout/CheckoutProductCard/styles'
 import { Container as RecommendedProductCard } from '@/components/products/RecommendedProductCard/styles'
 import styled from 'styled-components'
 
@@ -16,6 +17,12 @@ export const Container = styled.div`
 
   ${CartProductsGroup} & {
     width: 7rem;
+    height: 12rem;
+    padding: 0 1rem;
+  }
+
+  ${CheckoutProductCard} & {
+    width: 9rem;
     height: 12rem;
     padding: 0 1rem;
   }

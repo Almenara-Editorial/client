@@ -1,0 +1,8 @@
+import styled from 'styled-components'
+
+export const Container = styled.main`
+  display: grid;
+  grid-template-columns: 1fr 69.5rem minmax(54.8rem, 1fr);
+  grid-template-areas: '. form .';
+  gap: 6.4rem;
+`

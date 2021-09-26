@@ -6,7 +6,10 @@ type ProductCardNameProps = {
   textAlign?: 'center' | 'left'
 }
 
-export function ProductCardName({ name, textAlign = 'center' }: ProductCardNameProps) {
+export function ProductCardName({
+  name,
+  textAlign = 'center'
+}: ProductCardNameProps) {
   const style = { '--text-align': textAlign } as CSSProperties
 
   return <Container style={style}>{name}</Container>

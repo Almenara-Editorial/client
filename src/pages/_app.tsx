@@ -1,10 +1,12 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ApolloProvider } from '@apollo/client'
+import { useRouter } from 'next/router'
 
 import GlobalStyles from '@/styles/global'
 import { useApollo } from '@/utils/apollo'
 import { Layout } from '@/components/layout'
+import { CheckoutLayout } from '@/components/checkout'
 import { CartProvider } from '@/contexts'
 import { Provider } from 'next-auth/client'
 
@@ -12,6 +14,7 @@ import '@/styles/react-slick.css'
 
 function App({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps?.initialApolloState)
+  const { pathname } = useRouter()
 
   return (
     <ApolloProvider client={client}>
@@ -22,9 +25,15 @@ function App({ Component, pageProps }: AppProps) {
             <link rel="shortcut icon" href="/img/icon-512.png" />
             <link rel="apple-touch-icon" href="/img/icon-512.png" />
           </Head>
-          <Layout footer={pageProps.footer}>
-            <Component {...pageProps} />
-          </Layout>
+          {pathname !== '/checkout' ? (
+            <Layout footer={pageProps.footer}>
+              <Component {...pageProps} />
+            </Layout>
+          ) : (
+            <CheckoutLayout>
+              <Component {...pageProps} />
+            </CheckoutLayout>
+          )}
           <GlobalStyles />
         </CartProvider>
       </Provider>

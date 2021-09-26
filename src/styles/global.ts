@@ -59,6 +59,7 @@ const GlobalStyles = createGlobalStyle`
 
     --layer-base: 10;
     --layer-header: 30;
+    --layer-sidebar: 30;
     --layer-overlay: 35;
     --layer-modal: 40;
     --layer-top: 50;

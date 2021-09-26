@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 export type AnchorProps = HTMLAttributes<HTMLAnchorElement> & {
   size?: 'sm' | 'rg' | 'lg' | 'xl'
-  color?: 'neutral' | 'tertiary' | 'light'
+  color?: 'neutral' | 'tertiary' | 'light' | 'primary'
 }
 
 export const Anchor = styled.a.attrs<AnchorProps>(
@@ -51,6 +51,11 @@ export const Anchor = styled.a.attrs<AnchorProps>(
   &[data-color='tertiary'] {
     --link-color: var(--color-tertiary-500);
     --link-color-hover: var(--color-tertiary-400);
+  }
+
+  &[data-color='primary'] {
+    --link-color: var(--color-primary-500);
+    --link-color-hover: var(--color-primary-400);
   }
 
   ${SelectAddressButton} & {
