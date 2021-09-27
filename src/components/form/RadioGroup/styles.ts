@@ -8,18 +8,15 @@ export const Radios = styled.div`
 
 export const Radio = styled.div`
   display: flex;
+  padding: 2.4rem;
+
   align-items: center;
   gap: 2.4rem;
-  padding: 1.8rem;
   cursor: pointer;
-  border-radius: 0.4rem;
   transition: all 0.2s;
 
-  &:hover {
-    box-shadow: 0 0 0 1px var(--color-neutral-100);
-  }
-
   > span {
+    flex-shrink: 0;
     position: relative;
     display: block;
     width: 1.6rem;
@@ -43,7 +40,28 @@ export const Radio = styled.div`
       border-radius: 100%;
     }
   }
+
   &[data-checked='true'] {
+    > span {
+      &:before {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  }
+`
+
+export const RadioWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.4rem;
+
+  &:hover {
+    box-shadow: 0 0 0 1px var(--color-neutral-100);
+  }
+
+  &[data-checked='true'] {
+    background-color: var(--color-neutral-50);
     box-shadow: 0 0 0 1px var(--color-neutral-200);
 
     > span {
@@ -52,4 +70,13 @@ export const Radio = styled.div`
       }
     }
   }
+`
+
+export const ContentWrapper = styled.div`
+  padding-inline: 2.4rem;
+`
+
+export const RadioTitle = styled.div`
+  font-size: var(--font-md);
+  font-weight: var(--body-bold);
 `

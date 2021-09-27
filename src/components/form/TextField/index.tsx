@@ -15,10 +15,11 @@ export type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string
   type?: 'text' | 'password' | 'search'
   error?: string
+  isLoading?: boolean
 }
 
 const TextFieldFn: ForwardRefRenderFunction<HTMLInputElement, TextFieldProps> =
-  ({ label, type = 'text', placeholder, error, ...rest }, ref) => {
+  ({ label, type = 'text', placeholder, error, isLoading, ...rest }, ref) => {
     const [fieldType, setFieldType] = useState<TextFieldProps['type']>(type)
     const isShowingPassword = fieldType === 'text'
 
@@ -35,6 +36,7 @@ const TextFieldFn: ForwardRefRenderFunction<HTMLInputElement, TextFieldProps> =
             {...rest}
             placeholder={placeholder || label}
             data-hidden-placeholder={!!label}
+            data-loading={isLoading}
           />
           {label && type !== 'search' && <Label>{label}</Label>}
           {type === 'password' && (

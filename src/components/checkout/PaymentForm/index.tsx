@@ -1,9 +1,11 @@
-import { FieldsRow, FieldsWrapper, RadioGroup } from '@/components/form'
-import { RHFForm, RHFTextField } from '@/components/hook-form'
+import { FieldsRow, FieldsWrapper } from '@/components/form'
+import { RHFForm, RHFRadioGroup, RHFTextField } from '@/components/hook-form'
 import { useCheckoutForm } from '@/contexts'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { SectionTitle } from '..'
 import { StepsButtons } from '../StepsButtons'
+import { schema } from './schema'
 
 type PaymentFormValues = {
   zipCode: string
@@ -14,7 +16,9 @@ type PaymentFormValues = {
 }
 
 export function PaymentForm() {
-  const formMethods = useForm<PaymentFormValues>()
+  const formMethods = useForm<PaymentFormValues>({
+    resolver: yupResolver(schema)
+  })
   const { nextStep } = useCheckoutForm()
 
   async function onSubmit(values: PaymentFormValues) {
@@ -23,24 +27,29 @@ export function PaymentForm() {
 
   return (
     <RHFForm {...formMethods} onSubmit={onSubmit}>
-      <SectionTitle title="Cartão de crédito:" />
-      <FieldsWrapper>
-        <RHFTextField label="Número:" name="number" />
-        <RHFTextField
-          label="Nome (o mesmo que consta no cartão):"
-          name="name"
-        />
-        <FieldsRow>
-          <RHFTextField label="Data de expiração:" name="expiry" />
-          <RHFTextField label="CVC:" name="cvc" />
-        </FieldsRow>
-      </FieldsWrapper>
-      <SectionTitle title="Outras formas de pagamento:" />
-      <RadioGroup
+      <RHFRadioGroup
+        name="paymentMethod"
         radios={[
-          { text: '1', value: 1 },
-          { text: '2', value: 2 },
-          { text: '3', value: 3 }
+          {
+            title: 'Cartão de crédito',
+            content: (
+              <>
+                <FieldsWrapper>
+                  <FieldsRow>
+                    <RHFTextField label="Número:" name="number" />
+                    <RHFTextField label="Nome" name="name" />
+                  </FieldsRow>
+                  <FieldsRow>
+                    <RHFTextField label="Data de expiração:" name="expiry" />
+                    <RHFTextField label="CVC:" name="cvc" />
+                  </FieldsRow>
+                </FieldsWrapper>
+              </>
+            ),
+            value: 1
+          },
+          { title: '2', value: 2 },
+          { title: '3', value: 3 }
         ]}
       />
       <StepsButtons />

@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import Script from 'next/script'
 import { ApolloProvider } from '@apollo/client'
 import { useRouter } from 'next/router'
 
@@ -25,6 +26,10 @@ function App({ Component, pageProps }: AppProps) {
             <link rel="shortcut icon" href="/img/icon-512.png" />
             <link rel="apple-touch-icon" href="/img/icon-512.png" />
           </Head>
+          <Script
+            strategy="afterInteractive"
+            src={`https://sdk.mercadopago.com/js/v2`}
+          />
           {pathname !== '/checkout' ? (
             <Layout footer={pageProps.footer}>
               <Component {...pageProps} />

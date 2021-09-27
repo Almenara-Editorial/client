@@ -88,13 +88,19 @@ export const Input = styled.input`
     }
   }
 
-  &:disabled {
+  &:disabled,
+  &[data-loading='true'] {
     background-color: var(--input-disabled-background);
     cursor: not-allowed;
 
     ~ button {
       display: none;
     }
+  }
+
+  &[data-loading='true'] {
+    pointer-events: none;
+    background: var;
   }
 
   ${FieldGroup} & {
