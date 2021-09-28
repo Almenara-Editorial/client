@@ -1,11 +1,11 @@
 import { Container, OffPercentage, Text } from './styles'
 import { Button, ButtonProps, Link } from '@/components/shared'
+import { ProductCardModel } from '@/models'
 import {
   ProductCardName,
   ProductCardPrice,
   ProductCardThumbnail
 } from '@/components/products'
-import { ProductCardModel } from '@/models'
 
 export type ProductCardProps = {
   product: ProductCardModel
