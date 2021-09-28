@@ -1,11 +1,11 @@
-import { LoginModal } from '.'
+import { SignInModal } from '.'
 import { Story, Meta } from '@storybook/react'
 import { Button } from '@/components/shared'
 import { useModal } from '@/hooks'
 
 export default {
-  title: 'auth/LoginModal',
-  component: LoginModal
+  title: 'auth/SignInModal',
+  component: SignInModal
 } as Meta
 
 export const Basic: Story = () => {
@@ -18,5 +18,5 @@ export const Basic: Story = () => {
       </Button>
     )
 
-  return <LoginModal {...modal} />
+  return <SignInModal {...modal} />
 }

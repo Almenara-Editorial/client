@@ -2,7 +2,7 @@ import { parseQueryToFilter } from '@/utils'
 import { useRouter } from 'next/dist/client/router'
 import { createContext, useContext, useEffect, useState } from 'react'
 
-type FilterValues = Record<string, string[]> | null
+export type FilterValues = Record<string, string[]> | null
 
 type ProductsFilterContextData = {
   values: FilterValues

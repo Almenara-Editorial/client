@@ -1,24 +1,28 @@
-import { Close } from '@/components/icons'
-import { useProductsFilter, FilterValue } from '@/contexts'
-import { Container, RemoveButton } from './styles'
+// import { Close } from '@/components/icons'
+// import { useProductsFilter } from '@/contexts'
+import { Container } from './styles'
 
 type FilterSelectedItemProps = {
-  item: FilterValue
+  item: {
+    value: string
+    name: string
+    slug: string
+  }
 }
 
 export const FilterSelectedItem = ({ item }: FilterSelectedItemProps) => {
-  const { updateFilter } = useProductsFilter()
+  // const { addToFilter } = useProductsFilter()
 
   if (!item.value) return null
 
   return (
     <Container>
       {item.name}
-      <RemoveButton
-        onClick={() => updateFilter(item.slug, { ...item, value: false })}
+      {/* <RemoveButton
+        onClick={() => addToFilter(item.slug, { ...item, value: false })}
       >
         <Close />
-      </RemoveButton>
+      </RemoveButton> */}
     </Container>
   )
 }
