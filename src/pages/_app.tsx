@@ -30,12 +30,7 @@ function App({ Component, pageProps }: AppProps) {
             strategy="beforeInteractive"
             src={`https://sdk.mercadopago.com/js/v2`}
           />
-          <Script
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `window.mp = new MercadoPago('YOUR_PUBLIC_KEY')`
-            }}
-          />
+
           {pathname !== '/checkout' ? (
             <Layout footer={pageProps.footer}>
               <Component {...pageProps} />
@@ -45,6 +40,7 @@ function App({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             </CheckoutLayout>
           )}
+
           <GlobalStyles />
         </CartProvider>
       </Provider>
