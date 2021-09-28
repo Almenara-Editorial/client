@@ -8,7 +8,7 @@ export function bannersMapper(
 ): HeroSliderImageModel[] {
   if (!banners) return []
 
-  return banners.map((banner) => ({
+  return banners?.map((banner) => ({
     src: getImageUrl(banner!.image?.url) || '',
     url: banner!.url
   }))

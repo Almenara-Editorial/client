@@ -87,7 +87,7 @@ function mergeSeparatorsAndValues(
 
   return map
     .slice(0, getCurrentLength(input, map))
-    .map((value) =>
+    ?.map((value) =>
       value === 's'
         ? separatorGenerator.next().value
         : valueGenerator.next().value

@@ -30,7 +30,7 @@ export function productsMapper(
 ): Omit<ProductModel, 'particulars' | 'description'>[] {
   if (!products) return []
 
-  return products.map((product) => ({
+  return products?.map((product) => ({
     id: product.id,
     name: product.name,
     price: product.price,
@@ -48,7 +48,7 @@ export function cartProductsMapper(
 ): CartProductModel[] {
   if (!products) return []
 
-  return products.map((product) => ({
+  return products?.map((product) => ({
     id: product.id,
     name: product.name,
     price: product.price,
@@ -66,10 +66,10 @@ export function productsGroupsMapper(
 ): ProductsCardsGroupModel[] {
   if (!productsGroups?.length) return []
 
-  return productsGroups.map((group) => ({
+  return productsGroups?.map((group) => ({
     id: group!.id,
     title: group!.title,
-    products: group!.livros.map((product) => ({
+    products: group!.livros?.map((product) => ({
       id: product.id,
       name: product.name,
       price: product.price,

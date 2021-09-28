@@ -16,7 +16,7 @@ export const ProductsCardsGroup = ({
       <ProductCardGroupTitle>{productGroup.title}</ProductCardGroupTitle>
     )}
     <Products>
-      {productGroup.products.map((product) => (
+      {productGroup.products?.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </Products>

@@ -10,7 +10,7 @@ export const FooterLinksGroup = ({ linksGroup }: FooterLinksGroupProps) => (
   <Container>
     <Title>{linksGroup.title}</Title>
     <ul>
-      {linksGroup.links.map((link) => (
+      {linksGroup.links?.map((link) => (
         <li key={link.name}>
           <Link href={link.url} as={Anchor}>
             {link.name}

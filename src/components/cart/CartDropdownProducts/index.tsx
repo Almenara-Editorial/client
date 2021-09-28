@@ -26,7 +26,7 @@ export const CartDropdownProducts = () => {
     <>
       <CustomScrollbar as={Container} autoHeight autoHeightMin="30rem">
         <Container>
-          {products.map((product) => (
+          {products?.map((product) => (
             <CartDropdownProduct key={product.id} product={product} />
           ))}
         </Container>

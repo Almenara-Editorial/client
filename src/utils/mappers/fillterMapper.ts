@@ -9,7 +9,7 @@ export function filterMapper({ categories }: FilterMapperParams) {
     categories: {
       title: 'Categorias',
       slug: 'categorias',
-      items: categories.map((category) => ({
+      items: categories?.map((category) => ({
         name: category.name,
         slug: category.slug
       }))

@@ -26,7 +26,7 @@ export async function loadShippingOptionsByZipCode({
     zipCode
   })
 
-  return data.services.map((service) => ({
+  return data.services?.map((service) => ({
     id: service.carrier,
     name: `${service.carrier} (${service.service})`,
     deliveryTime: service.deliveryTime,

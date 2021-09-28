@@ -12,6 +12,6 @@ export function footerMapper(data: Footer) {
       })),
       title: group!.title!
     })),
-    social: data.social
+    social: data?.social
   }
 }

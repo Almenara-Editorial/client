@@ -8,7 +8,7 @@ type FooterSocialLinksProps = {
 
 export const FooterSocialLinks = ({ social }: FooterSocialLinksProps) => (
   <Container>
-    {social.map((link) => (
+    {social?.map((link) => (
       <FooterSocialLink key={link.name} link={link} />
     ))}
   </Container>

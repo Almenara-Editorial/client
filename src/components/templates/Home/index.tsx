@@ -14,7 +14,7 @@ export function HomeTemplate({ productsGroups, slides }: HomeTemplateProps) {
   return (
     <Container>
       <HeroSlider images={slides} />
-      {productsGroups.map((productGroup) => (
+      {productsGroups?.map((productGroup) => (
         <ProductsCardsGroup key={productGroup.id} productGroup={productGroup} />
       ))}
       <NewsletterSignup />

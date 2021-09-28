@@ -10,7 +10,7 @@ type FilterSidebarProps = {
 export const FilterSidebar = ({ filters }: FilterSidebarProps) => (
   <Container>
     <FilterSelectedGroup />
-    {Object.keys(filters).map((key) => (
+    {Object.keys(filters)?.map((key) => (
       <FilterSidebarGroup key={key} group={filters[key]} />
     ))}
   </Container>

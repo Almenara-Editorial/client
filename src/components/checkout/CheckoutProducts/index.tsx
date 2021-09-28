@@ -9,7 +9,7 @@ export const CheckoutProducts = () => {
   return (
     <Container>
       <CustomScrollbar width="100%">
-        {products.map((product) => (
+        {products?.map((product) => (
           <CheckoutProductCard key={product.id} product={product} />
         ))}
       </CustomScrollbar>

@@ -11,7 +11,7 @@ export const FooterLinksGroups = ({ linksGroups }: FooterLinksGroupsProps) => {
 
   return (
     <Container>
-      {linksGroups.map((linksGroup) => (
+      {linksGroups?.map((linksGroup) => (
         <FooterLinksGroup key={linksGroup.title} linksGroup={linksGroup} />
       ))}
     </Container>
