@@ -36,7 +36,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
     IdentificationType[]
   >([])
 
-  const [installments, setInstallments] = useState<Installment>()
+  const [installments, setInstallments] = useState<Installment | null>(null)
 
   async function onSubmit(values: CreditCardFormValues) {
     const mp = new MercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY, {
@@ -81,7 +81,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
       advancedFraudPrevention: true
     })
 
-    setInstallments([])
+    setInstallments(null)
 
     if (!cardNumber || cardNumber?.length === 6 || cardNumber?.length === 16)
       return
