@@ -1,3 +1,4 @@
+import { loadPaymentMethods, PaymentMethods } from '@/services'
 import { useRouter } from 'next/router'
 import {
   createContext,
@@ -20,6 +21,11 @@ type CheckoutFormContextData = {
     installments: string
   } | null
   currentStep: FormSteps
+  paymentMethods: PaymentMethods
+  isLoading: {
+    shipping: boolean
+    payment: boolean
+  }
   prevStep: () => void
   nextStep: () => void
 }
@@ -32,9 +38,17 @@ export const CheckoutFormContext = createContext({} as CheckoutFormContextData)
 
 export function CheckoutFormProvider({ children }: CheckoutFormProviderProps) {
   const { query, push } = useRouter()
+  const [isLoading, setIsLoading] = useState(() => ({
+    payment: false,
+    shipping: false
+  }))
   const [currentStep, setCurrentStep] = useState<FormSteps>(
     query.step?.toString() as FormSteps
   )
+  const [paymentMethods, setPaymentMethods] = useState<PaymentMethods>({
+    availableMethods: [],
+    creditCards: []
+  })
   const [formValues, setFormValues] =
     useState<CheckoutFormContextData['formValues']>(null)
   const updateFormValues = useCallback((key: string, value: string) => {
@@ -62,13 +76,42 @@ export function CheckoutFormProvider({ children }: CheckoutFormProviderProps) {
     nextStepName && push(`/checkout?step=${nextStepName}`)
   }, [currentStep, push])
 
+  const updateIsLoading = useCallback(
+    (key: keyof typeof isLoading, value: boolean) => {
+      setIsLoading((state) => ({ ...state, [key]: value }))
+    },
+    []
+  )
+
   useEffect(() => {
     query.step && setCurrentStep(query.step.toString() as FormSteps)
   }, [query])
 
+  useEffect(() => {
+    async function getAndSetPaymentMethods() {
+      updateIsLoading('payment', true)
+      await loadPaymentMethods()
+        .then((payments) => {
+          setPaymentMethods(payments)
+          updateIsLoading('payment', false)
+        })
+        .catch((error) => console.log({ error }))
+    }
+
+    getAndSetPaymentMethods()
+  }, [updateIsLoading])
+
   return (
     <CheckoutFormContext.Provider
-      value={{ updateFormValues, formValues, currentStep, prevStep, nextStep }}
+      value={{
+        updateFormValues,
+        formValues,
+        paymentMethods,
+        currentStep,
+        prevStep,
+        nextStep,
+        isLoading
+      }}
     >
       {children}
     </CheckoutFormContext.Provider>

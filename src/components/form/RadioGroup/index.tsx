@@ -14,7 +14,7 @@ import { useEffect } from 'react'
 import { ErrorMessage } from '../ErrorMessage'
 
 type RadioModel = {
-  title: string
+  title?: React.ReactNode
   value: string | number
   content?: React.ReactNode
 }
@@ -55,7 +55,10 @@ const RadioGroupFn: ForwardRefRenderFunction<HTMLDivElement, RadioGroupProps> =
                     data-radio-center={!radio.title}
                   >
                     <span />
-                    {radio.title && <RadioTitle>{radio.title}</RadioTitle>}
+                    {typeof radio.title === 'string' && (
+                      <RadioTitle>{radio.title}</RadioTitle>
+                    )}
+                    {typeof radio.title === 'object' && radio.title}
                   </Radio>
                 )}
               </HeadlessRadioGroup.Option>

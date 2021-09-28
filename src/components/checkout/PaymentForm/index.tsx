@@ -3,9 +3,9 @@ import { RHFForm, RHFRadioGroup, RHFTextField } from '@/components/hook-form'
 import { useCheckoutForm } from '@/contexts'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import { SectionTitle } from '..'
 import { StepsButtons } from '../StepsButtons'
 import { schema } from './schema'
+import { Item, Thumbs } from './styles'
 
 type PaymentFormValues = {
   zipCode: string
@@ -19,37 +19,51 @@ export function PaymentForm() {
   const formMethods = useForm<PaymentFormValues>({
     resolver: yupResolver(schema)
   })
-  const { nextStep } = useCheckoutForm()
+  const { nextStep, paymentMethods, isLoading } = useCheckoutForm()
 
   async function onSubmit(values: PaymentFormValues) {
     nextStep()
   }
 
   return (
-    <RHFForm {...formMethods} onSubmit={onSubmit}>
+    <RHFForm {...formMethods} onSubmit={onSubmit} isLoading={isLoading.payment}>
       <RHFRadioGroup
         name="paymentMethod"
         radios={[
           {
-            title: 'Cartão de crédito',
+            title: (
+              <Item>
+                Cartão de crédito
+                <Thumbs>
+                  {paymentMethods.creditCards?.map(({ thumbnail }) => (
+                    <img src={thumbnail} key={thumbnail} />
+                  ))}
+                </Thumbs>
+              </Item>
+            ),
             content: (
-              <>
-                <FieldsWrapper>
-                  <FieldsRow>
-                    <RHFTextField label="Número:" name="number" />
-                    <RHFTextField label="Nome" name="name" />
-                  </FieldsRow>
-                  <FieldsRow>
-                    <RHFTextField label="Data de expiração:" name="expiry" />
-                    <RHFTextField label="CVC:" name="cvc" />
-                  </FieldsRow>
-                </FieldsWrapper>
-              </>
+              <FieldsWrapper>
+                <FieldsRow>
+                  <RHFTextField label="Número:" name="number" />
+                  <RHFTextField label="Nome" name="name" />
+                </FieldsRow>
+                <FieldsRow>
+                  <RHFTextField label="Data de expiração:" name="expiry" />
+                  <RHFTextField label="CVC:" name="cvc" />
+                </FieldsRow>
+              </FieldsWrapper>
             ),
             value: 1
           },
-          { title: '2', value: 2 },
-          { title: '3', value: 3 }
+          ...paymentMethods.availableMethods?.map((payment) => ({
+            title: (
+              <Item>
+                <img src={payment.thumbnail} />
+                {payment.name}
+              </Item>
+            ),
+            value: payment.id
+          }))
         ]}
       />
       <StepsButtons />

@@ -27,8 +27,14 @@ function App({ Component, pageProps }: AppProps) {
             <link rel="apple-touch-icon" href="/img/icon-512.png" />
           </Head>
           <Script
-            strategy="afterInteractive"
+            strategy="beforeInteractive"
             src={`https://sdk.mercadopago.com/js/v2`}
+          />
+          <Script
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `window.mp = new MercadoPago('YOUR_PUBLIC_KEY')`
+            }}
           />
           {pathname !== '/checkout' ? (
             <Layout footer={pageProps.footer}>

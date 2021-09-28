@@ -28,7 +28,7 @@ export const CartSummary = () => {
         <div>Total</div>
         <div>{formatToCurrency(totals.total)}</div>
       </Total>
-      <ButtonLink href="/">Continuar para Checkout</ButtonLink>
+      <ButtonLink href="/checkout">Continuar para Checkout</ButtonLink>
       <Link href="/produtos">Continuar comprando</Link>
     </Container>
   )
