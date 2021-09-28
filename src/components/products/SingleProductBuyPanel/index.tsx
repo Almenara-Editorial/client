@@ -1,16 +1,29 @@
 import { SingleProductModel } from '@/models'
 import { NumberField } from '@/components/form'
 import { Button, Hr } from '@/components/shared'
-import { SingleProductPrice, SingleProductTitle, SelectAddressButton, ButtonWishlist } from '..'
+import {
+  SingleProductPrice,
+  SingleProductTitle,
+  SelectAddressButton,
+  ButtonWishlist
+} from '..'
 import { Container, Bottom, QuantityBuy } from './styles'
 import { useCart } from '@/contexts'
 import { useState } from 'react'
 
-export type SingleProductBuyPanelProps = Pick<SingleProductModel, 'id' | 'name' | 'price' | 'stock' | 'installments'>
+export type SingleProductBuyPanelProps = Pick<
+  SingleProductModel,
+  'id' | 'name' | 'price' | 'stock' | 'installments'
+>
 
-export const SingleProductBuyPanel = ({ id, name, price, installments, stock }: SingleProductBuyPanelProps) => {
-  const { addProductToCart, isInCart } = useCart()
-  const itemInCart = isInCart(id)
+export const SingleProductBuyPanel = ({
+  id,
+  name,
+  price,
+  installments,
+  stock
+}: SingleProductBuyPanelProps) => {
+  const { addProductToCart } = useCart()
   const [quantity, setQuantity] = useState(1)
 
   function handleQuantityChange(value: number) {
@@ -29,7 +42,12 @@ export const SingleProductBuyPanel = ({ id, name, price, installments, stock }: 
         <SingleProductPrice price={price} installments={installments} />
         <SelectAddressButton />
         <QuantityBuy>
-          <NumberField value={quantity} min={1} onChange={handleQuantityChange} max={stock} />
+          <NumberField
+            value={quantity}
+            min={1}
+            onChange={handleQuantityChange}
+            max={stock}
+          />
           <Button size="rg-wide" onClick={handleAddProductToCart}>
             Comprar
           </Button>

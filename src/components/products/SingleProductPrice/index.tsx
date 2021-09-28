@@ -6,7 +6,10 @@ export type SingleProductPriceProps = {
   installments?: string
 }
 
-export const SingleProductPrice = ({ price, installments }: SingleProductPriceProps) => {
+export const SingleProductPrice = ({
+  price,
+  installments
+}: SingleProductPriceProps) => {
   return (
     <Container>
       {price && <Price>{formatToCurrency(price)}</Price>}

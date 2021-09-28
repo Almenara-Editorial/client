@@ -1,5 +1,4 @@
 import { Minus, Plus } from '@/components/icons'
-import { useOnClickOutside } from '@/hooks'
 import { ChangeEvent, InputHTMLAttributes, useRef, useState } from 'react'
 import { Container } from './styles'
 

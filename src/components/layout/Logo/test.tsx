@@ -6,7 +6,9 @@ describe('<Logo />', () => {
   it('should render the heading', () => {
     render(<Logo />)
 
-    expect(screen.getByLabelText(/almenara editorial/i).parentElement).toHaveStyle({
+    expect(
+      screen.getByLabelText(/almenara editorial/i).parentElement
+    ).toHaveStyle({
       color: '#rgba(22, 24, 29, 1)'
     })
   })

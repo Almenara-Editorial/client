@@ -8,14 +8,20 @@ export type ProductsCardsGroupProps = {
   productGroup: ProductsCardsGroupModel
 }
 
-export const ProductsCardsGroup = ({ productGroup }: ProductsCardsGroupProps) => (
+export const ProductsCardsGroup = ({
+  productGroup
+}: ProductsCardsGroupProps) => (
   <Container>
-    {productGroup?.title && <ProductCardGroupTitle>{productGroup.title}</ProductCardGroupTitle>}
+    {productGroup?.title && (
+      <ProductCardGroupTitle>{productGroup.title}</ProductCardGroupTitle>
+    )}
     <Products>
       {productGroup.products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </Products>
-    {productGroup.seeMore && <Link href={productGroup.seeMore.url}>{productGroup.seeMore.name}</Link>}
+    {productGroup.seeMore && (
+      <Link href={productGroup.seeMore.url}>{productGroup.seeMore.name}</Link>
+    )}
   </Container>
 )

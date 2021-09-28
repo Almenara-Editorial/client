@@ -10,7 +10,7 @@ export const FieldsWrapper = styled.div`
 export const FieldsRow = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   gap: var(--space-lg);
 
   > * {

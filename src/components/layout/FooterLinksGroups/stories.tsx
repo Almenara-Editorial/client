@@ -6,4 +6,6 @@ export default {
   component: FooterLinksGroups
 } as Meta
 
-export const Basic: Story<FooterLinksGroupsProps> = (args) => <FooterLinksGroups {...args} />
+export const Basic: Story<FooterLinksGroupsProps> = (args) => (
+  <FooterLinksGroups {...args} />
+)

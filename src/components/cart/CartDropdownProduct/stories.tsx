@@ -6,7 +6,9 @@ export default {
   component: CartDropdownProduct
 } as Meta
 
-export const Basic: Story<CartDropdownProductProps> = (args) => <CartDropdownProduct {...args} />
+export const Basic: Story<CartDropdownProductProps> = (args) => (
+  <CartDropdownProduct {...args} />
+)
 
 Basic.args = {
   product: {

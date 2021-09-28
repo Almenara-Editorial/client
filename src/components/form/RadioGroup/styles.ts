@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+export const Container = styled.div``
+
 export const Radios = styled.div`
   display: flex;
   flex-direction: column;

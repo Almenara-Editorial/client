@@ -6,7 +6,9 @@ describe('<HeroSlider />', () => {
   it('should render the heading', () => {
     const { container } = render(<HeroSlider images={[]} />)
 
-    expect(screen.getByRole('heading', { name: /HeroSlider/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /HeroSlider/i })
+    ).toBeInTheDocument()
 
     expect(container.firstChild).toMatchSnapshot()
   })

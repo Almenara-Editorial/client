@@ -1,9 +1,14 @@
-import { FieldsWrapper } from '@/components/form'
+import { FieldsWrapper, FieldsRow } from '@/components/form'
 import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { RHFSelect } from '@/components/hook-form/Select'
 import { Button } from '@/components/shared'
 import { useCart } from '@/contexts'
-import { CardToken, IdentificationType, Installment } from '@/models'
+import {
+  CardToken,
+  IdentificationType,
+  Installment,
+  PaymentMethods
+} from '@/models'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Container } from './styles'
@@ -24,12 +29,14 @@ type CreditCardFormValues = {
   securityCode: string
   identificationType: string
   identificationNumber: string
+  paymentMethodId: string
+  issuerId: number
 }
 
 export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
   const { totals } = useCart()
   const formMethods = useForm<CreditCardFormValues>()
-  const { watch } = formMethods
+  const { watch, setValue } = formMethods
   const cardNumber = watch('cardNumber')
 
   const [identificationTypes, setIdentificationTypes] = useState<
@@ -52,12 +59,12 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
       cardExpirationYear,
       securityCode: values.securityCode,
       identificationType: values.identificationType,
-      identificationNumber: values.identificationNumber
+      identificationNumber: values.identificationNumber.replace(/\D+/g, '')
     })) as CardToken
 
-    cardToken && onGetCardToken && onGetCardToken(cardToken.id)
-
     console.log(cardToken)
+
+    cardToken && onGetCardToken && onGetCardToken(cardToken.id)
   }
 
   useEffect(() => {
@@ -89,9 +96,14 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
     async function fetchPaymentMethodsAndInstallments() {
       const bin = cardNumber.replace(/\D+/g, '').slice(0, 6).toString()
 
-      const paymentMethods = await mp.getPaymentMethods({
+      const paymentMethods = (await mp.getPaymentMethods({
         bin
-      })
+      })) as PaymentMethods
+
+      console.log(paymentMethods)
+
+      setValue('paymentMethodId', paymentMethods.results[0].id)
+      setValue('issuerId', paymentMethods.results[0].issuer.id)
 
       const newInstallments = (await mp.getInstallments({
         amount: totals.total.toString(),
@@ -104,9 +116,10 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
     }
 
     fetchPaymentMethodsAndInstallments()
-  }, [cardNumber, totals.total])
+  }, [cardNumber, totals.total, setValue])
 
   // https://www.mercadopago.com.br/developers/pt/guides/online-payments/checkout-api/testing
+
   // APRO: Pagamento aprovado.
   // CONT: Pagamento pendente.
   // OTHE: Recusado por erro geral.
@@ -119,40 +132,63 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
     <Container>
       <RHFForm {...formMethods} onSubmit={onSubmit}>
         <FieldsWrapper>
-          <RHFTextField label="Número do cartão" name="cardNumber" />
-          <RHFTextField label="Nome" name="cardHolderName" />
-          <RHFTextField label="Expira em" name="cardExpiration" />
+          <FieldsRow>
+            <RHFTextField
+              label="Número do cartão"
+              name="cardNumber"
+              mask="9999 9999 9999 9999"
+            />
+            <RHFTextField label="Nome" name="cardHoldaerName" />
+          </FieldsRow>
+          <FieldsRow>
+            <RHFTextField
+              label="Expira em"
+              name="cardExpiration"
+              mask="99/9999"
+            />
+            <RHFTextField
+              label="Código de segurança"
+              name="securityCode"
+              mask="999"
+            />
+          </FieldsRow>
+          <FieldsRow>
+            <RHFSelect
+              label="Parcelas"
+              name="installments"
+              disabled={
+                !installments?.payer_costs ||
+                installments.payer_costs?.length === 0
+              }
+              options={
+                installments?.payer_costs?.map((installment) => ({
+                  value: installment.installments,
+                  text: installment.recommended_message
+                })) || []
+              }
+            />
+          </FieldsRow>
           <RHFTextField label="E-mail" name="cardHolderEmail" />
-          <RHFTextField label="Código de segurança" name="securityCode" />
-          <RHFSelect
-            label="Parcelas"
-            name="installments"
-            disabled={
-              !installments?.payer_costs ||
-              installments.payer_costs?.length === 0
-            }
-            options={
-              installments?.payer_costs?.map((installment) => ({
-                value: installment.installments,
-                text: installment.recommended_message
-              })) || []
-            }
-          />
-          <RHFSelect
-            label="Tipo de documento"
-            disabled={!identificationTypes || identificationTypes.length === 0}
-            options={identificationTypes?.map((id) => ({
-              value: id.id,
-              text: id.name
-            }))}
-            name="identificationType"
-          />
-          <RHFTextField
-            label="Número do documento"
-            name="identificationNumber"
-          />
+          <FieldsRow>
+            <RHFSelect
+              label="Tipo de documento"
+              disabled={
+                !identificationTypes || identificationTypes.length === 0
+              }
+              options={identificationTypes?.map((id) => ({
+                value: id.id,
+                text: id.name
+              }))}
+              name="identificationType"
+            />
+            <RHFTextField
+              label="Número do documento"
+              name="identificationNumber"
+              mask={['999.999.999-99', '99. 999. 999/9999-99']}
+            />
+          </FieldsRow>
           <Button type="submit" id="form-checkout__submit">
-            Pagar
+            Continuar
           </Button>
         </FieldsWrapper>
       </RHFForm>

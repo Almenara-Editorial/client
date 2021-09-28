@@ -31,7 +31,7 @@ export const HeaderAccountDropdown = ({
         <List>
           {links?.map((link) => (
             <Menu.Item key={link.url}>
-              {({ active }) => (
+              {() => (
                 <li>
                   <DefaultLink as={Link} href="/account-settings">
                     {link.title}
@@ -43,7 +43,7 @@ export const HeaderAccountDropdown = ({
           ))}
           <Hr space="md" />
           <Menu.Item>
-            {({ active }) => (
+            {() => (
               <li>
                 <Link as="button" onClick={() => signOut()}>
                   Sair

@@ -6,7 +6,9 @@ export default {
   component: SingleProductBuyPanel
 } as Meta
 
-export const Basic: Story<SingleProductBuyPanelProps> = (args) => <SingleProductBuyPanel {...args} />
+export const Basic: Story<SingleProductBuyPanelProps> = (args) => (
+  <SingleProductBuyPanel {...args} />
+)
 
 Basic.args = {
   name: 'Telos Livro Três Protocolos da Quinta Dimensão',

@@ -6,10 +6,10 @@ type SingleProductDetailsTabProps = {
   title: string
 }
 
-const SingleProductDetailsTabFn: ForwardRefRenderFunction<HTMLButtonElement, SingleProductDetailsTabProps> = (
-  { active, title, ...rest },
-  ref
-) => (
+const SingleProductDetailsTabFn: ForwardRefRenderFunction<
+  HTMLButtonElement,
+  SingleProductDetailsTabProps
+> = ({ active, title, ...rest }, ref) => (
   <Container data-active={active} {...rest} ref={ref}>
     {title}
   </Container>

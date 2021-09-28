@@ -6,7 +6,9 @@ export default {
   component: SingleProductPrice
 } as Meta
 
-export const Basic: Story<SingleProductPriceProps> = (args) => <SingleProductPrice {...args} />
+export const Basic: Story<SingleProductPriceProps> = (args) => (
+  <SingleProductPrice {...args} />
+)
 
 Basic.args = {
   price: 59.9,

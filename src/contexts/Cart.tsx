@@ -134,7 +134,7 @@ export function CartProvider({ children }: CartProviderProps) {
     const productsTotal = products
       .map((product) => product.price * product.quantity)
       .reduce((total, curr) => curr + total, 0)
-    const shippingTotal = 10
+    const shippingTotal = 0
 
     setTotals({
       products: productsTotal,

@@ -6,7 +6,9 @@ describe('<SingleProductTitle />', () => {
   it('should render the heading', () => {
     const { container } = render(<SingleProductTitle />)
 
-    expect(screen.getByRole('heading', { name: /SingleProductTitle/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /SingleProductTitle/i })
+    ).toBeInTheDocument()
 
     expect(container.firstChild).toMatchSnapshot()
   })

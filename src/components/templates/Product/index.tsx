@@ -1,4 +1,8 @@
-import { SingleProductBuyPanel, SingleProductImage, SingleProductDetails } from '@/components/products'
+import {
+  SingleProductBuyPanel,
+  SingleProductImage,
+  SingleProductDetails
+} from '@/components/products'
 import { ProductModel } from '@/models'
 import { Container, Main, Infos } from './styles'
 
@@ -11,10 +15,18 @@ export function ProductTemplate({ product }: ProductTemplateProps) {
     <Container>
       <Main>
         <SingleProductImage src={product.imageSrc} />
-        <SingleProductBuyPanel id={product.id} name={product.name} price={product.price} stock={product.stock} />
+        <SingleProductBuyPanel
+          id={product.id}
+          name={product.name}
+          price={product.price}
+          stock={product.stock}
+        />
       </Main>
       <Infos>
-        <SingleProductDetails description={product.description} particulars={product.particulars} />
+        <SingleProductDetails
+          description={product.description}
+          particulars={product.particulars}
+        />
       </Infos>
     </Container>
   )

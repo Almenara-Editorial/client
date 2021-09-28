@@ -15,7 +15,7 @@ import { ErrorMessage } from '../ErrorMessage'
 
 type RadioModel = {
   title?: React.ReactNode
-  value: string | number
+  value: string
   content?: React.ReactNode
 }
 
@@ -31,7 +31,7 @@ export type RadioGroupProps = Omit<
 
 const RadioGroupFn: ForwardRefRenderFunction<HTMLDivElement, RadioGroupProps> =
   ({ label, radios, error, onChange }, ref) => {
-    const [radioValue, setRadioValue] = useState(radios[0].value)
+    const [radioValue, setRadioValue] = useState(radios[0]?.value)
 
     useEffect(() => {
       onChange && onChange(radioValue)
@@ -53,6 +53,7 @@ const RadioGroupFn: ForwardRefRenderFunction<HTMLDivElement, RadioGroupProps> =
                   <Radio
                     data-checked={checked}
                     data-radio-center={!radio.title}
+                    tabIndex={-1}
                   >
                     <span />
                     {typeof radio.title === 'string' && (

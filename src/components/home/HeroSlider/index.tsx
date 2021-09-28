@@ -1,6 +1,11 @@
 import Slider, { Settings } from 'react-slick'
 
-import { HeroSliderImageModel, HeroSliderImage, HeroSliderDots, HeroSliderPaging } from '@/components/home'
+import {
+  HeroSliderImageModel,
+  HeroSliderImage,
+  HeroSliderDots,
+  HeroSliderPaging
+} from '@/components/home'
 
 import { Container } from './styles'
 import HeroSliderButton from '../HeroSliderButton'

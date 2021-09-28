@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const Item = styled.div`
   display: flex;
+  width: 100%;
   align-items: center;
-  gap: 1.2rem;
+  gap: 2.4rem;
 
   img {
     width: 3rem;

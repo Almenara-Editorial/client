@@ -8,7 +8,10 @@ type HeroSliderButtonProps = HTMLAttributes<HTMLButtonElement> & {
   direction?: 'left' | 'right'
 }
 
-export const HeroSliderButton = ({ direction = 'left', ...rest }: HeroSliderButtonProps) => {
+export const HeroSliderButton = ({
+  direction = 'left',
+  ...rest
+}: HeroSliderButtonProps) => {
   const ariaLabel = direction === 'left' ? 'Anterior' : 'Próximo'
 
   return (

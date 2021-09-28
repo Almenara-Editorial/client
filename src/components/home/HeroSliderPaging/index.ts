@@ -5,9 +5,11 @@ type HeroSliderPagingProps = {
   active?: boolean
 }
 
-export const HeroSliderPaging = styled.span.attrs<HeroSliderPagingProps>(({ active }) => ({
-  'data-active': active
-}))`
+export const HeroSliderPaging = styled.span.attrs<HeroSliderPagingProps>(
+  ({ active }) => ({
+    'data-active': active
+  })
+)`
   display: block;
   height: 0.8rem;
   width: 0.8rem;

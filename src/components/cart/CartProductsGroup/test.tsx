@@ -6,7 +6,9 @@ describe('<CartProductsGroup />', () => {
   it('should render the heading', () => {
     const { container } = render(<CartProductsGroup />)
 
-    expect(screen.getByRole('heading', { name: /CartProductsGroup/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /CartProductsGroup/i })
+    ).toBeInTheDocument()
 
     expect(container.firstChild).toMatchSnapshot()
   })

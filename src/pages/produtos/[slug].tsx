@@ -1,5 +1,8 @@
 import { ProductTemplate, ProductTemplateProps } from '@/components/templates'
-import { QueryBookBySlug, QueryBookBySlugVariables } from '@/graphql/generated/QueryBookBySlug'
+import {
+  QueryBookBySlug,
+  QueryBookBySlugVariables
+} from '@/graphql/generated/QueryBookBySlug'
 import { QUERY_BOOK } from '@/graphql/queries'
 import { initializeApollo } from '@/utils'
 import { footerMapper, productMapper } from '@/utils/mappers'
@@ -32,7 +35,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const apolloClient = initializeApollo()
 
-  const { data } = await apolloClient.query<QueryBookBySlug, QueryBookBySlugVariables>({
+  const { data } = await apolloClient.query<
+    QueryBookBySlug,
+    QueryBookBySlugVariables
+  >({
     query: QUERY_BOOK,
     variables: {
       slug: slug.toString()
