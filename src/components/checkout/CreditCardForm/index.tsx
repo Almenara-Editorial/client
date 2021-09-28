@@ -1,186 +1,161 @@
-import { TextField } from '@/components/form'
+import { FieldsWrapper } from '@/components/form'
+import { RHFForm, RHFTextField } from '@/components/hook-form'
+import { RHFSelect } from '@/components/hook-form/Select'
 import { Button } from '@/components/shared'
 import { useCart } from '@/contexts'
-import Script from 'next/script'
-import { FormEvent, useEffect, useState } from 'react'
+import { CardToken, IdentificationType, Installment } from '@/models'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { Container } from './styles'
 
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    mp: any
-  }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare let MercadoPago: any
+
+type CreditCardFormProps = {
+  onGetCardToken?: (cardToken: string) => void
 }
 
-export function CreditCardForm() {
-  const [mounted, setMounted] = useState(false)
+type CreditCardFormValues = {
+  cardExpiration: string
+  cardNumber: string
+  cardHolderName: string
+  cardExpirationMonth: string
+  cardExpirationYear: string
+  securityCode: string
+  identificationType: string
+  identificationNumber: string
+}
+
+export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
   const { totals } = useCart()
+  const formMethods = useForm<CreditCardFormValues>()
+  const { watch } = formMethods
+  const cardNumber = watch('cardNumber')
+
+  const [identificationTypes, setIdentificationTypes] = useState<
+    IdentificationType[]
+  >([])
+
+  const [installments, setInstallments] = useState<Installment>()
+
+  async function onSubmit(values: CreditCardFormValues) {
+    const mp = new MercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY, {
+      locale: 'pt-BR',
+      advancedFraudPrevention: true
+    })
+    const [cardExpirationMonth, cardExpirationYear] =
+      values.cardExpiration.split('/')
+    const cardToken = (await mp.createCardToken({
+      cardNumber: values.cardNumber.replace(/\D+/g, ''),
+      cardholderName: values.cardHolderName,
+      cardExpirationMonth,
+      cardExpirationYear,
+      securityCode: values.securityCode,
+      identificationType: values.identificationType,
+      identificationNumber: values.identificationNumber
+    })) as CardToken
+
+    cardToken && onGetCardToken && onGetCardToken(cardToken.id)
+
+    console.log(cardToken)
+  }
 
   useEffect(() => {
-    setMounted(true)
+    const mp = new MercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY, {
+      locale: 'pt-BR',
+      advancedFraudPrevention: true
+    })
+
+    async function fetchResources() {
+      const identificationTypesResponse = await mp.getIdentificationTypes()
+
+      setIdentificationTypes(identificationTypesResponse)
+    }
+
+    fetchResources()
   }, [])
 
-  if (!mounted) return null
+  useEffect(() => {
+    const mp = new MercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY, {
+      locale: 'pt-BR',
+      advancedFraudPrevention: true
+    })
 
+    setInstallments([])
+
+    if (!cardNumber || cardNumber?.length === 6 || cardNumber?.length === 16)
+      return
+
+    async function fetchPaymentMethodsAndInstallments() {
+      const bin = cardNumber.replace(/\D+/g, '').slice(0, 6).toString()
+
+      const paymentMethods = await mp.getPaymentMethods({
+        bin
+      })
+
+      const newInstallments = (await mp.getInstallments({
+        amount: totals.total.toString(),
+        locale: 'pt-BR',
+        bin,
+        processingMode: 'aggregator'
+      })) as Installment[]
+
+      setInstallments(newInstallments[0])
+    }
+
+    fetchPaymentMethodsAndInstallments()
+  }, [cardNumber, totals.total])
+
+  // https://www.mercadopago.com.br/developers/pt/guides/online-payments/checkout-api/testing
+  // APRO: Pagamento aprovado.
+  // CONT: Pagamento pendente.
+  // OTHE: Recusado por erro geral.
+  // CALL: Recusado com validação para autorizar.
+  // FUND: Recusado por quantia insuficiente.
+  // SECU: Recusado por código de segurança inválido.
+  // EXPI: Recusado por problema com a data de vencimento.
+  // FORM: Recusado por erro no formulário.
   return (
     <Container>
-      <form id="form-checkout">
-        <TextField
-          type="text"
-          name="cardNumber"
-          id="form-checkout__cardNumber"
-        />
-        <TextField
-          type="text"
-          name="cardExpirationMonth"
-          id="form-checkout__cardExpirationMonth"
-        />
-        <TextField
-          type="text"
-          name="cardExpirationYear"
-          id="form-checkout__cardExpirationYear"
-        />
-        <TextField
-          type="text"
-          name="cardholderName"
-          id="form-checkout__cardholderName"
-        />
-        <TextField
-          type="text"
-          name="cardholderEmail"
-          id="form-checkout__cardholderEmail"
-        />
-        <TextField
-          type="text"
-          name="securityCode"
-          id="form-checkout__securityCode"
-        />
-        <select name="issuer" id="form-checkout__issuer" hidden></select>
-        <select
-          name="identificationType"
-          id="form-checkout__identificationType"
-        ></select>
-        <TextField
-          type="text"
-          name="identificationNumber"
-          id="form-checkout__identificationNumber"
-        />
-        <select name="installments" id="form-checkout__installments"></select>
-        <Button type="submit" id="form-checkout__submit">
-          Pagar
-        </Button>
-        <progress value="0" className="progress-bar">
-          Carregando...
-        </progress>
-      </form>
-      <Script
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-                  var mp = new MercadoPago("${
-                    process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY
-                  }");
-                  var cardForm = mp.cardForm({
-                    amount: "${totals.total.toString()}",
-                    autoMount: true,
-                    form: {
-                      id: "form-checkout",
-                      cardholderName: {
-                        id: "form-checkout__cardholderName",
-                        placeholder: "Titular do cartão",
-                      },
-                      cardholderEmail: {
-                        id: "form-checkout__cardholderEmail",
-                        placeholder: "E-mail",
-                      },
-                      cardNumber: {
-                        id: "form-checkout__cardNumber",
-                        placeholder: "Número do cartão",
-                      },
-                      cardExpirationMonth: {
-                        id: "form-checkout__cardExpirationMonth",
-                        placeholder: "Mês de vencimento",
-                      },
-                      cardExpirationYear: {
-                        id: "form-checkout__cardExpirationYear",
-                        placeholder: "Ano de vencimento",
-                      },
-                      securityCode: {
-                        id: "form-checkout__securityCode",
-                        placeholder: "Código de segurança",
-                      },
-                      installments: {
-                        id: "form-checkout__installments",
-                        placeholder: "Parcelas",
-                      },
-                      identificationType: {
-                        id: "form-checkout__identificationType",
-                        placeholder: "Tipo de documento",
-                      },
-                      identificationNumber: {
-                        id: "form-checkout__identificationNumber",
-                        placeholder: "Número do documento",
-                      },
-                      issuer: {
-                        id: "form-checkout__issuer",
-                        placeholder: "Banco emissor",
-                      },
-                    },
-                    callbacks: {
-                      onFormMounted: error => {
-                        if (error) return console.warn("Form Mounted handling error: ", error);
-                        // console.log("Form mounted");
-                      },
-                      onSubmit: event => {
-                        event.preventDefault();
-                  
-                        const {
-                          paymentMethodId: payment_method_id,
-                          issuerId: issuer_id,
-                          cardholderEmail: email,
-                          amount,
-                          token,
-                          installments,
-                          identificationNumber,
-                          identificationType,
-                        } = cardForm.getCardFormData();
-                  
-                        fetch("/process_payment", {
-                          method: "POST",
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
-                          body: JSON.stringify({
-                            token,
-                            issuer_id,
-                            payment_method_id,
-                            transaction_amount: Number(amount),
-                            installments: Number(installments),
-                            description: "Descrição do produto",
-                            payer: {
-                              email,
-                              identification: {
-                                type: identificationType,
-                                number: identificationNumber,
-                              },
-                            },
-                          }),
-                        });
-                      },
-                      onFetching: (resource) => {
-                        console.log("Fetching resource: ", resource);
-                        // Animate progress bar
-                        const progressBar = document.querySelector(".progress-bar");
-                        progressBar.removeAttribute("value");
-                  
-                        return () => {
-                          progressBar.setAttribute("value", "0");
-                        };
-                      },
-                    },
-                  });`
-        }}
-      />
+      <RHFForm {...formMethods} onSubmit={onSubmit}>
+        <FieldsWrapper>
+          <RHFTextField label="Número do cartão" name="cardNumber" />
+          <RHFTextField label="Nome" name="cardHolderName" />
+          <RHFTextField label="Expira em" name="cardExpiration" />
+          <RHFTextField label="E-mail" name="cardHolderEmail" />
+          <RHFTextField label="Código de segurança" name="securityCode" />
+          <RHFSelect
+            label="Parcelas"
+            name="installments"
+            disabled={
+              !installments?.payer_costs ||
+              installments.payer_costs?.length === 0
+            }
+            options={
+              installments?.payer_costs?.map((installment) => ({
+                value: installment.installments,
+                text: installment.recommended_message
+              })) || []
+            }
+          />
+          <RHFSelect
+            label="Tipo de documento"
+            disabled={!identificationTypes || identificationTypes.length === 0}
+            options={identificationTypes?.map((id) => ({
+              value: id.id,
+              text: id.name
+            }))}
+            name="identificationType"
+          />
+          <RHFTextField
+            label="Número do documento"
+            name="identificationNumber"
+          />
+          <Button type="submit" id="form-checkout__submit">
+            Pagar
+          </Button>
+        </FieldsWrapper>
+      </RHFForm>
     </Container>
   )
 }

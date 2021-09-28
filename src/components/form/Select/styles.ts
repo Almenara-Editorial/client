@@ -25,6 +25,12 @@ export const Button = styled.button`
     transform: translateY(2px);
   }
 
+  &[data-disabled='true'],
+  &[data-disabled='true'] i {
+    background: var(--color-neutral-50);
+    pointer-events: none;
+  }
+
   i {
     position: absolute;
     display: flex;
@@ -48,6 +54,7 @@ export const Button = styled.button`
 export const Popover = styled(DefaultPopover)`
   padding-block: var(--space-sm);
   list-style: none;
+  z-index: var(--layer-popover);
 `
 
 export const Option = styled.li`

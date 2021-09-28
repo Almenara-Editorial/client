@@ -58,6 +58,7 @@ const GlobalStyles = createGlobalStyle`
     --header-height: 8.7rem;
 
     --layer-base: 10;
+    --layer-popover: 20;
     --layer-header: 30;
     --layer-sidebar: 30;
     --layer-overlay: 35;
