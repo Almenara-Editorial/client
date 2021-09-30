@@ -9,6 +9,7 @@ import {
   Installment,
   PaymentMethods
 } from '@/models'
+import Script from 'next/script'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Container } from './styles'
@@ -48,21 +49,19 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
   async function onSubmit(values: CreditCardFormValues) {
     const mp = new MercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY, {
       locale: 'pt-BR',
-      advancedFraudPrevention: true
+      advancedFraudPrevention: false
     })
     const [cardExpirationMonth, cardExpirationYear] =
       values.cardExpiration.split('/')
-    const cardToken = (await mp.createCardToken({
-      cardNumber: values.cardNumber.replace(/\D+/g, ''),
+    const cardToken = await mp.createCardToken({
+      cardNumber: values.cardNumber.replace(/\D/g, ''),
       cardholderName: values.cardHolderName,
       cardExpirationMonth,
       cardExpirationYear,
       securityCode: values.securityCode,
       identificationType: values.identificationType,
-      identificationNumber: values.identificationNumber.replace(/\D+/g, '')
-    })) as CardToken
-
-    console.log(cardToken)
+      identificationNumber: values.identificationNumber.replace(/\D/g, '')
+    })
 
     cardToken && onGetCardToken && onGetCardToken(cardToken.id)
   }
@@ -70,7 +69,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
   useEffect(() => {
     const mp = new MercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY, {
       locale: 'pt-BR',
-      advancedFraudPrevention: true
+      advancedFraudPrevention: false
     })
 
     async function fetchResources() {
@@ -85,7 +84,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
   useEffect(() => {
     const mp = new MercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY, {
       locale: 'pt-BR',
-      advancedFraudPrevention: true
+      advancedFraudPrevention: false
     })
 
     setInstallments(null)
@@ -100,19 +99,19 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
         bin
       })) as PaymentMethods
 
-      console.log(paymentMethods)
+      if (paymentMethods.results[0]) {
+        setValue('paymentMethodId', paymentMethods.results[0].id)
+        setValue('issuerId', paymentMethods.results[0].issuer.id)
 
-      setValue('paymentMethodId', paymentMethods.results[0].id)
-      setValue('issuerId', paymentMethods.results[0].issuer.id)
+        const newInstallments = (await mp.getInstallments({
+          amount: totals.total.toString(),
+          locale: 'pt-BR',
+          bin,
+          processingMode: 'aggregator'
+        })) as Installment[]
 
-      const newInstallments = (await mp.getInstallments({
-        amount: totals.total.toString(),
-        locale: 'pt-BR',
-        bin,
-        processingMode: 'aggregator'
-      })) as Installment[]
-
-      setInstallments(newInstallments[0])
+        setInstallments(newInstallments[0])
+      }
     }
 
     fetchPaymentMethodsAndInstallments()
@@ -138,7 +137,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
               name="cardNumber"
               mask="9999 9999 9999 9999"
             />
-            <RHFTextField label="Nome" name="cardHoldaerName" />
+            <RHFTextField label="Nome" name="cardHolderName" />
           </FieldsRow>
           <FieldsRow>
             <RHFTextField
@@ -149,7 +148,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
             <RHFTextField
               label="Código de segurança"
               name="securityCode"
-              mask="999"
+              mask="9999"
             />
           </FieldsRow>
           <FieldsRow>

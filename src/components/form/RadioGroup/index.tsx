@@ -1,5 +1,4 @@
 import { ForwardRefRenderFunction, useState } from 'react'
-import { RadioGroup as HeadlessRadioGroup } from '@headlessui/react'
 import {
   Radios,
   Radio,
@@ -38,37 +37,32 @@ const RadioGroupFn: ForwardRefRenderFunction<HTMLDivElement, RadioGroupProps> =
     }, [onChange, radioValue])
 
     return (
-      <HeadlessRadioGroup value={radioValue} onChange={setRadioValue}>
-        <HeadlessRadioGroup.Label>
-          {label && <Label>{label}</Label>}
-        </HeadlessRadioGroup.Label>
+      <div>
+        {label && <Label>{label}</Label>}
         <Radios ref={ref}>
           {radios?.map((radio) => (
             <RadioWrapper
               key={radio.value}
               data-checked={radioValue === radio.value}
+              onClick={() => setRadioValue(radio.value)}
             >
-              <HeadlessRadioGroup.Option value={radio.value}>
-                {({ checked }) => (
-                  <Radio
-                    data-checked={checked}
-                    data-radio-center={!radio.title}
-                    tabIndex={-1}
-                  >
-                    <span />
-                    {typeof radio.title === 'string' && (
-                      <RadioTitle>{radio.title}</RadioTitle>
-                    )}
-                    {typeof radio.title === 'object' && radio.title}
-                  </Radio>
+              <Radio
+                data-checked={radioValue === radio.value}
+                data-radio-center={!radio.title}
+              >
+                <span />
+                {typeof radio.title === 'string' && (
+                  <RadioTitle>{radio.title}</RadioTitle>
                 )}
-              </HeadlessRadioGroup.Option>
+                {typeof radio.title === 'object' && radio.title}
+              </Radio>
+
               <ContentWrapper>{radio.content}</ContentWrapper>
             </RadioWrapper>
           ))}
         </Radios>
         {error && <ErrorMessage error={error} />}
-      </HeadlessRadioGroup>
+      </div>
     )
   }
 

@@ -8,7 +8,7 @@ export const Radios = styled.div`
   gap: 1.2rem;
 `
 
-export const Radio = styled.div`
+export const Radio = styled.button`
   display: flex;
   padding: 2.4rem;
 
@@ -16,6 +16,9 @@ export const Radio = styled.div`
   gap: 2.4rem;
   cursor: pointer;
   transition: all 0.2s;
+  background: none;
+  font: inherit;
+  border: 0;
 
   > span {
     flex-shrink: 0;
