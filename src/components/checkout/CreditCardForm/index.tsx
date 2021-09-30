@@ -3,13 +3,7 @@ import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { RHFSelect } from '@/components/hook-form/Select'
 import { Button } from '@/components/shared'
 import { useCart } from '@/contexts'
-import {
-  CardToken,
-  IdentificationType,
-  Installment,
-  PaymentMethods
-} from '@/models'
-import Script from 'next/script'
+import { IdentificationType, Installment, PaymentMethods } from '@/models'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Container } from './styles'
@@ -35,6 +29,10 @@ type CreditCardFormValues = {
 }
 
 export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
+  const mp = new MercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY, {
+    locale: 'pt-BR',
+    advancedFraudPrevention: false
+  })
   const { totals } = useCart()
   const formMethods = useForm<CreditCardFormValues>()
   const { watch, setValue } = formMethods
@@ -47,12 +45,9 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
   const [installments, setInstallments] = useState<Installment | null>(null)
 
   async function onSubmit(values: CreditCardFormValues) {
-    const mp = new MercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY, {
-      locale: 'pt-BR',
-      advancedFraudPrevention: false
-    })
     const [cardExpirationMonth, cardExpirationYear] =
       values.cardExpiration.split('/')
+
     const cardToken = await mp.createCardToken({
       cardNumber: values.cardNumber.replace(/\D/g, ''),
       cardholderName: values.cardHolderName,
@@ -63,15 +58,12 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
       identificationNumber: values.identificationNumber.replace(/\D/g, '')
     })
 
+    console.log({ cardToken })
+
     cardToken && onGetCardToken && onGetCardToken(cardToken.id)
   }
 
   useEffect(() => {
-    const mp = new MercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY, {
-      locale: 'pt-BR',
-      advancedFraudPrevention: false
-    })
-
     async function fetchResources() {
       const identificationTypesResponse = await mp.getIdentificationTypes()
 
@@ -82,11 +74,6 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
   }, [])
 
   useEffect(() => {
-    const mp = new MercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY, {
-      locale: 'pt-BR',
-      advancedFraudPrevention: false
-    })
-
     setInstallments(null)
 
     if (!cardNumber || cardNumber?.length === 6 || cardNumber?.length === 16)

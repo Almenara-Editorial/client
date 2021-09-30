@@ -9,6 +9,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "incremental": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -18,10 +19,8 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "exclude": ["node_modules", "cypress"],
   "include": [
-    "next-env.d.ts",
-    "pages/**/*",
-    "src/**/*",
-  ]
+    "src"
+  ],
+  "exclude": ["**/node_modules", "**/.*/"]
 }
