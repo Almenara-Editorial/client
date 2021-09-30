@@ -7,7 +7,7 @@ module.exports = withPWA({
     ignoreBuildErrors: true
   },
   images: {
-    domains: ['localhost']
+    domains: ['localhost', 'almenara-api-wfaof.ondigitalocean.app']
   },
   pwa: {
     dest: 'public',
