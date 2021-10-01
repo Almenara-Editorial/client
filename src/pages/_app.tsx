@@ -1,6 +1,5 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import Script from 'next/script'
 import { ApolloProvider } from '@apollo/client'
 import { useRouter } from 'next/router'
 
@@ -12,6 +11,7 @@ import { CartProvider } from '@/contexts'
 import { Provider } from 'next-auth/client'
 
 import '@/styles/react-slick.css'
+import { MercadoPago } from '@/components/shared'
 
 function App({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps?.initialApolloState)
@@ -26,11 +26,7 @@ function App({ Component, pageProps }: AppProps) {
             <link rel="shortcut icon" href="/img/icon-512.png" />
             <link rel="apple-touch-icon" href="/img/icon-512.png" />
           </Head>
-          <Script
-            strategy="beforeInteractive"
-            src={`https://sdk.mercadopago.com/js/v2`}
-          />
-
+          <MercadoPago />
           {pathname !== '/checkout' ? (
             <Layout footer={pageProps.footer}>
               <Component {...pageProps} />

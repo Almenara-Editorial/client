@@ -4,12 +4,17 @@ import { RHFSelect } from '@/components/hook-form/Select'
 import { Button } from '@/components/shared'
 import { useCart } from '@/contexts'
 import { IdentificationType, Installment, PaymentMethods } from '@/models'
+import { filterNumbers } from '@/utils'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Container } from './styles'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare let MercadoPago: any
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mp: any
+  }
+}
 
 type CreditCardFormProps = {
   onGetCardToken?: (cardToken: string) => void
@@ -29,10 +34,6 @@ type CreditCardFormValues = {
 }
 
 export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
-  const mp = new MercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY, {
-    locale: 'pt-BR',
-    advancedFraudPrevention: false
-  })
   const { totals } = useCart()
   const formMethods = useForm<CreditCardFormValues>()
   const { watch, setValue } = formMethods
@@ -48,14 +49,14 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
     const [cardExpirationMonth, cardExpirationYear] =
       values.cardExpiration.split('/')
 
-    const cardToken = await mp.createCardToken({
-      cardNumber: values.cardNumber.replace(/\D/g, ''),
+    const cardToken = await window.mp.createCardToken({
+      cardNumber: filterNumbers(values.cardNumber),
       cardholderName: values.cardHolderName,
       cardExpirationMonth,
       cardExpirationYear,
       securityCode: values.securityCode,
       identificationType: values.identificationType,
-      identificationNumber: values.identificationNumber.replace(/\D/g, '')
+      identificationNumber: filterNumbers(values.identificationNumber)
     })
 
     console.log({ cardToken })
@@ -65,7 +66,8 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
 
   useEffect(() => {
     async function fetchResources() {
-      const identificationTypesResponse = await mp.getIdentificationTypes()
+      const identificationTypesResponse =
+        await window.mp.getIdentificationTypes()
 
       setIdentificationTypes(identificationTypesResponse)
     }
@@ -80,9 +82,8 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
       return
 
     async function fetchPaymentMethodsAndInstallments() {
-      const bin = cardNumber.replace(/\D+/g, '').slice(0, 6).toString()
-
-      const paymentMethods = (await mp.getPaymentMethods({
+      const bin = filterNumbers(cardNumber).slice(0, 6).toString()
+      const paymentMethods = (await window.mp.getPaymentMethods({
         bin
       })) as PaymentMethods
 
@@ -90,7 +91,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
         setValue('paymentMethodId', paymentMethods.results[0].id)
         setValue('issuerId', paymentMethods.results[0].issuer.id)
 
-        const newInstallments = (await mp.getInstallments({
+        const newInstallments = (await window.mp.getInstallments({
           amount: totals.total.toString(),
           locale: 'pt-BR',
           bin,
@@ -104,16 +105,6 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
     fetchPaymentMethodsAndInstallments()
   }, [cardNumber, totals.total, setValue])
 
-  // https://www.mercadopago.com.br/developers/pt/guides/online-payments/checkout-api/testing
-
-  // APRO: Pagamento aprovado.
-  // CONT: Pagamento pendente.
-  // OTHE: Recusado por erro geral.
-  // CALL: Recusado com validação para autorizar.
-  // FUND: Recusado por quantia insuficiente.
-  // SECU: Recusado por código de segurança inválido.
-  // EXPI: Recusado por problema com a data de vencimento.
-  // FORM: Recusado por erro no formulário.
   return (
     <Container>
       <RHFForm {...formMethods} onSubmit={onSubmit}>
