@@ -90,19 +90,26 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
         <FieldsWrapper>
           <FieldsRow>
             <RHFTextField
+              labelStyle="static"
               label="Número do cartão"
               name="cardNumber"
               mask="9999 9999 9999 9999"
             />
-            <RHFTextField label="Nome" name="cardHolderName" />
+            <RHFTextField
+              labelStyle="static"
+              label="Nome"
+              name="cardHolderName"
+            />
           </FieldsRow>
           <FieldsRow>
             <RHFTextField
+              labelStyle="static"
               label="Expira em"
               name="cardExpiration"
               mask="99/9999"
             />
             <RHFTextField
+              labelStyle="static"
               label="Código de segurança"
               name="securityCode"
               mask="9999"
@@ -124,7 +131,11 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
               }
             />
           </FieldsRow>
-          <RHFTextField label="E-mail" name="cardHolderEmail" />
+          <RHFTextField
+            labelStyle="static"
+            label="E-mail"
+            name="cardHolderEmail"
+          />
           <IdentificationDocumentFields />
           <Button type="submit" id="form-checkout__submit">
             Continuar

@@ -20,6 +20,7 @@ export function IdentificationDocumentFields() {
         name="identificationType"
       />
       <RHFTextField
+        labelStyle="static"
         label="Número do documento"
         name="identificationNumber"
         mask={['999.999.999-99', '99. 999. 999/9999-99']}

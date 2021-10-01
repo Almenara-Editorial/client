@@ -17,6 +17,7 @@ export type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   type?: 'text' | 'password' | 'search'
   error?: string
   isLoading?: boolean
+  labelStyle?: 'dynamic' | 'static'
   mask?: string | string[]
 }
 
@@ -30,6 +31,7 @@ const TextFieldFn: ForwardRefRenderFunction<HTMLInputElement, TextFieldProps> =
       mask,
       error,
       isLoading,
+      labelStyle = 'dynamic',
       ...rest
     },
     ref
@@ -44,6 +46,9 @@ const TextFieldFn: ForwardRefRenderFunction<HTMLInputElement, TextFieldProps> =
     return (
       <Container>
         <FieldContainer>
+          {label && labelStyle === 'static' && type !== 'search' && (
+            <Label>{label}</Label>
+          )}
           <Input
             {...rest}
             type={fieldType}
@@ -61,7 +66,9 @@ const TextFieldFn: ForwardRefRenderFunction<HTMLInputElement, TextFieldProps> =
             data-hidden-placeholder={!!label}
             data-loading={isLoading}
           />
-          {label && type !== 'search' && <Label>{label}</Label>}
+          {label && labelStyle === 'dynamic' && type !== 'search' && (
+            <Label>{label}</Label>
+          )}
           {type === 'password' && (
             <button type="button" onClick={togglePasswordVisibility}>
               {isShowingPassword ? <EyeInvisible /> : <Eye />}

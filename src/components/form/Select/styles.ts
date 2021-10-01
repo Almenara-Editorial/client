@@ -25,6 +25,11 @@ export const Button = styled.button`
     transform: translateY(2px);
   }
 
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--input-focus-border-color);
+  }
+
   &[data-disabled='true'],
   &[data-disabled='true'] i {
     background: var(--color-neutral-50);
@@ -55,6 +60,11 @@ export const Popover = styled(DefaultPopover)`
   padding-block: var(--space-sm);
   list-style: none;
   z-index: var(--layer-popover);
+
+  &:focus,
+  &:focus-within {
+    outline: none;
+  }
 `
 
 export const Option = styled.li`

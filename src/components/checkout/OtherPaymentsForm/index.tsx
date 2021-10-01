@@ -26,10 +26,18 @@ export function OtherPaymentsForm() {
       <RHFForm {...formMethods} onSubmit={onSubmit}>
         <FieldsWrapper>
           <FieldsRow>
-            <RHFTextField label="Nome" name="payerFirstName" />
-            <RHFTextField label="Sobrenome" name="payerLastName" />
+            <RHFTextField
+              labelStyle="static"
+              label="Nome"
+              name="payerFirstName"
+            />
+            <RHFTextField
+              labelStyle="static"
+              label="Sobrenome"
+              name="payerLastName"
+            />
           </FieldsRow>
-          <RHFTextField label="E-mail" name="payerEmail" />
+          <RHFTextField labelStyle="static" label="E-mail" name="payerEmail" />
           <IdentificationDocumentFields />
           <Button type="submit" id="form-checkout__submit">
             Continuar

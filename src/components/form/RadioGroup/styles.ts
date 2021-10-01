@@ -20,6 +20,10 @@ export const Radio = styled.button`
   font: inherit;
   border: 0;
 
+  &:focus-within {
+    outline: none;
+  }
+
   > span {
     flex-shrink: 0;
     position: relative;
@@ -63,6 +67,11 @@ export const RadioWrapper = styled.div`
 
   &:hover {
     box-shadow: 0 0 0 1px var(--color-neutral-100);
+  }
+
+  &:focus-within {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--color-neutral-200);
   }
 
   &[data-checked='true'] {
