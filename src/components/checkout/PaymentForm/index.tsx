@@ -2,6 +2,7 @@ import { RadioGroup } from '@/components/form'
 import { useCheckoutForm } from '@/contexts'
 import { useEffect, useState } from 'react'
 import { CreditCardForm } from '../CreditCardForm'
+import { OtherPaymentsForm } from '../OtherPaymentsForm'
 import { Item, Thumbs } from './styles'
 
 // type PaymentFormValues = {
@@ -51,6 +52,12 @@ export function PaymentForm() {
                 {payment.name}
               </Item>
             ),
+            content:
+              activeForm === payment.id ? (
+                <Item>
+                  <OtherPaymentsForm />
+                </Item>
+              ) : null,
             value: payment.id
           }))
         ]}

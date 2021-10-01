@@ -3,6 +3,7 @@ import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { RHFSelect } from '@/components/hook-form/Select'
 import { Button } from '@/components/shared'
 import { useCart } from '@/contexts'
+import { useMercadoPago } from '@/hooks'
 import { IdentificationType, Installment, PaymentMethods } from '@/models'
 import { filterNumbers } from '@/utils'
 import { useEffect, useState } from 'react'
@@ -34,6 +35,7 @@ type CreditCardFormValues = {
 }
 
 export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
+  const { mercadopago } = useMercadoPago()
   const { totals } = useCart()
   const formMethods = useForm<CreditCardFormValues>()
   const { watch, setValue } = formMethods
@@ -49,7 +51,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
     const [cardExpirationMonth, cardExpirationYear] =
       values.cardExpiration.split('/')
 
-    const cardToken = await window.mp.createCardToken({
+    const cardToken = await mercadopago.createCardToken({
       cardNumber: filterNumbers(values.cardNumber),
       cardholderName: values.cardHolderName,
       cardExpirationMonth,
@@ -67,13 +69,13 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
   useEffect(() => {
     async function fetchResources() {
       const identificationTypesResponse =
-        await window.mp.getIdentificationTypes()
+        await mercadopago.getIdentificationTypes()
 
       setIdentificationTypes(identificationTypesResponse)
     }
 
     fetchResources()
-  }, [])
+  }, [mercadopago])
 
   useEffect(() => {
     setInstallments(null)
@@ -83,7 +85,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
 
     async function fetchPaymentMethodsAndInstallments() {
       const bin = filterNumbers(cardNumber).slice(0, 6).toString()
-      const paymentMethods = (await window.mp.getPaymentMethods({
+      const paymentMethods = (await mercadopago.getPaymentMethods({
         bin
       })) as PaymentMethods
 
@@ -91,7 +93,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
         setValue('paymentMethodId', paymentMethods.results[0].id)
         setValue('issuerId', paymentMethods.results[0].issuer.id)
 
-        const newInstallments = (await window.mp.getInstallments({
+        const newInstallments = (await mercadopago.getInstallments({
           amount: totals.total.toString(),
           locale: 'pt-BR',
           bin,
@@ -103,7 +105,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
     }
 
     fetchPaymentMethodsAndInstallments()
-  }, [cardNumber, totals.total, setValue])
+  }, [cardNumber, totals.total, setValue, mercadopago])
 
   return (
     <Container>
