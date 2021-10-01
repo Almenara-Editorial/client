@@ -3,19 +3,12 @@ import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { RHFSelect } from '@/components/hook-form/Select'
 import { Button } from '@/components/shared'
 import { useCart } from '@/contexts'
-import { useMercadoPago } from '@/hooks'
-import { IdentificationType, Installment, PaymentMethods } from '@/models'
+import { Installment, PaymentMethods } from '@/models'
 import { filterNumbers } from '@/utils'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { IdentificationDocumentFields } from '..'
 import { Container } from './styles'
-
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    mp: any
-  }
-}
 
 type CreditCardFormProps = {
   onGetCardToken?: (cardToken: string) => void
@@ -35,15 +28,10 @@ type CreditCardFormValues = {
 }
 
 export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
-  const { mercadopago } = useMercadoPago()
   const { totals } = useCart()
   const formMethods = useForm<CreditCardFormValues>()
   const { watch, setValue } = formMethods
   const cardNumber = watch('cardNumber')
-
-  const [identificationTypes, setIdentificationTypes] = useState<
-    IdentificationType[]
-  >([])
 
   const [installments, setInstallments] = useState<Installment | null>(null)
 
@@ -51,7 +39,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
     const [cardExpirationMonth, cardExpirationYear] =
       values.cardExpiration.split('/')
 
-    const cardToken = await mercadopago.createCardToken({
+    const cardToken = await window.mp.createCardToken({
       cardNumber: filterNumbers(values.cardNumber),
       cardholderName: values.cardHolderName,
       cardExpirationMonth,
@@ -67,17 +55,6 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
   }
 
   useEffect(() => {
-    async function fetchResources() {
-      const identificationTypesResponse =
-        await mercadopago.getIdentificationTypes()
-
-      setIdentificationTypes(identificationTypesResponse)
-    }
-
-    fetchResources()
-  }, [mercadopago])
-
-  useEffect(() => {
     setInstallments(null)
 
     if (!cardNumber || cardNumber?.length === 6 || cardNumber?.length === 16)
@@ -85,7 +62,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
 
     async function fetchPaymentMethodsAndInstallments() {
       const bin = filterNumbers(cardNumber).slice(0, 6).toString()
-      const paymentMethods = (await mercadopago.getPaymentMethods({
+      const paymentMethods = (await window.mp.getPaymentMethods({
         bin
       })) as PaymentMethods
 
@@ -93,19 +70,19 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
         setValue('paymentMethodId', paymentMethods.results[0].id)
         setValue('issuerId', paymentMethods.results[0].issuer.id)
 
-        const newInstallments = (await mercadopago.getInstallments({
+        const newInstallments = await window.mp.getInstallments({
           amount: totals.total.toString(),
           locale: 'pt-BR',
           bin,
           processingMode: 'aggregator'
-        })) as Installment[]
+        })
 
         setInstallments(newInstallments[0])
       }
     }
 
     fetchPaymentMethodsAndInstallments()
-  }, [cardNumber, totals.total, setValue, mercadopago])
+  }, [cardNumber, totals.total, setValue])
 
   return (
     <Container>
@@ -148,24 +125,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
             />
           </FieldsRow>
           <RHFTextField label="E-mail" name="cardHolderEmail" />
-          <FieldsRow>
-            <RHFSelect
-              label="Tipo de documento"
-              disabled={
-                !identificationTypes || identificationTypes.length === 0
-              }
-              options={identificationTypes?.map((id) => ({
-                value: id.id,
-                text: id.name
-              }))}
-              name="identificationType"
-            />
-            <RHFTextField
-              label="Número do documento"
-              name="identificationNumber"
-              mask={['999.999.999-99', '99. 999. 999/9999-99']}
-            />
-          </FieldsRow>
+          <IdentificationDocumentFields />
           <Button type="submit" id="form-checkout__submit">
             Continuar
           </Button>

@@ -1,7 +1,9 @@
 import { FieldsRow, FieldsWrapper } from '@/components/form'
 import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { Button } from '@/components/shared'
+import { useMercadoPago } from '@/hooks'
 import { useForm } from 'react-hook-form'
+import { IdentificationDocumentFields } from '../IdentificationDocumentFields'
 import { Container } from './styles'
 
 type OtherPaymentsFormValues = {
@@ -28,10 +30,7 @@ export function OtherPaymentsForm() {
             <RHFTextField label="Sobrenome" name="payerLastName" />
           </FieldsRow>
           <RHFTextField label="E-mail" name="payerEmail" />
-          <FieldsRow>
-            <RHFTextField label="Primeiro nome" name="docType" />
-            <RHFTextField label="Primeiro nome" name="docNumber" />
-          </FieldsRow>
+          <IdentificationDocumentFields />
           <Button type="submit" id="form-checkout__submit">
             Continuar
           </Button>

@@ -80,28 +80,6 @@ export type Result = {
   settings: Setting[]
 }
 
-export type PaymentMethods = {
-  paging: Paging
-  results: Result[]
-}
-
-export type Installment = {
-  payment_method_id: string
-  payment_type_id: string
-  issuer: Issuer
-  processing_mode: string
-  merchant_account_id?: string
-  payer_costs: PayerCost[]
-  agreements?: string
-}
-
-export type IdentificationType = {
-  id: string
-  max_length: number
-  name: string
-  type: string
-}
-
 export interface Identification {
   number: string
   type: string
@@ -129,4 +107,50 @@ export interface CardToken {
   require_esc: boolean
   card_number_length: number
   security_code_length: number
+}
+
+export type IdentificationType = {
+  id: string
+  name: string
+  type: string
+  min_length: number
+  max_length: number
+}
+
+export type GetCardTokenParams = {
+  cardNumber: string
+  cardholderName: string
+  cardExpirationMonth: string
+  cardExpirationYear: string
+  securityCode: string
+  identificationType: string
+  identificationNumber: string
+  cardId?: string
+}
+
+export type GetPaymentMethodsParams = {
+  bin: string
+  processingMode?: 'aggregator' | 'gateway'
+}
+
+export type PaymentMethods = {
+  paging: Paging
+  results: Result[]
+}
+
+export type GetInstallmentsParams = {
+  amount: string
+  bin: string
+  locale: string
+  processingMode: 'aggregator' | 'gateway'
+}
+
+export type Installment = {
+  payment_method_id: string
+  payment_type_id: string
+  issuer: Issuer
+  processing_mode: string
+  merchant_account_id?: string
+  payer_costs: PayerCost[]
+  agreements?: string
 }
