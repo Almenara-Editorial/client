@@ -1,5 +1,7 @@
 node_modules
-**/.next/**
-**/_next/**
-**/dist/**
-**/__tmp__/**
+.next
+/*.js
+coverage/
+__snapshots__/
+package-lock.json
+yarn.lock
