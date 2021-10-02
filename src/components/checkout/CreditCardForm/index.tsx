@@ -2,12 +2,15 @@ import { FieldsWrapper, FieldsRow } from '@/components/form'
 import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { RHFSelect } from '@/components/hook-form/Select'
 import { Button } from '@/components/shared'
-import { useCart } from '@/contexts'
-import { Installment, PaymentMethods } from '@/models'
+import { useCart, useCheckoutForm } from '@/contexts'
+import { useDebounce } from '@/hooks'
+import { CreditCardPaymentValues, Installment, PaymentMethods } from '@/models'
 import { filterNumbers } from '@/utils'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IdentificationDocumentFields } from '..'
+import { schema } from './schema'
 import { Container } from './styles'
 
 type CreditCardFormProps = {
@@ -17,6 +20,8 @@ type CreditCardFormProps = {
 type CreditCardFormValues = {
   cardExpiration: string
   cardNumber: string
+  cardHolderEmail: string
+  installments: number
   cardHolderName: string
   cardExpirationMonth: string
   cardExpirationYear: string
@@ -24,14 +29,18 @@ type CreditCardFormValues = {
   identificationType: string
   identificationNumber: string
   paymentMethodId: string
+  cardToken: string
   issuerId: number
 }
 
 export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
-  const { totals } = useCart()
-  const formMethods = useForm<CreditCardFormValues>()
+  const formMethods = useForm<CreditCardFormValues>({
+    resolver: yupResolver(schema)
+  })
   const { watch, setValue } = formMethods
-  const cardNumber = watch('cardNumber')
+  const cardNumber = useDebounce(watch('cardNumber'), 800)
+  const { updateFormValues } = useCheckoutForm()
+  const { totals } = useCart()
 
   const [installments, setInstallments] = useState<Installment | null>(null)
 
@@ -49,7 +58,19 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
       identificationNumber: filterNumbers(values.identificationNumber)
     })
 
-    console.log({ cardToken })
+    updateFormValues('payment', {
+      token: cardToken.id,
+      installments: values.installments,
+      payer: {
+        email: values.cardHolderEmail,
+        identification: {
+          number: values.identificationNumber,
+          type: values.identificationType
+        }
+      },
+      issuerId: values.issuerId.toString(),
+      paymentMethodId: values.paymentMethodId
+    } as CreditCardPaymentValues)
 
     cardToken && onGetCardToken && onGetCardToken(cardToken.id)
   }
@@ -57,8 +78,7 @@ export function CreditCardForm({ onGetCardToken }: CreditCardFormProps) {
   useEffect(() => {
     setInstallments(null)
 
-    if (!cardNumber || cardNumber?.length === 6 || cardNumber?.length === 16)
-      return
+    if (!cardNumber || cardNumber?.length < 15) return
 
     async function fetchPaymentMethodsAndInstallments() {
       const bin = filterNumbers(cardNumber).slice(0, 6).toString()

@@ -1,3 +1,4 @@
+import { CreditCardPaymentValues, OtherPaymentsValues } from '@/models'
 import { loadPaymentMethods, PaymentMethods } from '@/services'
 import { useRouter } from 'next/router'
 import {
@@ -13,13 +14,15 @@ const formSteps = ['shipping', 'payment', 'review']
 type FormSteps = 'shipping' | 'payment' | 'review' | undefined
 
 type CheckoutFormContextData = {
-  updateFormValues: (key: string, value: string) => void
+  updateFormValues: (
+    key: keyof CheckoutFormContextData['formValues'],
+    value: CheckoutFormContextData['formValues'][typeof key]
+  ) => void
   formValues: {
-    address: string
-    shipping: string
-    payment: string
-    installments: string
-  } | null
+    address: string | undefined
+    shipping: string | undefined
+    payment: OtherPaymentsValues | CreditCardPaymentValues | undefined
+  }
   currentStep: FormSteps
   paymentMethods: PaymentMethods
   isLoading: {
@@ -49,14 +52,21 @@ export function CheckoutFormProvider({ children }: CheckoutFormProviderProps) {
     availableMethods: [],
     creditCards: []
   })
-  const [formValues, setFormValues] =
-    useState<CheckoutFormContextData['formValues']>(null)
-  const updateFormValues = useCallback((key: string, value: string) => {
-    setFormValues(
-      (state) =>
-        ({ ...state, [key]: value } as CheckoutFormContextData['formValues'])
-    )
-  }, [])
+  const [formValues, setFormValues] = useState(
+    {} as CheckoutFormContextData['formValues']
+  )
+  const updateFormValues = useCallback(
+    (
+      key: keyof CheckoutFormContextData['formValues'],
+      value: CheckoutFormContextData['formValues'][typeof key]
+    ) => {
+      setFormValues(
+        (state) =>
+          ({ ...state, [key]: value } as CheckoutFormContextData['formValues'])
+      )
+    },
+    []
+  )
 
   const prevStep = useCallback(() => {
     if (!currentStep) return
@@ -100,6 +110,10 @@ export function CheckoutFormProvider({ children }: CheckoutFormProviderProps) {
 
     getAndSetPaymentMethods()
   }, [updateIsLoading])
+
+  useEffect(() => {
+    console.log({ formValues })
+  }, [formValues])
 
   return (
     <CheckoutFormContext.Provider

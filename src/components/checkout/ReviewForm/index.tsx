@@ -14,7 +14,8 @@ export function ReviewForm() {
   const { nextStep } = useCheckoutForm()
 
   async function onSubmit(values: ReviewFormValues) {
-    console.log({ values })
+    console.log('reviewForm', values)
+
     nextStep()
   }
 

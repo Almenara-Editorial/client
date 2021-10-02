@@ -17,10 +17,6 @@ export function PaymentForm() {
   const { paymentMethods } = useCheckoutForm()
   const [activeForm, setActiveForm] = useState<string>('')
 
-  useEffect(() => {
-    console.log({ activeForm })
-  }, [activeForm])
-
   return (
     <>
       <RadioGroup

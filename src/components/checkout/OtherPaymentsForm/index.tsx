@@ -1,24 +1,45 @@
 import { FieldsRow, FieldsWrapper } from '@/components/form'
 import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { Button } from '@/components/shared'
-import { useMercadoPago } from '@/hooks'
+import { useCheckoutForm } from '@/contexts'
+import { OtherPaymentsValues } from '@/models'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { IdentificationDocumentFields } from '../IdentificationDocumentFields'
+import { schema } from './schema'
 import { Container } from './styles'
 
 type OtherPaymentsFormValues = {
   payerFirstName: string
   payerLastName: string
   payerEmail: string
-  docType: string
-  docNumber: string
+  identificationType: string
+  identificationNumber: string
 }
 
-export function OtherPaymentsForm() {
-  const formMethods = useForm<OtherPaymentsFormValues>()
+type OtherPaymentsFormProps = {
+  paymentMethodId: string
+}
+
+export function OtherPaymentsForm({ paymentMethodId }: OtherPaymentsFormProps) {
+  const formMethods = useForm<OtherPaymentsFormValues>({
+    resolver: yupResolver(schema)
+  })
+  const { updateFormValues } = useCheckoutForm()
 
   async function onSubmit(values: OtherPaymentsFormValues) {
-    console.log(values)
+    updateFormValues('payment', {
+      payer: {
+        firstName: values.payerFirstName,
+        lastName: values.payerLastName,
+        email: values.payerEmail,
+        identification: {
+          number: values.identificationNumber,
+          type: values.identificationType
+        }
+      },
+      paymentMethodId: paymentMethodId
+    } as OtherPaymentsValues)
   }
 
   return (

@@ -29,7 +29,7 @@ export function ShippingForm() {
 
   async function onSubmit(values: ShippingFormValues) {
     nextStep()
-    console.log(values)
+    console.log('shippingForm', values)
   }
 
   useEffect(() => {

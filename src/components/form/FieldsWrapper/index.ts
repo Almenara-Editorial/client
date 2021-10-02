@@ -12,7 +12,7 @@ export const FieldsRow = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: var(--space-lg);
 
   > * {

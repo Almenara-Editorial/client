@@ -55,7 +55,12 @@ export const Select = ({
   }, [options, value, emptyOption])
 
   return (
-    <Listbox as={Container} value={selectedOption} onChange={setSelectedOption}>
+    <Listbox
+      as={Container}
+      value={selectedOption}
+      onChange={setSelectedOption}
+      disabled={disabled}
+    >
       {label && <Label>{label}</Label>}
       <Listbox.Button as={Button} data-disabled={disabled} ref={innerRef}>
         {selectedOption.text}

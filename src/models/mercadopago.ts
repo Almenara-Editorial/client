@@ -154,3 +154,38 @@ export type Installment = {
   payer_costs: PayerCost[]
   agreements?: string
 }
+
+export interface Identification {
+  type: string
+  number: string
+}
+
+export interface Address {
+  zipCode: string
+  street: string
+  number: string
+  neighborhood: string
+  city: string
+  state: string
+}
+
+export interface Payer {
+  email: string
+  firstName: string
+  lastName: string
+  identification: Identification
+  address: Address
+}
+
+export interface OtherPaymentsValues {
+  paymentMethodId: string
+  payer: Payer
+}
+
+export interface CreditCardPaymentValues {
+  token: string
+  issuerId: string
+  paymentMethodId: string
+  installments: number
+  payer: Pick<Payer, 'email' | 'identification'>
+}

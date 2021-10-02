@@ -13,7 +13,7 @@ export const CartShippingForm = () => {
     e.preventDefault()
 
     await loadShippingOptions(zipCode).catch((error) =>
-      console.log(error.response)
+      console.log('error', error.response)
     )
   }
 

@@ -29,7 +29,7 @@ export const ForgotPasswordForm = () => {
       .post('/auth/forgot-password', values)
       .then(({ data }) => {
         if (data.error) {
-          console.log('Error', data)
+          console.log('error', data)
         } else {
           setIsSubmitSuccessful(true)
         }
