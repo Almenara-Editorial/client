@@ -1,25 +1,20 @@
 import { RadioGroup } from '@/components/form'
 import { useCheckoutForm } from '@/contexts'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { CreditCardForm } from '../CreditCardForm'
 import { OtherPaymentsForm } from '../OtherPaymentsForm'
 import { Item, Thumbs } from './styles'
 
-// type PaymentFormValues = {
-//   zipCode: string
-//   street: string
-//   number: string
-//   info: string
-//   city: string
-// }
-
 export function PaymentForm() {
-  const { paymentMethods } = useCheckoutForm()
-  const [activeForm, setActiveForm] = useState<string>('')
+  const { paymentMethods, formValues } = useCheckoutForm()
+  const [activeForm, setActiveForm] = useState<string>(
+    formValues.payment?.id || ''
+  )
 
   return (
     <>
       <RadioGroup
+        defaultValue={activeForm}
         onChange={setActiveForm}
         radios={[
           {
@@ -51,7 +46,10 @@ export function PaymentForm() {
             content:
               activeForm === payment.id ? (
                 <Item>
-                  <OtherPaymentsForm />
+                  <OtherPaymentsForm
+                    paymentId={payment.id}
+                    paymentTypeId={payment.paymentTypeId}
+                  />
                 </Item>
               ) : null,
             value: payment.id

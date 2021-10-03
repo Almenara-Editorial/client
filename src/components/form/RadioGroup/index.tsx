@@ -24,13 +24,19 @@ export type RadioGroupProps = Omit<
 > & {
   label?: string
   error?: string
+  defaultValue?: string
   radios: RadioModel[]
   onChange: (value: RadioModel['value']) => void
 }
 
 const RadioGroupFn: ForwardRefRenderFunction<HTMLDivElement, RadioGroupProps> =
-  ({ label, radios, error, onChange }, ref) => {
-    const [radioValue, setRadioValue] = useState(radios[0]?.value)
+  (
+    { label, radios, defaultValue = radios[0]?.value, error, onChange },
+    ref
+  ) => {
+    const [radioValue, setRadioValue] = useState(
+      defaultValue || radios[0].value
+    )
 
     useEffect(() => {
       onChange && onChange(radioValue)

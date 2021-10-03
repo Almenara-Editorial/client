@@ -8,28 +8,21 @@ import { StepsButtons } from '../StepsButtons'
 import { Fields } from './styles'
 import { schema } from './schema'
 import { yupResolver } from '@hookform/resolvers/yup'
-
-type ShippingFormValues = {
-  cep: string
-  street: string
-  number: string
-  info: string
-  city: string
-  state: string
-}
+import { ShippingValues } from '@/models'
 
 export function ShippingForm() {
-  const formMethods = useForm<ShippingFormValues>({
-    resolver: yupResolver(schema)
+  const { nextStep, updateFormValues, formValues } = useCheckoutForm()
+  const formMethods = useForm<ShippingValues>({
+    resolver: yupResolver(schema),
+    defaultValues: formValues.shipping
   })
   const [isLoading, setIsLoading] = useState(false)
   const { watch, setValue, setError } = formMethods
-  const { nextStep } = useCheckoutForm()
   const cepFieldValue = watch('cep')
 
-  async function onSubmit(values: ShippingFormValues) {
+  async function onSubmit(values: ShippingValues) {
+    updateFormValues('shipping', values)
     nextStep()
-    console.log('shippingForm', values)
   }
 
   useEffect(() => {
@@ -41,6 +34,9 @@ export function ShippingForm() {
           setValue('street', address.street, { shouldValidate: true })
           setValue('city', address.city, { shouldValidate: true })
           setValue('state', address.state, { shouldValidate: true })
+          setValue('neighborhood', address.neighborhood, {
+            shouldValidate: true
+          })
         })
         .catch(() => {
           setError('cep', { message: 'CEP inválido.' })
@@ -64,6 +60,11 @@ export function ShippingForm() {
         <RHFTextField label="Número:" name="number" />
         <RHFTextField label="Complemento:" name="info" />
         <RHFTextField label="Cidade:" name="city" disabled={isLoading} />
+        <RHFTextField
+          label="Bairro:"
+          name="neighborhood"
+          disabled={isLoading}
+        />
         <RHFTextField label="Estado:" name="state" disabled={isLoading} />
       </Fields>
       <SectionTitle title="Opções de entrega:" />

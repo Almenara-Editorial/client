@@ -17,6 +17,7 @@ export type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   type?: 'text' | 'password' | 'search'
   error?: string
   isLoading?: boolean
+  allCaps?: boolean
   labelStyle?: 'dynamic' | 'static'
   mask?: string | string[]
 }
@@ -27,6 +28,7 @@ const TextFieldFn: ForwardRefRenderFunction<HTMLInputElement, TextFieldProps> =
       label,
       type = 'text',
       placeholder,
+      allCaps,
       onChange,
       mask,
       error,
@@ -58,7 +60,7 @@ const TextFieldFn: ForwardRefRenderFunction<HTMLInputElement, TextFieldProps> =
                 ? inputMask(e.target.value, mask)
                 : e.target.value
 
-              e.target.value = value
+              e.target.value = allCaps ? value.toUpperCase() : value
 
               onChange && onChange(e)
             }}

@@ -22,6 +22,9 @@ export const schema = yup
     securityCode: yup
       .string()
       .required(generateRequiredFieldMessage('Código de segurança')),
+    installments: yup
+      .string()
+      .required(generateRequiredFieldMessage('Número de parcelas')),
     identificationType: yup
       .string()
       .required(generateRequiredFieldMessage('Tipo de documento')),

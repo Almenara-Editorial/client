@@ -11,6 +11,7 @@ export const schema = yup
     info: yup.string(),
     city: yup.string().required(requiredMessage('Cidade')),
     state: yup.string().required(requiredMessage('Estado')),
-    shipping: yup.string().required(requiredMessage('Forma de envio'))
+    shipping: yup.string().required(requiredMessage('Forma de envio')),
+    neighborhood: yup.string().required(requiredMessage('Bairro'))
   })
   .required()

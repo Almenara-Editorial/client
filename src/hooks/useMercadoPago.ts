@@ -10,12 +10,12 @@ import {
 import { useEffect, useMemo, useState } from 'react'
 
 type MercadoPago = {
-  getIdentificationTypes: () => IdentificationType[]
+  getIdentificationTypes: () => Promise<IdentificationType[]>
   createCardToken: (params: GetCardTokenParams) => Promise<CardToken>
   getPaymentMethods: (
     params: GetPaymentMethodsParams
   ) => Promise<PaymentMethods>
-  getInstallments: (params: GetInstallmentsParams) => Installment[]
+  getInstallments: (params: GetInstallmentsParams) => Promise<Installment[]>
 }
 
 declare global {

@@ -1,11 +1,4 @@
-import {
-  SelectHTMLAttributes,
-  useEffect,
-  useState,
-  Fragment,
-  Ref,
-  useMemo
-} from 'react'
+import { SelectHTMLAttributes, useEffect, useState, Fragment, Ref } from 'react'
 import { Container, Button, Popover, Option } from './styles'
 import { Listbox } from '@headlessui/react'
 import { CaretDownSolid, Checkmark } from '@/components/icons'
@@ -21,6 +14,7 @@ export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   options: Option[]
   onChange?: (value: Option['value']) => void
   value?: Option['value']
+  disabledPlaceholder?: string
   error?: string
   label?: string
   innerRef?: Ref<HTMLButtonElement>
@@ -33,37 +27,37 @@ export const Select = ({
   innerRef,
   label,
   disabled,
+  disabledPlaceholder,
   error
 }: SelectProps) => {
-  const emptyOption: Option = useMemo(() => ({ text: '', value: '' }), [])
-  const [selectedOption, setSelectedOption] = useState(
-    options && options.length > 0 ? options[0] : emptyOption
-  )
+  const [selectedOption, setSelectedOption] = useState<Option>()
+
+  function handleChange(selected: Option) {
+    selected && setSelectedOption(selected)
+    onChange && selected && onChange(selected.value)
+  }
 
   useEffect(() => {
-    onChange && selectedOption && onChange(selectedOption.value),
-      [selectedOption]
-  }, [onChange, selectedOption])
+    // if (!options || options.length === 0) return setSelectedOption(emptyOption)
 
-  useEffect(() => {
-    if (!options || options.length === 0) return setSelectedOption(emptyOption)
-
-    if (!value) return setSelectedOption(options[0])
-
-    const selected = options.find((option) => option.value === value)
-    selected ? setSelectedOption(selected) : setSelectedOption(options[0])
-  }, [options, value, emptyOption])
+    const selected = options.find(
+      (option) => option.value.toString() === value?.toString()
+    )
+    selected && setSelectedOption(selected)
+  }, [options, value])
 
   return (
     <Listbox
       as={Container}
       value={selectedOption}
-      onChange={setSelectedOption}
+      onChange={handleChange}
       disabled={disabled}
     >
       {label && <Label>{label}</Label>}
       <Listbox.Button as={Button} data-disabled={disabled} ref={innerRef}>
-        {selectedOption.text}
+        {!disabled
+          ? selectedOption?.text || 'Selecione uma opção'
+          : disabledPlaceholder || ''}
         <i>
           <CaretDownSolid />
         </i>

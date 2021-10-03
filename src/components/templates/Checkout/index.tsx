@@ -1,11 +1,16 @@
 import { Steps } from '@/components/checkout'
 import { Sidebar } from '@/components/checkout'
 import { CheckoutFormProvider } from '@/contexts'
+import { Session } from 'next-auth'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { Container } from './styles'
 
-export function CheckoutTemplate() {
+export type CheckoutTemplateProps = {
+  session: Session | null
+}
+
+export function CheckoutTemplate({ session }: CheckoutTemplateProps) {
   const { query, replace } = useRouter()
 
   useEffect(() => {
@@ -15,7 +20,7 @@ export function CheckoutTemplate() {
   }, [query.step, replace])
 
   return (
-    <CheckoutFormProvider>
+    <CheckoutFormProvider session={session}>
       <Container>
         <Steps />
       </Container>

@@ -1,11 +1,11 @@
 import { FieldsRow, FieldsWrapper } from '@/components/form'
 import { RHFForm, RHFTextField } from '@/components/hook-form'
-import { Button } from '@/components/shared'
 import { useCheckoutForm } from '@/contexts'
 import { OtherPaymentsValues } from '@/models'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { IdentificationDocumentFields } from '../IdentificationDocumentFields'
+import { StepsButtons } from '../StepsButtons'
 import { schema } from './schema'
 import { Container } from './styles'
 
@@ -18,15 +18,25 @@ type OtherPaymentsFormValues = {
 }
 
 type OtherPaymentsFormProps = {
-  paymentMethodId: string
+  paymentTypeId: string
+  paymentId: string
 }
 
-export function OtherPaymentsForm({ paymentMethodId }: OtherPaymentsFormProps) {
+export function OtherPaymentsForm({
+  paymentTypeId,
+  paymentId
+}: OtherPaymentsFormProps) {
+  const { updateFormValues, formValues, nextStep } = useCheckoutForm()
   const formMethods = useForm<OtherPaymentsFormValues>({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
+    defaultValues: {
+      payerFirstName: formValues.payment?.payer.firstName,
+      payerLastName: formValues.payment?.payer.lastName,
+      identificationNumber: formValues.payment?.payer.identification.number,
+      identificationType: formValues.payment?.payer.identification.type,
+      payerEmail: formValues.payment?.payer.email
+    }
   })
-  const { updateFormValues } = useCheckoutForm()
-
   async function onSubmit(values: OtherPaymentsFormValues) {
     updateFormValues('payment', {
       payer: {
@@ -38,8 +48,11 @@ export function OtherPaymentsForm({ paymentMethodId }: OtherPaymentsFormProps) {
           type: values.identificationType
         }
       },
-      paymentMethodId: paymentMethodId
+      paymentTypeId: paymentTypeId,
+      id: paymentId
     } as OtherPaymentsValues)
+
+    nextStep()
   }
 
   return (
@@ -60,9 +73,7 @@ export function OtherPaymentsForm({ paymentMethodId }: OtherPaymentsFormProps) {
           </FieldsRow>
           <RHFTextField labelStyle="static" label="E-mail" name="payerEmail" />
           <IdentificationDocumentFields />
-          <Button type="submit" id="form-checkout__submit">
-            Continuar
-          </Button>
+          <StepsButtons />
         </FieldsWrapper>
       </RHFForm>
     </Container>

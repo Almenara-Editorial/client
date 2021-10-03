@@ -176,16 +176,3 @@ export interface Payer {
   identification: Identification
   address: Address
 }
-
-export interface OtherPaymentsValues {
-  paymentMethodId: string
-  payer: Payer
-}
-
-export interface CreditCardPaymentValues {
-  token: string
-  issuerId: string
-  paymentMethodId: string
-  installments: number
-  payer: Pick<Payer, 'email' | 'identification'>
-}

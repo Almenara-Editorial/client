@@ -1,5 +1,6 @@
-import { CreditCardPaymentValues, OtherPaymentsValues } from '@/models'
+import { CheckoutValues, Installment } from '@/models'
 import { loadPaymentMethods, PaymentMethods } from '@/services'
+import { Session } from 'next-auth'
 import { useRouter } from 'next/router'
 import {
   createContext,
@@ -18,13 +19,12 @@ type CheckoutFormContextData = {
     key: keyof CheckoutFormContextData['formValues'],
     value: CheckoutFormContextData['formValues'][typeof key]
   ) => void
-  formValues: {
-    address: string | undefined
-    shipping: string | undefined
-    payment: OtherPaymentsValues | CreditCardPaymentValues | undefined
-  }
+  formValues: CheckoutValues
+  session: Session | null
   currentStep: FormSteps
   paymentMethods: PaymentMethods
+  creditCardInstallments: Installment | null
+  setCreditCardInstallments: (installments: Installment | null) => void
   isLoading: {
     shipping: boolean
     payment: boolean
@@ -35,11 +35,15 @@ type CheckoutFormContextData = {
 
 type CheckoutFormProviderProps = {
   children: React.ReactNode
+  session: Session | null
 }
 
 export const CheckoutFormContext = createContext({} as CheckoutFormContextData)
 
-export function CheckoutFormProvider({ children }: CheckoutFormProviderProps) {
+export function CheckoutFormProvider({
+  children,
+  session
+}: CheckoutFormProviderProps) {
   const { query, push } = useRouter()
   const [isLoading, setIsLoading] = useState(() => ({
     payment: false,
@@ -48,6 +52,8 @@ export function CheckoutFormProvider({ children }: CheckoutFormProviderProps) {
   const [currentStep, setCurrentStep] = useState<FormSteps>(
     query.step?.toString() as FormSteps
   )
+  const [creditCardInstallments, setCreditCardInstallments] =
+    useState<Installment | null>(null)
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethods>({
     availableMethods: [],
     creditCards: []
@@ -111,10 +117,6 @@ export function CheckoutFormProvider({ children }: CheckoutFormProviderProps) {
     getAndSetPaymentMethods()
   }, [updateIsLoading])
 
-  useEffect(() => {
-    console.log({ formValues })
-  }, [formValues])
-
   return (
     <CheckoutFormContext.Provider
       value={{
@@ -124,7 +126,10 @@ export function CheckoutFormProvider({ children }: CheckoutFormProviderProps) {
         currentStep,
         prevStep,
         nextStep,
-        isLoading
+        isLoading,
+        creditCardInstallments,
+        setCreditCardInstallments,
+        session
       }}
     >
       {children}

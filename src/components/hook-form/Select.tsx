@@ -3,10 +3,19 @@ import { Select, SelectProps } from '../form'
 
 type RHFSelectProps = Omit<SelectProps, 'onChange'> & {
   name: string
+  onChange?: (value: unknown) => void
 }
 
-export function RHFSelect({ name, ...rest }: RHFSelectProps) {
+export function RHFSelect({ name, onChange, ...rest }: RHFSelectProps) {
   const { control } = useFormContext()
+
+  function handleChange(
+    value: unknown,
+    hookFormOnChange: (value: unknown) => void
+  ) {
+    hookFormOnChange(value)
+    onChange && onChange(value)
+  }
 
   return (
     <Controller
@@ -18,7 +27,7 @@ export function RHFSelect({ name, ...rest }: RHFSelectProps) {
       }) => (
         <Select
           onBlur={onBlur}
-          onChange={onChange}
+          onChange={(value) => handleChange(value, onChange)}
           value={value}
           error={error?.message}
           innerRef={ref}

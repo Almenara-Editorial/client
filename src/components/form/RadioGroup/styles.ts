@@ -8,7 +8,7 @@ export const Radios = styled.div`
   gap: 1.2rem;
 `
 
-export const Radio = styled.button`
+export const Radio = styled.button.attrs({ type: 'button' })`
   display: flex;
   padding: 2.4rem;
 
