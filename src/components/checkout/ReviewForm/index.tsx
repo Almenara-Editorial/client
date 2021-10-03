@@ -15,21 +15,24 @@ type ReviewFormValues = {
 export function ReviewForm() {
   const { products } = useCart()
   const formMethods = useForm<ReviewFormValues>()
+  const {
+    formState: { isSubmitting }
+  } = formMethods
   const { nextStep, updateFormValues, formValues, session } = useCheckoutForm()
   const { shipping, payment } = formValues
 
   async function onSubmit(values: ReviewFormValues) {
     updateFormValues('review', values)
-    console.log('reviewForm', formValues)
+
     await createOrder({
       order: formValues,
       token: session?.jwt as string,
       cart: products
     })
       .then((data) => {
-        alert(JSON.stringify(data))
+        console.log(data)
       })
-      .catch((error) => alert(JSON.stringify(error?.response?.data || error)))
+      .catch((error) => console.log(error))
 
     nextStep()
   }
@@ -68,7 +71,10 @@ export function ReviewForm() {
         <FieldsWrapper>
           <RHFTextArea label="Observações para o pedido:" name="comments" />
         </FieldsWrapper>
-        <StepsButtons />
+        <StepsButtons
+          nextStepButtonText="Confirmar pedido"
+          isLoadingNextStep={isSubmitting}
+        />
       </Container>
     </RHFForm>
   )

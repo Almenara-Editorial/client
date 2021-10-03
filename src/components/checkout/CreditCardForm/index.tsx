@@ -13,7 +13,11 @@ import { StepsButtons } from '../StepsButtons'
 import { schema } from './schema'
 import { Container } from './styles'
 
-export function CreditCardForm() {
+type CreditCardFormProps = {
+  paymentId: string
+}
+
+export function CreditCardForm({ paymentId }: CreditCardFormProps) {
   const {
     updateFormValues,
     formValues,
@@ -25,7 +29,11 @@ export function CreditCardForm() {
     resolver: yupResolver(schema),
     defaultValues: formValues.payment
   })
-  const { watch, setValue } = formMethods
+  const {
+    watch,
+    setValue,
+    formState: { isSubmitting }
+  } = formMethods
   const cardNumber = useDebounce(watch('cardNumber'), 800)
   const { totals } = useCart()
 
@@ -43,10 +51,14 @@ export function CreditCardForm() {
         identificationType: values.identificationType,
         identificationNumber: filterNumbers(values.identificationNumber)
       })
-      .catch((error) => console.log(error))
+      .catch((error) => console.log({ error }))
 
     !!cardToken &&
-      updateFormValues('payment', { ...values, token: cardToken.id })
+      updateFormValues('payment', {
+        ...values,
+        token: cardToken.id,
+        id: paymentId
+      })
     nextStep()
   }
 
@@ -155,7 +167,7 @@ export function CreditCardForm() {
             name="cardHolderEmail"
           />
           <IdentificationDocumentFields />
-          <StepsButtons />
+          <StepsButtons isLoadingNextStep={isSubmitting} />
         </FieldsWrapper>
       </RHFForm>
     </Container>

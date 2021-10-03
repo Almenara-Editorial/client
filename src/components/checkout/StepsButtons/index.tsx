@@ -4,9 +4,15 @@ import { Container } from './styles'
 
 type StepsButtonsProps = {
   onClickNext?: () => void
+  isLoadingNextStep?: boolean
+  nextStepButtonText?: string
 }
 
-export const StepsButtons = ({ onClickNext }: StepsButtonsProps) => {
+export const StepsButtons = ({
+  onClickNext,
+  isLoadingNextStep,
+  nextStepButtonText = 'Continuar'
+}: StepsButtonsProps) => {
   const { prevStep } = useCheckoutForm()
 
   return (
@@ -27,8 +33,9 @@ export const StepsButtons = ({ onClickNext }: StepsButtonsProps) => {
           size="rg-full"
           type={onClickNext ? 'button' : 'submit'}
           onClick={onClickNext}
+          isLoading={isLoadingNextStep}
         >
-          Continuar
+          {nextStepButtonText}
         </Button>
       </div>
     </Container>

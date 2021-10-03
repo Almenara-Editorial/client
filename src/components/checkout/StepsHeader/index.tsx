@@ -5,6 +5,8 @@ import { Container } from './styles'
 export const StepsHeader = () => {
   const { currentStep } = useCheckoutForm()
 
+  if (currentStep === 'success') return null
+
   return (
     <Container>
       <StepsHeaderItem

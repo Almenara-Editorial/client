@@ -2,6 +2,7 @@ import { useCheckoutForm } from '@/contexts'
 import { PaymentForm } from '../PaymentForm'
 import { ReviewForm } from '../ReviewForm'
 import { ShippingForm } from '../ShippingForm'
+import { Success } from '../Success'
 import { Container } from './styles'
 
 export const StepsForms = () => {
@@ -12,6 +13,7 @@ export const StepsForms = () => {
       {currentStep === 'shipping' && <ShippingForm />}
       {currentStep === 'payment' && <PaymentForm />}
       {currentStep === 'review' && <ReviewForm />}
+      {currentStep === 'success' && <Success />}
     </Container>
   )
 }

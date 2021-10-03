@@ -27,14 +27,15 @@ export function OtherPaymentsForm({
   paymentId
 }: OtherPaymentsFormProps) {
   const { updateFormValues, formValues, nextStep } = useCheckoutForm()
+
   const formMethods = useForm<OtherPaymentsFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
-      payerFirstName: formValues.payment?.payer.firstName,
-      payerLastName: formValues.payment?.payer.lastName,
-      identificationNumber: formValues.payment?.payer.identification.number,
-      identificationType: formValues.payment?.payer.identification.type,
-      payerEmail: formValues.payment?.payer.email
+      payerFirstName: formValues.payment?.payer?.firstName,
+      payerLastName: formValues.payment?.payer?.lastName,
+      identificationNumber: formValues.payment?.payer?.identification.number,
+      identificationType: formValues.payment?.payer?.identification.type,
+      payerEmail: formValues.payment?.payer?.email
     }
   })
   async function onSubmit(values: OtherPaymentsFormValues) {

@@ -21,15 +21,15 @@ export async function createOrder({ order, token, cart }: CreateOrderValues) {
         installments: order.payment?.installments,
         payer: {
           email: order.payment?.cardHolderEmail || order.payment?.payer.email,
-          firstName: order.payment?.payer.firstName || '',
-          lastName: order.payment?.payer.lastName || '',
+          firstName: order.payment?.payer?.firstName || '',
+          lastName: order.payment?.payer?.lastName || '',
           identification: {
             type:
               order.payment?.identificationType ||
-              order.payment?.payer.identification.type,
+              order.payment?.payer?.identification.type,
             number:
               order.payment?.identificationNumber ||
-              order.payment?.payer.identification.number
+              order.payment?.payer?.identification.number
           },
           address: {
             zipCode: order.shipping.cep,

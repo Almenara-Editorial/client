@@ -1,4 +1,6 @@
 export function filterNumbers(string: string) {
+  if (!string) return ''
+
   return string.replace(/\D+/g, '')
 }
 

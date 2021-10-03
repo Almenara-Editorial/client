@@ -10,14 +10,16 @@ import {
   useState
 } from 'react'
 
-const formSteps = ['shipping', 'payment', 'review']
+const formSteps = ['shipping', 'payment', 'review', 'success']
 
-type FormSteps = 'shipping' | 'payment' | 'review' | undefined
+type FormSteps = 'shipping' | 'payment' | 'review' | 'success' | undefined
 
 type CheckoutFormContextData = {
   updateFormValues: (
     key: keyof CheckoutFormContextData['formValues'],
-    value: CheckoutFormContextData['formValues'][typeof key]
+    value:
+      | CheckoutFormContextData['formValues'][keyof CheckoutFormContextData['formValues']]
+      | null
   ) => void
   formValues: CheckoutValues
   session: Session | null
@@ -64,7 +66,7 @@ export function CheckoutFormProvider({
   const updateFormValues = useCallback(
     (
       key: keyof CheckoutFormContextData['formValues'],
-      value: CheckoutFormContextData['formValues'][typeof key]
+      value: CheckoutFormContextData['formValues'][typeof key] | null
     ) => {
       setFormValues(
         (state) =>

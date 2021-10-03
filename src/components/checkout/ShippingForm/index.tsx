@@ -1,14 +1,14 @@
 import { RHFForm, RHFTextField, RHFRadioGroup } from '@/components/hook-form'
 import { useCheckoutForm } from '@/contexts'
 import { getAddressByCep } from '@/services'
+import { ShippingValues } from '@/models'
+import { FieldsRow, FieldsWrapper } from '@/components/form'
+import { SectionTitle, StepsButtons } from '@/components/checkout'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { SectionTitle } from '../SectionTitle'
-import { StepsButtons } from '../StepsButtons'
-import { Fields } from './styles'
 import { schema } from './schema'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { ShippingValues } from '@/models'
+import { filterNumbers } from '@/utils'
 
 export function ShippingForm() {
   const { nextStep, updateFormValues, formValues } = useCheckoutForm()
@@ -47,26 +47,37 @@ export function ShippingForm() {
     }
 
     cepFieldValue &&
-      cepFieldValue.length === 8 &&
+      filterNumbers(cepFieldValue)?.length === 8 &&
       handleCepChange(cepFieldValue)
   }, [cepFieldValue, setError, setValue])
 
   return (
     <RHFForm {...formMethods} onSubmit={onSubmit}>
       <SectionTitle title="Endereço de entrega:" buttonText="Editar" />
-      <Fields>
-        <RHFTextField label="CEP:" name="cep" disabled={isLoading} />
-        <RHFTextField label="Rua:" name="street" disabled={isLoading} />
-        <RHFTextField label="Número:" name="number" />
-        <RHFTextField label="Complemento:" name="info" />
-        <RHFTextField label="Cidade:" name="city" disabled={isLoading} />
-        <RHFTextField
-          label="Bairro:"
-          name="neighborhood"
-          disabled={isLoading}
-        />
+      <FieldsWrapper>
+        <FieldsRow>
+          <RHFTextField
+            label="CEP:"
+            name="cep"
+            disabled={isLoading}
+            mask="99999-999"
+          />
+          <RHFTextField label="Rua:" name="street" disabled={isLoading} />
+        </FieldsRow>
+        <FieldsRow>
+          <RHFTextField label="Número:" name="number" />
+          <RHFTextField label="Complemento:" name="info" />
+        </FieldsRow>
+        <FieldsRow>
+          <RHFTextField label="Cidade:" name="city" disabled={isLoading} />
+          <RHFTextField
+            label="Bairro:"
+            name="neighborhood"
+            disabled={isLoading}
+          />
+        </FieldsRow>
         <RHFTextField label="Estado:" name="state" disabled={isLoading} />
-      </Fields>
+      </FieldsWrapper>
       <SectionTitle title="Opções de entrega:" />
       <RHFRadioGroup
         name="shipping"
