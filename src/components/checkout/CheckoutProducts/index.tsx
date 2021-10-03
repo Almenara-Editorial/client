@@ -1,11 +1,13 @@
 import { CustomScrollbar } from '@/components/shared/CustomScrollbar'
-import { useCart } from '@/contexts'
+import { CartProductModel } from '@/models'
 import { CheckoutProductCard } from '../CheckoutProductCard'
 import { Container } from './styles'
 
-export const CheckoutProducts = () => {
-  const { products } = useCart()
+type CheckoutProductsProps = {
+  products: CartProductModel[]
+}
 
+export const CheckoutProducts = ({ products }: CheckoutProductsProps) => {
   return (
     <Container>
       <CustomScrollbar width="100%">

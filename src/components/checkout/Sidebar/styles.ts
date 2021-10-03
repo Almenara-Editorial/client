@@ -21,3 +21,20 @@ export const Title = styled.h2`
   margin-bottom: 2.4rem;
   font-family: var(--font-title);
 `
+export const OrderDetails = styled.div`
+  padding-inline: 5.6rem;
+  color: var(--color-neutral-500);
+  margin-bottom: 3.2rem;
+`
+
+export const Row = styled.div`
+  display: flex;
+  gap: 3.2rem;
+  justify-content: space-between;
+
+  font-size: var(--font-sm);
+
+  & + & {
+    margin-top: 1.8rem;
+  }
+`
