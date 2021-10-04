@@ -14,6 +14,13 @@ export enum ENUM_COMPONENTPAGESOCIAL_NAME {
   whatsapp = "whatsapp",
 }
 
+export enum ENUM_ORDER_STATUS {
+  Aprovado = "Aprovado",
+  Pendente = "Pendente",
+  Processando = "Processando",
+  Rejeitado = "Rejeitado",
+}
+
 export interface UsersPermissionsRegisterInput {
   username: string;
   email: string;

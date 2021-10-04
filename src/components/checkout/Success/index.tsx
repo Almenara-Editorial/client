@@ -51,13 +51,13 @@ export function Success() {
     return (
       <Container>
         <Title>
-          {capitalizeFirstLetter(createdOrder.user.username)}, obrigado por
+          {capitalizeFirstLetter(createdOrder.user?.username)}, obrigado por
           comprar conosco. Tenha uma boa leitura e volte sempre.
         </Title>
         <Body>
           <p>
             Os detalhes do pedido foram enviados para o email:{' '}
-            {createdOrder.user.email}
+            {createdOrder.user?.email}
           </p>
           <p>
             Você receberá todas as atualizações do pedido por email e sempre que

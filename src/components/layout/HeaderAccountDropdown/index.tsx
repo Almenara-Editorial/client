@@ -33,7 +33,7 @@ export const HeaderAccountDropdown = ({
             <Menu.Item key={link.url}>
               {() => (
                 <li>
-                  <DefaultLink as={Link} href="/account-settings">
+                  <DefaultLink as={Link} href="/conta/seus-pedidos">
                     {link.title}
                     {link.subtitle && <span>{link.subtitle}</span>}
                   </DefaultLink>

@@ -80,9 +80,8 @@ export interface Livro {
 
 export interface Order {
   id: number
-  user: User
+  user: User | null
   created_at: Date
-  updated_at: Date
   cardBrand?: string
   cardLastFour?: string
   total: string
@@ -93,4 +92,11 @@ export interface Order {
     documentUrl: string
     lastFour: string
   }
+}
+
+export type OrderModel = {
+  id: string
+  createdAt: string
+  status: string
+  total: string
 }

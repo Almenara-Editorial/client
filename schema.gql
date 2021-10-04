@@ -928,7 +928,6 @@ type Order {
   status: ENUM_ORDER_STATUS
   comments: String
   books: [ComponentOrderOrderProduct]
-  livros(sort: String, limit: Int, start: Int, where: JSON): [Livro!]!
 }
 
 type OrderConnection {
@@ -1001,7 +1000,6 @@ type OrderConnectionComments {
 
 input OrderInput {
   user: ID
-  livros: [ID]
   cardBrand: String
   cardLastFour: String
   total: String
@@ -1014,7 +1012,6 @@ input OrderInput {
 
 input editOrderInput {
   user: ID
-  livros: [ID]
   cardBrand: String
   cardLastFour: String
   total: String
