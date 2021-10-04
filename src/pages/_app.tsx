@@ -31,7 +31,7 @@ function App({ Component, pageProps }: AppProps) {
       <Provider session={pageProps.session}>
         <CartProvider>
           <Head>
-            <title>Loja Almenara Editorial</title>
+            <title>Almenara Editorial - Loja</title>
             <link rel="shortcut icon" href="/img/icon-512.png" />
             <link rel="apple-touch-icon" href="/img/icon-512.png" />
           </Head>
