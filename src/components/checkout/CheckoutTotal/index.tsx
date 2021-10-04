@@ -1,21 +1,23 @@
 import { Hr } from '@/components/shared'
-import { useCart } from '@/contexts'
-import { CheckoutTotalItem } from '..'
-import { CheckoutTotalSum } from '../CheckoutTotalSum'
+import { CartTotalModel } from '@/models'
+import { CheckoutTotalItem, CheckoutTotalSum } from '..'
 import { Container } from './styles'
 
-export const CheckoutTotal = () => {
-  const { totals, cartItems } = useCart()
+type CheckoutTotalProps = {
+  totals: CartTotalModel
+  itemsLength: number
+}
 
+export const CheckoutTotal = ({ itemsLength, totals }: CheckoutTotalProps) => {
   return (
     <Container>
       <CheckoutTotalItem
-        title={`Subtotal (${cartItems?.length} itens)`}
+        title={`Subtotal (${itemsLength} itens)`}
         price={totals.products}
       />
       <CheckoutTotalItem title="Frete" price={totals.shipping} />
       <Hr space="lg" />
-      <CheckoutTotalSum />
+      <CheckoutTotalSum total={totals.total} />
     </Container>
   )
 }

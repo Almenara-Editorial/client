@@ -4,7 +4,7 @@ export type ProductModel = {
   slug: string
   price: number
   stock: number
-  imageSrc: string
+  imageSrc: string | undefined
   description: string
   particulars: string
 }

@@ -22,14 +22,14 @@ export const Anchor = styled.a.attrs<AnchorProps>(
   text-decoration: underline;
   font-weight: var(--body-bold);
 
-  color: var(--link-color);
+  color: var(--link-color) !important;
   background: none;
   border: 0;
 
   cursor: pointer;
 
   &:hover {
-    color: var(--link-color-hover);
+    color: var(--link-color-hover) !important;
     transform: translateY(-0.2rem);
   }
 

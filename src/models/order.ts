@@ -86,5 +86,11 @@ export interface Order {
   cardBrand?: string
   cardLastFour?: string
   total: string
-  livros: Livro[]
+  books: ({ book: Livro } & { quantity: number })[]
+  payment: {
+    id: string
+    status: string
+    documentUrl: string
+    lastFour: string
+  }
 }

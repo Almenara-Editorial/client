@@ -24,6 +24,7 @@ type CartContextData = {
   shippingOptions: ShippingOptionModel[]
   products: CartProductModel[]
   totals: CartTotalModel
+  cartLength: number
   addProductToCart: (item: CartItemModel) => void
   removeProductFromCart: (id: string) => void
   resetCart: () => void
@@ -148,6 +149,7 @@ export function CartProvider({ children }: CartProviderProps) {
       value={{
         cartItems,
         products,
+        cartLength: cartItems?.length || 0,
         totals,
         addProductToCart,
         removeProductFromCart,

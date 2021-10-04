@@ -1,14 +1,15 @@
-import { useCart } from '@/contexts'
 import { formatToCurrency } from '@/utils'
 import { Container } from './styles'
 
-export const CheckoutTotalSum = () => {
-  const { totals } = useCart()
+type CheckoutTotalSumProps = {
+  total: number
+}
 
+export const CheckoutTotalSum = ({ total }: CheckoutTotalSumProps) => {
   return (
     <Container>
       <div>Total</div>
-      <div>{formatToCurrency(totals.total)}</div>
+      <div>{formatToCurrency(total)}</div>
     </Container>
   )
 }

@@ -1,5 +1,6 @@
 import { FieldsWrapper } from '@/components/form'
 import { RHFForm, RHFTextArea } from '@/components/hook-form'
+import { PaymentCard, PaymentCardId } from '@/components/shared'
 import { useCart, useCheckoutForm } from '@/contexts'
 import { createOrder } from '@/services'
 import { useForm } from 'react-hook-form'
@@ -18,7 +19,14 @@ export function ReviewForm() {
   const {
     formState: { isSubmitting }
   } = formMethods
-  const { nextStep, updateFormValues, formValues, session } = useCheckoutForm()
+  const {
+    nextStep,
+    updateFormValues,
+    formValues,
+    session,
+    setCreatedOrder,
+    setCreateOrderError
+  } = useCheckoutForm()
   const { shipping, payment } = formValues
 
   async function onSubmit(values: ReviewFormValues) {
@@ -29,12 +37,15 @@ export function ReviewForm() {
       token: session?.jwt as string,
       cart: products
     })
-      .then((data) => {
-        console.log(data)
+      .then((order) => {
+        setCreateOrderError(null)
+        setCreatedOrder(order)
+        nextStep()
       })
-      .catch((error) => console.log(error))
-
-    nextStep()
+      .catch((error) => {
+        setCreatedOrder(null)
+        setCreateOrderError(error.response?.data || error.message || error)
+      })
   }
 
   return (
@@ -60,8 +71,10 @@ export function ReviewForm() {
               title="Pagamento:"
               content={
                 <>
-                  <div>{payment?.id}</div>
-                  <div>**** **** **** {payment?.cardNumber?.slice(-4)}</div>
+                  <PaymentCard
+                    paymentId={(payment?.id as PaymentCardId) || 'other'}
+                    lastFour={payment?.cardNumber?.slice(-4)}
+                  />
                   <div>{payment?.installmentsText}</div>
                 </>
               }

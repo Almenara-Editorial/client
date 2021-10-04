@@ -20,6 +20,7 @@ export type CreditCardPaymentValues = {
   id: string
   cardExpiration: string
   cardNumber: string
+  lastFour: string
   cardHolderEmail: string
   installments: number
   installmentsText: string
@@ -34,6 +35,18 @@ export type CreditCardPaymentValues = {
   token: string
   payer: Payer
 }
+
+export type OrderCreditCardPaymentValues = Pick<
+  CreditCardPaymentValues,
+  | 'token'
+  | 'installments'
+  | 'installmentsText'
+  | 'id'
+  | 'issuerId'
+  | 'identificationNumber'
+  | 'identificationType'
+  | 'paymentTypeId'
+> & { lastFour: string }
 
 export type CheckoutReviewValues = {
   comments?: string

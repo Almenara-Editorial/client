@@ -35,12 +35,14 @@ export const CartDropdownProduct = ({ product }: CartDropdownProductProps) => {
   return (
     <Container data-removing={isRemoving}>
       <Thumbnail>
-        <Image
-          src={product.imageSrc}
-          width="80"
-          height="117"
-          objectFit="contain"
-        />
+        {product.imageSrc && (
+          <Image
+            src={product.imageSrc}
+            width="80"
+            height="117"
+            objectFit="contain"
+          />
+        )}
       </Thumbnail>
       <Details>
         <ProductName>{product.name}</ProductName>

@@ -1,4 +1,5 @@
 import { CheckoutValues, Installment } from '@/models'
+import { Order } from '@/models/order'
 import { loadPaymentMethods, PaymentMethods } from '@/services'
 import { Session } from 'next-auth'
 import { useRouter } from 'next/router'
@@ -27,6 +28,10 @@ type CheckoutFormContextData = {
   paymentMethods: PaymentMethods
   creditCardInstallments: Installment | null
   setCreditCardInstallments: (installments: Installment | null) => void
+  createdOrder: Order | null | undefined
+  setCreatedOrder: (order: Order | null) => void
+  createOrderError: string | null | undefined
+  setCreateOrderError: (error: string | null) => void
   isLoading: {
     shipping: boolean
     payment: boolean
@@ -54,6 +59,8 @@ export function CheckoutFormProvider({
   const [currentStep, setCurrentStep] = useState<FormSteps>(
     query.step?.toString() as FormSteps
   )
+  const [createdOrder, setCreatedOrder] = useState<Order | null>()
+  const [createOrderError, setCreateOrderError] = useState<string | null>()
   const [creditCardInstallments, setCreditCardInstallments] =
     useState<Installment | null>(null)
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethods>({
@@ -131,7 +138,11 @@ export function CheckoutFormProvider({
         isLoading,
         creditCardInstallments,
         setCreditCardInstallments,
-        session
+        session,
+        createdOrder,
+        setCreatedOrder,
+        createOrderError,
+        setCreateOrderError
       }}
     >
       {children}

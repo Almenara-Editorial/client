@@ -19,7 +19,7 @@ export const CheckoutProductCard = ({ product }: CheckoutProductCardProps) => (
         <ProductCardPrice
           muted
           quantity={product.quantity}
-          price={product.quantity}
+          price={product.price}
         />
 
         <ProductCardPrice price={product.price * product.quantity} />

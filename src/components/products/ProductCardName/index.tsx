@@ -1,3 +1,4 @@
+import { capitalizeFirstLetter } from '@/utils'
 import { CSSProperties } from 'styled-components'
 import { Container } from './styles'
 
@@ -12,5 +13,5 @@ export function ProductCardName({
 }: ProductCardNameProps) {
   const style = { '--text-align': textAlign } as CSSProperties
 
-  return <Container style={style}>{name}</Container>
+  return <Container style={style}>{capitalizeFirstLetter(name)}</Container>
 }

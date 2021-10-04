@@ -10,6 +10,7 @@ import {
 import { Container, Bottom, QuantityBuy } from './styles'
 import { useCart } from '@/contexts'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 export type SingleProductBuyPanelProps = Pick<
   SingleProductModel,
@@ -25,6 +26,7 @@ export const SingleProductBuyPanel = ({
 }: SingleProductBuyPanelProps) => {
   const { addProductToCart } = useCart()
   const [quantity, setQuantity] = useState(1)
+  const { push } = useRouter()
 
   function handleQuantityChange(value: number) {
     setQuantity(value)
@@ -32,6 +34,7 @@ export const SingleProductBuyPanel = ({
 
   function handleAddProductToCart() {
     addProductToCart({ id, quantity })
+    push('/carrinho')
   }
 
   return (

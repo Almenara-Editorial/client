@@ -14,7 +14,13 @@ export const Body = styled.div`
   line-height: 1.8;
   margin-bottom: 3.2rem;
 
-  p + p {
+  * + * {
     margin-top: 2.4rem;
   }
+`
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3.2rem;
 `

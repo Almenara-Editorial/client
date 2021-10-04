@@ -9,13 +9,13 @@ import { Item, Thumbs } from './styles'
 export function PaymentForm() {
   const { paymentMethods, formValues, updateFormValues } = useCheckoutForm()
   const [activeForm, setActiveForm] = useState<string>(
-    formValues.payment?.id || ''
+    formValues.payment?.paymentTypeId || ''
   )
 
   useEffect(() => {
-    activeForm !== formValues?.payment?.id &&
+    activeForm !== formValues?.payment?.paymentTypeId &&
       updateFormValues('payment', { id: activeForm } as CreditCardPaymentValues)
-  }, [activeForm, formValues?.payment?.id, updateFormValues])
+  }, [activeForm, formValues?.payment?.paymentTypeId, updateFormValues])
 
   return (
     <RadioGroup
@@ -36,7 +36,7 @@ export function PaymentForm() {
           content:
             activeForm === 'credit_card' ? (
               <Item>
-                <CreditCardForm paymentId="credit_card" />
+                <CreditCardForm paymentTypeId="credit_card" />
               </Item>
             ) : null,
           value: 'credit_card'
@@ -53,7 +53,7 @@ export function PaymentForm() {
               <Item>
                 <OtherPaymentsForm
                   paymentId={payment.id}
-                  paymentTypeId={payment.paymentTypeId}
+                  paymentTypeId={payment.id}
                 />
               </Item>
             ) : null,

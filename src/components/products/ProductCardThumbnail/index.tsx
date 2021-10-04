@@ -1,7 +1,9 @@
 import { Image, ImageProps } from '@/components/shared'
 import { Container } from './styles'
 
-type ProductCardThumbnailProps = Pick<ImageProps, 'src' | 'aria-label'>
+type ProductCardThumbnailProps = Pick<ImageProps, 'aria-label'> & {
+  src?: string | undefined
+}
 
 export function ProductCardThumbnail({
   src,
@@ -9,13 +11,15 @@ export function ProductCardThumbnail({
 }: ProductCardThumbnailProps) {
   return (
     <Container>
-      <Image
-        src={src as string}
-        width={149}
-        height={213}
-        objectFit="contain"
-        aria-label={ariaLabel}
-      />
+      {src && (
+        <Image
+          src={src as string}
+          width={149}
+          height={213}
+          objectFit="contain"
+          aria-label={ariaLabel}
+        />
+      )}
     </Container>
   )
 }

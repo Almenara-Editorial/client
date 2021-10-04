@@ -3,10 +3,14 @@ import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { RHFSelect } from '@/components/hook-form/Select'
 import { useCart, useCheckoutForm } from '@/contexts'
 import { useDebounce } from '@/hooks'
-import { CreditCardPaymentValues, PaymentMethods } from '@/models'
+import {
+  CreditCardPaymentValues,
+  OrderCreditCardPaymentValues,
+  PaymentMethods
+} from '@/models'
 import { filterNumbers } from '@/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { IdentificationDocumentFields } from '..'
 import { StepsButtons } from '../StepsButtons'
@@ -14,10 +18,10 @@ import { schema } from './schema'
 import { Container } from './styles'
 
 type CreditCardFormProps = {
-  paymentId: string
+  paymentTypeId: string
 }
 
-export function CreditCardForm({ paymentId }: CreditCardFormProps) {
+export function CreditCardForm({ paymentTypeId }: CreditCardFormProps) {
   const {
     updateFormValues,
     formValues,
@@ -36,6 +40,7 @@ export function CreditCardForm({ paymentId }: CreditCardFormProps) {
   } = formMethods
   const cardNumber = useDebounce(watch('cardNumber'), 800)
   const { totals } = useCart()
+  const isFirstRender = useRef(true)
 
   async function onSubmit(values: CreditCardPaymentValues) {
     const [cardExpirationMonth, cardExpirationYear] =
@@ -57,18 +62,16 @@ export function CreditCardForm({ paymentId }: CreditCardFormProps) {
       updateFormValues('payment', {
         ...values,
         token: cardToken.id,
-        id: paymentId
-      })
+        lastFour: cardToken.last_four_digits
+      } as CreditCardPaymentValues)
     nextStep()
   }
 
   useEffect(() => {
+    if (isFirstRender.current) return
+
     if (!cardNumber || cardNumber?.length < 15) {
       return setCreditCardInstallments(null)
-    }
-
-    if (cardNumber === formValues?.payment?.cardNumber) {
-      return
     }
 
     setCreditCardInstallments(null)
@@ -82,6 +85,7 @@ export function CreditCardForm({ paymentId }: CreditCardFormProps) {
       if (paymentMethods.results[0]) {
         setValue('paymentTypeId', paymentMethods.results[0].payment_type_id)
         setValue('issuerId', paymentMethods.results[0].issuer.id.toString())
+        setValue('id', paymentMethods.results[0].id)
 
         const newInstallments = await window.mp.getInstallments({
           amount: totals.total.toString(),
@@ -95,13 +99,11 @@ export function CreditCardForm({ paymentId }: CreditCardFormProps) {
     }
 
     fetchPaymentMethodsAndInstallments()
-  }, [
-    cardNumber,
-    totals.total,
-    setValue,
-    setCreditCardInstallments,
-    formValues?.payment?.cardNumber
-  ])
+  }, [cardNumber, totals.total, setValue, setCreditCardInstallments])
+
+  useEffect(() => {
+    isFirstRender.current = false
+  }, [])
 
   return (
     <Container>

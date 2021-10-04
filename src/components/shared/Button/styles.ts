@@ -88,7 +88,7 @@ export const Container = styled.button.attrs<ButtonProps>(
     --button-color: var(--color-primary-500);
     --button-color-hover: var(--color-primary-400);
     --button-color-focus: var(--color-primary-500);
-    --button-color-loading: var(--color-primary-500);
+    --button-color-loading: var(--color-primary-300);
     --button-text-color-loading: var(--color-white);
     --button-color-focus-outline: var(--color-primary-200);
     --button-color-active: var(--color-primary-500);
