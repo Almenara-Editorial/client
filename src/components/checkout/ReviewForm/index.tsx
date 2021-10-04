@@ -32,7 +32,7 @@ export function ReviewForm() {
   async function onSubmit(values: ReviewFormValues) {
     updateFormValues('review', values)
 
-    await createOrder({
+    return await createOrder({
       order: formValues,
       token: session?.jwt as string,
       cart: products

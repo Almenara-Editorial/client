@@ -14,7 +14,6 @@ export async function createOrder({
   token,
   cart
 }: CreateOrderValues): Promise<Order> {
-  console.log({ order })
   const { data } = await api.post(
     '/orders',
     {

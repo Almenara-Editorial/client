@@ -2,6 +2,7 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ApolloProvider } from '@apollo/client'
 import { useRouter } from 'next/router'
+import NextNprogress from 'nextjs-progressbar'
 
 import GlobalStyles from '@/styles/global'
 import { useApollo } from '@/utils/apollo'
@@ -12,6 +13,7 @@ import { Provider } from 'next-auth/client'
 
 import '@/styles/react-slick.css'
 import { MercadoPago } from '@/components/shared'
+import { colors } from '@/styles/colors'
 
 function App({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps?.initialApolloState)
@@ -19,6 +21,13 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={client}>
+      <NextNprogress
+        color={colors['blue-500']}
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={4}
+        showOnShallow={true}
+      />
       <Provider session={pageProps.session}>
         <CartProvider>
           <Head>
