@@ -27,6 +27,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await protectedRoutes(context)
   const apolloClient = initializeApollo({}, session)
 
+  if (!session)
+    return {
+      props: {}
+    }
+
   const { data } = await apolloClient.query<QueryOrders, QueryOrdersVariables>({
     query: QUERY_ORDERS,
     variables: {

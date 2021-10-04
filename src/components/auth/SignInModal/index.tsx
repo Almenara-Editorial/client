@@ -1,7 +1,7 @@
 import { UseModalData } from '@/hooks'
-import { Link, Modal } from '@/components/shared'
+import { Modal } from '@/components/shared'
 import { SignInModalHeader, SignInForm } from '..'
-import { Container, NewAccountLink } from './styles'
+import { Container } from './styles'
 import { useSession } from 'next-auth/client'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -27,9 +27,6 @@ export const SignInModal = (props: SignInModalProps) => {
     <Modal as={Container} {...props}>
       <SignInModalHeader />
       <SignInForm />
-      <NewAccountLink>
-        Não tem uma conta? <Link href="/criar-conta">Crie agora.</Link>
-      </NewAccountLink>
     </Modal>
   )
 }

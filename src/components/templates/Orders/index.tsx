@@ -9,7 +9,7 @@ type OrdersTemplateProps = {
 export function OrdersTemplate({ orders }: OrdersTemplateProps) {
   return (
     <Container>
-      {orders.map((order) => (
+      {orders?.map((order) => (
         <Order key={order.id} order={order} />
       ))}
     </Container>

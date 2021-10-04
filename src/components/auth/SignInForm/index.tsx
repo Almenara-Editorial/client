@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { ErrorMessage } from '@/components/form/ErrorMessage'
 import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { useRouter } from 'next/router'
+import { NewAccountLink } from '../SignInModal/styles'
 
 type SignInFormValues = {
   email: string
@@ -29,11 +30,18 @@ export const SignInForm = () => {
       ...values,
       redirect: false
     })
-      .then(() => {
+      .then((data) => {
+        if (data?.error) {
+          setSignInError('Credenciais inválidas, tente novamente.')
+
+          return
+        }
+
         if (query.callbackUrl) return push(query.callbackUrl.toString())
         pathname === '/entrar' && push('/')
       })
       .catch((error) => {
+        console.log(error)
         setSignInError(error.response.data.message[0].messages[0].id)
       })
     setIsSigningIn(false)
@@ -55,6 +63,9 @@ export const SignInForm = () => {
           {signInError && <ErrorMessage error={signInError} />}
         </div>
       </Fields>
+      <NewAccountLink>
+        Não tem uma conta? <Link href="/criar-conta">Crie agora.</Link>
+      </NewAccountLink>
     </RHFForm>
   )
 }

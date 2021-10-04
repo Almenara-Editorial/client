@@ -8,5 +8,6 @@ export const Container = styled.div`
   padding: 4.8rem;
 `
 export const NewAccountLink = styled.div`
+  padding-block: 2.4rem;
   text-align: center;
 `
