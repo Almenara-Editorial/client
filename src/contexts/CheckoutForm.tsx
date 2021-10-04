@@ -89,7 +89,7 @@ export function CheckoutFormProvider({
     const currentStepIndex = formSteps.indexOf(currentStep)
     const prevStepName = formSteps[currentStepIndex - 1]
 
-    prevStepName && push(`/checkout?step=${prevStepName}`)
+    prevStepName ? push(`/checkout?step=${prevStepName}`) : push('/produtos')
   }, [currentStep, push])
 
   const nextStep = useCallback(() => {

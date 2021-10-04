@@ -7,6 +7,7 @@ import { schema } from './schema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ErrorMessage } from '@/components/form/ErrorMessage'
 import { RHFForm, RHFTextField } from '@/components/hook-form'
+import { useRouter } from 'next/router'
 
 type SignInFormValues = {
   email: string
@@ -17,17 +18,24 @@ export const SignInForm = () => {
   const [signInError, setSignInError] = useState<string | null>(null)
   const [isSigningIn, setIsSigningIn] = useState(false)
   const [session] = useSession()
+  const { pathname, query, push } = useRouter()
   const formMethods = useForm<SignInFormValues>({
     resolver: yupResolver(schema)
   })
+
   async function onSubmit(values: SignInFormValues) {
     setIsSigningIn(true)
     await signIn('credentials', {
       ...values,
       redirect: false
-    }).catch((error) => {
-      setSignInError(error.response.data.message[0].messages[0].id)
     })
+      .then(() => {
+        if (query.callbackUrl) return push(query.callbackUrl.toString())
+        pathname === '/entrar' && push('/')
+      })
+      .catch((error) => {
+        setSignInError(error.response.data.message[0].messages[0].id)
+      })
     setIsSigningIn(false)
   }
 

@@ -8,20 +8,13 @@ export default function SignIn() {
   return <SignInTemplate />
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const apolloClient = initializeApollo()
-  const where = parseQueryToWhere(context.query)
 
   const { data } = await apolloClient.query<QueryBooks, QueryBooksVariables>({
     query: QUERY_BOOKS,
     variables: {
-      limit: 12,
-      where,
-      recommended: {
-        categorias: {
-          slug: ['recomendado']
-        }
-      }
+      limit: 1
     }
   })
 
