@@ -32,6 +32,7 @@ export interface QueryHome_home_productGroup_livros {
   name: string;
   slug: string;
   price: number;
+  promoPrice: number | null;
   image: QueryHome_home_productGroup_livros_image | null;
 }
 

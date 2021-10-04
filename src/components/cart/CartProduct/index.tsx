@@ -28,7 +28,10 @@ export const CartProduct = ({ product }: CartProductProps) => {
       <ProductCardThumbnail src={product.imageSrc} />
       <Info>
         <ProductCardName name={product.name} />
-        <ProductCardPrice price={product.price} />
+        <ProductCardPrice
+          price={product.price}
+          promoPrice={product.promoPrice}
+        />
       </Info>
       <Actions>
         <NumberField min={1} onChange={handleChange} value={product.quantity} />

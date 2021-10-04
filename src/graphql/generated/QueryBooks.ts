@@ -21,6 +21,7 @@ export interface QueryBooks_recommended {
   name: string;
   slug: string;
   price: number;
+  promoPrice: number | null;
   image: QueryBooks_recommended_image | null;
 }
 
@@ -36,6 +37,7 @@ export interface QueryBooks_livros {
   name: string;
   slug: string;
   price: number;
+  promoPrice: number | null;
   image: QueryBooks_livros_image | null;
 }
 

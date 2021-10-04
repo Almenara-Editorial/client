@@ -21,6 +21,7 @@ export interface QueryBookBySlug_livros {
   name: string;
   slug: string;
   price: number;
+  promoPrice: number | null;
   stock: number;
   particulars: string | null;
   description: string;

@@ -17,6 +17,7 @@ export function productMapper(products: QueryBookBySlug_livros[]) {
     id: product.id,
     name: product.name,
     price: product.price,
+    promoPrice: product.promoPrice,
     slug: product.slug,
     imageSrc: getImageUrl(product.image?.src),
     stock: product.stock,
@@ -34,6 +35,7 @@ export function productsMapper(
     id: product.id,
     name: product.name,
     price: product.price,
+    promoPrice: product.promoPrice,
     slug: product.slug,
     imageSrc:
       getImageUrl(product.image?.formats.small?.url || product.image?.src) ||
@@ -52,6 +54,7 @@ export function cartProductsMapper(
     id: product.id,
     name: product.name,
     price: product.price,
+    promoPrice: product.promoPrice,
     slug: product.slug,
     imageSrc:
       getImageUrl(product.image?.formats.small?.url || product.image?.src) ||
@@ -73,6 +76,7 @@ export function productsGroupsMapper(
       id: product.id,
       name: product.name,
       price: product.price,
+      promoPrice: product.promoPrice,
       slug: product.slug,
       imageSrc:
         getImageUrl(product.image?.formats.small?.url || product.image?.src) ||

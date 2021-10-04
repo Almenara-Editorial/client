@@ -69,7 +69,7 @@ export interface Livro {
   autor?: string
   stock: number
   active: boolean
-  promoPrice?: string
+  promoPrice?: number
   sku?: string
   gtin?: string
   ncm?: string

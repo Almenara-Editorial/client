@@ -37,7 +37,7 @@ export function Sidebar() {
             id: book.id.toString(),
             imageSrc: getImageUrl(book.image?.url),
             name: book.name,
-            price: book.price,
+            price: book.promoPrice || book.price,
             quantity,
             slug: book.slug
           }))}

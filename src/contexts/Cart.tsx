@@ -133,7 +133,9 @@ export function CartProvider({ children }: CartProviderProps) {
 
   useEffect(() => {
     const productsTotal = products
-      .map((product) => product.price * product.quantity)
+      .map(
+        (product) => (product.promoPrice || product.price) * product.quantity
+      )
       .reduce((total, curr) => curr + total, 0)
     const shippingTotal = 0
 

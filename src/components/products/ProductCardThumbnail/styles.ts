@@ -1,3 +1,4 @@
+import { Container as ProductCard } from '@/components/products/ProductCard/styles'
 import { Container as CartProductsGroup } from '@/components/cart/CartProductsGroup/styles'
 import { Container as CheckoutProductCard } from '@/components/checkout/CheckoutProductCard/styles'
 import { Container as RecommendedProductCard } from '@/components/products/RecommendedProductCard/styles'
@@ -9,6 +10,8 @@ export const Container = styled.div`
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
+  transition: all 0.1s;
+  will-change: transform;
 
   ${RecommendedProductCard} & {
     width: 14rem;
@@ -25,5 +28,9 @@ export const Container = styled.div`
     width: 9rem;
     height: 12rem;
     padding: 0 1rem;
+  }
+
+  ${ProductCard}:hover & {
+    transform: scale(1.02);
   }
 `

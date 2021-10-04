@@ -1,4 +1,5 @@
 import { NumberField } from '@/components/form'
+import { ProductCardPrice } from '@/components/products'
 import { Anchor, Image } from '@/components/shared'
 import { useCart } from '@/contexts'
 import { CartProductModel } from '@/models'
@@ -46,7 +47,10 @@ export const CartDropdownProduct = ({ product }: CartDropdownProductProps) => {
       </Thumbnail>
       <Details>
         <ProductName>{product.name}</ProductName>
-        <ProductPrice>{formatToCurrency(product.price)}</ProductPrice>
+        <ProductCardPrice
+          price={product.price}
+          promoPrice={product.promoPrice}
+        />
         <NumberField value={product.quantity} onChange={handleChange} />
         <div>
           <Anchor

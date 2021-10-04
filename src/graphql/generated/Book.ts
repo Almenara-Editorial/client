@@ -19,5 +19,6 @@ export interface Book {
   name: string;
   slug: string;
   price: number;
+  promoPrice: number | null;
   image: Book_image | null;
 }

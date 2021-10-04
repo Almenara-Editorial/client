@@ -6,6 +6,7 @@ export const BOOK_FRAGMENT = gql`
     name
     slug
     price
+    promoPrice
     image {
       src: url
       formats

@@ -19,6 +19,7 @@ export function ProductTemplate({ product }: ProductTemplateProps) {
           id={product.id}
           name={product.name}
           price={product.price}
+          promoPrice={product.promoPrice}
           stock={product.stock}
         />
       </Main>

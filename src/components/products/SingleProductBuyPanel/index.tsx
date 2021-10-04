@@ -14,7 +14,7 @@ import { useRouter } from 'next/router'
 
 export type SingleProductBuyPanelProps = Pick<
   SingleProductModel,
-  'id' | 'name' | 'price' | 'stock' | 'installments'
+  'id' | 'name' | 'price' | 'promoPrice' | 'stock' | 'installments'
 >
 
 export const SingleProductBuyPanel = ({
@@ -22,7 +22,8 @@ export const SingleProductBuyPanel = ({
   name,
   price,
   installments,
-  stock
+  stock,
+  promoPrice
 }: SingleProductBuyPanelProps) => {
   const { addProductToCart } = useCart()
   const [quantity, setQuantity] = useState(1)
@@ -42,7 +43,11 @@ export const SingleProductBuyPanel = ({
       <SingleProductTitle>{name}</SingleProductTitle>
       <Hr />
       <Bottom>
-        <SingleProductPrice price={price} installments={installments} />
+        <SingleProductPrice
+          price={price}
+          promoPrice={promoPrice}
+          installments={installments}
+        />
         <SelectAddressButton />
         <QuantityBuy>
           <NumberField
