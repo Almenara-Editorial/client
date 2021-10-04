@@ -62,7 +62,7 @@ export function Success() {
           <p>
             Você receberá todas as atualizações do pedido por email e sempre que
             quiser pode consultar todos os detalhes em{' '}
-            <Link href="/conta/pedidos" size="sm">
+            <Link href="/conta/seus-pedidos" size="sm">
               Conta &gt; Seus Pedidos
             </Link>
             .
@@ -71,7 +71,7 @@ export function Success() {
             {createdOrder.payment.documentUrl && (
               <DownloadButton
                 url={createdOrder.payment.documentUrl}
-                text="Fazer o download do boleto para pagamento"
+                text="Fazer o download do documento para pagamento"
               />
             )}
           </div>
