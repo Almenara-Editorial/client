@@ -74,7 +74,7 @@ export function productsGroupsMapper(
       price: product.price,
       promoPrice: product.promoPrice,
       slug: product.slug,
-      imageSrc: product.image?.map((image) => getImageUrl(image?.src))
+      imageSrc: product.image?.map((image) => getImageUrl(image?.src)) || []
     })),
     ...(group?.link && {
       seeMore: {
