@@ -63,7 +63,7 @@ export function cartProductsMapper(
 export function productsGroupsMapper(
   productsGroups: (QueryHome_home_productGroup | null)[] | null | undefined
 ): ProductsCardsGroupModel[] {
-  if (!productsGroups?.length) return []
+  if (!productsGroups?.length || productsGroups.length === 0) return []
 
   return productsGroups?.map((group) => ({
     id: group!.id,
