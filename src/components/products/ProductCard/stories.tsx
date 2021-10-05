@@ -13,7 +13,7 @@ export const Basic: Story<ProductCardProps> = (args) => (
 Basic.args = {
   product: {
     id: '1',
-    imageSrc: '/img/example/book1.png',
+    imageSrc: ['/img/example/book1.png'],
     name: 'Box 2 - Cartas de Cristo Vol. 1 e Cartas de Cristo Vol. 2',
     price: 30,
     slug: 'cartas-de-cristo'

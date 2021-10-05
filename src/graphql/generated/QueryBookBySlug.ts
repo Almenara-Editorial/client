@@ -25,7 +25,7 @@ export interface QueryBookBySlug_livros {
   stock: number;
   particulars: string | null;
   description: string;
-  image: QueryBookBySlug_livros_image | null;
+  image: QueryBookBySlug_livros_image[];
 }
 
 export interface QueryBookBySlug_rodape_links_link {

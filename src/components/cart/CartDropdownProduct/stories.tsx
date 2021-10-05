@@ -15,7 +15,7 @@ Basic.args = {
     id: '1',
     name: 'Box 2 - Cartas de Cristo Vol. 1 e Cartas de Cristo Vol. 2',
     price: 30,
-    imageSrc: 'img/example/book1.png',
+    imageSrc: ['img/example/book1.png'],
     quantity: 2,
     slug: 'ahsush'
   }

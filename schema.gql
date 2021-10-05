@@ -680,7 +680,6 @@ type Livro {
   description: String!
   particulars: String
   price: Float!
-  image: UploadFile
   autor: Autor
   stock: Int!
   dimensions: ComponentProductDimensions
@@ -690,6 +689,7 @@ type Livro {
   gtin: String
   ncm: String
   seoDescription: String
+  image(sort: String, limit: Int, start: Int, where: JSON): [UploadFile!]!
   categorias(sort: String, limit: Int, start: Int, where: JSON): [Categorias!]!
 }
 
@@ -741,7 +741,6 @@ type LivroGroupBy {
   description: [LivroConnectionDescription]
   particulars: [LivroConnectionParticulars]
   price: [LivroConnectionPrice]
-  image: [LivroConnectionImage]
   autor: [LivroConnectionAutor]
   stock: [LivroConnectionStock]
   dimensions: [LivroConnectionDimensions]
@@ -790,11 +789,6 @@ type LivroConnectionParticulars {
 
 type LivroConnectionPrice {
   key: Float
-  connection: LivroConnection
-}
-
-type LivroConnectionImage {
-  key: ID
   connection: LivroConnection
 }
 
@@ -849,7 +843,7 @@ input LivroInput {
   description: String!
   particulars: String
   price: Float
-  image: ID
+  image: [ID]
   autor: ID
   categorias: [ID]
   stock: Int
@@ -870,7 +864,7 @@ input editLivroInput {
   description: String
   particulars: String
   price: Float
-  image: ID
+  image: [ID]
   autor: ID
   categorias: [ID]
   stock: Int
@@ -928,6 +922,8 @@ type Order {
   status: ENUM_ORDER_STATUS
   comments: String
   books: [ComponentOrderOrderProduct]
+  totalInCents: Int
+  shipping: ComponentOrderShippingAddress
 }
 
 type OrderConnection {
@@ -939,6 +935,26 @@ type OrderConnection {
 type OrderAggregator {
   count: Int
   totalCount: Int
+  sum: OrderAggregatorSum
+  avg: OrderAggregatorAvg
+  min: OrderAggregatorMin
+  max: OrderAggregatorMax
+}
+
+type OrderAggregatorSum {
+  totalInCents: Float
+}
+
+type OrderAggregatorAvg {
+  totalInCents: Float
+}
+
+type OrderAggregatorMin {
+  totalInCents: Float
+}
+
+type OrderAggregatorMax {
+  totalInCents: Float
 }
 
 type OrderGroupBy {
@@ -951,6 +967,8 @@ type OrderGroupBy {
   total: [OrderConnectionTotal]
   status: [OrderConnectionStatus]
   comments: [OrderConnectionComments]
+  totalInCents: [OrderConnectionTotalInCents]
+  shipping: [OrderConnectionShipping]
 }
 
 type OrderConnectionId {
@@ -998,6 +1016,16 @@ type OrderConnectionComments {
   connection: OrderConnection
 }
 
+type OrderConnectionTotalInCents {
+  key: Int
+  connection: OrderConnection
+}
+
+type OrderConnectionShipping {
+  key: ID
+  connection: OrderConnection
+}
+
 input OrderInput {
   user: ID
   cardBrand: String
@@ -1006,6 +1034,8 @@ input OrderInput {
   status: ENUM_ORDER_STATUS
   comments: String
   books: [ComponentOrderOrderProductInput]
+  totalInCents: Int
+  shipping: ComponentOrderShippingAddressInput
   created_by: ID
   updated_by: ID
 }
@@ -1018,6 +1048,8 @@ input editOrderInput {
   status: ENUM_ORDER_STATUS
   comments: String
   books: [editComponentOrderOrderProductInput]
+  totalInCents: Int
+  shipping: editComponentOrderShippingAddressInput
   created_by: ID
   updated_by: ID
 }
@@ -1966,6 +1998,38 @@ input editComponentOrderOrderProductInput {
   quantity: Int
 }
 
+type ComponentOrderShippingAddress {
+  id: ID!
+  street: String
+  zipCode: String
+  city: String
+  state: String
+  neighborhood: String
+  price: Float
+  method: String
+}
+
+input ComponentOrderShippingAddressInput {
+  street: String
+  zipCode: String
+  city: String
+  state: String
+  neighborhood: String
+  price: Float
+  method: String
+}
+
+input editComponentOrderShippingAddressInput {
+  id: ID
+  street: String
+  zipCode: String
+  city: String
+  state: String
+  neighborhood: String
+  price: Float
+  method: String
+}
+
 type ComponentPageHeaderLink {
   id: ID!
   name: String
@@ -2022,6 +2086,7 @@ enum ENUM_COMPONENTPAGESOCIAL_NAME {
   instagram
   whatsapp
   email
+  youtube
 }
 
 type ComponentPageSocial {
@@ -2064,7 +2129,7 @@ input editComponentProductDimensionInput {
   boxWeight: Float
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | AssinaturasNewletter | AssinaturasNewletterConnection | AssinaturasNewletterAggregator | AssinaturasNewletterGroupBy | AssinaturasNewletterConnectionId | AssinaturasNewletterConnectionCreated_at | AssinaturasNewletterConnectionUpdated_at | AssinaturasNewletterConnectionName | AssinaturasNewletterConnectionEmail | createAssinaturasNewletterPayload | updateAssinaturasNewletterPayload | deleteAssinaturasNewletterPayload | Autor | AutorConnection | AutorAggregator | AutorGroupBy | AutorConnectionId | AutorConnectionCreated_at | AutorConnectionUpdated_at | AutorConnectionName | createAutorPayload | updateAutorPayload | deleteAutorPayload | BannerHero | BannerHeroConnection | BannerHeroAggregator | BannerHeroGroupBy | BannerHeroConnectionId | BannerHeroConnectionCreated_at | BannerHeroConnectionUpdated_at | BannerHeroConnectionImage | BannerHeroConnectionUrl | createBannerHeroPayload | updateBannerHeroPayload | deleteBannerHeroPayload | BannerTopo | updateBannerTopoPayload | deleteBannerTopoPayload | Cabecalho | updateCabecalhoPayload | deleteCabecalhoPayload | Categorias | CategoriasConnection | CategoriasAggregator | CategoriasGroupBy | CategoriasConnectionId | CategoriasConnectionCreated_at | CategoriasConnectionUpdated_at | CategoriasConnectionName | CategoriasConnectionSlug | createCategoriaPayload | updateCategoriaPayload | deleteCategoriaPayload | Cupons | CuponsConnection | CuponsAggregator | CuponsAggregatorSum | CuponsAggregatorAvg | CuponsAggregatorMin | CuponsAggregatorMax | CuponsGroupBy | CuponsConnectionId | CuponsConnectionCreated_at | CuponsConnectionUpdated_at | CuponsConnectionCode | CuponsConnectionFreeShipping | CuponsConnectionPercentage | CuponsConnectionExpirationDate | CuponsConnectionIsActive | createCuponPayload | updateCuponPayload | deleteCuponPayload | Home | updateHomePayload | deleteHomePayload | Livro | LivroConnection | LivroAggregator | LivroAggregatorSum | LivroAggregatorAvg | LivroAggregatorMin | LivroAggregatorMax | LivroGroupBy | LivroConnectionId | LivroConnectionCreated_at | LivroConnectionUpdated_at | LivroConnectionName | LivroConnectionSlug | LivroConnectionDescription | LivroConnectionParticulars | LivroConnectionPrice | LivroConnectionImage | LivroConnectionAutor | LivroConnectionStock | LivroConnectionDimensions | LivroConnectionActive | LivroConnectionPromoPrice | LivroConnectionSku | LivroConnectionGtin | LivroConnectionNcm | LivroConnectionSeoDescription | createLivroPayload | updateLivroPayload | deleteLivroPayload | Order | OrderConnection | OrderAggregator | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionCardBrand | OrderConnectionCardLastFour | OrderConnectionTotal | OrderConnectionStatus | OrderConnectionComments | createOrderPayload | updateOrderPayload | deleteOrderPayload | Podcast | PodcastConnection | PodcastAggregator | PodcastGroupBy | PodcastConnectionId | PodcastConnectionCreated_at | PodcastConnectionUpdated_at | PodcastConnectionTitle | PodcastConnectionUrl | PodcastConnectionPublished_at | createPodcastPayload | updatePodcastPayload | deletePodcastPayload | PoliticaDePrivacidade | PoliticaDePrivacidadeConnection | PoliticaDePrivacidadeAggregator | PoliticaDePrivacidadeAggregatorSum | PoliticaDePrivacidadeAggregatorAvg | PoliticaDePrivacidadeAggregatorMin | PoliticaDePrivacidadeAggregatorMax | PoliticaDePrivacidadeGroupBy | PoliticaDePrivacidadeConnectionId | PoliticaDePrivacidadeConnectionCreated_at | PoliticaDePrivacidadeConnectionUpdated_at | PoliticaDePrivacidadeConnectionBody | PoliticaDePrivacidadeConnectionVersion | PoliticaDePrivacidadeConnectionPublished_at | createPoliticaDePrivacidadePayload | updatePoliticaDePrivacidadePayload | deletePoliticaDePrivacidadePayload | Rodape | updateRodapePayload | deleteRodapePayload | TermosDeUso | TermosDeUsoConnection | TermosDeUsoAggregator | TermosDeUsoAggregatorSum | TermosDeUsoAggregatorAvg | TermosDeUsoAggregatorMin | TermosDeUsoAggregatorMax | TermosDeUsoGroupBy | TermosDeUsoConnectionId | TermosDeUsoConnectionCreated_at | TermosDeUsoConnectionUpdated_at | TermosDeUsoConnectionBody | TermosDeUsoConnectionVersion | TermosDeUsoConnectionPublished_at | createTermosDeUsoPayload | updateTermosDeUsoPayload | deleteTermosDeUsoPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionPrivacyPolicy | UsersPermissionsUserConnectionTermsOfUse | createUserPayload | updateUserPayload | deleteUserPayload | ComponentHomeBanner | ComponentHomeProductGroup | ComponentOrderOrderProduct | ComponentPageHeaderLink | ComponentPageLinks | ComponentPageSocialLink | ComponentPageSocial | ComponentProductDimensions
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | AssinaturasNewletter | AssinaturasNewletterConnection | AssinaturasNewletterAggregator | AssinaturasNewletterGroupBy | AssinaturasNewletterConnectionId | AssinaturasNewletterConnectionCreated_at | AssinaturasNewletterConnectionUpdated_at | AssinaturasNewletterConnectionName | AssinaturasNewletterConnectionEmail | createAssinaturasNewletterPayload | updateAssinaturasNewletterPayload | deleteAssinaturasNewletterPayload | Autor | AutorConnection | AutorAggregator | AutorGroupBy | AutorConnectionId | AutorConnectionCreated_at | AutorConnectionUpdated_at | AutorConnectionName | createAutorPayload | updateAutorPayload | deleteAutorPayload | BannerHero | BannerHeroConnection | BannerHeroAggregator | BannerHeroGroupBy | BannerHeroConnectionId | BannerHeroConnectionCreated_at | BannerHeroConnectionUpdated_at | BannerHeroConnectionImage | BannerHeroConnectionUrl | createBannerHeroPayload | updateBannerHeroPayload | deleteBannerHeroPayload | BannerTopo | updateBannerTopoPayload | deleteBannerTopoPayload | Cabecalho | updateCabecalhoPayload | deleteCabecalhoPayload | Categorias | CategoriasConnection | CategoriasAggregator | CategoriasGroupBy | CategoriasConnectionId | CategoriasConnectionCreated_at | CategoriasConnectionUpdated_at | CategoriasConnectionName | CategoriasConnectionSlug | createCategoriaPayload | updateCategoriaPayload | deleteCategoriaPayload | Cupons | CuponsConnection | CuponsAggregator | CuponsAggregatorSum | CuponsAggregatorAvg | CuponsAggregatorMin | CuponsAggregatorMax | CuponsGroupBy | CuponsConnectionId | CuponsConnectionCreated_at | CuponsConnectionUpdated_at | CuponsConnectionCode | CuponsConnectionFreeShipping | CuponsConnectionPercentage | CuponsConnectionExpirationDate | CuponsConnectionIsActive | createCuponPayload | updateCuponPayload | deleteCuponPayload | Home | updateHomePayload | deleteHomePayload | Livro | LivroConnection | LivroAggregator | LivroAggregatorSum | LivroAggregatorAvg | LivroAggregatorMin | LivroAggregatorMax | LivroGroupBy | LivroConnectionId | LivroConnectionCreated_at | LivroConnectionUpdated_at | LivroConnectionName | LivroConnectionSlug | LivroConnectionDescription | LivroConnectionParticulars | LivroConnectionPrice | LivroConnectionAutor | LivroConnectionStock | LivroConnectionDimensions | LivroConnectionActive | LivroConnectionPromoPrice | LivroConnectionSku | LivroConnectionGtin | LivroConnectionNcm | LivroConnectionSeoDescription | createLivroPayload | updateLivroPayload | deleteLivroPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionCardBrand | OrderConnectionCardLastFour | OrderConnectionTotal | OrderConnectionStatus | OrderConnectionComments | OrderConnectionTotalInCents | OrderConnectionShipping | createOrderPayload | updateOrderPayload | deleteOrderPayload | Podcast | PodcastConnection | PodcastAggregator | PodcastGroupBy | PodcastConnectionId | PodcastConnectionCreated_at | PodcastConnectionUpdated_at | PodcastConnectionTitle | PodcastConnectionUrl | PodcastConnectionPublished_at | createPodcastPayload | updatePodcastPayload | deletePodcastPayload | PoliticaDePrivacidade | PoliticaDePrivacidadeConnection | PoliticaDePrivacidadeAggregator | PoliticaDePrivacidadeAggregatorSum | PoliticaDePrivacidadeAggregatorAvg | PoliticaDePrivacidadeAggregatorMin | PoliticaDePrivacidadeAggregatorMax | PoliticaDePrivacidadeGroupBy | PoliticaDePrivacidadeConnectionId | PoliticaDePrivacidadeConnectionCreated_at | PoliticaDePrivacidadeConnectionUpdated_at | PoliticaDePrivacidadeConnectionBody | PoliticaDePrivacidadeConnectionVersion | PoliticaDePrivacidadeConnectionPublished_at | createPoliticaDePrivacidadePayload | updatePoliticaDePrivacidadePayload | deletePoliticaDePrivacidadePayload | Rodape | updateRodapePayload | deleteRodapePayload | TermosDeUso | TermosDeUsoConnection | TermosDeUsoAggregator | TermosDeUsoAggregatorSum | TermosDeUsoAggregatorAvg | TermosDeUsoAggregatorMin | TermosDeUsoAggregatorMax | TermosDeUsoGroupBy | TermosDeUsoConnectionId | TermosDeUsoConnectionCreated_at | TermosDeUsoConnectionUpdated_at | TermosDeUsoConnectionBody | TermosDeUsoConnectionVersion | TermosDeUsoConnectionPublished_at | createTermosDeUsoPayload | updateTermosDeUsoPayload | deleteTermosDeUsoPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionPrivacyPolicy | UsersPermissionsUserConnectionTermsOfUse | createUserPayload | updateUserPayload | deleteUserPayload | ComponentHomeBanner | ComponentHomeProductGroup | ComponentOrderOrderProduct | ComponentOrderShippingAddress | ComponentPageHeaderLink | ComponentPageLinks | ComponentPageSocialLink | ComponentPageSocial | ComponentProductDimensions
 
 input InputID {
   id: ID!

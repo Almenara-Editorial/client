@@ -75,7 +75,7 @@ export interface Livro {
   ncm?: string
   seoDescription?: string
   dimensions: Dimensions
-  image: Image
+  image: Image[]
 }
 
 export interface Order {

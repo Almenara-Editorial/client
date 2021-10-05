@@ -21,8 +21,9 @@ export interface QueryOrders_orders_books_book {
   name: string;
   slug: string;
   price: number;
+  stock: number;
   promoPrice: number | null;
-  image: QueryOrders_orders_books_book_image | null;
+  image: QueryOrders_orders_books_book_image[];
 }
 
 export interface QueryOrders_orders_books {

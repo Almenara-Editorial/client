@@ -29,7 +29,7 @@ export const ProductCard = ({
     />
     <Link href={`/produtos/${product.slug}`}>
       {offPercentage && <OffPercentage>-{offPercentage}%</OffPercentage>}
-      <ProductCardThumbnail src={product.imageSrc || '/'} />
+      <ProductCardThumbnail src={product.imageSrc[0]} />
       <Text>
         <ProductCardName name={product.name} />
         <ProductCardPrice

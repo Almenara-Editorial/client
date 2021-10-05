@@ -12,6 +12,7 @@ export enum ENUM_COMPONENTPAGESOCIAL_NAME {
   facebook = "facebook",
   instagram = "instagram",
   whatsapp = "whatsapp",
+  youtube = "youtube",
 }
 
 export enum ENUM_ORDER_STATUS {

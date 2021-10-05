@@ -12,7 +12,7 @@ type CheckoutProductCardProps = {
 
 export const CheckoutProductCard = ({ product }: CheckoutProductCardProps) => (
   <Container>
-    <ProductCardThumbnail src={product.imageSrc} />
+    <ProductCardThumbnail src={product.imageSrc[0]} />
     <Infos>
       <ProductCardName name={product.name} textAlign="left" />
       <div className="price">

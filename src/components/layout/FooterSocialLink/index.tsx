@@ -1,5 +1,11 @@
 import { Container } from './styles'
-import { Email, Facebook, Instagram, Whatsapp } from '@/components/icons'
+import {
+  Email,
+  Facebook,
+  Instagram,
+  Whatsapp,
+  Youtube
+} from '@/components/icons'
 import { SocialModel } from '@/models'
 import { Link } from '@/components/shared'
 
@@ -11,6 +17,7 @@ const iconMapper = {
   facebook: Facebook,
   whatsapp: Whatsapp,
   instagram: Instagram,
+  youtube: Youtube,
   email: Email
 }
 

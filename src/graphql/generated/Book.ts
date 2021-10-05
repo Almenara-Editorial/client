@@ -19,6 +19,7 @@ export interface Book {
   name: string;
   slug: string;
   price: number;
+  stock: number;
   promoPrice: number | null;
-  image: Book_image | null;
+  image: Book_image[];
 }

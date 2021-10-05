@@ -38,7 +38,7 @@ export const CartDropdownProduct = ({ product }: CartDropdownProductProps) => {
       <Thumbnail>
         {product.imageSrc && (
           <Image
-            src={product.imageSrc}
+            src={product.imageSrc[0] as string}
             width="80"
             height="117"
             objectFit="contain"

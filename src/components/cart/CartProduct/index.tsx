@@ -25,7 +25,7 @@ export const CartProduct = ({ product }: CartProductProps) => {
 
   return (
     <Container>
-      <ProductCardThumbnail src={product.imageSrc} />
+      <ProductCardThumbnail src={product.imageSrc[0]} />
       <Info>
         <ProductCardName name={product.name} />
         <ProductCardPrice

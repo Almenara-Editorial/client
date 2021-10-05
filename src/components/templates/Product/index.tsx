@@ -14,7 +14,7 @@ export function ProductTemplate({ product }: ProductTemplateProps) {
   return (
     <Container>
       <Main>
-        <SingleProductImage src={product.imageSrc} />
+        <SingleProductImage images={product.imageSrc} />
         <SingleProductBuyPanel
           id={product.id}
           name={product.name}

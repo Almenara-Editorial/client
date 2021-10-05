@@ -5,7 +5,7 @@ export type ProductModel = {
   promoPrice?: number | null
   price: number
   stock: number
-  imageSrc: string | undefined
+  imageSrc: (string | undefined)[]
   description: string
   particulars: string
 }

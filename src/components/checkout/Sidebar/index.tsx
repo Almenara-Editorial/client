@@ -35,7 +35,7 @@ export function Sidebar() {
         <CheckoutProducts
           products={createdOrder?.books.map(({ quantity, book }) => ({
             id: book.id.toString(),
-            imageSrc: getImageUrl(book.image?.url),
+            imageSrc: [getImageUrl(book.image[0]?.url)],
             name: book.name,
             price: book.promoPrice || book.price,
             quantity,

@@ -16,7 +16,7 @@ export const RecommendedProductCard = ({
 }: RecommendedProductCardProps) => {
   return (
     <Container>
-      <ProductCardThumbnail src={product.imageSrc} />
+      <ProductCardThumbnail src={product.imageSrc[0]} />
       <Text>
         <ProductCardName name={product.name} textAlign="left" />
         <ProductCardPrice price={product.price} />

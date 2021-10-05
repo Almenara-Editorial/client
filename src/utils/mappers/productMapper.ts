@@ -19,7 +19,7 @@ export function productMapper(products: QueryBookBySlug_livros[]) {
     price: product.price,
     promoPrice: product.promoPrice,
     slug: product.slug,
-    imageSrc: getImageUrl(product.image?.src),
+    imageSrc: product.image?.map((image) => getImageUrl(image?.src)),
     stock: product.stock,
     description: product.description,
     particulars: product.particulars
@@ -37,10 +37,8 @@ export function productsMapper(
     price: product.price,
     promoPrice: product.promoPrice,
     slug: product.slug,
-    imageSrc:
-      getImageUrl(product.image?.formats.small?.url || product.image?.src) ||
-      '#',
-    stock: 1000
+    imageSrc: product.image?.map((image) => getImageUrl(image?.src)),
+    stock: product.stock
   }))
 }
 
@@ -56,10 +54,8 @@ export function cartProductsMapper(
     price: product.price,
     promoPrice: product.promoPrice,
     slug: product.slug,
-    imageSrc:
-      getImageUrl(product.image?.formats.small?.url || product.image?.src) ||
-      '#',
-    stock: 1000,
+    imageSrc: product.image?.map((image) => getImageUrl(image?.src)),
+    stock: product.stock,
     quantity: cartItems.find((item) => item.id === product.id)!.quantity
   }))
 }
@@ -78,9 +74,7 @@ export function productsGroupsMapper(
       price: product.price,
       promoPrice: product.promoPrice,
       slug: product.slug,
-      imageSrc:
-        getImageUrl(product.image?.formats.small?.url || product.image?.src) ||
-        '#'
+      imageSrc: product.image?.map((image) => getImageUrl(image?.src))
     })),
     ...(group?.link && {
       seeMore: {
