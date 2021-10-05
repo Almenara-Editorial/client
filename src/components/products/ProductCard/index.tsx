@@ -1,6 +1,6 @@
 import { Container, OffPercentage, Text } from './styles'
 import { ProductCardPromoBadge } from '../ProductCardPromoBadge'
-import { Button, ButtonProps, Link } from '@/components/shared'
+import { Anchor, Button, ButtonProps, Link } from '@/components/shared'
 import { ProductCardModel } from '@/models'
 import {
   ProductCardName,
@@ -29,20 +29,32 @@ export const ProductCard = ({
     />
     <Link href={`/produtos/${product.slug}`}>
       {offPercentage && <OffPercentage>-{offPercentage}%</OffPercentage>}
-      <ProductCardThumbnail src={product.imageSrc[0]} />
+      <ProductCardThumbnail
+        muted={!product.stock || product.stock === 0}
+        src={product.imageSrc[0]}
+      />
       <Text>
         <ProductCardName name={product.name} />
-        <ProductCardPrice
-          promoPrice={product.promoPrice}
-          price={product.price}
-        />
-        {withBuyButton && (
-          <Button size="sm-full" {...buyButtonProps}>
-            Comprar agora
-          </Button>
+        {product?.stock > 0 && (
+          <>
+            <ProductCardPrice
+              promoPrice={product.promoPrice}
+              price={product.price}
+            />
+            {withBuyButton && (
+              <Button size="sm-full" {...buyButtonProps}>
+                Comprar agora
+              </Button>
+            )}
+          </>
         )}
       </Text>
     </Link>
+    {(!product.stock || product.stock === 0) && (
+      <Anchor size="sm" align="center" color="primary">
+        Avise-me quando chegar
+      </Anchor>
+    )}
   </Container>
 )
 

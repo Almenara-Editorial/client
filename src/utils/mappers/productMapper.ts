@@ -72,6 +72,7 @@ export function productsGroupsMapper(
       id: product.id,
       name: product.name,
       price: product.price,
+      stock: product.stock,
       promoPrice: product.promoPrice,
       slug: product.slug,
       imageSrc: product.image?.map((image) => getImageUrl(image?.src)) || []

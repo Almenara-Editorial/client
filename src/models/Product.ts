@@ -24,7 +24,7 @@ export type ProductsCardsGroupModel = {
 
 export type ProductCardModel = Pick<
   ProductModel,
-  'id' | 'name' | 'price' | 'promoPrice' | 'slug' | 'imageSrc'
+  'id' | 'name' | 'price' | 'promoPrice' | 'slug' | 'imageSrc' | 'stock'
 >
 export type SingleProductModel = ProductModel & {
   installments?: string

@@ -7,13 +7,17 @@ import styled from 'styled-components'
 export type AnchorProps = HTMLAttributes<HTMLAnchorElement> & {
   size?: 'sm' | 'rg' | 'lg' | 'xl'
   color?: 'neutral' | 'tertiary' | 'light' | 'primary'
+  align?: 'center' | 'right' | 'left'
 }
 
 export const Anchor = styled.a.attrs<AnchorProps>(
-  ({ size = 'rg', color = 'neutral' }) => ({
+  ({ size = 'rg', color = 'neutral', align = 'left' }) => ({
     'data-color': color,
     tabIndex: '0',
-    style: { '--link-size': `var(--font-${size})` }
+    style: {
+      '--link-size': `var(--font-${size})`,
+      textAlign: align
+    }
   })
 )<AnchorProps>`
   display: inline-block;

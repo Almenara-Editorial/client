@@ -50,15 +50,23 @@ export const SingleProductBuyPanel = ({
         />
         <SelectAddressButton />
         <QuantityBuy>
-          <NumberField
-            value={quantity}
-            min={1}
-            onChange={handleQuantityChange}
-            max={stock}
-          />
-          <Button size="rg-wide" onClick={handleAddProductToCart}>
-            Comprar
-          </Button>
+          {stock > 0 ? (
+            <>
+              <NumberField
+                value={quantity}
+                min={1}
+                onChange={handleQuantityChange}
+                max={stock}
+              />
+              <Button size="rg-wide" onClick={handleAddProductToCart}>
+                Comprar
+              </Button>
+            </>
+          ) : (
+            <Button size="rg-wide" outline>
+              Avise-me quando chegar
+            </Button>
+          )}
         </QuantityBuy>
         <ButtonWishlist isInWishlist={false} />
       </Bottom>

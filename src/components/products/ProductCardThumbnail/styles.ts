@@ -13,6 +13,28 @@ export const Container = styled.div`
   transition: all 0.1s;
   will-change: transform;
 
+  &[data-muted='true'] {
+    img {
+      filter: saturate(0);
+    }
+
+    &:before {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      content: 'Indisponível';
+      text-align: center;
+      padding: 0.2rem;
+      font-weight: var(--body-bold);
+      font-size: var(--font-sm);
+      width: 100%;
+      transform: translateY(-50%);
+      color: var(--color-white);
+      z-index: var(--layer-base);
+      background-color: var(--color-secondary-500);
+    }
+  }
+
   ${RecommendedProductCard} & {
     width: 14rem;
     padding: 2.4rem;
