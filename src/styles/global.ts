@@ -149,6 +149,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: var(--color-text);
+    background-color: var(--color-white);
   }
 
   .sr-only {

@@ -27,7 +27,7 @@ export const Popup = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: var(--layer-modal);
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.6);
 
   animation: ${popupAnimation} 0.2s ease;
 

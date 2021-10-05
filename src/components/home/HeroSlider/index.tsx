@@ -37,7 +37,7 @@ export const HeroSlider = ({ images }: HeroSliderProps) => {
 
   return (
     <Container>
-      <Slider {...sliderSettings}>
+      <Slider {...sliderSettings} targetIndex={0}>
         {images?.map((image) => (
           <HeroSliderImage key={image.url} image={image} />
         ))}

@@ -1,5 +1,5 @@
 import { Close } from '@/components/icons'
-import { CloseButton, Image } from '@/components/shared'
+import { Image } from '@/components/shared'
 import { SliderButton } from '@/components/shared'
 import { useEffect, useState } from 'react'
 import ReactDom from 'react-dom'
