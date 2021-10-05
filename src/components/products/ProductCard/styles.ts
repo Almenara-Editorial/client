@@ -6,6 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 21.2rem;
+  padding-block: 1.6rem;
 `
 
 export const OffPercentage = styled.span`

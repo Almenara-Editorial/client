@@ -12,4 +12,5 @@ export const Container = styled(Wrapper)`
 export const Products = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  padding-bottom: 2.4rem;
 `
