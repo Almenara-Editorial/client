@@ -10,4 +10,12 @@ export const Container = styled.div`
   p {
     font-size: 1.4rem;
   }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 16rem;
+    height: fit-content;
+    line-height: 0;
+  }
 `

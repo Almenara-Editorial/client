@@ -3,8 +3,9 @@ import * as React from 'react'
 export function Logo(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
-      width={150}
-      height={48}
+      width="1em"
+      height="0.4em"
+      viewBox="0 0 150 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}

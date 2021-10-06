@@ -3,7 +3,9 @@ import { Logo } from '@/components/layout'
 
 export const FooterCopyright = () => (
   <Container>
-    <Logo />
+    <div className="logo">
+      <Logo />
+    </div>
     <p>
       Almenara Editorial Eireli - CNPJ: 09.584.097/0001-00 © Todos os direitos
       reservados. 2021

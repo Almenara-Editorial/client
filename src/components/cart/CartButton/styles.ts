@@ -15,7 +15,7 @@ export const Container = styled.button`
 
   background: none;
   border: 0;
-  font-size: 2.4rem;
+  font-size: 3.2rem;
 
   cursor: pointer;
   transition: all 0.2s ease;
@@ -26,13 +26,13 @@ export const Container = styled.button`
 
   span {
     position: absolute;
-    bottom: 0.9rem;
+    bottom: 1.3rem;
     left: 50%;
     transform: translateX(-50%);
 
     color: var(--color-white);
 
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: var(--body-bold);
     animation: ${scaleAnimation} 0.2s;
   }

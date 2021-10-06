@@ -26,7 +26,7 @@ export const Header = ({ header }: HeaderProps) => {
   return (
     <Container>
       <Wrapper>
-        <div>
+        <div className="logo">
           <Link href="/" as="a">
             <Logo />
           </Link>

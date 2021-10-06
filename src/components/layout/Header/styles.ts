@@ -26,16 +26,16 @@ export const Wrapper = styled(DefaultWrapper)`
   align-items: center;
   gap: var(--space-xl);
 
-  > div:first-child {
-    flex: 5 0 54.3rem;
-
-    > a {
-      display: block;
-      width: fit-content;
-    }
-  }
-
   > form {
     width: 42.4rem;
+  }
+
+  .logo {
+    flex: 5 0 54.3rem;
+    display: flex;
+    align-items: center;
+    font-size: 16rem;
+    height: fit-content;
+    line-height: 0;
   }
 `
