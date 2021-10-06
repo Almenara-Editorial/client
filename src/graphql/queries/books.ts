@@ -1,10 +1,16 @@
 import { gql, QueryHookOptions, useQuery } from '@apollo/client'
-import { BOOK_FRAGMENT, FOOTER_FRAGMENT, CATEGORY_FRAGMENT } from '../fragments'
+import {
+  BOOK_FRAGMENT,
+  FOOTER_FRAGMENT,
+  CATEGORY_FRAGMENT,
+  HEADER_FRAGMENT
+} from '../fragments'
 import { QueryBooks, QueryBooksVariables } from '../generated/QueryBooks'
 
 export const QUERY_BOOKS = gql`
   ${BOOK_FRAGMENT}
   ${CATEGORY_FRAGMENT}
+  ${HEADER_FRAGMENT}
   ${FOOTER_FRAGMENT}
 
   query QueryBooks(
@@ -14,6 +20,9 @@ export const QUERY_BOOKS = gql`
     $sort: String
     $recommended: JSON
   ) {
+    cabecalho {
+      ...Header
+    }
     recommended: livros(where: $recommended) {
       ...Book
     }
@@ -29,8 +38,12 @@ export const QUERY_BOOKS = gql`
   }
 `
 export const QUERY_BOOK = gql`
+  ${HEADER_FRAGMENT}
   ${FOOTER_FRAGMENT}
   query QueryBookBySlug($slug: String) {
+    cabecalho {
+      ...Header
+    }
     livros(where: { slug: $slug }) {
       id
       name

@@ -9,6 +9,17 @@ import { ENUM_COMPONENTPAGESOCIAL_NAME } from "./globalTypes";
 // GraphQL query operation: QueryHome
 // ====================================================
 
+export interface QueryHome_cabecalho_links {
+  __typename: "ComponentPageHeaderLink";
+  name: string | null;
+  url: string | null;
+}
+
+export interface QueryHome_cabecalho {
+  __typename: "Cabecalho";
+  links: (QueryHome_cabecalho_links | null)[] | null;
+}
+
 export interface QueryHome_home_banner_image {
   __typename: "UploadFile";
   url: string;
@@ -84,6 +95,7 @@ export interface QueryHome_rodape {
 }
 
 export interface QueryHome {
+  cabecalho: QueryHome_cabecalho | null;
   home: QueryHome_home | null;
   rodape: QueryHome_rodape | null;
 }

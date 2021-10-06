@@ -375,20 +375,17 @@ type Cabecalho {
   id: ID!
   created_at: DateTime!
   updated_at: DateTime!
-  logo: UploadFile
-  headerLink: [ComponentPageHeaderLink]
+  links: [ComponentPageHeaderLink]
 }
 
 input CabecalhoInput {
-  logo: ID
-  headerLink: [ComponentPageHeaderLinkInput]
+  links: [ComponentPageHeaderLinkInput]
   created_by: ID
   updated_by: ID
 }
 
 input editCabecalhoInput {
-  logo: ID
-  headerLink: [editComponentPageHeaderLinkInput]
+  links: [editComponentPageHeaderLinkInput]
   created_by: ID
   updated_by: ID
 }

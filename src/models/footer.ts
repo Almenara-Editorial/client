@@ -1,5 +1,5 @@
 export type LinkModel = {
-  id: string
+  id?: string
   name: string
   url: string
 }

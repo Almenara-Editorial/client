@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
-      ...commonDataMapper({ footer: data.rodape })
+      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
     }
   }
 }

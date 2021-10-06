@@ -5,7 +5,7 @@ import {
 } from '@/graphql/generated/QueryBookBySlug'
 import { QUERY_BOOK } from '@/graphql/queries'
 import { initializeApollo } from '@/utils'
-import { footerMapper, productMapper } from '@/utils/mappers'
+import { commonDataMapper, productMapper } from '@/utils/mappers'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       product: productMapper(data.livros),
       initialApolloState: apolloClient.cache.extract(),
-      footer: data.rodape ? footerMapper(data.rodape) : null
+      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
     }
   }
 }

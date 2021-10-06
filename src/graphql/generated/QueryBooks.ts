@@ -9,6 +9,17 @@ import { ENUM_COMPONENTPAGESOCIAL_NAME } from "./globalTypes";
 // GraphQL query operation: QueryBooks
 // ====================================================
 
+export interface QueryBooks_cabecalho_links {
+  __typename: "ComponentPageHeaderLink";
+  name: string | null;
+  url: string | null;
+}
+
+export interface QueryBooks_cabecalho {
+  __typename: "Cabecalho";
+  links: (QueryBooks_cabecalho_links | null)[] | null;
+}
+
 export interface QueryBooks_recommended_image {
   __typename: "UploadFile";
   src: string;
@@ -76,6 +87,7 @@ export interface QueryBooks_categorias {
 }
 
 export interface QueryBooks {
+  cabecalho: QueryBooks_cabecalho | null;
   recommended: QueryBooks_recommended[];
   livros: QueryBooks_livros[];
   rodape: QueryBooks_rodape | null;

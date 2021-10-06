@@ -37,7 +37,7 @@ function App({ Component, pageProps }: AppProps) {
           </Head>
           <MercadoPago />
           {pathname !== '/checkout' ? (
-            <Layout footer={pageProps.footer}>
+            <Layout header={pageProps.header} footer={pageProps.footer}>
               <Component {...pageProps} />
             </Layout>
           ) : (

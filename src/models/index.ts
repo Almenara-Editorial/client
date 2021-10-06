@@ -1,5 +1,6 @@
 export * from './product'
 export * from './cart'
+export * from './header'
 export * from './footer'
 export * from './all-pages-data'
 export * from './shipping'

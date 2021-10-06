@@ -1,12 +1,16 @@
 import { TextField } from '@/components/form'
 import { Link } from '@/components/shared'
 import { ChangeEvent, FormEvent, useState } from 'react'
-import { HeaderActions } from '../HeaderActions'
-import { Logo } from '..'
+import { Logo, HeaderActions, HeaderLinks } from '..'
 import { Container, Wrapper } from './styles'
 import { useRouter } from 'next/dist/client/router'
+import { HeaderModel } from '@/models'
 
-export const Header = () => {
+type HeaderProps = {
+  header: HeaderModel
+}
+
+export const Header = ({ header }: HeaderProps) => {
   const router = useRouter()
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -37,6 +41,7 @@ export const Header = () => {
         </form>
         <HeaderActions />
       </Wrapper>
+      <HeaderLinks links={header?.links} />
     </Container>
   )
 }

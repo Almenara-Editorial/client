@@ -1,4 +1,4 @@
-import { commonDataMapper, initializeApollo, parseQueryToWhere } from '@/utils'
+import { commonDataMapper, initializeApollo } from '@/utils'
 import { GetServerSideProps } from 'next'
 import { QUERY_BOOKS } from '@/graphql/queries'
 import { QueryBooks, QueryBooksVariables } from '@/graphql/generated/QueryBooks'
@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
-      ...commonDataMapper({ footer: data.rodape })
+      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
     }
   }
 }

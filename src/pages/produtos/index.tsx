@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       products: productsMapper(data.livros),
       filters: filterMapper({ categories: data.categorias }),
       initialApolloState: apolloClient.cache.extract(),
-      ...commonDataMapper({ footer: data.rodape })
+      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
     }
   }
 }

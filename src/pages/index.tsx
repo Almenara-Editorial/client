@@ -5,7 +5,7 @@ import { initializeApollo } from '@/utils'
 import {
   productsGroupsMapper,
   bannersMapper,
-  footerMapper
+  commonDataMapper
 } from '@/utils/mappers'
 
 type HomeProps = HomeTemplateProps
@@ -27,7 +27,7 @@ export async function getStaticProps() {
       slides: bannersMapper(data.home?.banner),
       productsGroups: productsGroupsMapper(data.home?.productGroup),
       initialApolloState: apolloClient.cache.extract(),
-      footer: data.rodape ? footerMapper(data.rodape) : null
+      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
     }
   }
 }

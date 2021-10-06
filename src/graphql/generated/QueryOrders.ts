@@ -9,6 +9,17 @@ import { ENUM_ORDER_STATUS, ENUM_COMPONENTPAGESOCIAL_NAME } from "./globalTypes"
 // GraphQL query operation: QueryOrders
 // ====================================================
 
+export interface QueryOrders_cabecalho_links {
+  __typename: "ComponentPageHeaderLink";
+  name: string | null;
+  url: string | null;
+}
+
+export interface QueryOrders_cabecalho {
+  __typename: "Cabecalho";
+  links: (QueryOrders_cabecalho_links | null)[] | null;
+}
+
 export interface QueryOrders_orders_books_book_image {
   __typename: "UploadFile";
   src: string;
@@ -68,6 +79,7 @@ export interface QueryOrders_rodape {
 }
 
 export interface QueryOrders {
+  cabecalho: QueryOrders_cabecalho | null;
   orders: QueryOrders_orders[];
   rodape: QueryOrders_rodape | null;
 }
