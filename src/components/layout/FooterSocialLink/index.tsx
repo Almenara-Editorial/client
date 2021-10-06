@@ -3,6 +3,7 @@ import {
   Email,
   Facebook,
   Instagram,
+  Telegram,
   Whatsapp,
   Youtube
 } from '@/components/icons'
@@ -17,6 +18,7 @@ const iconMapper = {
   facebook: Facebook,
   whatsapp: Whatsapp,
   instagram: Instagram,
+  telegram: Telegram,
   youtube: Youtube,
   email: Email
 }

@@ -12,6 +12,6 @@ export const LinkAnchor = styled.a`
   padding: 1.2rem 2.8rem;
 
   & + & {
-    border-left: 1px solid var(--color-neutral-300);
+    border-left: 1px solid var(--color-neutral-100);
   }
 `
