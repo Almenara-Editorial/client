@@ -1,4 +1,14 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const focusAnimation = keyframes`
+  0% {
+    background-color: transparent;
+  }
+
+  100% {
+    background-color: var(--color-secondary-50);
+  }
+`
 
 export const Container = styled.div`
   position: relative;
@@ -7,6 +17,16 @@ export const Container = styled.div`
   align-items: center;
   max-width: 21.2rem;
   padding-block: 1.6rem;
+
+  &:focus,
+  &:focus-within {
+    animation: ${focusAnimation} 0.6s ease forwards;
+  }
+`
+
+export const ProductAnchor = styled.a`
+  outline: none;
+  border: none;
 `
 
 export const OffPercentage = styled.span`
@@ -14,6 +34,8 @@ export const OffPercentage = styled.span`
   top: 0;
   right: 0;
   z-index: var(--layer-base);
+  pointer-events: none;
+  user-select: none;
 
   height: 2rem;
   padding-inline: 1.6rem;
