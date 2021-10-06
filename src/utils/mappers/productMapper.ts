@@ -17,6 +17,7 @@ export function productMapper(products: QueryBookBySlug_livros[]) {
     id: product.id,
     name: product.name,
     price: product.price,
+    authors: product.authors?.map((author) => author?.name),
     promoPrice: product.promoPrice,
     slug: product.slug,
     imageSrc: product.image?.map((image) => getImageUrl(image?.src)),
@@ -34,6 +35,7 @@ export function productsMapper(
   return products?.map((product) => ({
     id: product.id,
     name: product.name,
+    authors: product.authors?.map((author) => author?.name),
     price: product.price,
     promoPrice: product.promoPrice,
     slug: product.slug,

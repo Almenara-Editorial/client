@@ -20,6 +20,11 @@ export interface QueryBookBySlug_cabecalho {
   links: (QueryBookBySlug_cabecalho_links | null)[] | null;
 }
 
+export interface QueryBookBySlug_livros_authors {
+  __typename: "Author";
+  name: string | null;
+}
+
 export interface QueryBookBySlug_livros_image {
   __typename: "UploadFile";
   src: string;
@@ -32,6 +37,7 @@ export interface QueryBookBySlug_livros {
   name: string;
   slug: string;
   price: number;
+  authors: QueryBookBySlug_livros_authors[];
   promoPrice: number | null;
   stock: number;
   particulars: string | null;

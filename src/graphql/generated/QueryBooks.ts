@@ -20,6 +20,11 @@ export interface QueryBooks_cabecalho {
   links: (QueryBooks_cabecalho_links | null)[] | null;
 }
 
+export interface QueryBooks_recommended_authors {
+  __typename: "Author";
+  name: string | null;
+}
+
 export interface QueryBooks_recommended_image {
   __typename: "UploadFile";
   src: string;
@@ -34,7 +39,13 @@ export interface QueryBooks_recommended {
   price: number;
   stock: number;
   promoPrice: number | null;
+  authors: QueryBooks_recommended_authors[];
   image: QueryBooks_recommended_image[];
+}
+
+export interface QueryBooks_livros_authors {
+  __typename: "Author";
+  name: string | null;
 }
 
 export interface QueryBooks_livros_image {
@@ -51,6 +62,7 @@ export interface QueryBooks_livros {
   price: number;
   stock: number;
   promoPrice: number | null;
+  authors: QueryBooks_livros_authors[];
   image: QueryBooks_livros_image[];
 }
 

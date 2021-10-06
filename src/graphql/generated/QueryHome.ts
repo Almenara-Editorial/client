@@ -31,6 +31,11 @@ export interface QueryHome_home_banner {
   url: string | null;
 }
 
+export interface QueryHome_home_productGroup_livros_authors {
+  __typename: "Author";
+  name: string | null;
+}
+
 export interface QueryHome_home_productGroup_livros_image {
   __typename: "UploadFile";
   src: string;
@@ -45,6 +50,7 @@ export interface QueryHome_home_productGroup_livros {
   price: number;
   stock: number;
   promoPrice: number | null;
+  authors: QueryHome_home_productGroup_livros_authors[];
   image: QueryHome_home_productGroup_livros_image[];
 }
 

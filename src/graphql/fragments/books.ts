@@ -8,6 +8,9 @@ export const BOOK_FRAGMENT = gql`
     price
     stock
     promoPrice
+    authors {
+      name
+    }
     image {
       src: url
       formats

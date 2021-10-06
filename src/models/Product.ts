@@ -2,6 +2,7 @@ export type ProductModel = {
   id: string
   name: string
   slug: string
+  authors: (string | null)[]
   promoPrice?: number | null
   price: number
   stock: number

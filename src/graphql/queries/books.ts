@@ -49,6 +49,9 @@ export const QUERY_BOOK = gql`
       name
       slug
       price
+      authors {
+        name
+      }
       promoPrice
       stock
       particulars

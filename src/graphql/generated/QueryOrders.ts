@@ -20,6 +20,11 @@ export interface QueryOrders_cabecalho {
   links: (QueryOrders_cabecalho_links | null)[] | null;
 }
 
+export interface QueryOrders_orders_books_book_authors {
+  __typename: "Author";
+  name: string | null;
+}
+
 export interface QueryOrders_orders_books_book_image {
   __typename: "UploadFile";
   src: string;
@@ -34,6 +39,7 @@ export interface QueryOrders_orders_books_book {
   price: number;
   stock: number;
   promoPrice: number | null;
+  authors: QueryOrders_orders_books_book_authors[];
   image: QueryOrders_orders_books_book_image[];
 }
 

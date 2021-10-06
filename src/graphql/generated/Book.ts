@@ -7,6 +7,11 @@
 // GraphQL fragment: Book
 // ====================================================
 
+export interface Book_authors {
+  __typename: "Author";
+  name: string | null;
+}
+
 export interface Book_image {
   __typename: "UploadFile";
   src: string;
@@ -21,5 +26,6 @@ export interface Book {
   price: number;
   stock: number;
   promoPrice: number | null;
+  authors: Book_authors[];
   image: Book_image[];
 }

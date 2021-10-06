@@ -11,16 +11,18 @@ import { Container, Bottom, QuantityBuy } from './styles'
 import { useCart } from '@/contexts'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { SingleProductAuthors } from '../SingleProductAuthors'
 
 export type SingleProductBuyPanelProps = Pick<
   SingleProductModel,
-  'id' | 'name' | 'price' | 'promoPrice' | 'stock' | 'installments'
+  'id' | 'name' | 'price' | 'promoPrice' | 'stock' | 'installments' | 'authors'
 >
 
 export const SingleProductBuyPanel = ({
   id,
   name,
   price,
+  authors,
   installments,
   stock,
   promoPrice
@@ -41,6 +43,11 @@ export const SingleProductBuyPanel = ({
   return (
     <Container>
       <SingleProductTitle>{name}</SingleProductTitle>
+      {authors?.length > 0 && (
+        <SingleProductAuthors>
+          <span>{authors.join(', ')}.</span>
+        </SingleProductAuthors>
+      )}
       <Hr />
       <Bottom>
         <SingleProductPrice
