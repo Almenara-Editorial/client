@@ -5,6 +5,7 @@ export async function protectedRoutes(context: GetServerSidePropsContext) {
   const session = await getSession(context)
 
   // if (!session) {
+  
   //   context.res.setHeader(
   //     'Location',
   //     `/entrar?callbackUrl=${context.resolvedUrl}`
