@@ -1,3 +1,4 @@
+import { shimmer } from '@/styles/shimmer'
 import styled, { keyframes } from 'styled-components'
 
 const popupAnimation = keyframes`
@@ -14,6 +15,10 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  img {
+    ${shimmer}
+  }
 `
 
 export const Popup = styled.div`

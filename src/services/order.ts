@@ -23,8 +23,10 @@ export async function createOrder({
         street: order.shipping.street,
         number: order.shipping.number,
         neighborhood: order.shipping.neighborhood,
-        city: order.shipping.cep,
-        state: order.shipping.cep
+        city: order.shipping.city,
+        state: order.shipping.state,
+        info: order.shipping.info,
+        shippingMethodId: order.shipping.shipping
       },
       comments: order.review.comments,
       payment: {
@@ -34,7 +36,7 @@ export async function createOrder({
         paymentTypeId: order.payment?.paymentTypeId,
         installments: order.payment?.installments,
         lastFour: order.payment?.lastFour,
-        cardBrand: order.payment?.id,
+        paymentBrand: order.payment?.id,
         payer: {
           email: order.payment?.cardHolderEmail || order.payment?.payer.email,
           firstName: order.payment?.payer?.firstName || '',

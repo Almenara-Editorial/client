@@ -35,7 +35,7 @@ const RadioGroupFn: ForwardRefRenderFunction<HTMLDivElement, RadioGroupProps> =
     ref
   ) => {
     const [radioValue, setRadioValue] = useState(
-      defaultValue || radios[0].value
+      defaultValue || radios[0]?.value
     )
 
     useEffect(() => {

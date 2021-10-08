@@ -1,14 +1,15 @@
 import { RHFForm, RHFTextField, RHFRadioGroup } from '@/components/hook-form'
-import { useCheckoutForm } from '@/contexts'
-import { getAddressByCep } from '@/services'
-import { ShippingValues } from '@/models'
+import { useCart, useCheckoutForm } from '@/contexts'
+import { getAddressByCep, loadShippingOptionsByZipCode } from '@/services'
+import { ShippingOptionModel, ShippingValues } from '@/models'
 import { FieldsRow, FieldsWrapper } from '@/components/form'
 import { SectionTitle, StepsButtons } from '@/components/checkout'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { schema } from './schema'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { filterNumbers } from '@/utils'
+import { filterNumbers, formatToCurrency } from '@/utils'
+import { ShippingItem } from './styles'
 
 export function ShippingForm() {
   const { nextStep, updateFormValues, formValues } = useCheckoutForm()
@@ -17,8 +18,12 @@ export function ShippingForm() {
     defaultValues: formValues.shipping
   })
   const [isLoading, setIsLoading] = useState(false)
+  const [shippingOptions, setShippingOptions] = useState<ShippingOptionModel[]>(
+    []
+  )
   const { watch, setValue, setError } = formMethods
   const cepFieldValue = watch('cep')
+  const { cartItems } = useCart()
 
   async function onSubmit(values: ShippingValues) {
     updateFormValues('shipping', values)
@@ -51,6 +56,25 @@ export function ShippingForm() {
       handleCepChange(cepFieldValue)
   }, [cepFieldValue, setError, setValue])
 
+  useEffect(() => {
+    setValue('shipping', '')
+    setShippingOptions([])
+
+    async function setNewShippingOptions() {
+      await loadShippingOptionsByZipCode({
+        zipCode: cepFieldValue,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        cart: cartItems!
+      })
+        .then((shippingOptions) => {
+          shippingOptions && setShippingOptions(shippingOptions)
+        })
+        .catch((error) => console.log(error))
+    }
+
+    cartItems && cepFieldValue?.length === 9 && setNewShippingOptions()
+  }, [cepFieldValue, cartItems, setValue])
+
   return (
     <RHFForm {...formMethods} onSubmit={onSubmit}>
       <SectionTitle title="Endereço de entrega:" buttonText="Editar" />
@@ -79,14 +103,25 @@ export function ShippingForm() {
         <RHFTextField label="Estado:" name="state" disabled={isLoading} />
       </FieldsWrapper>
       <SectionTitle title="Opções de entrega:" />
-      <RHFRadioGroup
-        name="shipping"
-        radios={[
-          { title: '1', value: '1' },
-          { title: '2', value: '2' },
-          { title: '3', value: '3' }
-        ]}
-      />
+      {shippingOptions && shippingOptions.length > 0 ? (
+        <RHFRadioGroup
+          name="shipping"
+          radios={shippingOptions.map(
+            (option) =>
+              ({
+                title: (
+                  <ShippingItem>
+                    <span>{option.name}</span>
+                    <span>{formatToCurrency(option.price)}</span>
+                  </ShippingItem>
+                ),
+                value: option.id
+              } || [])
+          )}
+        />
+      ) : (
+        <p>Preencha o CEP</p>
+      )}
       <StepsButtons />
     </RHFForm>
   )

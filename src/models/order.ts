@@ -82,7 +82,7 @@ export interface Order {
   id: number
   user: User | null
   created_at: Date
-  cardBrand?: string
+  paymentBrand?: string
   cardLastFour?: string
   total: string
   books: ({ book: Livro } & { quantity: number })[]

@@ -9,6 +9,7 @@ export type CheckoutValues = {
 export type ShippingValues = {
   cep: string
   street: string
+  shipping: string
   number: string
   info: string
   city: string

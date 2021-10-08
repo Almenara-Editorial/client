@@ -1,4 +1,6 @@
+import { CartItemModel, ShippingOptionModel } from '@/models'
 import axios from 'axios'
+import { api } from './api'
 
 type BrasilApiCepData = {
   cep: string
@@ -10,7 +12,7 @@ type BrasilApiCepData = {
 }
 
 export async function getAddressByCep(cep: string) {
-  const cepOnlyNumbers = cep.replace(/\D/g, '') // 123456
+  const cepOnlyNumbers = cep.replace(/\D/g, '')
 
   const { data } = await axios.get<BrasilApiCepData>(
     `https://brasilapi.com.br/api/cep/v1/${cepOnlyNumbers}`
