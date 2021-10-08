@@ -92,6 +92,10 @@ export interface Order {
     documentUrl: string
     lastFour: string
   }
+  shipping: {
+    time: string
+    price: number
+  }
 }
 
 export type OrderModel = {

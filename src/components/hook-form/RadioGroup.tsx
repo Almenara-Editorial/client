@@ -1,12 +1,18 @@
 import { Controller, useFormContext } from 'react-hook-form'
 import { RadioGroup, RadioGroupProps } from '../form'
 
-type RHFRadioGroupProps = Omit<RadioGroupProps, 'onChange'> & {
+type RHFRadioGroupProps = RadioGroupProps & {
   name: string
 }
 
-export function RHFRadioGroup({ name, ...rest }: RHFRadioGroupProps) {
+export function RHFRadioGroup({ name, onChange, ...rest }: RHFRadioGroupProps) {
   const { control } = useFormContext()
+
+  function handleChange(value: string, RHFonChange: (value: string) => void) {
+    onChange && onChange(value)
+
+    RHFonChange(value)
+  }
 
   return (
     <Controller
@@ -18,7 +24,7 @@ export function RHFRadioGroup({ name, ...rest }: RHFRadioGroupProps) {
       }) => (
         <RadioGroup
           onBlur={onBlur}
-          onChange={onChange}
+          onChange={(value) => handleChange(value, onChange)}
           checked={value}
           error={error?.message}
           ref={ref}

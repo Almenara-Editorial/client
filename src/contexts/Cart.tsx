@@ -25,6 +25,7 @@ type CartContextData = {
   products: CartProductModel[]
   totals: CartTotalModel
   cartLength: number
+  updateShippingTotal: (value: number) => void
   addProductToCart: (item: CartItemModel) => void
   removeProductFromCart: (id: string) => void
   resetCart: () => void
@@ -48,6 +49,7 @@ export function CartProvider({ children }: CartProviderProps) {
   const [shippingOptions, setShippingOptions] = useState<ShippingOptionModel[]>(
     []
   )
+  const [shippingTotal, setShippingTotal] = useState(0)
   const [isLoading, setIsLoading] = useState({
     products: false,
     shipping: false
@@ -137,14 +139,17 @@ export function CartProvider({ children }: CartProviderProps) {
         (product) => (product.promoPrice || product.price) * product.quantity
       )
       .reduce((total, curr) => curr + total, 0)
-    const shippingTotal = 0
 
     setTotals({
       products: productsTotal,
       shipping: shippingTotal,
       total: productsTotal + shippingTotal
     })
-  }, [products])
+  }, [products, shippingTotal])
+
+  function updateShippingTotal(value: number) {
+    value && setShippingTotal(value)
+  }
 
   return (
     <CartContext.Provider
@@ -156,6 +161,7 @@ export function CartProvider({ children }: CartProviderProps) {
         addProductToCart,
         removeProductFromCart,
         loadShippingOptions,
+        updateShippingTotal,
         shippingOptions,
         isInCart,
         resetCart,

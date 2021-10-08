@@ -1,7 +1,7 @@
 import { Hr, PaymentCardId } from '@/components/shared'
 import { PaymentCard } from '@/components/shared'
 import { useCart, useCheckoutForm } from '@/contexts'
-import { getImageUrl } from '@/utils'
+import { addDays, getImageUrl } from '@/utils'
 import { useRouter } from 'next/router'
 import { CheckoutProducts, CheckoutTotal } from '..'
 import { Container, Title, Row, OrderDetails } from './styles'
@@ -12,13 +12,18 @@ export function Sidebar() {
   const { createdOrder } = useCheckoutForm()
 
   if (query.step === 'success' && createdOrder) {
+    // const deliveryDate = addDays(
+    //   new Date(),
+    //   Number(createdOrder.shipping.time)
+    // ).toLocaleString('pt-BR')
+
     return (
       <Container>
         <Title>Seu pedido #{createdOrder.id}</Title>
         <OrderDetails>
           <Row>
             <div>Estimativa de Entrega:</div>
-            <div>99/99/9999</div>
+            <div>{createdOrder?.shipping.time} dias.</div>
           </Row>
           <Row>
             <div>Forma de pagamento:</div>
@@ -48,7 +53,7 @@ export function Sidebar() {
               (total, { quantity, book }) => total + book.price * quantity,
               0
             ),
-            shipping: 9999,
+            shipping: createdOrder.shipping.price,
             total: Number(createdOrder.total)
           }}
           itemsLength={createdOrder?.books.length}

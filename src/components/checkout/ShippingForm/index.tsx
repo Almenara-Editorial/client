@@ -23,7 +23,7 @@ export function ShippingForm() {
   )
   const { watch, setValue, setError } = formMethods
   const cepFieldValue = watch('cep')
-  const { cartItems } = useCart()
+  const { cartItems, updateShippingTotal } = useCart()
 
   async function onSubmit(values: ShippingValues) {
     updateFormValues('shipping', values)
@@ -106,6 +106,11 @@ export function ShippingForm() {
       {shippingOptions && shippingOptions.length > 0 ? (
         <RHFRadioGroup
           name="shipping"
+          onChange={(id) =>
+            updateShippingTotal(
+              shippingOptions.find((option) => option.id === id)?.price || 0
+            )
+          }
           radios={shippingOptions.map(
             (option) =>
               ({
