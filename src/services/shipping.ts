@@ -10,7 +10,7 @@ type ShippingApiData = {
   id: string
   hashId: string
   carrier: string
-  time: string
+  estimatedDelivery: string
   service: string
   price: number
 }
@@ -30,6 +30,6 @@ export async function loadShippingOptionsByZipCode({
     id: item.hashId,
     name: item.carrier,
     price: item.price,
-    time: item.time
+    estimatedDelivery: item.estimatedDelivery
   })) as ShippingOptionModel[]
 }

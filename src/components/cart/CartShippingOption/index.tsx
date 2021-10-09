@@ -7,14 +7,14 @@ export type CartShippingOptionProps = {
 }
 
 export const CartShippingOption = ({ option }: CartShippingOptionProps) => {
-  const { time, name, price } = option
-  const timeText = time + (time === '1' ? ' dia útil' : ' dias úteis')
+  const { estimatedDelivery, name, price } = option
 
   return (
     <Container>
-      <div>{timeText}</div>
+      <div>
+        {name} - Entrega prevista: {estimatedDelivery}
+      </div>
       <div>{formatToCurrency(price)}</div>
-      <div>{name}</div>
     </Container>
   )
 }

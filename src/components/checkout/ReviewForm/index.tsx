@@ -21,7 +21,6 @@ export function ReviewForm() {
   } = formMethods
   const {
     nextStep,
-    updateFormValues,
     formValues,
     session,
     setCreatedOrder,
@@ -30,10 +29,8 @@ export function ReviewForm() {
   const { shipping, payment } = formValues
 
   async function onSubmit(values: ReviewFormValues) {
-    updateFormValues('review', values)
-
     return await createOrder({
-      order: formValues,
+      order: { ...formValues, review: { comments: values.comments } },
       token: session?.jwt as string,
       cart: products
     })
@@ -43,6 +40,7 @@ export function ReviewForm() {
         nextStep()
       })
       .catch((error) => {
+        console.log({ error })
         setCreatedOrder(null)
         setCreateOrderError(error.response?.data || error.message || error)
       })

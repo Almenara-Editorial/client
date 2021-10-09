@@ -1,7 +1,6 @@
 import { Hr, PaymentCardId } from '@/components/shared'
 import { PaymentCard } from '@/components/shared'
 import { useCart, useCheckoutForm } from '@/contexts'
-import { addDays, getImageUrl } from '@/utils'
 import { useRouter } from 'next/router'
 import { CheckoutProducts, CheckoutTotal } from '..'
 import { Container, Title, Row, OrderDetails } from './styles'
@@ -14,7 +13,7 @@ export function Sidebar() {
   if (query.step === 'success' && createdOrder) {
     // const deliveryDate = addDays(
     //   new Date(),
-    //   Number(createdOrder.shipping.time)
+    //   Number(createdOrder.shipping.estimatedDelivery)
     // ).toLocaleString('pt-BR')
 
     return (
@@ -23,7 +22,7 @@ export function Sidebar() {
         <OrderDetails>
           <Row>
             <div>Estimativa de Entrega:</div>
-            <div>{createdOrder?.shipping.time} dias.</div>
+            <div>{createdOrder?.shipping.estimatedDelivery}</div>
           </Row>
           <Row>
             <div>Forma de pagamento:</div>
@@ -37,20 +36,11 @@ export function Sidebar() {
             <div>{createdOrder?.payment.status}</div>
           </Row>
         </OrderDetails>
-        <CheckoutProducts
-          products={createdOrder?.books.map(({ quantity, book }) => ({
-            id: book.id.toString(),
-            imageSrc: [getImageUrl(book.image[0]?.url)],
-            name: book.name,
-            price: book.promoPrice || book.price,
-            quantity,
-            slug: book.slug
-          }))}
-        />
+        <CheckoutProducts products={createdOrder?.books} />
         <CheckoutTotal
           totals={{
             products: createdOrder?.books.reduce(
-              (total, { quantity, book }) => total + book.price * quantity,
+              (total, { quantity, price }) => total + price * quantity,
               0
             ),
             shipping: createdOrder.shipping.price,

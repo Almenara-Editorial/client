@@ -1,3 +1,5 @@
+import { ProductModel } from './product'
+
 export interface User {
   id: number
   username: string
@@ -78,14 +80,26 @@ export interface Livro {
   image: Image[]
 }
 
-export interface Order {
+export type UserModel = {
   id: number
-  user: User | null
-  created_at: Date
+  username: string
+  email: string
+}
+
+export type OrderModel = {
+  id: string
+  user: UserModel
+  createdAt: string
   paymentBrand?: string
   cardLastFour?: string
+  status: string
   total: string
-  books: ({ book: Livro } & { quantity: number })[]
+  books: (Pick<
+    ProductModel,
+    'id' | 'name' | 'price' | 'imageSrc' | 'promoPrice' | 'slug'
+  > & {
+    quantity: number
+  })[]
   payment: {
     id: string
     status: string
@@ -93,14 +107,7 @@ export interface Order {
     lastFour: string
   }
   shipping: {
-    time: string
+    estimatedDelivery: string
     price: number
   }
-}
-
-export type OrderModel = {
-  id: string
-  createdAt: string
-  status: string
-  total: string
 }

@@ -1,7 +1,7 @@
 import { CartProductModel, CheckoutValues } from '@/models'
 import { api } from './api'
-import { withAuthHeader } from '@/utils'
-import { Order } from '@/models/order'
+import { ApiOrder, orderMapper, withAuthHeader } from '@/utils'
+import { OrderModel } from '@/models/order'
 
 type CreateOrderValues = {
   cart: CartProductModel[]
@@ -13,8 +13,8 @@ export async function createOrder({
   order,
   token,
   cart
-}: CreateOrderValues): Promise<Order> {
-  const { data } = await api.post(
+}: CreateOrderValues): Promise<OrderModel> {
+  const { data } = await api.post<ApiOrder>(
     '/orders',
     {
       cart,
@@ -28,7 +28,7 @@ export async function createOrder({
         info: order.shipping.info,
         shippingMethodId: order.shipping.shipping
       },
-      comments: order.review.comments,
+      comments: order.review?.comments,
       payment: {
         id: order.payment?.id,
         token: order.payment?.token,
@@ -63,5 +63,5 @@ export async function createOrder({
     withAuthHeader(token)
   )
 
-  return data
+  return orderMapper(data)
 }

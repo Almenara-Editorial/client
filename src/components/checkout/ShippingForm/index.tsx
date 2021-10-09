@@ -116,7 +116,10 @@ export function ShippingForm() {
               ({
                 title: (
                   <ShippingItem>
-                    <span>{option.name}</span>
+                    <span>
+                      {option.name} - Entrega prevista{' '}
+                      {option.estimatedDelivery}
+                    </span>
                     <span>{formatToCurrency(option.price)}</span>
                   </ShippingItem>
                 ),
