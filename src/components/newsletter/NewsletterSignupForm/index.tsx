@@ -3,8 +3,10 @@ import { Button } from '@/components/shared'
 import { MUTATION_NEWSLETTER } from '@/graphql/mutations/newletter'
 import { getFormErrorMessageById } from '@/utils'
 import { useMutation } from '@apollo/client'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { schema } from './schema'
 import { Container, ErrorMessage } from './styles'
 
 type NewsletterSignupFormValues = {
@@ -20,12 +22,12 @@ export const NewsletterSignupForm = ({
   onSignupSuccesful
 }: NewsletterSignupFormProps) => {
   const [submitError, setSubmitError] = useState<string | null>(null)
-  const formMethods = useForm<NewsletterSignupFormValues>()
+  const formMethods = useForm<NewsletterSignupFormValues>({
+    resolver: yupResolver(schema)
+  })
   const [createNewsletter] = useMutation(MUTATION_NEWSLETTER, {
     onError: (err) => {
-      const errorId =
-        err?.graphQLErrors[0]?.extensions?.exception?.data?.message[0]
-          .messages[0].id || err.message
+      const errorId = err.message
 
       const errorMessage = getFormErrorMessageById(errorId)
 

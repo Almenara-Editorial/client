@@ -13,10 +13,14 @@ export function MercadoPago() {
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-          window.mp = new MercadoPago("${MERCADO_PAGO_KEY}", {
-            locale: 'pt-BR',
-            advancedFraudPrevention: false
-          })`
+          try {
+            window.mp = new MercadoPago("${MERCADO_PAGO_KEY}", {
+              locale: 'pt-BR',
+              advancedFraudPrevention: false
+            })
+          } catch (error){
+            console.log(error)
+          }`
         }}
       />
     </>
