@@ -55,7 +55,7 @@ export interface QueryOrders_orders {
   created_at: any;
   status: ENUM_ORDER_STATUS | null;
   books: (QueryOrders_orders_books | null)[] | null;
-  total: string | null;
+  total: number;
 }
 
 export interface QueryOrders_rodape_links_link {

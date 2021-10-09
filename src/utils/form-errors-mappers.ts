@@ -2,7 +2,8 @@ const errors = {
   'Auth.form.error.email.taken': 'Este e-mail já está em uso.',
   'Auth.form.error.code.provide': 'O link de recuperação não é válido.',
   'Auth.form.error.user.not-exist':
-    'Não existe nenhum cadastro para este email.'
+    'Não existe nenhum cadastro para este email.',
+  'Duplicate entry': 'Registro já existe.'
 }
 
 export function getFormErrorMessageById(id: string) {

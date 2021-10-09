@@ -10,3 +10,15 @@ export const Container = styled.div`
     flex-direction: column;
   `}
 `
+
+export const ErrorMessage = styled.div`
+  color: var(--color-white);
+  font-size: var(--font-sm);
+  padding-block: 1.2rem;
+  text-align: center;
+`
+
+export const SuccessIcon = styled.div`
+  font-size: 6.4rem;
+  color: var(--color-white);
+`
