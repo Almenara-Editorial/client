@@ -1,3 +1,4 @@
+import { PostCardGroup } from '@/components/blog/PostCardGroup'
 import { PostModel } from '@/models'
 import { Container } from './styles'
 
@@ -6,5 +7,9 @@ export type BlogTemplateProps = {
 }
 
 export function BlogTemplate({ posts }: BlogTemplateProps) {
-  return <Container>{JSON.stringify(posts)}</Container>
+  return (
+    <Container>
+      <PostCardGroup posts={posts} />
+    </Container>
+  )
 }

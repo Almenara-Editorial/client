@@ -25,12 +25,21 @@ export interface QueryBlog_posts_cover {
   url: string;
 }
 
+export interface QueryBlog_posts_user {
+  __typename: "AdminUser";
+  firstname: string;
+  lastname: string;
+}
+
 export interface QueryBlog_posts {
   __typename: "Post";
   id: string;
   title: string;
+  slug: string | null;
   cover: QueryBlog_posts_cover | null;
-  content: string;
+  excerpt: string | null;
+  created_at: any;
+  user: QueryBlog_posts_user | null;
 }
 
 export interface QueryBlog_rodape_links_link {
