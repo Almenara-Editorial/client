@@ -1,11 +1,12 @@
-import { TextField } from '@/components/form'
 import { Link } from '@/components/shared'
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { Logo, HeaderActions, HeaderLinks } from '..'
+import { useEffect, useState } from 'react'
+import { Logo, HeaderLinks, MediaMatch } from '..'
 import { Container, Wrapper } from './styles'
-import { useRouter } from 'next/dist/client/router'
 import { HeaderModel } from '@/models'
 import { useDebounce } from '@/hooks'
+import { Menu } from '../Menu'
+import { SearchForm } from '../SearchForm'
+import { HeaderActions } from '../HeaderActions'
 
 type HeaderProps = {
   header: HeaderModel
@@ -14,17 +15,6 @@ type HeaderProps = {
 export const Header = ({ header }: HeaderProps) => {
   const [scrollPosition, setScrollPosition] = useState(0)
   const lastScrollPosition = useDebounce(scrollPosition, 500)
-  const router = useRouter()
-  const [searchTerm, setSearchTerm] = useState('')
-
-  function onSubmitSearch(e: FormEvent) {
-    e.preventDefault()
-    router.push(`/produtos?s=${searchTerm}`)
-  }
-
-  function handleChangeSearchField(e: ChangeEvent<HTMLInputElement>) {
-    setSearchTerm(e.target.value)
-  }
 
   function handleScroll() {
     setScrollPosition(() => {
@@ -55,15 +45,15 @@ export const Header = ({ header }: HeaderProps) => {
             <Logo />
           </Link>
         </div>
-        <form onSubmit={onSubmitSearch}>
-          <TextField
-            type="search"
-            placeholder="O que você está procurando?"
-            onChange={handleChangeSearchField}
-            value={searchTerm}
-          />
-        </form>
-        <HeaderActions />
+        <MediaMatch greaterThan="medium">
+          <div className="links">
+            <SearchForm />
+            <HeaderActions />
+          </div>
+        </MediaMatch>
+        <MediaMatch lessThan="medium">
+          <Menu links={header.links} />
+        </MediaMatch>
       </Wrapper>
       <HeaderLinks links={header?.links} />
     </Container>

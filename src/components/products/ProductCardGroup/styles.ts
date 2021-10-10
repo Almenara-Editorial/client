@@ -1,4 +1,5 @@
 import { Wrapper } from '@/components/shared'
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled(Wrapper)`
@@ -13,4 +14,8 @@ export const Products = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   padding-bottom: 2.4rem;
+
+  ${media.lessThan('medium')`
+    grid-template-columns: repeat(2, 1fr);
+  `}
 `

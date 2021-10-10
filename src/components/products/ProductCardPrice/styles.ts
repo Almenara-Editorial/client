@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.span`
@@ -29,4 +30,9 @@ export const Container = styled.span`
       background-color: var(--color-neutral-300);
     }
   }
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+    gap: .4rem;
+  `}
 `

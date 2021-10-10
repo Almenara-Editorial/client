@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -18,4 +19,9 @@ export const Container = styled.div`
     height: fit-content;
     line-height: 0;
   }
+
+  ${media.lessThan('medium')`
+    align-items: flex-start;
+    flex-direction: column;
+  `}
 `

@@ -1,3 +1,4 @@
+import { Container as Menu } from '@/components/layout/Menu/styles'
 import styled from 'styled-components'
 
 export const Container = styled.button`
@@ -20,5 +21,14 @@ export const Container = styled.button`
 
   &:hover {
     color: var(--color-neutral-300);
+  }
+
+  ${Menu} & {
+    top: 3rem;
+    right: 2.4rem;
+    font-size: 3rem;
+    width: 4rem;
+    height: 4rem;
+    color: var(--color-white);
   }
 `

@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.a`
@@ -6,4 +7,8 @@ export const Container = styled.a`
   &:hover {
     color: var(--color-neutral-700);
   }
+
+  ${media.lessThan('medium')`
+    font-size: 2rem;
+  `}
 `

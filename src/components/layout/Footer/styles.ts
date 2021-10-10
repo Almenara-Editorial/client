@@ -1,4 +1,5 @@
 import { Wrapper as DefaultWrapper } from '@/components/shared'
+import { media } from '@/utils'
 
 import styled from 'styled-components'
 
@@ -8,4 +9,8 @@ export const Container = styled.div`
 
 export const Wrapper = styled(DefaultWrapper)`
   padding-block: 18rem;
+
+  ${media.lessThan('medium')`
+    padding-block: 10rem;
+  `}
 `

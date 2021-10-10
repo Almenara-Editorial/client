@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -6,6 +7,10 @@ export const Container = styled.div`
   align-items: center;
   height: 4.9rem;
   padding-bottom: 1.2rem;
+
+  ${media.lessThan('medium')`
+    display:none;
+  `}
 `
 
 export const LinkAnchor = styled.a`

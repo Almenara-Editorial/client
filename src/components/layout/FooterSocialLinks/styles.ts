@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -5,4 +6,8 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 4rem;
+
+  ${media.lessThan('medium')`
+    flex-wrap: wrap;  
+  `}
 `

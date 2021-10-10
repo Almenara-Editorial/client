@@ -1,5 +1,6 @@
 import { colors } from './colors'
 import { createGlobalStyle } from 'styled-components'
+import { media } from '@/utils'
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -126,6 +127,10 @@ const GlobalStyles = createGlobalStyle`
     --input-label-color: var(--color-neutral-300);
     --input-height: 5.1rem;
     --input-border-radius: var(--radius-md);
+
+    ${media.lessThan('medium')`
+      --header-height: 10rem;
+    `}
   }
 
   * {
@@ -162,6 +167,8 @@ const GlobalStyles = createGlobalStyle`
     clip: rect(0, 0, 0, 0);
     border: 0;
   }
+
+  
 `
 
 export default GlobalStyles

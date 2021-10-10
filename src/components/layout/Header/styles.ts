@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Wrapper as DefaultWrapper } from '@/components/shared'
+import { media } from '@/utils'
 
 export const Container = styled.div`
   display: flex;
@@ -38,4 +39,15 @@ export const Wrapper = styled(DefaultWrapper)`
     height: fit-content;
     line-height: 0;
   }
+
+  .links {
+    display: flex;
+    gap: var(--space-xl);
+  }
+
+  ${media.lessThan('medium')`
+    .logo {
+      flex: 1;
+    }
+  `}
 `
