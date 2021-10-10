@@ -45,6 +45,11 @@ export const Wrapper = styled(DefaultWrapper)`
     gap: var(--space-xl);
   }
 
+  .mobile-buttons {
+    display: flex;
+    gap: var(--space-lg);
+  }
+
   ${media.lessThan('medium')`
     .logo {
       flex: 1;

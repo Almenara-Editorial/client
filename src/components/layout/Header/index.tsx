@@ -7,6 +7,7 @@ import { useDebounce } from '@/hooks'
 import { Menu } from '../Menu'
 import { SearchForm } from '../SearchForm'
 import { HeaderActions } from '../HeaderActions'
+import { CartDropdown } from '@/components/cart'
 
 type HeaderProps = {
   header: HeaderModel
@@ -52,7 +53,10 @@ export const Header = ({ header }: HeaderProps) => {
           </div>
         </MediaMatch>
         <MediaMatch lessThan="medium">
-          <Menu links={header.links} />
+          <div className="mobile-buttons">
+            <CartDropdown />
+            <Menu links={header.links} />
+          </div>
         </MediaMatch>
       </Wrapper>
       <HeaderLinks links={header?.links} />

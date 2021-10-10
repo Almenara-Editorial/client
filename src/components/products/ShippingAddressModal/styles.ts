@@ -1,6 +1,8 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  width: 100%;
   max-width: 40rem;
 `
 
@@ -21,6 +23,13 @@ export const FieldRow = styled.div`
   display: flex;
   align-items: center;
   gap: var(--space-rg);
+
+  ${media.lessThan('medium')`
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+
+  `}
 `
 export const Separator = styled.div`
   display: flex;

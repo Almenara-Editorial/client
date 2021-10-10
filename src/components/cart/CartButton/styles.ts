@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled, { keyframes } from 'styled-components'
 
 const scaleAnimation = keyframes`
@@ -36,4 +37,12 @@ export const Container = styled.button`
     font-weight: var(--body-bold);
     animation: ${scaleAnimation} 0.2s;
   }
+
+  ${media.lessThan('medium')`
+    font-size: 4rem;
+
+    span {
+      font-size: 1.8rem;
+    }
+  `}
 `
