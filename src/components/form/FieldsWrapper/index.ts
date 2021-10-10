@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const FieldsWrapper = styled.div`
@@ -18,4 +19,12 @@ export const FieldsRow = styled.div`
   > * {
     flex: 1;
   }
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+
+    > * { 
+      min-width: 100%;
+    }
+  `}
 `

@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { CloseButton, Link } from '@/components/shared'
 import { MenuButton, Logo } from '@/components/layout'
 import { HeaderModel } from '@/models'
 import { Container, Wrapper, Anchor } from './styles'
 import { SearchForm } from '../SearchForm'
+import { HeaderAccount } from '../HeaderAccount'
+import { useRouter } from 'next/router'
 
 type MenuProps = {
   links: HeaderModel['links']
@@ -12,6 +14,11 @@ type MenuProps = {
 
 export const Menu = ({ links }: MenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const { asPath } = useRouter()
+
+  useEffect(() => {
+    setIsOpen(false)
+  }, [asPath])
 
   return (
     <>
@@ -31,6 +38,7 @@ export const Menu = ({ links }: MenuProps) => {
             </i>
           </div>
           <SearchForm />
+          <HeaderAccount withoutDropdown />
           <ul>
             {links?.map((link) => (
               <li key={link.name}>

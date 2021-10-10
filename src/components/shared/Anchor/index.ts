@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 export type AnchorProps = HTMLAttributes<HTMLAnchorElement> & {
   size?: 'sm' | 'rg' | 'lg' | 'xl'
-  color?: 'neutral' | 'tertiary' | 'light' | 'primary'
+  color?: 'white' | 'neutral' | 'tertiary' | 'light' | 'primary'
   align?: 'center' | 'right' | 'left'
 }
 
@@ -45,6 +45,11 @@ export const Anchor = styled.a.attrs<AnchorProps>(
   &[data-color='neutral'] {
     --link-color: var(--color-neutral-900);
     --link-color-hover: var(--color-neutral-800);
+  }
+
+  &[data-color='white'] {
+    --link-color: var(--color-white);
+    --link-color-hover: var(--color-white);
   }
 
   &[data-color='light'] {

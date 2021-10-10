@@ -1,3 +1,4 @@
+import { MediaMatch } from '@/components/layout'
 import { useCheckoutForm } from '@/contexts'
 import { StepsHeaderItem } from '../StepsHeaderItem'
 import { Container } from './styles'
@@ -8,22 +9,24 @@ export const StepsHeader = () => {
   if (currentStep === 'success') return null
 
   return (
-    <Container>
-      <StepsHeaderItem
-        stepNumber={1}
-        title="Entrega"
-        active={currentStep === 'shipping'}
-      />
-      <StepsHeaderItem
-        stepNumber={2}
-        title="Pagamento"
-        active={currentStep === 'payment'}
-      />
-      <StepsHeaderItem
-        stepNumber={3}
-        title="Revisão"
-        active={currentStep === 'review'}
-      />
-    </Container>
+    <MediaMatch greaterThan="medium">
+      <Container>
+        <StepsHeaderItem
+          stepNumber={1}
+          title="Entrega"
+          active={currentStep === 'shipping'}
+        />
+        <StepsHeaderItem
+          stepNumber={2}
+          title="Pagamento"
+          active={currentStep === 'payment'}
+        />
+        <StepsHeaderItem
+          stepNumber={3}
+          title="Revisão"
+          active={currentStep === 'review'}
+        />
+      </Container>
+    </MediaMatch>
   )
 }

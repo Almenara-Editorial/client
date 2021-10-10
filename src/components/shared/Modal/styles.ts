@@ -32,6 +32,8 @@ export const Container = styled.div`
   background-color: var(--color-background);
   will-change: transform, opacity;
   animation: ${modalAnimation} 0.3s ease;
+
+  max-width: calc(100vw - 2.4rem) !important;
 `
 
 export const Overlay = styled.div`

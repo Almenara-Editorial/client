@@ -1,3 +1,4 @@
+import { Container as Menu } from '@/components/layout/Menu/styles'
 import styled from 'styled-components'
 
 export const Container = styled.button`
@@ -9,5 +10,9 @@ export const Container = styled.button`
 
   &:hover {
     text-decoration: underline;
+  }
+
+  ${Menu} & {
+    color: var(--color-white);
   }
 `

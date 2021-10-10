@@ -44,7 +44,7 @@ export const Wrapper = styled(DefaultWrapper)`
 `
 export const Anchor = styled.a`
   display: block;
-  padding: 1.2rem;
+  padding: 1.2rem 0;
   font-size: var(--font-md);
   color: var(--color-white);
 `

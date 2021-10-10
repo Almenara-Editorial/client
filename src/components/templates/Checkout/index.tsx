@@ -1,5 +1,6 @@
 import { Steps } from '@/components/checkout'
 import { Sidebar } from '@/components/checkout'
+import { MediaMatch } from '@/components/layout'
 import { CheckoutFormProvider } from '@/contexts'
 import { Session } from 'next-auth'
 import { useRouter } from 'next/router'
@@ -24,7 +25,9 @@ export function CheckoutTemplate({ session }: CheckoutTemplateProps) {
       <Container>
         <Steps />
       </Container>
-      <Sidebar />
+      <MediaMatch greaterThan="medium">
+        <Sidebar />
+      </MediaMatch>
     </CheckoutFormProvider>
   )
 }

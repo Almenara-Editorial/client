@@ -1,6 +1,22 @@
 import styled from 'styled-components'
+import { Container as Menu } from '../Menu/styles'
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  li {
+    color: var(--color-white);
+    display: block;
+  }
+
+  li + li {
+    margin-top: 1rem;
+  }
+`
+
+export const User = styled.div`
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -13,5 +29,9 @@ export const Container = styled.div`
 
   > div > span {
     white-space: nowrap;
+  }
+
+  ${Menu} & {
+    color: var(--color-white);
   }
 `

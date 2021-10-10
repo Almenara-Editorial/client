@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -13,6 +14,12 @@ export const Container = styled.div`
   z-index: var(--layer-sidebar);
   background: var(--color-white);
   box-shadow: 0px 4px 40px -20px #b3c6ff;
+
+  ${media.lessThan('medium')`
+    width: 100vw;
+    max-width: 100vw;
+    top: 100%;
+  `}
 `
 
 export const Title = styled.h2`

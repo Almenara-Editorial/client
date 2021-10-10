@@ -1,4 +1,5 @@
 import { Wrapper } from '@/components/shared'
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -45,6 +46,10 @@ export const Banner = styled.div`
   height: 100%;
   width: calc(50vw - 3.2rem);
   background: transparent;
+
+  ${media.lessThan('medium')`
+    display:none;
+  `}
 `
 export const Title = styled.h2`
   margin-bottom: 2.4rem;
