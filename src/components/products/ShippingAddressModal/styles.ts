@@ -14,7 +14,7 @@ export const Header = styled.header`
   text-align: center;
 `
 
-export const Content = styled.div`
+export const Form = styled.form`
   padding: 2.4rem;
 `
 export const FieldRow = styled.div`

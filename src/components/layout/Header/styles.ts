@@ -8,7 +8,7 @@ export const Container = styled.div`
   min-width: 100%;
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   z-index: var(--layer-header);
 
   width: 100%;

@@ -55,7 +55,7 @@ export const SingleProductBuyPanel = ({
           promoPrice={promoPrice}
           installments={installments}
         />
-        <SelectAddressButton />
+        <SelectAddressButton product={{ id, quantity: 1 }} />
         <QuantityBuy>
           {stock > 0 ? (
             <>
