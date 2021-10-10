@@ -1,5 +1,5 @@
 import { HeaderModel, FooterModel } from '@/models'
-import { Header, Footer } from '..'
+import { Header, Footer, WhatsappButton } from '..'
 import { Container, Main } from './styles'
 
 type LayoutProps = {
@@ -13,6 +13,7 @@ export function Layout({ children, header, footer }: LayoutProps) {
     <Container>
       <Header header={header} />
       <Main>{children}</Main>
+      <WhatsappButton />
       <Footer footer={footer} />
     </Container>
   )

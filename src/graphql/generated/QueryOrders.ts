@@ -22,8 +22,7 @@ export interface QueryOrders_cabecalho {
 
 export interface QueryOrders_orders_books_book {
   __typename: "Livro";
-  id: string;
-  name: string;
+  slug: string;
 }
 
 export interface QueryOrders_orders_books {
@@ -31,19 +30,13 @@ export interface QueryOrders_orders_books {
   book: QueryOrders_orders_books_book | null;
 }
 
-export interface QueryOrders_orders_user {
-  __typename: "UsersPermissionsUser";
-  id: string;
-}
-
 export interface QueryOrders_orders {
   __typename: "Order";
   id: string;
-  created_at: any;
-  status: ENUM_ORDER_STATUS | null;
   books: (QueryOrders_orders_books | null)[] | null;
+  status: ENUM_ORDER_STATUS | null;
   total: number;
-  user: QueryOrders_orders_user | null;
+  created_at: any;
 }
 
 export interface QueryOrders_rodape_links_link {
