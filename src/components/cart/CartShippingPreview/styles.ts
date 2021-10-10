@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -7,4 +8,8 @@ export const Container = styled.div`
   padding: 3.2rem;
   width: 100%;
   max-width: 69.6rem;
+
+  ${media.lessThan('medium')`
+    padding: 0;
+  `}
 `

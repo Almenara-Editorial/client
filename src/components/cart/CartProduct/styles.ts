@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -5,16 +6,30 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 1.2rem;
-  padding: 3.2rem;
   border-bottom: 1px solid var(--color-neutral-100);
+
+  ${media.greaterThan('medium')`
+    padding: 3.2rem;
+
+    .text {
+      display: flex;
+    }
+  `}
 `
 
 export const Info = styled.div`
   display: flex;
-  flex: 1 0 34rem;
   flex-direction: column;
-  align-items: flex-start;
   gap: 2.4rem;
+
+  ${media.lessThan('medium')`
+    align-itens: flex-start;
+  `}
+
+  ${media.greaterThan('medium')`
+    align-items: flex-start;
+    flex: 1 0 34rem;
+  `}
 `
 
 export const Actions = styled.div`
@@ -22,6 +37,11 @@ export const Actions = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 2.4rem;
+
+  ${media.lessThan('medium')`
+    flex-direction: row;
+    align-items:flex-end;
+  `}
 `
 
 export const RemoveButton = styled.button`

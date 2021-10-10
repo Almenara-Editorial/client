@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Wrapper } from '@/components/shared'
+import { media } from '@/utils'
 
 export const Container = styled(Wrapper)``
 
@@ -9,4 +10,15 @@ export const Main = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--space-xl);
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+  `}
 `

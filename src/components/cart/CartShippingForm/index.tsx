@@ -25,6 +25,7 @@ export const CartShippingForm = () => {
           <FieldGroup>
             <TextField
               id="cep"
+              mask="99999-999"
               placeholder="00000-000"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}

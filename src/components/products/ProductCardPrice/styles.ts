@@ -34,5 +34,6 @@ export const Container = styled.span`
   ${media.lessThan('medium')`
     flex-direction: column;
     gap: .4rem;
+    text-align: center;
   `}
 `

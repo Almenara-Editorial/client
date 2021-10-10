@@ -189,8 +189,9 @@ export const Container = styled.button.attrs<ButtonProps>(
   }
 
   ${FieldGroup} & {
+    flex: 0;
     z-index: var(--layer-base);
-    --button-width: fit-content;
+    --button-width: fit-content !important;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }

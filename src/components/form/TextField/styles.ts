@@ -104,6 +104,7 @@ export const Input = styled.input`
   }
 
   ${FieldGroup} & {
+    flex: 1;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }

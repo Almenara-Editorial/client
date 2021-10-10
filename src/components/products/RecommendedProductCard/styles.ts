@@ -9,6 +9,7 @@ export const Container = styled.div`
 export const Text = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: var(--space-sm);
   padding-block: 2.4rem;
 `

@@ -26,19 +26,26 @@ export const CartProduct = ({ product }: CartProductProps) => {
   return (
     <Container>
       <ProductCardThumbnail src={product.imageSrc[0]} />
-      <Info>
-        <ProductCardName name={product.name} />
-        <ProductCardPrice
-          price={product.price}
-          promoPrice={product.promoPrice}
-        />
-      </Info>
-      <Actions>
-        <NumberField min={1} onChange={handleChange} value={product.quantity} />
-        <RemoveButton onClick={() => removeProductFromCart(product.id)}>
-          Remover
-        </RemoveButton>
-      </Actions>
+      <div className="text">
+        <Info>
+          <ProductCardName textAlign="left" name={product.name} />
+          <ProductCardPrice
+            textAlign="left"
+            price={product.price}
+            promoPrice={product.promoPrice}
+          />
+        </Info>
+        <Actions>
+          <NumberField
+            min={1}
+            onChange={handleChange}
+            value={product.quantity}
+          />
+          <RemoveButton onClick={() => removeProductFromCart(product.id)}>
+            Remover
+          </RemoveButton>
+        </Actions>
+      </div>
     </Container>
   )
 }

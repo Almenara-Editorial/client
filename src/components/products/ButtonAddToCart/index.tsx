@@ -21,7 +21,7 @@ export const ButtonAddToCart = ({ productId }: ButtonAddToCartProps) => {
       ) : (
         <Checkmark aria-label="checkmark icon" />
       )}
-      <span>{!inCart ? 'Adicionar ao carrinho' : 'Adicionado'}</span>
+      <span>{!inCart ? 'Adicionar' : 'Adicionado'}</span>
     </Container>
   )
 }

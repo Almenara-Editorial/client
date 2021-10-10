@@ -3,6 +3,7 @@ import { Container } from './styles'
 
 type ProductCardPriceProps = {
   price: number
+  textAlign?: 'left' | 'center'
   promoPrice?: number | null
   quantity?: number
   muted?: boolean
@@ -11,11 +12,12 @@ type ProductCardPriceProps = {
 export function ProductCardPrice({
   price,
   promoPrice,
+  textAlign = 'center',
   quantity,
   muted
 }: ProductCardPriceProps) {
   return (
-    <Container data-muted={muted}>
+    <Container style={{ textAlign }} data-muted={muted}>
       <div data-old-price={!!promoPrice}>
         {quantity && !promoPrice && <span>{quantity}x </span>}
         <span>{formatToCurrency(price)}</span>
