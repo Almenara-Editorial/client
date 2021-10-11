@@ -1,4 +1,5 @@
 import { Wrapper } from '@/components/shared'
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled(Wrapper)``
@@ -7,6 +8,10 @@ export const Title = styled.h2`
   font-size: 4rem;
   font-family: var(--font-title);
   margin-bottom: 3.2rem;
+
+  ${media.lessThan('medium')`
+    font-size: 3rem;
+  `}
 `
 
 export const Body = styled.div`

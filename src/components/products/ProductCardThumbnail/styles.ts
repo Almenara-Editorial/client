@@ -8,6 +8,7 @@ export const Container = styled.div`
   padding: 1.8rem;
   display: flex;
   flex-shrink: 0;
+  width: 100%;
   align-items: center;
   justify-content: center;
   transition: all 0.1s;

@@ -7,6 +7,7 @@ export const Container = styled.div`
   padding-block: 4.8rem;
 
   ${media.lessThan('medium')`
+    padding-block: 0;
     padding-inline: 2.4rem;
   `}
 `

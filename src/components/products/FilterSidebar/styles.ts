@@ -12,3 +12,12 @@ export const Container = styled.div`
   flex: 1 0 28rem;
   padding: 0 2.4rem;
 `
+
+export const FilterButton = styled.button`
+  position: fixed;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 0;
+`

@@ -17,7 +17,7 @@ export const ProductCardGroupTitle = styled.div.attrs<ProductCardGroupTitleProps
   margin-bottom: var(--space-xl);
 
   font-family: var(--font-title);
-  font-size: 3.2rem;
+  font-size: var(--font-xl);
   font-weight: var(--title-regular);
   text-align: center;
   white-space: nowrap;

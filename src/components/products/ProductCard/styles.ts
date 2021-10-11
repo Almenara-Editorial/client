@@ -15,6 +15,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  min-width: 100%;
   max-width: 21.2rem;
   padding-block: 1.6rem;
 
