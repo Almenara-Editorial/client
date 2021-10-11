@@ -3,9 +3,11 @@ import { MediaMatch } from '@/components/layout'
 import { Modal } from '@/components/shared'
 import { useModal } from '@/hooks'
 import { FilterItemsGroupModel } from '@/models/filter'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 import { FilterSidebarGroup, FilterSelectedGroup } from '..'
-import { Container, FilterButton } from './styles'
+import { Container, FilterButton, FilterModal } from './styles'
 
 type FilterSidebarProps = {
   filters: Record<string, FilterItemsGroupModel>
@@ -13,6 +15,12 @@ type FilterSidebarProps = {
 
 export const FilterSidebar = ({ filters }: FilterSidebarProps) => {
   const modalMethods = useModal()
+  const { asPath } = useRouter()
+
+  useEffect(() => {
+    modalMethods.closeModal()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [asPath])
 
   return (
     <>
@@ -28,7 +36,7 @@ export const FilterSidebar = ({ filters }: FilterSidebarProps) => {
         <FilterButton onClick={modalMethods.openModal}>
           <Filter />
         </FilterButton>
-        <Modal {...modalMethods}>
+        <Modal {...modalMethods} as={FilterModal}>
           <FilterSelectedGroup />
           {Object.keys(filters)?.map((key) => (
             <FilterSidebarGroup key={key} group={filters[key]} />
