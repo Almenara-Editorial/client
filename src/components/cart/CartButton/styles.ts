@@ -14,12 +14,14 @@ const scaleAnimation = keyframes`
 export const Container = styled.button`
   position: relative;
 
+  -webkit-appearance: none;
   background: none;
   border: 0;
   font-size: 3.2rem;
 
   cursor: pointer;
   transition: all 0.2s ease;
+  color: var(--color-text);
 
   &:hover {
     color: var(--color-neutral-700);

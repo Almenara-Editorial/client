@@ -4,6 +4,7 @@ import { Label } from '../Label'
 
 export const Input = styled.input`
   width: 100%;
+  -webkit-appearance: none;
   height: var(--input-height);
   max-height: var(--input-height);
   padding-inline: var(--input-padding-x);

@@ -8,7 +8,7 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   transform: translateY(100%);
-  opacity: 0.5;
+  opacity: 0;
   background-color: var(--color-primary-500);
   z-index: var(--layer-modal);
   transition: all 0.2s ease;

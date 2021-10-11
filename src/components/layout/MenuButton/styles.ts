@@ -10,5 +10,6 @@ export const Container = styled.button`
   cursor: pointer;
 
   background: none;
+  color: var(--color-text);
   border: 0;
 `
