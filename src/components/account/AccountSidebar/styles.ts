@@ -1,8 +1,13 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
   flex: 3;
   padding-block: 4.8rem;
+
+  ${media.lessThan('medium')`
+    padding-block: 0;
+  `}
 `
 
 export const Links = styled.div`
@@ -24,4 +29,8 @@ export const MenuItem = styled.a`
   &:hover {
     background-color: var(--color-neutral-50);
   }
+
+  ${media.lessThan('medium')`
+    padding: 1.2rem 0;
+  `}
 `

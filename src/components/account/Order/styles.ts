@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -20,6 +21,14 @@ export const Container = styled.div`
     font-size: var(--font-xs);
     color: var(--color-neutral-500);
   }
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+    align-items:flex-start;
+    gap: 2.4rem;
+    padding: 1.8rem 0;
+
+  `}
 `
 
 export const Item = styled.div`
@@ -34,6 +43,7 @@ export const Column = styled.div`
   display: flex;
   gap: 3.2rem;
   align-items: flex-start;
+  flex-wrap: wrap;
 
   &:last-child {
     justify-content: flex-end;

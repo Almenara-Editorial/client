@@ -55,7 +55,7 @@ export const Header = ({ header }: HeaderProps) => {
         <MediaMatch lessThan="medium">
           <div className="mobile-buttons">
             <CartDropdown />
-            <Menu links={header.links} />
+            <Menu links={header?.links} />
           </div>
         </MediaMatch>
       </Wrapper>

@@ -14,7 +14,7 @@ type HeaderAccountProps = {
 }
 
 const links = [
-  { title: 'Seus Pedidos', url: '/seus-pedidos' },
+  { title: 'Seus Pedidos', url: '/conta/seus-pedidos' },
   {
     title: 'Configurações',
     subtitle: 'Dados de usuário, endereços, métodos de pagamentos.',
