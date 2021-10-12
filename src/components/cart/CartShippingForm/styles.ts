@@ -11,6 +11,6 @@ export const Row = styled.div`
   ${media.lessThan('medium')`
     flex-direction: column;
     align-items:flex-start;
-    gap: .8rem;
+    gap: 1.2rem;
   `}
 `

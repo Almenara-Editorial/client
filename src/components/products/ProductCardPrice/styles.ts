@@ -1,3 +1,4 @@
+import { Container as CartProduct } from '@/components/cart/CartProduct/styles'
 import { media } from '@/utils'
 import styled from 'styled-components'
 
@@ -36,4 +37,8 @@ export const Container = styled.span`
     gap: .4rem;
     text-align: center;
   `}
+
+  ${CartProduct} & {
+    align-items: flex-start;
+  }
 `

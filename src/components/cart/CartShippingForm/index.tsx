@@ -37,7 +37,12 @@ export const CartShippingForm = () => {
             </Button>
           </FieldGroup>
         </form>
-        <Anchor href="#" size="sm">
+        <Anchor
+          href="https://buscacepinter.correios.com.br/app/endereco/index.php"
+          target="_blank"
+          rel="noopener noreferrer"
+          size="sm"
+        >
           Não sei meu CEP
         </Anchor>
       </Row>

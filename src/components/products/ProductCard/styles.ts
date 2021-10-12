@@ -38,6 +38,7 @@ export const OffPercentage = styled.span`
   z-index: var(--layer-base);
   pointer-events: none;
   user-select: none;
+  white-space: nowrap;
 
   height: 2rem;
   padding-inline: 1.6rem;

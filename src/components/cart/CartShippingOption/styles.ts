@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -8,15 +9,22 @@ export const Container = styled.div`
     margin-top: 1.8rem;
   }
 
-  > div:first-child {
-    flex: 1 0 30rem;
+  > div {
+    flex: 2;
   }
 
-  > div:nth-child(2) {
-    flex: 1 0 7rem;
+  > div + div {
+    flex: 0;
+    white-space: nowrap;
   }
 
-  > div:nth-child(3) {
-    flex: 1 0 12rem;
-  }
+  ${media.greaterThan('medium')`
+    > div:first-child {
+      flex: 1 0 30rem;
+    }
+
+    > div:nth-child(2) {
+      flex: 1 0 7rem;
+    }
+  `}
 `

@@ -1,3 +1,4 @@
+import { MediaMatch } from '@/components/layout'
 import { ButtonLink, Hr, Link } from '@/components/shared'
 import { useCart } from '@/contexts'
 import { formatToCurrency } from '@/utils'
@@ -23,7 +24,12 @@ export const CartSummary = () => {
           - {formatToCurrency(totals.products)}
         </div>
       </Item> */}
-      <Hr space="xl" />
+      <MediaMatch greaterThan="medium">
+        <Hr space="xl" />
+      </MediaMatch>
+      <MediaMatch lessThan="medium">
+        <Hr space="lg" />
+      </MediaMatch>
       <Total>
         <div>Total</div>
         <div>{formatToCurrency(totals.total)}</div>

@@ -6,6 +6,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 1.2rem;
+  padding: 3.2rem 0;
   border-bottom: 1px solid var(--color-neutral-100);
 
   ${media.greaterThan('medium')`
@@ -24,6 +25,8 @@ export const Info = styled.div`
 
   ${media.lessThan('medium')`
     align-itens: flex-start;
+    gap: 1.2rem;
+    padding-bottom: 1.2rem;
   `}
 
   ${media.greaterThan('medium')`

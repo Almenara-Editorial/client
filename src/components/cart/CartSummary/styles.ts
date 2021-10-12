@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -8,6 +9,10 @@ export const Container = styled.div`
   padding: var(--space-xl);
   border: 1px solid var(--color-neutral-100);
   border-radius: 0.4rem;
+
+  ${media.lessThan('medium')`
+    padding: var(--space-lg);
+  `}
 `
 export const Title = styled.h2`
   font-family: var(--font-title);
