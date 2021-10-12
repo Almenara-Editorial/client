@@ -84,6 +84,17 @@ const GlobalStyles = createGlobalStyle`
     --body-regular: 400;
     --body-bold: 700;
 
+    ${media.lessThan('medium')`
+      --font-xs: 1.2rem;
+      --font-sm: 1.4rem;
+      --font-rg: 1.6rem;
+      --font-md: 1.8rem;
+      --font-lg: 2.2rem;
+      --font-xl: 2.8rem;
+      --font-2xl: 3.2rem;
+      --font-3xl: 3.8rem;
+    `}
+
     --color-primary-100: ${colors['blue-100']};
     --color-primary-200: ${colors['blue-200']};
     --color-primary-400: ${colors['blue-400']};
