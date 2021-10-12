@@ -28,7 +28,6 @@ export const FieldRow = styled.div`
     width: 100%;
     flex-direction: column;
     align-items: stretch;
-
   `}
 `
 export const Separator = styled.div`

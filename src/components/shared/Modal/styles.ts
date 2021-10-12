@@ -1,3 +1,4 @@
+import { media } from '@/utils'
 import styled, { keyframes } from 'styled-components'
 
 const modalAnimation = keyframes`
@@ -33,7 +34,9 @@ export const Container = styled.div`
   will-change: transform, opacity;
   animation: ${modalAnimation} 0.3s ease;
 
-  max-width: calc(100vw - 2.4rem) !important;
+  ${media.lessThan('medium')`
+    max-width: calc(100vw - 2.4rem) !important;
+  `}
 `
 
 export const Overlay = styled.div`
