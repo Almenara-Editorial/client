@@ -5,7 +5,7 @@ const requiredMessage = (field: string) => `${field} é obrigatório.`
 export const schema = yup
   .object()
   .shape({
-    username: yup.string().required(requiredMessage('Nome de usuário')),
+    fullName: yup.string().required(requiredMessage('Nome')),
     email: yup
       .string()
       .email('Digite um e-mail válido')

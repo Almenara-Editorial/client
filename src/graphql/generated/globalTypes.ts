@@ -34,6 +34,7 @@ export interface UsersPermissionsRegisterInput {
   username: string;
   email: string;
   password: string;
+  fullName: string;
 }
 
 export interface createNewsletterInput {

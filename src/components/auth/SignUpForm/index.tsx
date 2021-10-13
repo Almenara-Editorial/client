@@ -12,7 +12,7 @@ import { ErrorMessage } from '@/components/form/ErrorMessage'
 import { getFormErrorMessageById } from '@/utils'
 
 type SignUpFormValues = {
-  username: string
+  fullName: string
   email: string
   password: string
   confirmPassword: string
@@ -36,7 +36,7 @@ export const SignUpForm = () => {
       !error &&
         signIn('credentials', {
           email: getValues('email'),
-          username: getValues('username'),
+          username: getValues('email'),
           password: getValues('password'),
           callbackUrl: '/'
         })
@@ -47,7 +47,8 @@ export const SignUpForm = () => {
     await createUser({
       variables: {
         input: {
-          username: values.username,
+          fullName: values.fullName,
+          username: values.email,
           password: values.password,
           email: values.email
         }
@@ -58,7 +59,7 @@ export const SignUpForm = () => {
   return (
     <RHFForm {...formMethods} onSubmit={onSubmit}>
       <Fields onSubmit={handleSubmit(onSubmit)}>
-        <RHFTextField label="Usuário" name="username" />
+        <RHFTextField label="Nome" name="fullName" />
         <RHFTextField label="E-mail" name="email" />
         <RHFTextField label="Senha" type="password" name="password" />
         <RHFTextField
