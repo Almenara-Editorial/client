@@ -46,12 +46,12 @@ export const Header = ({ header }: HeaderProps) => {
             <Logo />
           </Link>
         </div>
-        <MediaMatch greaterThan="medium">
-          <div className="links">
+        <div className="right">
+          <div className="search">
             <SearchForm />
-            <HeaderActions />
           </div>
-        </MediaMatch>
+          <HeaderActions />
+        </div>
         <MediaMatch lessThan="medium">
           <div className="mobile-buttons">
             <CartDropdown />

@@ -32,7 +32,7 @@ export const Wrapper = styled(DefaultWrapper)`
   }
 
   .logo {
-    flex: 5 0 54.3rem;
+    flex: 5;
     display: flex;
     align-items: center;
     font-size: 16rem;
@@ -40,9 +40,18 @@ export const Wrapper = styled(DefaultWrapper)`
     line-height: 0;
   }
 
-  .links {
+  .right {
+    flex: 7;
     display: flex;
     gap: var(--space-xl);
+
+    ${media.lessThan('medium')`
+      display: none;
+    `}
+  }
+
+  .search {
+    flex: 1 1;
   }
 
   .mobile-buttons {

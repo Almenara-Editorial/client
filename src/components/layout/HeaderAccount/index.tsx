@@ -18,7 +18,7 @@ const links = [
   {
     title: 'Configurações',
     subtitle: 'Dados de usuário, endereços, métodos de pagamentos.',
-    url: '/minha-conta'
+    url: '/conta/configuracoes'
   }
 ]
 
