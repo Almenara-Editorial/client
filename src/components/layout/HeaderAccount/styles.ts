@@ -4,6 +4,7 @@ import { Container as Menu } from '../Menu/styles'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1rem;
 
   li {
