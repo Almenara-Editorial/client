@@ -51,7 +51,7 @@ export function Success() {
     return (
       <Container>
         <Title>
-          {capitalizeFirstLetter(createdOrder.user?.username)}, obrigado por
+          {capitalizeFirstLetter(createdOrder.user?.fullName)}, obrigado por
           comprar conosco. Tenha uma boa leitura e volte sempre.
         </Title>
         <Body>

@@ -5,7 +5,7 @@ import { Container as CartSummary } from '@/components/cart/CartSummary/styles'
 import styled from 'styled-components'
 
 export type AnchorProps = HTMLAttributes<HTMLAnchorElement> & {
-  size?: 'sm' | 'rg' | 'lg' | 'xl'
+  size?: 'xs' | 'sm' | 'rg' | 'lg' | 'xl'
   color?: 'white' | 'neutral' | 'tertiary' | 'light' | 'primary'
   align?: 'center' | 'right' | 'left'
 }

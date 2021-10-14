@@ -1,4 +1,4 @@
-import { ProductModel } from './product'
+import { OrderProductModel } from './product'
 
 export interface User {
   id: number
@@ -83,6 +83,7 @@ export interface Livro {
 export type UserModel = {
   id: number
   username: string
+  fullName: string
   email: string
 }
 
@@ -94,12 +95,8 @@ export type OrderModel = {
   cardLastFour?: string
   status: string
   total: string
-  books: (Pick<
-    ProductModel,
-    'id' | 'name' | 'price' | 'imageSrc' | 'promoPrice' | 'slug'
-  > & {
-    quantity: number
-  })[]
+  paymentUrl: string
+  books: OrderProductModel[]
   payment: {
     id: string
     status: string

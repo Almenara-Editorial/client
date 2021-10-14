@@ -1,6 +1,7 @@
-import { Container, Item, OrderId, Column } from './styles'
+import { Container, Column, Header } from './styles'
 import { OrderModel } from '@/models/order'
-import { Anchor } from '@/components/shared'
+import { Anchor, DownloadButton } from '@/components/shared'
+import { OrderProductCard } from '../OrderProductCard'
 
 type OrderProps = {
   order: OrderModel
@@ -9,30 +10,29 @@ type OrderProps = {
 export function Order({ order }: OrderProps) {
   return (
     <Container>
-      <Column>
-        <Item>
-          <div className="title">Pedido:</div>
-          <OrderId>#{order.id}</OrderId>
-        </Item>
-        <Item>
-          <div className="title">Data do pedido:</div>
-          <div>{order.createdAt}</div>
-        </Item>
-        <Item>
-          <div className="title">Total:</div>
-          <div>{order.total}</div>
-        </Item>
-        <Item>
-          <div className="title">Status:</div>
-          <div>{order.status}</div>
-        </Item>
-      </Column>
-      <Column>
-        <Item>
-          <Anchor as="button" size="sm" color="primary">
+      <Header>
+        <div>PEDIDO: {order.id}</div>
+        <div>DATA: {order.createdAt}</div>
+        <div>TOTAL: {order.total}</div>
+        <div>STATUS: {order.status}</div>
+        <div>
+          <Anchor as="button" size="xs" color="primary">
             Ver pedido
           </Anchor>
-        </Item>
+        </div>
+      </Header>
+      <Column>
+        {order.books.map((book) => (
+          <OrderProductCard key={book.id} product={book} />
+        ))}
+      </Column>
+      <Column>
+        {order.paymentUrl && (
+          <DownloadButton
+            url={order.paymentUrl}
+            text="Dowload do documento para pagamento"
+          />
+        )}
       </Column>
     </Container>
   )

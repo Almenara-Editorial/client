@@ -1,8 +1,9 @@
+import styled from 'styled-components'
 import { Container as ProductCard } from '@/components/products/ProductCard/styles'
 import { Container as CartProductsGroup } from '@/components/cart/CartProductsGroup/styles'
 import { Container as CheckoutProductCard } from '@/components/checkout/CheckoutProductCard/styles'
 import { Container as RecommendedProductCard } from '@/components/products/RecommendedProductCard/styles'
-import styled from 'styled-components'
+import { Container as OrderProductCard } from '@/components/account/OrderProductCard/styles'
 
 export const Container = styled.div`
   padding: 1.8rem;
@@ -55,5 +56,10 @@ export const Container = styled.div`
 
   ${ProductCard}:hover & {
     transform: scale(1.02);
+  }
+
+  ${OrderProductCard} & {
+    width: 9rem;
+    height: 12rem;
   }
 `

@@ -1,4 +1,5 @@
 import { Container as CartProduct } from '@/components/cart/CartProduct/styles'
+import { Container as OrderProductCard } from '@/components/account/OrderProductCard/styles'
 import { media } from '@/utils'
 import styled from 'styled-components'
 
@@ -6,6 +7,7 @@ export const Container = styled.span`
   display: flex;
   align-items: center;
   gap: 1rem;
+  white-space: nowrap;
 
   font-size: var(--font-sm);
   font-family: var(--font-body);
@@ -39,6 +41,10 @@ export const Container = styled.span`
   `}
 
   ${CartProduct} & {
+    align-items: flex-start;
+  }
+
+  ${OrderProductCard} & {
     align-items: flex-start;
   }
 `

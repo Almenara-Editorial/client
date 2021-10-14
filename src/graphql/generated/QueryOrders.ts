@@ -20,14 +20,34 @@ export interface QueryOrders_cabecalho {
   links: (QueryOrders_cabecalho_links | null)[] | null;
 }
 
+export interface QueryOrders_orders_books_book_authors {
+  __typename: "Author";
+  name: string | null;
+}
+
+export interface QueryOrders_orders_books_book_image {
+  __typename: "UploadFile";
+  src: string;
+  formats: any | null;
+}
+
 export interface QueryOrders_orders_books_book {
   __typename: "Livro";
+  id: string;
+  name: string;
   slug: string;
+  price: number;
+  stock: number;
+  promoPrice: number | null;
+  authors: QueryOrders_orders_books_book_authors[];
+  image: QueryOrders_orders_books_book_image[];
 }
 
 export interface QueryOrders_orders_books {
   __typename: "ComponentOrderOrderProduct";
   book: QueryOrders_orders_books_book | null;
+  price: number | null;
+  quantity: number;
 }
 
 export interface QueryOrders_orders {
@@ -37,6 +57,7 @@ export interface QueryOrders_orders {
   status: ENUM_ORDER_STATUS | null;
   total: number;
   created_at: any;
+  paymentUrl: string | null;
 }
 
 export interface QueryOrders_rodape_links_link {

@@ -3,6 +3,7 @@ import { QueryOrders_orders } from '@/graphql/generated/QueryOrders'
 import { OrderModel } from '@/models/order'
 import { formatToCurrency } from '../format-to-currency'
 import { getImageUrl } from '../get-image-url'
+import { OrderProductModel } from '@/models'
 
 type ApiUploadFile = {
   id: number
@@ -96,6 +97,7 @@ type ApiUsersPermissionsUser = {
   created_at: Date
   updated_at: Date
   username: string
+  fullName: string
   email: string
   provider: string
 }
@@ -143,7 +145,8 @@ export function orderMapper(order: ApiOrder): OrderModel {
     total: order.total,
     user: order.user,
     paymentBrand: order.paymentBrand,
-    cardLastFour: order.cardLastFour
+    cardLastFour: order.cardLastFour,
+    paymentUrl: order.payment.documentUrl
   }
 }
 
@@ -155,6 +158,20 @@ export function ordersMapper(
   return orders?.map((order) => ({
     id: order.id.toString(),
     createdAt: format(new Date(order.created_at), 'dd/MM/yyyy'),
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    books: order.books!.map(
+      (book) =>
+        ({
+          id: book?.book?.id,
+          name: book?.book?.name,
+          imageSrc: book?.book?.image.map((image) => getImageUrl(image.src)),
+          price: book?.price,
+          slug: book?.book?.slug,
+          stock: book?.book?.stock,
+          quantity: book?.quantity
+        } as OrderProductModel)
+    ),
+    paymentUrl: order.paymentUrl,
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     total: formatToCurrency(Number(order.total)),
     status: order.status || ''

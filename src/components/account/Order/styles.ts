@@ -2,48 +2,21 @@ import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  display: flex;
-  text-align: center;
-  font-size: var(--font-sm);
-  padding: 1.8rem;
-  border-bottom: 2px solid var(--color-neutral-50);
+  padding-bottom: 1.2rem;
+  border: 1px solid var(--color-neutral-100);
+  border-radius: var(--radius-sm);
 
-  > div {
-    flex: 1;
+  & + & {
+    margin-top: 2.4rem;
   }
-
-  &[data-is-title='true'] {
-    font-weight: var(--body-bold);
-  }
-
-  .title {
-    text-transform: uppercase;
-    font-size: var(--font-xs);
-    color: var(--color-neutral-500);
-  }
-
-  ${media.lessThan('medium')`
-    flex-direction: column;
-    align-items:flex-start;
-    gap: 2.4rem;
-    padding: 1.8rem 0;
-
-  `}
-`
-
-export const Item = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.8rem;
 `
 
 export const Column = styled.div`
   flex: 1;
   display: flex;
-  gap: 3.2rem;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding-inline: 2.4rem;
 
   &:last-child {
     justify-content: flex-end;
@@ -53,4 +26,30 @@ export const Column = styled.div`
 export const OrderId = styled.h3`
   font-size: var(--font-md);
   font-weight: var(--body-bold);
+`
+
+export const Header = styled.header`
+  display: flex;
+  gap: 2.4rem;
+  text-transform: uppercase;
+  font-size: var(--font-xs);
+  color: var(--color-neutral-500);
+  background-color: var(--color-neutral-50);
+  padding: 1.2rem 2.4rem;
+
+  font-weight: var(--body-bold);
+
+  ${media.greaterThan('medium')`
+    > div:last-child {
+      margin-left: auto;
+    }
+  `}
+
+  ${media.lessThan('medium')`
+    flex-wrap: wrap;
+
+    > div {
+      flex:1 0 100%;
+    }
+  `}
 `

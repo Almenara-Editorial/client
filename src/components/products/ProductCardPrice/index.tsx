@@ -23,7 +23,7 @@ export function ProductCardPrice({
         <span>{formatToCurrency(price)}</span>
       </div>
       <div>
-        {quantity && <span>{quantity}x </span>}
+        {quantity && promoPrice && <span>{quantity}x </span>}
         {promoPrice && formatToCurrency(promoPrice)}
       </div>
     </Container>

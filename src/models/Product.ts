@@ -11,6 +11,13 @@ export type ProductModel = {
   particulars: string
 }
 
+export type OrderProductModel = Pick<
+  ProductModel,
+  'id' | 'name' | 'price' | 'imageSrc' | 'slug'
+> & {
+  quantity: number
+}
+
 type SeeMoreModel = {
   name: string
   url: string
