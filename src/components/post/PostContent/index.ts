@@ -1,9 +1,14 @@
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const PostContent = styled.div`
-  font-size: 2rem;
-  line-height: 1.8;
+  font-size: 1.8rem;
+  line-height: 2;
   color: var(--color-neutral-800);
+
+  ${media.lessThan('medium')`
+    font-size: 1.6rem;
+  `}
 
   h1,
   h2,
@@ -43,6 +48,12 @@ export const PostContent = styled.div`
   ol,
   table {
     margin-bottom: var(--space-lg);
+  }
+
+  figure,
+  table {
+    max-width: 100%;
+    overflow-x: auto;
   }
 
   ul,
