@@ -32,7 +32,7 @@ export const Wrapper = styled(DefaultWrapper)`
   }
 
   .logo {
-    flex: 5;
+    flex: 4;
     display: flex;
     align-items: center;
     font-size: 16rem;
@@ -41,13 +41,28 @@ export const Wrapper = styled(DefaultWrapper)`
   }
 
   .right {
-    flex: 7;
+    flex: 8;
     display: flex;
+    align-items: center;
     gap: var(--space-xl);
 
     ${media.lessThan('medium')`
       display: none;
     `}
+  }
+
+  .phone {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    gap: 0.4rem;
+    color: var(--color-neutral-700);
+
+    i {
+      font-size: 2rem;
+      line-height: 0;
+      color: var(--color-neutral-300);
+    }
   }
 
   .search {

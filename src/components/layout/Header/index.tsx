@@ -8,6 +8,7 @@ import { Menu } from '../Menu'
 import { SearchForm } from '../SearchForm'
 import { HeaderActions } from '../HeaderActions'
 import { CartDropdown } from '@/components/cart'
+import { Phone } from '@/components/icons'
 
 type HeaderProps = {
   header: HeaderModel
@@ -47,6 +48,12 @@ export const Header = ({ header }: HeaderProps) => {
           </Link>
         </div>
         <div className="right">
+          <div className="phone">
+            <i>
+              <Phone />
+            </i>
+            (41) 99270-2079
+          </div>
           <div className="search">
             <SearchForm />
           </div>
