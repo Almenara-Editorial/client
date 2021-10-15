@@ -6,25 +6,22 @@ import { ErrorMessage } from '@/components/form/ErrorMessage'
 import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { useState } from 'react'
 import { FieldsWrapper } from '@/components/form'
-import { DefaultSession } from 'next-auth'
 
 type AccountSettingsFormValues = {
-  fullName: string
-  email: string
+  currentPassword: string
+  newPassword: string
+  newPasswordConfirmation: string
 }
 
-type AccountSettingsFormProps = {
-  user: DefaultSession['user']
-}
-
-export const AccountSettingsForm = ({ user }: AccountSettingsFormProps) => {
+export const AccountSettingsForm = () => {
   const [formSuccess, setFormSuccess] = useState('')
   const [formError, setFormError] = useState('')
   const formMethods = useForm<AccountSettingsFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
-      fullName: (user?.name as string) || '',
-      email: (user?.email as string) || ''
+      currentPassword: '',
+      newPassword: '',
+      newPasswordConfirmation: ''
     }
   })
   const {
@@ -38,8 +35,18 @@ export const AccountSettingsForm = ({ user }: AccountSettingsFormProps) => {
   return (
     <RHFForm {...formMethods} onSubmit={onSubmit}>
       <FieldsWrapper>
-        <RHFTextField label="Nome completo" name="fullName" />
-        <RHFTextField label="E-mail" name="email" />
+        <RHFTextField
+          label="Senha atual"
+          type="password"
+          name="currentPassword"
+        />
+        <RHFTextField label="Nova senha:" type="password" name="newPassword" />
+        <RHFTextField
+          label="Confirme a nova senha:"
+          type="password"
+          name="newPasswordConfirmation"
+        />
+
         <div>
           <Button
             size="rg-full"

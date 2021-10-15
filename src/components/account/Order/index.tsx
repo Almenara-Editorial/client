@@ -30,7 +30,7 @@ export function Order({ order }: OrderProps) {
         {order.paymentUrl && (
           <DownloadButton
             url={order.paymentUrl}
-            text="Dowload do documento para pagamento"
+            text="Download do documento para pagamento"
           />
         )}
       </Column>
