@@ -23,6 +23,10 @@ export enum ENUM_ORDER_STATUS {
   Rejeitado = "Rejeitado",
 }
 
+export interface InputID {
+  id: string;
+}
+
 export interface NewsletterInput {
   email: string;
   name: string;
@@ -39,6 +43,28 @@ export interface UsersPermissionsRegisterInput {
 
 export interface createNewsletterInput {
   data?: NewsletterInput | null;
+}
+
+export interface editUserInput {
+  username?: string | null;
+  email?: string | null;
+  provider?: string | null;
+  password?: string | null;
+  resetPasswordToken?: string | null;
+  confirmationToken?: string | null;
+  confirmed?: boolean | null;
+  blocked?: boolean | null;
+  role?: string | null;
+  privacyPolicy?: string | null;
+  termsOfUse?: string | null;
+  fullName?: string | null;
+  created_by?: string | null;
+  updated_by?: string | null;
+}
+
+export interface updateUserInput {
+  where?: InputID | null;
+  data?: editUserInput | null;
 }
 
 //==============================================================

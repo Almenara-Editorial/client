@@ -7,6 +7,9 @@ import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { useState } from 'react'
 import { FieldsWrapper } from '@/components/form'
 import { DefaultSession } from 'next-auth'
+import { useMutation } from '@apollo/client'
+import { MUTATION_UPDATE_USER } from '@/graphql/mutations'
+import { signOut, useSession } from 'next-auth/client'
 
 type AccountSettingsFormValues = {
   fullName: string
@@ -18,8 +21,9 @@ type AccountSettingsFormProps = {
 }
 
 export const AccountSettingsForm = ({ user }: AccountSettingsFormProps) => {
-  const [formSuccess, setFormSuccess] = useState('')
-  const [formError, setFormError] = useState('')
+  const [session] = useSession()
+  const [formSuccess, setFormSuccess] = useState<null | string>('')
+  const [formError, setFormError] = useState<null | string>('')
   const formMethods = useForm<AccountSettingsFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -27,12 +31,38 @@ export const AccountSettingsForm = ({ user }: AccountSettingsFormProps) => {
       email: (user?.email as string) || ''
     }
   })
-  const {
-    formState: { isSubmitting }
-  } = formMethods
+  const [updateAccount, { error, loading }] = useMutation(
+    MUTATION_UPDATE_USER,
+    {
+      context: { session },
+      onError: (err) => {
+        const errorId =
+          err?.graphQLErrors[0]?.extensions?.exception?.data?.message[0]
+            .messages[0]?.id
+        errorId &&
+          setFormError(
+            'Houve um problema ao atualizar as informações de usuário'
+          )
+      },
+      onCompleted: () => {
+        setFormError(null)
+        !error && setFormSuccess('Informações atualizadas')
+        signOut()
+      }
+    }
+  )
 
   async function onSubmit(values: AccountSettingsFormValues) {
-    console.log(values)
+    await updateAccount({
+      variables: {
+        input: {
+          where: {
+            id: '53'
+          },
+          data: values
+        }
+      }
+    })
   }
 
   return (
@@ -42,11 +72,12 @@ export const AccountSettingsForm = ({ user }: AccountSettingsFormProps) => {
         <RHFTextField label="E-mail" name="email" />
         <div>
           <Button
+            type="submit"
             size="rg-full"
-            isLoading={isSubmitting}
+            isLoading={loading}
             isSuccess={!!formSuccess}
           >
-            Enviar
+            {formSuccess ? 'Atualizado' : 'Enviar'}
           </Button>
           {formError && <ErrorMessage error={formError} />}
         </div>
