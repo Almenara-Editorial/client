@@ -1,18 +1,20 @@
 import { Container, Title } from './styles'
 import { AccountSettingsForm } from '@/components/account'
-import { DefaultSession } from 'next-auth'
+import { DefaultSession, Session } from 'next-auth'
 
 export type AccountSettingsTemplateProps = {
   user: DefaultSession['user']
+  session: Session | null
 }
 
 export function AccountSettingsTemplate({
-  user
+  user,
+  session
 }: AccountSettingsTemplateProps) {
   return (
     <Container>
       <Title>Alterar informações da conta</Title>
-      <AccountSettingsForm user={user} />
+      <AccountSettingsForm session={session} user={user} />
     </Container>
   )
 }

@@ -63,7 +63,7 @@ export const HeaderAccount = ({ withoutDropdown }: HeaderAccountProps) => {
       {session && withoutDropdown && (
         <ul>
           {links.map((link) => (
-            <li key={link.title}>
+            <li key={link.url}>
               <Link href={link.url} color="white">
                 {link.title}
               </Link>

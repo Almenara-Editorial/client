@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { schema } from './schema'
 import { ErrorMessage } from '@/components/form/ErrorMessage'
 import { getFormErrorMessageById } from '@/utils'
+import { useRouter } from 'next/router'
 
 type ForgotPasswordFormValues = {
   email: string
@@ -17,8 +18,12 @@ type ForgotPasswordFormValues = {
 export const ForgotPasswordForm = () => {
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false)
+  const { query } = useRouter()
   const formMethods = useForm<ForgotPasswordFormValues>({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: query?.email ? query.email.toString() : ''
+    }
   })
   const {
     formState: { isSubmitting }

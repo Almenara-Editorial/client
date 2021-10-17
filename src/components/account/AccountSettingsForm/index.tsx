@@ -1,86 +1,73 @@
-import { Button } from '@/components/shared'
+import { Button, ButtonLink } from '@/components/shared'
 import { useForm } from 'react-hook-form'
 import { schema } from './schema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ErrorMessage } from '@/components/form/ErrorMessage'
 import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { useState } from 'react'
-import { FieldsWrapper } from '@/components/form'
-import { DefaultSession } from 'next-auth'
-import { useMutation } from '@apollo/client'
-import { MUTATION_UPDATE_USER } from '@/graphql/mutations'
-import { signOut, useSession } from 'next-auth/client'
+import { FieldsWrapper, TextField } from '@/components/form'
+import { DefaultSession, Session } from 'next-auth'
+import { ButtonGroup } from './styles'
+import { updateUser } from '@/services'
 
 type AccountSettingsFormValues = {
   fullName: string
-  email: string
 }
 
 type AccountSettingsFormProps = {
   user: DefaultSession['user']
+  session: Session | null
 }
 
-export const AccountSettingsForm = ({ user }: AccountSettingsFormProps) => {
-  const [session] = useSession()
+export const AccountSettingsForm = ({
+  user,
+  session
+}: AccountSettingsFormProps) => {
   const [formSuccess, setFormSuccess] = useState<null | string>('')
   const [formError, setFormError] = useState<null | string>('')
   const formMethods = useForm<AccountSettingsFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
-      fullName: (user?.name as string) || '',
-      email: (user?.email as string) || ''
+      fullName: (user?.name as string) || ''
     }
   })
-  const [updateAccount, { error, loading }] = useMutation(
-    MUTATION_UPDATE_USER,
-    {
-      context: { session },
-      onError: (err) => {
-        const errorId =
-          err?.graphQLErrors[0]?.extensions?.exception?.data?.message[0]
-            .messages[0]?.id
-        errorId &&
-          setFormError(
-            'Houve um problema ao atualizar as informações de usuário'
-          )
-      },
-      onCompleted: () => {
-        setFormError(null)
-        !error && setFormSuccess('Informações atualizadas')
-        signOut()
-      }
-    }
-  )
+  const {
+    reset,
+    formState: { isSubmitting }
+  } = formMethods
 
   async function onSubmit(values: AccountSettingsFormValues) {
-    await updateAccount({
-      variables: {
-        input: {
-          where: {
-            id: '53'
-          },
-          data: values
-        }
-      }
-    })
+    return updateUser(values, (session?.jwt as string) || '')
+      .then((data) => {
+        setFormSuccess('Atualizado')
+        reset({
+          fullName: data.fullName
+        })
+      })
+      .catch(() => setFormError('Ocorreu um erro ao atualizar o perfil'))
   }
 
   return (
     <RHFForm {...formMethods} onSubmit={onSubmit}>
       <FieldsWrapper>
         <RHFTextField label="Nome completo" name="fullName" />
-        <RHFTextField label="E-mail" name="email" />
-        <div>
+        <TextField label="E-mail" disabled value={user?.email || ''} />
+        <ButtonGroup>
+          <ButtonLink
+            outline
+            href={`/recuperar-senha?email=${user?.email || ''}`}
+          >
+            Alterar senha
+          </ButtonLink>
           <Button
             type="submit"
-            size="rg-full"
-            isLoading={loading}
+            isLoading={isSubmitting}
             isSuccess={!!formSuccess}
           >
             {formSuccess ? 'Atualizado' : 'Enviar'}
           </Button>
           {formError && <ErrorMessage error={formError} />}
-        </div>
+        </ButtonGroup>
       </FieldsWrapper>
     </RHFForm>
   )

@@ -4,8 +4,8 @@ import { ForgotPasswordForm } from '@/components/auth'
 export function ForgotPasswordTemplate() {
   return (
     <AuthLayout
-      title="Recuperar senha"
-      subtitle="Digite seu e-mail que enviaremos um link para recuperação de senha."
+      title="Recuperar/Alterar senha"
+      subtitle="Digite seu e-mail que enviaremos um link para alteração de senha."
     >
       <ForgotPasswordForm />
     </AuthLayout>

@@ -14,10 +14,13 @@ import {
 
 type AccountSettingsProps = AccountSettingsTemplateProps
 
-export default function AccountSettings({ user }: AccountSettingsProps) {
+export default function AccountSettings({
+  user,
+  session
+}: AccountSettingsProps) {
   return (
     <AccountLayout>
-      <AccountSettingsTemplate user={user} />
+      <AccountSettingsTemplate session={session} user={user} />
     </AccountLayout>
   )
 }
@@ -39,6 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
+      session,
       user: session.user,
       initialApolloState: apolloClient.cache.extract(),
       ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })

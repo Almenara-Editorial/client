@@ -1,4 +1,4 @@
-import { commonDataMapper, initializeApollo, parseQueryToWhere } from '@/utils'
+import { commonDataMapper, initializeApollo } from '@/utils'
 import { GetServerSideProps } from 'next'
 import { QUERY_BOOKS } from '@/graphql/queries'
 import { QueryBooks, QueryBooksVariables } from '@/graphql/generated/QueryBooks'
@@ -8,21 +8,11 @@ export default function ForgotPassword() {
   return <ForgotPasswordTemplate />
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const apolloClient = initializeApollo()
-  const where = parseQueryToWhere(context.query)
 
   const { data } = await apolloClient.query<QueryBooks, QueryBooksVariables>({
-    query: QUERY_BOOKS,
-    variables: {
-      limit: 12,
-      where,
-      recommended: {
-        categorias: {
-          slug: ['recomendado']
-        }
-      }
-    }
+    query: QUERY_BOOKS
   })
 
   return {

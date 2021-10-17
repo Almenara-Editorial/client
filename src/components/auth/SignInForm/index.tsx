@@ -31,6 +31,8 @@ export const SignInForm = () => {
       redirect: false
     })
       .then((data) => {
+        setIsSigningIn(false)
+
         if (data?.error) {
           setSignInError('Credenciais inválidas, tente novamente.')
 
@@ -41,10 +43,10 @@ export const SignInForm = () => {
         pathname === '/entrar' && push('/')
       })
       .catch((error) => {
+        setIsSigningIn(false)
         console.log(error)
         setSignInError(error.response.data.message[0].messages[0].id)
       })
-    setIsSigningIn(false)
   }
 
   return (
