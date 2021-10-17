@@ -51,7 +51,12 @@ export const CartDropdownProduct = ({ product }: CartDropdownProductProps) => {
           price={product.price}
           promoPrice={product.promoPrice}
         />
-        <NumberField value={product.quantity} onChange={handleChange} />
+        <NumberField
+          min={1}
+          value={product.quantity}
+          max={product.stock}
+          onChange={handleChange}
+        />
         <div>
           <Anchor
             as="button"

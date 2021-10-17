@@ -17,6 +17,7 @@ Basic.args = {
     price: 30,
     imageSrc: ['img/example/book1.png'],
     quantity: 2,
-    slug: 'ahsush'
+    slug: 'ahsush',
+    stock: 1
   }
 }

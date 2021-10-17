@@ -6,7 +6,7 @@ export type CartItemModel = Pick<ProductModel, 'id'> & {
 
 export type CartProductModel = Pick<
   ProductModel,
-  'id' | 'name' | 'price' | 'slug' | 'imageSrc' | 'promoPrice'
+  'id' | 'name' | 'price' | 'slug' | 'imageSrc' | 'promoPrice' | 'stock'
 > & {
   quantity: number
 }

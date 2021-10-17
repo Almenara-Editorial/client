@@ -22,7 +22,7 @@ export function Order({ order }: OrderProps) {
         </div>
       </Header>
       <Column>
-        {order.books.map((book) => (
+        {order?.books?.map((book) => (
           <OrderProductCard key={book.id} product={book} />
         ))}
       </Column>

@@ -1,10 +1,10 @@
 import { CustomScrollbar } from '@/components/shared/CustomScrollbar'
-import { CartProductModel } from '@/models'
+import { OrderProductModel } from '@/models'
 import { CheckoutProductCard } from '../CheckoutProductCard'
 import { Container } from './styles'
 
 type CheckoutProductsProps = {
-  products: CartProductModel[]
+  products: OrderProductModel[]
 }
 
 export const CheckoutProducts = ({ products }: CheckoutProductsProps) => {

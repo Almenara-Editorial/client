@@ -1,5 +1,5 @@
 import { Container, Infos } from './styles'
-import { CartProductModel } from '@/models'
+import { OrderProductModel } from '@/models'
 import {
   ProductCardName,
   ProductCardPrice,
@@ -7,7 +7,7 @@ import {
 } from '@/components/products'
 
 type CheckoutProductCardProps = {
-  product: CartProductModel
+  product: OrderProductModel
 }
 
 export const CheckoutProductCard = ({ product }: CheckoutProductCardProps) => (

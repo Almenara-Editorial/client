@@ -125,15 +125,16 @@ export type ApiOrder = {
 
 export function orderMapper(order: ApiOrder): OrderModel {
   return {
-    books: order.books.map((product) => ({
-      id: product.book.id.toString(),
-      name: product.book.name,
-      price: product.book.promoPrice || product.book.price,
-      imageSrc: product.book.image.map((image) => getImageUrl(image.url)),
-      quantity: product.quantity,
-      slug: product.book.slug,
-      promoPrice: product.book.promoPrice
-    })),
+    books:
+      order?.books?.map((product) => ({
+        id: product.book.id.toString(),
+        name: product.book.name,
+        price: product.book.promoPrice || product.book.price,
+        imageSrc: product.book.image.map((image) => getImageUrl(image.url)),
+        quantity: product.quantity,
+        slug: product.book.slug,
+        promoPrice: product.book.promoPrice
+      })) || [],
     createdAt: format(new Date(order.created_at), 'dd/MM/yyyy'),
     status: order.status,
     id: order.id.toString(),
