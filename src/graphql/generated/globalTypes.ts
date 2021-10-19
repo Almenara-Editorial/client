@@ -23,6 +23,15 @@ export enum ENUM_ORDER_STATUS {
   Rejeitado = "Rejeitado",
 }
 
+export interface ContactInput {
+  name?: string | null;
+  email?: string | null;
+  subject?: string | null;
+  message?: string | null;
+  created_by?: string | null;
+  updated_by?: string | null;
+}
+
 export interface InputID {
   id: string;
 }
@@ -39,6 +48,10 @@ export interface UsersPermissionsRegisterInput {
   email: string;
   password: string;
   fullName: string;
+}
+
+export interface createContactInput {
+  data?: ContactInput | null;
 }
 
 export interface createNewsletterInput {

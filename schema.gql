@@ -378,6 +378,115 @@ type deleteCategoriaPayload {
   categoria: Categorias
 }
 
+type Contact {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String
+  email: String
+  subject: String
+  message: String
+}
+
+type ContactConnection {
+  values: [Contact]
+  groupBy: ContactGroupBy
+  aggregate: ContactAggregator
+}
+
+type ContactAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ContactGroupBy {
+  id: [ContactConnectionId]
+  created_at: [ContactConnectionCreated_at]
+  updated_at: [ContactConnectionUpdated_at]
+  name: [ContactConnectionName]
+  email: [ContactConnectionEmail]
+  subject: [ContactConnectionSubject]
+  message: [ContactConnectionMessage]
+}
+
+type ContactConnectionId {
+  key: ID
+  connection: ContactConnection
+}
+
+type ContactConnectionCreated_at {
+  key: DateTime
+  connection: ContactConnection
+}
+
+type ContactConnectionUpdated_at {
+  key: DateTime
+  connection: ContactConnection
+}
+
+type ContactConnectionName {
+  key: String
+  connection: ContactConnection
+}
+
+type ContactConnectionEmail {
+  key: String
+  connection: ContactConnection
+}
+
+type ContactConnectionSubject {
+  key: String
+  connection: ContactConnection
+}
+
+type ContactConnectionMessage {
+  key: String
+  connection: ContactConnection
+}
+
+input ContactInput {
+  name: String
+  email: String
+  subject: String
+  message: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editContactInput {
+  name: String
+  email: String
+  subject: String
+  message: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createContactInput {
+  data: ContactInput
+}
+
+type createContactPayload {
+  contact: Contact
+}
+
+input updateContactInput {
+  where: InputID
+  data: editContactInput
+}
+
+type updateContactPayload {
+  contact: Contact
+}
+
+input deleteContactInput {
+  where: InputID
+}
+
+type deleteContactPayload {
+  contact: Contact
+}
+
 type Home {
   id: ID!
   created_at: DateTime!
@@ -2009,7 +2118,7 @@ input editComponentProductDimensionInput {
   boxWeight: Float
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Author | AuthorConnection | AuthorAggregator | AuthorGroupBy | AuthorConnectionId | AuthorConnectionCreated_at | AuthorConnectionUpdated_at | AuthorConnectionName | AuthorConnectionBook | createAuthorPayload | updateAuthorPayload | deleteAuthorPayload | BannerHero | BannerHeroConnection | BannerHeroAggregator | BannerHeroGroupBy | BannerHeroConnectionId | BannerHeroConnectionCreated_at | BannerHeroConnectionUpdated_at | BannerHeroConnectionImage | BannerHeroConnectionUrl | createBannerHeroPayload | updateBannerHeroPayload | deleteBannerHeroPayload | Cabecalho | updateCabecalhoPayload | deleteCabecalhoPayload | Categorias | CategoriasConnection | CategoriasAggregator | CategoriasGroupBy | CategoriasConnectionId | CategoriasConnectionCreated_at | CategoriasConnectionUpdated_at | CategoriasConnectionName | CategoriasConnectionSlug | createCategoriaPayload | updateCategoriaPayload | deleteCategoriaPayload | Home | updateHomePayload | deleteHomePayload | Livro | LivroConnection | LivroAggregator | LivroAggregatorSum | LivroAggregatorAvg | LivroAggregatorMin | LivroAggregatorMax | LivroGroupBy | LivroConnectionId | LivroConnectionCreated_at | LivroConnectionUpdated_at | LivroConnectionName | LivroConnectionSlug | LivroConnectionDescription | LivroConnectionParticulars | LivroConnectionPrice | LivroConnectionStock | LivroConnectionDimensions | LivroConnectionActive | LivroConnectionPromoPrice | LivroConnectionSku | LivroConnectionGtin | LivroConnectionNcm | LivroConnectionSeoDescription | createLivroPayload | updateLivroPayload | deleteLivroPayload | Newsletter | NewsletterConnection | NewsletterAggregator | NewsletterGroupBy | NewsletterConnectionId | NewsletterConnectionCreated_at | NewsletterConnectionUpdated_at | NewsletterConnectionEmail | NewsletterConnectionName | createNewsletterPayload | updateNewsletterPayload | deleteNewsletterPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionPaymentBrand | OrderConnectionCardLastFour | OrderConnectionStatus | OrderConnectionComments | OrderConnectionTotalInCents | OrderConnectionShipping | OrderConnectionTotal | OrderConnectionPaymentUrl | createOrderPayload | updateOrderPayload | deleteOrderPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionTitle | PostConnectionContent | PostConnectionCover | PostConnectionExcerpt | PostConnectionUser | PostConnectionSlug | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | PrivacyPolicy | updatePrivacyPolicyPayload | deletePrivacyPolicyPayload | Rodape | updateRodapePayload | deleteRodapePayload | Shipping | ShippingConnection | ShippingAggregator | ShippingAggregatorSum | ShippingAggregatorAvg | ShippingAggregatorMin | ShippingAggregatorMax | ShippingGroupBy | ShippingConnectionId | ShippingConnectionCreated_at | ShippingConnectionUpdated_at | ShippingConnectionService | ShippingConnectionEstimatedDelivery | ShippingConnectionCarrier | ShippingConnectionPrice | ShippingConnectionHashId | createShippingPayload | updateShippingPayload | deleteShippingPayload | TermsOfUse | updateTermsOfUsePayload | deleteTermsOfUsePayload | EmailDesignerEmailTemplate | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionFullName | createUserPayload | updateUserPayload | deleteUserPayload | ComponentHomeBanner | ComponentHomeProductGroup | ComponentOrderOrderProduct | ComponentOrderShippingAddress | ComponentPageHeaderLink | ComponentPageLinks | ComponentPageSocialLink | ComponentPageSocial | ComponentProductDimensions
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Author | AuthorConnection | AuthorAggregator | AuthorGroupBy | AuthorConnectionId | AuthorConnectionCreated_at | AuthorConnectionUpdated_at | AuthorConnectionName | AuthorConnectionBook | createAuthorPayload | updateAuthorPayload | deleteAuthorPayload | BannerHero | BannerHeroConnection | BannerHeroAggregator | BannerHeroGroupBy | BannerHeroConnectionId | BannerHeroConnectionCreated_at | BannerHeroConnectionUpdated_at | BannerHeroConnectionImage | BannerHeroConnectionUrl | createBannerHeroPayload | updateBannerHeroPayload | deleteBannerHeroPayload | Cabecalho | updateCabecalhoPayload | deleteCabecalhoPayload | Categorias | CategoriasConnection | CategoriasAggregator | CategoriasGroupBy | CategoriasConnectionId | CategoriasConnectionCreated_at | CategoriasConnectionUpdated_at | CategoriasConnectionName | CategoriasConnectionSlug | createCategoriaPayload | updateCategoriaPayload | deleteCategoriaPayload | Contact | ContactConnection | ContactAggregator | ContactGroupBy | ContactConnectionId | ContactConnectionCreated_at | ContactConnectionUpdated_at | ContactConnectionName | ContactConnectionEmail | ContactConnectionSubject | ContactConnectionMessage | createContactPayload | updateContactPayload | deleteContactPayload | Home | updateHomePayload | deleteHomePayload | Livro | LivroConnection | LivroAggregator | LivroAggregatorSum | LivroAggregatorAvg | LivroAggregatorMin | LivroAggregatorMax | LivroGroupBy | LivroConnectionId | LivroConnectionCreated_at | LivroConnectionUpdated_at | LivroConnectionName | LivroConnectionSlug | LivroConnectionDescription | LivroConnectionParticulars | LivroConnectionPrice | LivroConnectionStock | LivroConnectionDimensions | LivroConnectionActive | LivroConnectionPromoPrice | LivroConnectionSku | LivroConnectionGtin | LivroConnectionNcm | LivroConnectionSeoDescription | createLivroPayload | updateLivroPayload | deleteLivroPayload | Newsletter | NewsletterConnection | NewsletterAggregator | NewsletterGroupBy | NewsletterConnectionId | NewsletterConnectionCreated_at | NewsletterConnectionUpdated_at | NewsletterConnectionEmail | NewsletterConnectionName | createNewsletterPayload | updateNewsletterPayload | deleteNewsletterPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionPaymentBrand | OrderConnectionCardLastFour | OrderConnectionStatus | OrderConnectionComments | OrderConnectionTotalInCents | OrderConnectionShipping | OrderConnectionTotal | OrderConnectionPaymentUrl | createOrderPayload | updateOrderPayload | deleteOrderPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionTitle | PostConnectionContent | PostConnectionCover | PostConnectionExcerpt | PostConnectionUser | PostConnectionSlug | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | PrivacyPolicy | updatePrivacyPolicyPayload | deletePrivacyPolicyPayload | Rodape | updateRodapePayload | deleteRodapePayload | Shipping | ShippingConnection | ShippingAggregator | ShippingAggregatorSum | ShippingAggregatorAvg | ShippingAggregatorMin | ShippingAggregatorMax | ShippingGroupBy | ShippingConnectionId | ShippingConnectionCreated_at | ShippingConnectionUpdated_at | ShippingConnectionService | ShippingConnectionEstimatedDelivery | ShippingConnectionCarrier | ShippingConnectionPrice | ShippingConnectionHashId | createShippingPayload | updateShippingPayload | deleteShippingPayload | TermsOfUse | updateTermsOfUsePayload | deleteTermsOfUsePayload | EmailDesignerEmailTemplate | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionFullName | createUserPayload | updateUserPayload | deleteUserPayload | ComponentHomeBanner | ComponentHomeProductGroup | ComponentOrderOrderProduct | ComponentOrderShippingAddress | ComponentPageHeaderLink | ComponentPageLinks | ComponentPageSocialLink | ComponentPageSocial | ComponentProductDimensions
 
 input InputID {
   id: ID!
@@ -2038,6 +2147,9 @@ type Query {
   categoria(id: ID!, publicationState: PublicationState): Categorias
   categorias(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Categorias!]!
   categoriasConnection(sort: String, limit: Int, start: Int, where: JSON): CategoriasConnection
+  contact(id: ID!, publicationState: PublicationState): Contact
+  contacts(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Contact!]!
+  contactsConnection(sort: String, limit: Int, start: Int, where: JSON): ContactConnection
   home(publicationState: PublicationState): Home
   livro(id: ID!, publicationState: PublicationState): Livro
   livros(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Livro!]!
@@ -2081,6 +2193,9 @@ type Mutation {
   createCategoria(input: createCategoriaInput): createCategoriaPayload
   updateCategoria(input: updateCategoriaInput): updateCategoriaPayload
   deleteCategoria(input: deleteCategoriaInput): deleteCategoriaPayload
+  createContact(input: createContactInput): createContactPayload
+  updateContact(input: updateContactInput): updateContactPayload
+  deleteContact(input: deleteContactInput): deleteContactPayload
   updateHome(input: updateHomeInput): updateHomePayload
   deleteHome: deleteHomePayload
   createLivro(input: createLivroInput): createLivroPayload
