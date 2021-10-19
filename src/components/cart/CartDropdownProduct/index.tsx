@@ -3,15 +3,8 @@ import { ProductCardPrice } from '@/components/products'
 import { Anchor, Image } from '@/components/shared'
 import { useCart } from '@/contexts'
 import { CartProductModel } from '@/models'
-import { formatToCurrency } from '@/utils'
 import { useCallback, useState } from 'react'
-import {
-  Container,
-  Details,
-  ProductName,
-  ProductPrice,
-  Thumbnail
-} from './styles'
+import { Container, Details, ProductName, Thumbnail } from './styles'
 
 export type CartDropdownProductProps = {
   product: CartProductModel

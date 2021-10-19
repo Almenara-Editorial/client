@@ -5,7 +5,7 @@ import {
   QueryPostBySlug,
   QueryPostBySlugVariables
 } from '@/graphql/generated/QueryPostBySlug'
-import { QUERY_BOOK, QUERY_POST } from '@/graphql/queries'
+import { QUERY_POST } from '@/graphql/queries'
 import { initializeApollo } from '@/utils'
 import { commonDataMapper, postMapper } from '@/utils/mappers'
 import { GetStaticPaths, GetStaticProps } from 'next'

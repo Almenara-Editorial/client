@@ -3,11 +3,7 @@ import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { RHFSelect } from '@/components/hook-form/Select'
 import { useCart, useCheckoutForm } from '@/contexts'
 import { useDebounce } from '@/hooks'
-import {
-  CreditCardPaymentValues,
-  OrderCreditCardPaymentValues,
-  PaymentMethods
-} from '@/models'
+import { CreditCardPaymentValues, PaymentMethods } from '@/models'
 import { filterNumbers } from '@/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect, useRef } from 'react'
@@ -17,11 +13,7 @@ import { StepsButtons } from '../StepsButtons'
 import { schema } from './schema'
 import { Container } from './styles'
 
-type CreditCardFormProps = {
-  paymentTypeId: string
-}
-
-export function CreditCardForm({ paymentTypeId }: CreditCardFormProps) {
+export function CreditCardForm() {
   const {
     updateFormValues,
     formValues,

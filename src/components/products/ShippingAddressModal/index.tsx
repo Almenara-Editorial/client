@@ -3,7 +3,7 @@ import { Button, Modal, ModalProps } from '@/components/shared'
 import { CartItemModel, ShippingOptionModel } from '@/models'
 import { loadShippingOptionsByZipCode } from '@/services'
 import { FormEvent, useState } from 'react'
-import { Container, Header, Form, FieldRow, Separator } from './styles'
+import { Container, Header, Form, FieldRow } from './styles'
 
 export type OnSubmitSuccessful = {
   shippingOptions: ShippingOptionModel[]

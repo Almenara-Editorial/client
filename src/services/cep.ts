@@ -1,6 +1,4 @@
-import { CartItemModel, ShippingOptionModel } from '@/models'
 import axios from 'axios'
-import { api } from './api'
 
 type BrasilApiCepData = {
   cep: string
