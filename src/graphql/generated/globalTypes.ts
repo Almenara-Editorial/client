@@ -55,8 +55,6 @@ export interface editUserInput {
   confirmed?: boolean | null;
   blocked?: boolean | null;
   role?: string | null;
-  privacyPolicy?: string | null;
-  termsOfUse?: string | null;
   fullName?: string | null;
   created_by?: string | null;
   updated_by?: string | null;

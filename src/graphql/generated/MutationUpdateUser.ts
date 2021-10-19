@@ -12,8 +12,6 @@ import { updateUserInput } from "./globalTypes";
 export interface MutationUpdateUser_updateUser_user {
   __typename: "UsersPermissionsUser";
   id: string;
-  fullName: string | null;
-  email: string;
 }
 
 export interface MutationUpdateUser_updateUser {
@@ -29,5 +27,5 @@ export interface MutationUpdateUser {
 }
 
 export interface MutationUpdateUserVariables {
-  input: updateUserInput;
+  input?: updateUserInput | null;
 }

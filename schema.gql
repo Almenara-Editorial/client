@@ -253,40 +253,6 @@ type deleteBannerHeroPayload {
   bannerHero: BannerHero
 }
 
-type BannerTopo {
-  id: ID!
-  created_at: DateTime!
-  updated_at: DateTime!
-  image: UploadFile
-  url: String!
-}
-
-input BannerTopoInput {
-  image: ID
-  url: String!
-  created_by: ID
-  updated_by: ID
-}
-
-input editBannerTopoInput {
-  image: ID
-  url: String
-  created_by: ID
-  updated_by: ID
-}
-
-input updateBannerTopoInput {
-  data: editBannerTopoInput
-}
-
-type updateBannerTopoPayload {
-  bannerTopo: BannerTopo
-}
-
-type deleteBannerTopoPayload {
-  bannerTopo: BannerTopo
-}
-
 type Cabecalho {
   id: ID!
   created_at: DateTime!
@@ -410,144 +376,6 @@ input deleteCategoriaInput {
 
 type deleteCategoriaPayload {
   categoria: Categorias
-}
-
-type Cupons {
-  id: ID!
-  created_at: DateTime!
-  updated_at: DateTime!
-  code: String!
-  freeShipping: Boolean
-  percentage: Int
-  expirationDate: DateTime
-  isActive: Boolean!
-}
-
-type CuponsConnection {
-  values: [Cupons]
-  groupBy: CuponsGroupBy
-  aggregate: CuponsAggregator
-}
-
-type CuponsAggregator {
-  count: Int
-  totalCount: Int
-  sum: CuponsAggregatorSum
-  avg: CuponsAggregatorAvg
-  min: CuponsAggregatorMin
-  max: CuponsAggregatorMax
-}
-
-type CuponsAggregatorSum {
-  percentage: Float
-}
-
-type CuponsAggregatorAvg {
-  percentage: Float
-}
-
-type CuponsAggregatorMin {
-  percentage: Float
-}
-
-type CuponsAggregatorMax {
-  percentage: Float
-}
-
-type CuponsGroupBy {
-  id: [CuponsConnectionId]
-  created_at: [CuponsConnectionCreated_at]
-  updated_at: [CuponsConnectionUpdated_at]
-  code: [CuponsConnectionCode]
-  freeShipping: [CuponsConnectionFreeShipping]
-  percentage: [CuponsConnectionPercentage]
-  expirationDate: [CuponsConnectionExpirationDate]
-  isActive: [CuponsConnectionIsActive]
-}
-
-type CuponsConnectionId {
-  key: ID
-  connection: CuponsConnection
-}
-
-type CuponsConnectionCreated_at {
-  key: DateTime
-  connection: CuponsConnection
-}
-
-type CuponsConnectionUpdated_at {
-  key: DateTime
-  connection: CuponsConnection
-}
-
-type CuponsConnectionCode {
-  key: String
-  connection: CuponsConnection
-}
-
-type CuponsConnectionFreeShipping {
-  key: Boolean
-  connection: CuponsConnection
-}
-
-type CuponsConnectionPercentage {
-  key: Int
-  connection: CuponsConnection
-}
-
-type CuponsConnectionExpirationDate {
-  key: DateTime
-  connection: CuponsConnection
-}
-
-type CuponsConnectionIsActive {
-  key: Boolean
-  connection: CuponsConnection
-}
-
-input CuponInput {
-  code: String!
-  freeShipping: Boolean
-  percentage: Int
-  expirationDate: DateTime
-  isActive: Boolean
-  created_by: ID
-  updated_by: ID
-}
-
-input editCuponInput {
-  code: String
-  freeShipping: Boolean
-  percentage: Int
-  expirationDate: DateTime
-  isActive: Boolean
-  created_by: ID
-  updated_by: ID
-}
-
-input createCuponInput {
-  data: CuponInput
-}
-
-type createCuponPayload {
-  cupon: Cupons
-}
-
-input updateCuponInput {
-  where: InputID
-  data: editCuponInput
-}
-
-type updateCuponPayload {
-  cupon: Cupons
-}
-
-input deleteCuponInput {
-  where: InputID
-}
-
-type deleteCuponPayload {
-  cupon: Cupons
 }
 
 type Home {
@@ -1090,226 +918,6 @@ type deleteOrderPayload {
   order: Order
 }
 
-type Podcast {
-  id: ID!
-  created_at: DateTime!
-  updated_at: DateTime!
-  title: String!
-  url: String!
-  published_at: DateTime
-}
-
-type PodcastConnection {
-  values: [Podcast]
-  groupBy: PodcastGroupBy
-  aggregate: PodcastAggregator
-}
-
-type PodcastAggregator {
-  count: Int
-  totalCount: Int
-}
-
-type PodcastGroupBy {
-  id: [PodcastConnectionId]
-  created_at: [PodcastConnectionCreated_at]
-  updated_at: [PodcastConnectionUpdated_at]
-  title: [PodcastConnectionTitle]
-  url: [PodcastConnectionUrl]
-  published_at: [PodcastConnectionPublished_at]
-}
-
-type PodcastConnectionId {
-  key: ID
-  connection: PodcastConnection
-}
-
-type PodcastConnectionCreated_at {
-  key: DateTime
-  connection: PodcastConnection
-}
-
-type PodcastConnectionUpdated_at {
-  key: DateTime
-  connection: PodcastConnection
-}
-
-type PodcastConnectionTitle {
-  key: String
-  connection: PodcastConnection
-}
-
-type PodcastConnectionUrl {
-  key: String
-  connection: PodcastConnection
-}
-
-type PodcastConnectionPublished_at {
-  key: DateTime
-  connection: PodcastConnection
-}
-
-input PodcastInput {
-  title: String!
-  url: String!
-  published_at: DateTime
-  created_by: ID
-  updated_by: ID
-}
-
-input editPodcastInput {
-  title: String
-  url: String
-  published_at: DateTime
-  created_by: ID
-  updated_by: ID
-}
-
-input createPodcastInput {
-  data: PodcastInput
-}
-
-type createPodcastPayload {
-  podcast: Podcast
-}
-
-input updatePodcastInput {
-  where: InputID
-  data: editPodcastInput
-}
-
-type updatePodcastPayload {
-  podcast: Podcast
-}
-
-input deletePodcastInput {
-  where: InputID
-}
-
-type deletePodcastPayload {
-  podcast: Podcast
-}
-
-type PoliticaDePrivacidade {
-  id: ID!
-  created_at: DateTime!
-  updated_at: DateTime!
-  body: String!
-  version: Float!
-  published_at: DateTime
-}
-
-type PoliticaDePrivacidadeConnection {
-  values: [PoliticaDePrivacidade]
-  groupBy: PoliticaDePrivacidadeGroupBy
-  aggregate: PoliticaDePrivacidadeAggregator
-}
-
-type PoliticaDePrivacidadeAggregator {
-  count: Int
-  totalCount: Int
-  sum: PoliticaDePrivacidadeAggregatorSum
-  avg: PoliticaDePrivacidadeAggregatorAvg
-  min: PoliticaDePrivacidadeAggregatorMin
-  max: PoliticaDePrivacidadeAggregatorMax
-}
-
-type PoliticaDePrivacidadeAggregatorSum {
-  version: Float
-}
-
-type PoliticaDePrivacidadeAggregatorAvg {
-  version: Float
-}
-
-type PoliticaDePrivacidadeAggregatorMin {
-  version: Float
-}
-
-type PoliticaDePrivacidadeAggregatorMax {
-  version: Float
-}
-
-type PoliticaDePrivacidadeGroupBy {
-  id: [PoliticaDePrivacidadeConnectionId]
-  created_at: [PoliticaDePrivacidadeConnectionCreated_at]
-  updated_at: [PoliticaDePrivacidadeConnectionUpdated_at]
-  body: [PoliticaDePrivacidadeConnectionBody]
-  version: [PoliticaDePrivacidadeConnectionVersion]
-  published_at: [PoliticaDePrivacidadeConnectionPublished_at]
-}
-
-type PoliticaDePrivacidadeConnectionId {
-  key: ID
-  connection: PoliticaDePrivacidadeConnection
-}
-
-type PoliticaDePrivacidadeConnectionCreated_at {
-  key: DateTime
-  connection: PoliticaDePrivacidadeConnection
-}
-
-type PoliticaDePrivacidadeConnectionUpdated_at {
-  key: DateTime
-  connection: PoliticaDePrivacidadeConnection
-}
-
-type PoliticaDePrivacidadeConnectionBody {
-  key: String
-  connection: PoliticaDePrivacidadeConnection
-}
-
-type PoliticaDePrivacidadeConnectionVersion {
-  key: Float
-  connection: PoliticaDePrivacidadeConnection
-}
-
-type PoliticaDePrivacidadeConnectionPublished_at {
-  key: DateTime
-  connection: PoliticaDePrivacidadeConnection
-}
-
-input PoliticaDePrivacidadeInput {
-  body: String!
-  version: Float!
-  published_at: DateTime
-  created_by: ID
-  updated_by: ID
-}
-
-input editPoliticaDePrivacidadeInput {
-  body: String
-  version: Float
-  published_at: DateTime
-  created_by: ID
-  updated_by: ID
-}
-
-input createPoliticaDePrivacidadeInput {
-  data: PoliticaDePrivacidadeInput
-}
-
-type createPoliticaDePrivacidadePayload {
-  politicaDePrivacidade: PoliticaDePrivacidade
-}
-
-input updatePoliticaDePrivacidadeInput {
-  where: InputID
-  data: editPoliticaDePrivacidadeInput
-}
-
-type updatePoliticaDePrivacidadePayload {
-  politicaDePrivacidade: PoliticaDePrivacidade
-}
-
-input deletePoliticaDePrivacidadeInput {
-  where: InputID
-}
-
-type deletePoliticaDePrivacidadePayload {
-  politicaDePrivacidade: PoliticaDePrivacidade
-}
-
 type Post {
   id: ID!
   created_at: DateTime!
@@ -1444,6 +1052,37 @@ input deletePostInput {
 
 type deletePostPayload {
   post: Post
+}
+
+type PrivacyPolicy {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  content: String
+}
+
+input PrivacyPolicyInput {
+  content: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editPrivacyPolicyInput {
+  content: String
+  created_by: ID
+  updated_by: ID
+}
+
+input updatePrivacyPolicyInput {
+  data: editPrivacyPolicyInput
+}
+
+type updatePrivacyPolicyPayload {
+  privacyPolicy: PrivacyPolicy
+}
+
+type deletePrivacyPolicyPayload {
+  privacyPolicy: PrivacyPolicy
 }
 
 type Rodape {
@@ -1621,131 +1260,41 @@ type deleteShippingPayload {
   shipping: Shipping
 }
 
-type TermosDeUso {
+type TermsOfUse {
   id: ID!
   created_at: DateTime!
   updated_at: DateTime!
-  body: String!
-  version: Float!
-  published_at: DateTime
+  content: String
 }
 
-type TermosDeUsoConnection {
-  values: [TermosDeUso]
-  groupBy: TermosDeUsoGroupBy
-  aggregate: TermosDeUsoAggregator
-}
-
-type TermosDeUsoAggregator {
-  count: Int
-  totalCount: Int
-  sum: TermosDeUsoAggregatorSum
-  avg: TermosDeUsoAggregatorAvg
-  min: TermosDeUsoAggregatorMin
-  max: TermosDeUsoAggregatorMax
-}
-
-type TermosDeUsoAggregatorSum {
-  version: Float
-}
-
-type TermosDeUsoAggregatorAvg {
-  version: Float
-}
-
-type TermosDeUsoAggregatorMin {
-  version: Float
-}
-
-type TermosDeUsoAggregatorMax {
-  version: Float
-}
-
-type TermosDeUsoGroupBy {
-  id: [TermosDeUsoConnectionId]
-  created_at: [TermosDeUsoConnectionCreated_at]
-  updated_at: [TermosDeUsoConnectionUpdated_at]
-  body: [TermosDeUsoConnectionBody]
-  version: [TermosDeUsoConnectionVersion]
-  published_at: [TermosDeUsoConnectionPublished_at]
-}
-
-type TermosDeUsoConnectionId {
-  key: ID
-  connection: TermosDeUsoConnection
-}
-
-type TermosDeUsoConnectionCreated_at {
-  key: DateTime
-  connection: TermosDeUsoConnection
-}
-
-type TermosDeUsoConnectionUpdated_at {
-  key: DateTime
-  connection: TermosDeUsoConnection
-}
-
-type TermosDeUsoConnectionBody {
-  key: String
-  connection: TermosDeUsoConnection
-}
-
-type TermosDeUsoConnectionVersion {
-  key: Float
-  connection: TermosDeUsoConnection
-}
-
-type TermosDeUsoConnectionPublished_at {
-  key: DateTime
-  connection: TermosDeUsoConnection
-}
-
-input TermosDeUsoInput {
-  body: String!
-  version: Float!
-  published_at: DateTime
+input TermsOfUseInput {
+  content: String
   created_by: ID
   updated_by: ID
 }
 
-input editTermosDeUsoInput {
-  body: String
-  version: Float
-  published_at: DateTime
+input editTermsOfUseInput {
+  content: String
   created_by: ID
   updated_by: ID
 }
 
-input createTermosDeUsoInput {
-  data: TermosDeUsoInput
+input updateTermsOfUseInput {
+  data: editTermsOfUseInput
 }
 
-type createTermosDeUsoPayload {
-  termosDeUso: TermosDeUso
+type updateTermsOfUsePayload {
+  termsOfUse: TermsOfUse
 }
 
-input updateTermosDeUsoInput {
-  where: InputID
-  data: editTermosDeUsoInput
-}
-
-type updateTermosDeUsoPayload {
-  termosDeUso: TermosDeUso
-}
-
-input deleteTermosDeUsoInput {
-  where: InputID
-}
-
-type deleteTermosDeUsoPayload {
-  termosDeUso: TermosDeUso
+type deleteTermsOfUsePayload {
+  termsOfUse: TermsOfUse
 }
 
 type EmailDesignerEmailTemplate {
   id: ID!
   created_at: DateTime!
   updated_at: DateTime!
-  sourceCodeToTemplateId: Int
   design: JSON
   name: String
   subject: String
@@ -1756,7 +1305,6 @@ type EmailDesignerEmailTemplate {
 }
 
 input EmailTemplateInput {
-  sourceCodeToTemplateId: Int
   design: JSON
   name: String
   subject: String
@@ -1769,7 +1317,6 @@ input EmailTemplateInput {
 }
 
 input editEmailTemplateInput {
-  sourceCodeToTemplateId: Int
   design: JSON
   name: String
   subject: String
@@ -2129,8 +1676,6 @@ type UsersPermissionsUser {
   confirmed: Boolean
   blocked: Boolean
   role: UsersPermissionsRole
-  privacyPolicy: PoliticaDePrivacidade
-  termsOfUse: TermosDeUso
   fullName: String
 }
 
@@ -2155,8 +1700,6 @@ type UsersPermissionsUserGroupBy {
   confirmed: [UsersPermissionsUserConnectionConfirmed]
   blocked: [UsersPermissionsUserConnectionBlocked]
   role: [UsersPermissionsUserConnectionRole]
-  privacyPolicy: [UsersPermissionsUserConnectionPrivacyPolicy]
-  termsOfUse: [UsersPermissionsUserConnectionTermsOfUse]
   fullName: [UsersPermissionsUserConnectionFullName]
 }
 
@@ -2205,16 +1748,6 @@ type UsersPermissionsUserConnectionRole {
   connection: UsersPermissionsUserConnection
 }
 
-type UsersPermissionsUserConnectionPrivacyPolicy {
-  key: ID
-  connection: UsersPermissionsUserConnection
-}
-
-type UsersPermissionsUserConnectionTermsOfUse {
-  key: ID
-  connection: UsersPermissionsUserConnection
-}
-
 type UsersPermissionsUserConnectionFullName {
   key: String
   connection: UsersPermissionsUserConnection
@@ -2230,8 +1763,6 @@ input UserInput {
   confirmed: Boolean
   blocked: Boolean
   role: ID
-  privacyPolicy: ID
-  termsOfUse: ID
   fullName: String
   created_by: ID
   updated_by: ID
@@ -2247,8 +1778,6 @@ input editUserInput {
   confirmed: Boolean
   blocked: Boolean
   role: ID
-  privacyPolicy: ID
-  termsOfUse: ID
   fullName: String
   created_by: ID
   updated_by: ID
@@ -2480,7 +2009,7 @@ input editComponentProductDimensionInput {
   boxWeight: Float
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Author | AuthorConnection | AuthorAggregator | AuthorGroupBy | AuthorConnectionId | AuthorConnectionCreated_at | AuthorConnectionUpdated_at | AuthorConnectionName | AuthorConnectionBook | createAuthorPayload | updateAuthorPayload | deleteAuthorPayload | BannerHero | BannerHeroConnection | BannerHeroAggregator | BannerHeroGroupBy | BannerHeroConnectionId | BannerHeroConnectionCreated_at | BannerHeroConnectionUpdated_at | BannerHeroConnectionImage | BannerHeroConnectionUrl | createBannerHeroPayload | updateBannerHeroPayload | deleteBannerHeroPayload | BannerTopo | updateBannerTopoPayload | deleteBannerTopoPayload | Cabecalho | updateCabecalhoPayload | deleteCabecalhoPayload | Categorias | CategoriasConnection | CategoriasAggregator | CategoriasGroupBy | CategoriasConnectionId | CategoriasConnectionCreated_at | CategoriasConnectionUpdated_at | CategoriasConnectionName | CategoriasConnectionSlug | createCategoriaPayload | updateCategoriaPayload | deleteCategoriaPayload | Cupons | CuponsConnection | CuponsAggregator | CuponsAggregatorSum | CuponsAggregatorAvg | CuponsAggregatorMin | CuponsAggregatorMax | CuponsGroupBy | CuponsConnectionId | CuponsConnectionCreated_at | CuponsConnectionUpdated_at | CuponsConnectionCode | CuponsConnectionFreeShipping | CuponsConnectionPercentage | CuponsConnectionExpirationDate | CuponsConnectionIsActive | createCuponPayload | updateCuponPayload | deleteCuponPayload | Home | updateHomePayload | deleteHomePayload | Livro | LivroConnection | LivroAggregator | LivroAggregatorSum | LivroAggregatorAvg | LivroAggregatorMin | LivroAggregatorMax | LivroGroupBy | LivroConnectionId | LivroConnectionCreated_at | LivroConnectionUpdated_at | LivroConnectionName | LivroConnectionSlug | LivroConnectionDescription | LivroConnectionParticulars | LivroConnectionPrice | LivroConnectionStock | LivroConnectionDimensions | LivroConnectionActive | LivroConnectionPromoPrice | LivroConnectionSku | LivroConnectionGtin | LivroConnectionNcm | LivroConnectionSeoDescription | createLivroPayload | updateLivroPayload | deleteLivroPayload | Newsletter | NewsletterConnection | NewsletterAggregator | NewsletterGroupBy | NewsletterConnectionId | NewsletterConnectionCreated_at | NewsletterConnectionUpdated_at | NewsletterConnectionEmail | NewsletterConnectionName | createNewsletterPayload | updateNewsletterPayload | deleteNewsletterPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionPaymentBrand | OrderConnectionCardLastFour | OrderConnectionStatus | OrderConnectionComments | OrderConnectionTotalInCents | OrderConnectionShipping | OrderConnectionTotal | OrderConnectionPaymentUrl | createOrderPayload | updateOrderPayload | deleteOrderPayload | Podcast | PodcastConnection | PodcastAggregator | PodcastGroupBy | PodcastConnectionId | PodcastConnectionCreated_at | PodcastConnectionUpdated_at | PodcastConnectionTitle | PodcastConnectionUrl | PodcastConnectionPublished_at | createPodcastPayload | updatePodcastPayload | deletePodcastPayload | PoliticaDePrivacidade | PoliticaDePrivacidadeConnection | PoliticaDePrivacidadeAggregator | PoliticaDePrivacidadeAggregatorSum | PoliticaDePrivacidadeAggregatorAvg | PoliticaDePrivacidadeAggregatorMin | PoliticaDePrivacidadeAggregatorMax | PoliticaDePrivacidadeGroupBy | PoliticaDePrivacidadeConnectionId | PoliticaDePrivacidadeConnectionCreated_at | PoliticaDePrivacidadeConnectionUpdated_at | PoliticaDePrivacidadeConnectionBody | PoliticaDePrivacidadeConnectionVersion | PoliticaDePrivacidadeConnectionPublished_at | createPoliticaDePrivacidadePayload | updatePoliticaDePrivacidadePayload | deletePoliticaDePrivacidadePayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionTitle | PostConnectionContent | PostConnectionCover | PostConnectionExcerpt | PostConnectionUser | PostConnectionSlug | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | Rodape | updateRodapePayload | deleteRodapePayload | Shipping | ShippingConnection | ShippingAggregator | ShippingAggregatorSum | ShippingAggregatorAvg | ShippingAggregatorMin | ShippingAggregatorMax | ShippingGroupBy | ShippingConnectionId | ShippingConnectionCreated_at | ShippingConnectionUpdated_at | ShippingConnectionService | ShippingConnectionEstimatedDelivery | ShippingConnectionCarrier | ShippingConnectionPrice | ShippingConnectionHashId | createShippingPayload | updateShippingPayload | deleteShippingPayload | TermosDeUso | TermosDeUsoConnection | TermosDeUsoAggregator | TermosDeUsoAggregatorSum | TermosDeUsoAggregatorAvg | TermosDeUsoAggregatorMin | TermosDeUsoAggregatorMax | TermosDeUsoGroupBy | TermosDeUsoConnectionId | TermosDeUsoConnectionCreated_at | TermosDeUsoConnectionUpdated_at | TermosDeUsoConnectionBody | TermosDeUsoConnectionVersion | TermosDeUsoConnectionPublished_at | createTermosDeUsoPayload | updateTermosDeUsoPayload | deleteTermosDeUsoPayload | EmailDesignerEmailTemplate | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionPrivacyPolicy | UsersPermissionsUserConnectionTermsOfUse | UsersPermissionsUserConnectionFullName | createUserPayload | updateUserPayload | deleteUserPayload | ComponentHomeBanner | ComponentHomeProductGroup | ComponentOrderOrderProduct | ComponentOrderShippingAddress | ComponentPageHeaderLink | ComponentPageLinks | ComponentPageSocialLink | ComponentPageSocial | ComponentProductDimensions
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Author | AuthorConnection | AuthorAggregator | AuthorGroupBy | AuthorConnectionId | AuthorConnectionCreated_at | AuthorConnectionUpdated_at | AuthorConnectionName | AuthorConnectionBook | createAuthorPayload | updateAuthorPayload | deleteAuthorPayload | BannerHero | BannerHeroConnection | BannerHeroAggregator | BannerHeroGroupBy | BannerHeroConnectionId | BannerHeroConnectionCreated_at | BannerHeroConnectionUpdated_at | BannerHeroConnectionImage | BannerHeroConnectionUrl | createBannerHeroPayload | updateBannerHeroPayload | deleteBannerHeroPayload | Cabecalho | updateCabecalhoPayload | deleteCabecalhoPayload | Categorias | CategoriasConnection | CategoriasAggregator | CategoriasGroupBy | CategoriasConnectionId | CategoriasConnectionCreated_at | CategoriasConnectionUpdated_at | CategoriasConnectionName | CategoriasConnectionSlug | createCategoriaPayload | updateCategoriaPayload | deleteCategoriaPayload | Home | updateHomePayload | deleteHomePayload | Livro | LivroConnection | LivroAggregator | LivroAggregatorSum | LivroAggregatorAvg | LivroAggregatorMin | LivroAggregatorMax | LivroGroupBy | LivroConnectionId | LivroConnectionCreated_at | LivroConnectionUpdated_at | LivroConnectionName | LivroConnectionSlug | LivroConnectionDescription | LivroConnectionParticulars | LivroConnectionPrice | LivroConnectionStock | LivroConnectionDimensions | LivroConnectionActive | LivroConnectionPromoPrice | LivroConnectionSku | LivroConnectionGtin | LivroConnectionNcm | LivroConnectionSeoDescription | createLivroPayload | updateLivroPayload | deleteLivroPayload | Newsletter | NewsletterConnection | NewsletterAggregator | NewsletterGroupBy | NewsletterConnectionId | NewsletterConnectionCreated_at | NewsletterConnectionUpdated_at | NewsletterConnectionEmail | NewsletterConnectionName | createNewsletterPayload | updateNewsletterPayload | deleteNewsletterPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionPaymentBrand | OrderConnectionCardLastFour | OrderConnectionStatus | OrderConnectionComments | OrderConnectionTotalInCents | OrderConnectionShipping | OrderConnectionTotal | OrderConnectionPaymentUrl | createOrderPayload | updateOrderPayload | deleteOrderPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionTitle | PostConnectionContent | PostConnectionCover | PostConnectionExcerpt | PostConnectionUser | PostConnectionSlug | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | PrivacyPolicy | updatePrivacyPolicyPayload | deletePrivacyPolicyPayload | Rodape | updateRodapePayload | deleteRodapePayload | Shipping | ShippingConnection | ShippingAggregator | ShippingAggregatorSum | ShippingAggregatorAvg | ShippingAggregatorMin | ShippingAggregatorMax | ShippingGroupBy | ShippingConnectionId | ShippingConnectionCreated_at | ShippingConnectionUpdated_at | ShippingConnectionService | ShippingConnectionEstimatedDelivery | ShippingConnectionCarrier | ShippingConnectionPrice | ShippingConnectionHashId | createShippingPayload | updateShippingPayload | deleteShippingPayload | TermsOfUse | updateTermsOfUsePayload | deleteTermsOfUsePayload | EmailDesignerEmailTemplate | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionFullName | createUserPayload | updateUserPayload | deleteUserPayload | ComponentHomeBanner | ComponentHomeProductGroup | ComponentOrderOrderProduct | ComponentOrderShippingAddress | ComponentPageHeaderLink | ComponentPageLinks | ComponentPageSocialLink | ComponentPageSocial | ComponentProductDimensions
 
 input InputID {
   id: ID!
@@ -2505,14 +2034,10 @@ type Query {
   bannerHero(id: ID!, publicationState: PublicationState): BannerHero
   bannerHeroes(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [BannerHero!]!
   bannerHeroesConnection(sort: String, limit: Int, start: Int, where: JSON): BannerHeroConnection
-  bannerTopo(publicationState: PublicationState): BannerTopo
   cabecalho(publicationState: PublicationState): Cabecalho
   categoria(id: ID!, publicationState: PublicationState): Categorias
   categorias(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Categorias!]!
   categoriasConnection(sort: String, limit: Int, start: Int, where: JSON): CategoriasConnection
-  cupon(id: ID!, publicationState: PublicationState): Cupons
-  cupons(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Cupons!]!
-  cuponsConnection(sort: String, limit: Int, start: Int, where: JSON): CuponsConnection
   home(publicationState: PublicationState): Home
   livro(id: ID!, publicationState: PublicationState): Livro
   livros(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Livro!]!
@@ -2523,22 +2048,15 @@ type Query {
   order(id: ID!, publicationState: PublicationState): Order
   orders(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Order!]!
   ordersConnection(sort: String, limit: Int, start: Int, where: JSON): OrderConnection
-  podcast(id: ID!, publicationState: PublicationState): Podcast
-  podcasts(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Podcast!]!
-  podcastsConnection(sort: String, limit: Int, start: Int, where: JSON): PodcastConnection
-  politicaDePrivacidade(id: ID!, publicationState: PublicationState): PoliticaDePrivacidade
-  politicaDePrivacidades(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [PoliticaDePrivacidade!]!
-  politicaDePrivacidadesConnection(sort: String, limit: Int, start: Int, where: JSON): PoliticaDePrivacidadeConnection
   post(id: ID!, publicationState: PublicationState): Post
   posts(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Post!]!
   postsConnection(sort: String, limit: Int, start: Int, where: JSON): PostConnection
+  privacyPolicy(publicationState: PublicationState): PrivacyPolicy
   rodape(publicationState: PublicationState): Rodape
   shipping(id: ID!, publicationState: PublicationState): Shipping
   shippings(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Shipping!]!
   shippingsConnection(sort: String, limit: Int, start: Int, where: JSON): ShippingConnection
-  termosDeUso(id: ID!, publicationState: PublicationState): TermosDeUso
-  termosDeUsos(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [TermosDeUso!]!
-  termosDeUsosConnection(sort: String, limit: Int, start: Int, where: JSON): TermosDeUsoConnection
+  termsOfUse(publicationState: PublicationState): TermsOfUse
   files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile!]!
   filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
   role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
@@ -2558,16 +2076,11 @@ type Mutation {
   createBannerHero(input: createBannerHeroInput): createBannerHeroPayload
   updateBannerHero(input: updateBannerHeroInput): updateBannerHeroPayload
   deleteBannerHero(input: deleteBannerHeroInput): deleteBannerHeroPayload
-  updateBannerTopo(input: updateBannerTopoInput): updateBannerTopoPayload
-  deleteBannerTopo: deleteBannerTopoPayload
   updateCabecalho(input: updateCabecalhoInput): updateCabecalhoPayload
   deleteCabecalho: deleteCabecalhoPayload
   createCategoria(input: createCategoriaInput): createCategoriaPayload
   updateCategoria(input: updateCategoriaInput): updateCategoriaPayload
   deleteCategoria(input: deleteCategoriaInput): deleteCategoriaPayload
-  createCupon(input: createCuponInput): createCuponPayload
-  updateCupon(input: updateCuponInput): updateCuponPayload
-  deleteCupon(input: deleteCuponInput): deleteCuponPayload
   updateHome(input: updateHomeInput): updateHomePayload
   deleteHome: deleteHomePayload
   createLivro(input: createLivroInput): createLivroPayload
@@ -2579,23 +2092,18 @@ type Mutation {
   createOrder(input: createOrderInput): createOrderPayload
   updateOrder(input: updateOrderInput): updateOrderPayload
   deleteOrder(input: deleteOrderInput): deleteOrderPayload
-  createPodcast(input: createPodcastInput): createPodcastPayload
-  updatePodcast(input: updatePodcastInput): updatePodcastPayload
-  deletePodcast(input: deletePodcastInput): deletePodcastPayload
-  createPoliticaDePrivacidade(input: createPoliticaDePrivacidadeInput): createPoliticaDePrivacidadePayload
-  updatePoliticaDePrivacidade(input: updatePoliticaDePrivacidadeInput): updatePoliticaDePrivacidadePayload
-  deletePoliticaDePrivacidade(input: deletePoliticaDePrivacidadeInput): deletePoliticaDePrivacidadePayload
   createPost(input: createPostInput): createPostPayload
   updatePost(input: updatePostInput): updatePostPayload
   deletePost(input: deletePostInput): deletePostPayload
+  updatePrivacyPolicy(input: updatePrivacyPolicyInput): updatePrivacyPolicyPayload
+  deletePrivacyPolicy: deletePrivacyPolicyPayload
   updateRodape(input: updateRodapeInput): updateRodapePayload
   deleteRodape: deleteRodapePayload
   createShipping(input: createShippingInput): createShippingPayload
   updateShipping(input: updateShippingInput): updateShippingPayload
   deleteShipping(input: deleteShippingInput): deleteShippingPayload
-  createTermosDeUso(input: createTermosDeUsoInput): createTermosDeUsoPayload
-  updateTermosDeUso(input: updateTermosDeUsoInput): updateTermosDeUsoPayload
-  deleteTermosDeUso(input: deleteTermosDeUsoInput): deleteTermosDeUsoPayload
+  updateTermsOfUse(input: updateTermsOfUseInput): updateTermsOfUsePayload
+  deleteTermsOfUse: deleteTermsOfUsePayload
   """Delete one file"""
   deleteFile(input: deleteFileInput): deleteFilePayload
   """Create a new role"""
