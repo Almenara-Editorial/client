@@ -19,6 +19,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "exclude": ["node_modules", "src/components/icons"],
-  "include": ["next-env.d.ts", "src"]
+  "include": ["next-env.d.ts", "src"],
+  "exclude": ["node_modules", "src/components/icons"]
 }
