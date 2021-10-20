@@ -1,4 +1,8 @@
-import { HeroBanner, Quote } from '@/components/cartas-de-cristo'
+import {
+  BooksDescription,
+  HeroBanner,
+  Quote
+} from '@/components/cartas-de-cristo'
 import { Container } from './styles'
 
 export type CartasDeCristoTemplateProps = {}
@@ -8,6 +12,7 @@ export function CartasDeCristoTemplate() {
     <Container>
       <HeroBanner />
       <Quote />
+      <BooksDescription />
     </Container>
   )
 }
