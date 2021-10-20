@@ -24,10 +24,10 @@ export enum ENUM_ORDER_STATUS {
 }
 
 export interface ContactInput {
-  name?: string | null;
-  email?: string | null;
-  subject?: string | null;
-  message?: string | null;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
   created_by?: string | null;
   updated_by?: string | null;
 }
