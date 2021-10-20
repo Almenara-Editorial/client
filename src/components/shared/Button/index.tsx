@@ -3,7 +3,7 @@ import { Checkmark } from '@/components/icons'
 import { forwardRef, ForwardRefRenderFunction, HTMLAttributes } from 'react'
 import { Container } from './styles'
 
-type ButtonColor = 'primary' | 'neutral' | 'background' | 'white'
+type ButtonColor = 'primary' | 'neutral' | 'background' | 'white' | 'tertiary'
 type ButtonSize =
   | 'rg-smallest'
   | 'rg-narrow'

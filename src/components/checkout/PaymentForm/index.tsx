@@ -36,7 +36,7 @@ export function PaymentForm() {
           content:
             activeForm === 'credit_card' ? (
               <Item>
-                <CreditCardForm paymentTypeId="credit_card" />
+                <CreditCardForm />
               </Item>
             ) : null,
           value: 'credit_card'

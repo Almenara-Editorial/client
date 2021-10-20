@@ -94,6 +94,16 @@ export const Container = styled.button.attrs<ButtonProps>(
     --button-color-active: var(--color-primary-500);
   }
 
+  &[data-color='tertiary'] {
+    --button-color: var(--color-tertiary-500);
+    --button-color-hover: var(--color-tertiary-400);
+    --button-color-focus: var(--color-tertiary-500);
+    --button-color-loading: var(--color-tertiary-300);
+    --button-text-color-loading: var(--color-white);
+    --button-color-focus-outline: var(--color-tertiary-200);
+    --button-color-active: var(--color-tertiary-500);
+  }
+
   &[data-is-outline='true'][data-color='primary'] {
     --button-color-hover: var(--color-primary-500);
   }

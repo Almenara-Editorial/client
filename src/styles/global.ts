@@ -79,6 +79,7 @@ const GlobalStyles = createGlobalStyle`
     --font-xl: 3.2rem;
     --font-2xl: 4rem;
     --font-3xl: 4.8rem;
+    --font-4xl: 5.6rem;
     --title-light: 400;
     --title-regular: 600;
     --body-regular: 400;
@@ -93,6 +94,7 @@ const GlobalStyles = createGlobalStyle`
       --font-xl: 2.8rem;
       --font-2xl: 3.2rem;
       --font-3xl: 3.8rem;
+      --font-4xl: 4.2rem;
     `}
 
     --color-primary-100: ${colors['blue-100']};
