@@ -6,8 +6,11 @@ import {
   CartasDeCristoTemplate,
   CartasDeCristoTemplateProps
 } from '@/components/templates'
-import { commonDataMapper, initializeApollo } from '@/utils'
-import { QueryCartas } from '@/graphql/generated/QueryCartas'
+import { commonDataMapper, initializeApollo, productsMapper } from '@/utils'
+import {
+  QueryCartas,
+  QueryCartas_cartasDeCristo_books_books
+} from '@/graphql/generated/QueryCartas'
 
 type CartasDeCristoProps = CartasDeCristoTemplateProps
 
@@ -26,7 +29,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       initialApolloState: apolloClient.cache.extract(),
       quote: data.cartasDeCristo?.quote,
-      books: data.cartasDeCristo?.books?.books || [],
+      books:
+        productsMapper(
+          data.cartasDeCristo?.books
+            ?.books as QueryCartas_cartasDeCristo_books_books[]
+        ) || [],
       ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
     }
   }

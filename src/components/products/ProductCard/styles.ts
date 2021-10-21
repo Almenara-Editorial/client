@@ -1,3 +1,4 @@
+import { Container as BooksGroup } from '@/components/cartas-de-cristo/BooksGroup/styles'
 import styled, { keyframes } from 'styled-components'
 
 const focusAnimation = keyframes`
@@ -24,9 +25,15 @@ export const Container = styled.div`
   &:focus-within {
     animation: ${focusAnimation} 0.6s ease forwards;
   }
+
+  ${BooksGroup} & {
+    width: 100%;
+    max-width: 38.4rem;
+  }
 `
 
 export const ProductAnchor = styled.a`
+  width: 100%;
   outline: none;
   border: none;
 `

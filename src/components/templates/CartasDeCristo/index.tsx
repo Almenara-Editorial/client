@@ -1,7 +1,8 @@
 import {
   BooksDescription,
   HeroBanner,
-  Quote
+  Quote,
+  BooksGroup
 } from '@/components/cartas-de-cristo'
 import { NewsletterSignup } from '@/components/newsletter'
 import { ProductCardModel } from '@/models'
@@ -12,13 +13,17 @@ export type CartasDeCristoTemplateProps = {
   books: ProductCardModel[]
 }
 
-export function CartasDeCristoTemplate({ quote }: CartasDeCristoTemplateProps) {
+export function CartasDeCristoTemplate({
+  quote,
+  books
+}: CartasDeCristoTemplateProps) {
   return (
     <Container>
       <HeroBanner />
       <Quote quote={quote} />
       <BooksDescription />
       <NewsletterSignup />
+      <BooksGroup books={books} />
     </Container>
   )
 }
