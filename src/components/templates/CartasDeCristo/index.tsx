@@ -22,8 +22,8 @@ export function CartasDeCristoTemplate({
       <HeroBanner />
       <Quote quote={quote} />
       <BooksDescription />
-      <NewsletterSignup />
       <BooksGroup books={books} />
+      <NewsletterSignup />
     </Container>
   )
 }

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Wrapper as DefaultWrapper } from '@/components/shared/Wrapper'
+import { media } from '@/utils'
 
 export const Container = styled.section`
   background: linear-gradient(
@@ -28,11 +29,22 @@ export const Wrapper = styled(DefaultWrapper)`
     color: var(--color-neutral-500);
     margin-bottom: 2.1rem;
   }
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+    padding-block: 4.8rem;
+  `}
 `
 
 export const Description = styled.div`
-  flex: 1 0 49rem;
-  max-width: 49rem;
+  ${media.greaterThan('medium')`
+    flex: 1 0 49rem;
+    max-width: 49rem;
+  `}
+
+  ${media.lessThan('medium')`
+    padding-bottom: 4.8rem;
+  `}
 `
 
 export const Books = styled.div`
@@ -41,4 +53,8 @@ export const Books = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 3.2rem;
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+  `}
 `

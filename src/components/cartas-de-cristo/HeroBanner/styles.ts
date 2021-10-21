@@ -1,4 +1,5 @@
 import { Wrapper } from '@/components/shared/Wrapper'
+import { media } from '@/utils'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -6,24 +7,34 @@ export const Container = styled.div`
   align-items: center;
 
   position: relative;
-  height: 80rem;
+  min-height: 80rem;
+
+  ${media.lessThan('medium')`
+    padding-block: 4.8rem;
+  `}
 `
 
 export const Content = styled(Wrapper)`
   display: flex;
   align-items: center;
   gap: 3.2rem;
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+  `}
 `
 
 export const BooksImage = styled.div`
-  position: absolute;
+  position: relative;
   flex-shrink: 0;
-  right: 50%;
+
+  ${media.greaterThan('medium')`
+    position: absolute;
+    right: 50%;
+  `}
 `
 
 export const Text = styled.div`
-  padding: 4.8rem;
-  max-width: 67.3rem;
   margin-left: auto;
   color: var(--color-primary-700);
 
@@ -43,4 +54,9 @@ export const Text = styled.div`
     font-size: var(--font-md);
     margin-bottom: 2rem;
   }
+
+  ${media.greaterThan('medium')`
+    padding: 4.8rem;
+    max-width: 67.3rem;
+  `}
 `
