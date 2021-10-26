@@ -19,7 +19,9 @@ export const QUERY_ORDERS = gql`
         price
         quantity
       }
-      status
+      status {
+        name
+      }
       total
       created_at
       paymentUrl

@@ -290,11 +290,13 @@ type CartasDeCristo {
   updated_at: DateTime!
   books: ComponentCartasBooks
   quote: String
+  Download: [ComponentCartasDownloadsGroup]
 }
 
 input CartasDeCristoInput {
   books: ComponentCartasBookInput
   quote: String
+  Download: [ComponentCartasDownloadsGroupInput]
   created_by: ID
   updated_by: ID
 }
@@ -302,6 +304,7 @@ input CartasDeCristoInput {
 input editCartasDeCristoInput {
   books: editComponentCartasBookInput
   quote: String
+  Download: [editComponentCartasDownloadsGroupInput]
   created_by: ID
   updated_by: ID
 }
@@ -873,11 +876,86 @@ type deleteNewsletterPayload {
   newsletter: Newsletter
 }
 
-enum ENUM_ORDER_STATUS {
-  Pendente
-  Aprovado
-  Processando
-  Rejeitado
+type OrderStatus {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String
+}
+
+type OrderStatusConnection {
+  values: [OrderStatus]
+  groupBy: OrderStatusGroupBy
+  aggregate: OrderStatusAggregator
+}
+
+type OrderStatusAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type OrderStatusGroupBy {
+  id: [OrderStatusConnectionId]
+  created_at: [OrderStatusConnectionCreated_at]
+  updated_at: [OrderStatusConnectionUpdated_at]
+  name: [OrderStatusConnectionName]
+}
+
+type OrderStatusConnectionId {
+  key: ID
+  connection: OrderStatusConnection
+}
+
+type OrderStatusConnectionCreated_at {
+  key: DateTime
+  connection: OrderStatusConnection
+}
+
+type OrderStatusConnectionUpdated_at {
+  key: DateTime
+  connection: OrderStatusConnection
+}
+
+type OrderStatusConnectionName {
+  key: String
+  connection: OrderStatusConnection
+}
+
+input OrderStatusInput {
+  name: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editOrderStatusInput {
+  name: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createOrderStatusInput {
+  data: OrderStatusInput
+}
+
+type createOrderStatusPayload {
+  orderStatus: OrderStatus
+}
+
+input updateOrderStatusInput {
+  where: InputID
+  data: editOrderStatusInput
+}
+
+type updateOrderStatusPayload {
+  orderStatus: OrderStatus
+}
+
+input deleteOrderStatusInput {
+  where: InputID
+}
+
+type deleteOrderStatusPayload {
+  orderStatus: OrderStatus
 }
 
 type Order {
@@ -887,13 +965,13 @@ type Order {
   user: UsersPermissionsUser
   paymentBrand: String
   cardLastFour: String
-  status: ENUM_ORDER_STATUS
   comments: String
   books: [ComponentOrderOrderProduct]
   totalInCents: Int
   shipping: ComponentOrderShippingAddress
   total: Float!
   paymentUrl: String
+  status: OrderStatus
 }
 
 type OrderConnection {
@@ -938,12 +1016,12 @@ type OrderGroupBy {
   user: [OrderConnectionUser]
   paymentBrand: [OrderConnectionPaymentBrand]
   cardLastFour: [OrderConnectionCardLastFour]
-  status: [OrderConnectionStatus]
   comments: [OrderConnectionComments]
   totalInCents: [OrderConnectionTotalInCents]
   shipping: [OrderConnectionShipping]
   total: [OrderConnectionTotal]
   paymentUrl: [OrderConnectionPaymentUrl]
+  status: [OrderConnectionStatus]
 }
 
 type OrderConnectionId {
@@ -976,11 +1054,6 @@ type OrderConnectionCardLastFour {
   connection: OrderConnection
 }
 
-type OrderConnectionStatus {
-  key: String
-  connection: OrderConnection
-}
-
 type OrderConnectionComments {
   key: String
   connection: OrderConnection
@@ -1006,17 +1079,22 @@ type OrderConnectionPaymentUrl {
   connection: OrderConnection
 }
 
+type OrderConnectionStatus {
+  key: ID
+  connection: OrderConnection
+}
+
 input OrderInput {
   user: ID
   paymentBrand: String
   cardLastFour: String
-  status: ENUM_ORDER_STATUS
   comments: String
   books: [ComponentOrderOrderProductInput]
   totalInCents: Int
   shipping: ComponentOrderShippingAddressInput
   total: Float!
   paymentUrl: String
+  status: ID
   created_by: ID
   updated_by: ID
 }
@@ -1025,13 +1103,13 @@ input editOrderInput {
   user: ID
   paymentBrand: String
   cardLastFour: String
-  status: ENUM_ORDER_STATUS
   comments: String
   books: [editComponentOrderOrderProductInput]
   totalInCents: Int
   shipping: editComponentOrderShippingAddressInput
   total: Float
   paymentUrl: String
+  status: ID
   created_by: ID
   updated_by: ID
 }
@@ -1965,6 +2043,23 @@ input editComponentCartasBookInput {
   books: [ID]
 }
 
+type ComponentCartasDownloadsGroup {
+  id: ID!
+  title: String
+  files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile!]!
+}
+
+input ComponentCartasDownloadsGroupInput {
+  title: String
+  files: [ID]
+}
+
+input editComponentCartasDownloadsGroupInput {
+  id: ID
+  title: String
+  files: [ID]
+}
+
 type ComponentHomeBanner {
   id: ID!
   url: String
@@ -2169,7 +2264,7 @@ input editComponentProductDimensionInput {
   boxWeight: Float
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Author | AuthorConnection | AuthorAggregator | AuthorGroupBy | AuthorConnectionId | AuthorConnectionCreated_at | AuthorConnectionUpdated_at | AuthorConnectionName | AuthorConnectionBook | createAuthorPayload | updateAuthorPayload | deleteAuthorPayload | BannerHero | BannerHeroConnection | BannerHeroAggregator | BannerHeroGroupBy | BannerHeroConnectionId | BannerHeroConnectionCreated_at | BannerHeroConnectionUpdated_at | BannerHeroConnectionImage | BannerHeroConnectionUrl | createBannerHeroPayload | updateBannerHeroPayload | deleteBannerHeroPayload | Cabecalho | updateCabecalhoPayload | deleteCabecalhoPayload | CartasDeCristo | updateCartasDeCristoPayload | deleteCartasDeCristoPayload | Categorias | CategoriasConnection | CategoriasAggregator | CategoriasGroupBy | CategoriasConnectionId | CategoriasConnectionCreated_at | CategoriasConnectionUpdated_at | CategoriasConnectionName | CategoriasConnectionSlug | createCategoriaPayload | updateCategoriaPayload | deleteCategoriaPayload | Contact | ContactConnection | ContactAggregator | ContactGroupBy | ContactConnectionId | ContactConnectionCreated_at | ContactConnectionUpdated_at | ContactConnectionName | ContactConnectionEmail | ContactConnectionSubject | ContactConnectionMessage | createContactPayload | updateContactPayload | deleteContactPayload | Home | updateHomePayload | deleteHomePayload | Livro | LivroConnection | LivroAggregator | LivroAggregatorSum | LivroAggregatorAvg | LivroAggregatorMin | LivroAggregatorMax | LivroGroupBy | LivroConnectionId | LivroConnectionCreated_at | LivroConnectionUpdated_at | LivroConnectionName | LivroConnectionSlug | LivroConnectionDescription | LivroConnectionParticulars | LivroConnectionPrice | LivroConnectionStock | LivroConnectionDimensions | LivroConnectionActive | LivroConnectionPromoPrice | LivroConnectionSku | LivroConnectionGtin | LivroConnectionNcm | LivroConnectionSeoDescription | createLivroPayload | updateLivroPayload | deleteLivroPayload | Newsletter | NewsletterConnection | NewsletterAggregator | NewsletterGroupBy | NewsletterConnectionId | NewsletterConnectionCreated_at | NewsletterConnectionUpdated_at | NewsletterConnectionEmail | NewsletterConnectionName | createNewsletterPayload | updateNewsletterPayload | deleteNewsletterPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionPaymentBrand | OrderConnectionCardLastFour | OrderConnectionStatus | OrderConnectionComments | OrderConnectionTotalInCents | OrderConnectionShipping | OrderConnectionTotal | OrderConnectionPaymentUrl | createOrderPayload | updateOrderPayload | deleteOrderPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionTitle | PostConnectionContent | PostConnectionCover | PostConnectionExcerpt | PostConnectionUser | PostConnectionSlug | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | PrivacyPolicy | updatePrivacyPolicyPayload | deletePrivacyPolicyPayload | Rodape | updateRodapePayload | deleteRodapePayload | Shipping | ShippingConnection | ShippingAggregator | ShippingAggregatorSum | ShippingAggregatorAvg | ShippingAggregatorMin | ShippingAggregatorMax | ShippingGroupBy | ShippingConnectionId | ShippingConnectionCreated_at | ShippingConnectionUpdated_at | ShippingConnectionService | ShippingConnectionEstimatedDelivery | ShippingConnectionCarrier | ShippingConnectionPrice | ShippingConnectionHashId | createShippingPayload | updateShippingPayload | deleteShippingPayload | TermsOfUse | updateTermsOfUsePayload | deleteTermsOfUsePayload | EmailDesignerEmailTemplate | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionFullName | createUserPayload | updateUserPayload | deleteUserPayload | ComponentCartasBooks | ComponentHomeBanner | ComponentHomeProductGroup | ComponentOrderOrderProduct | ComponentOrderShippingAddress | ComponentPageHeaderLink | ComponentPageLinks | ComponentPageSocialLink | ComponentPageSocial | ComponentProductDimensions
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Author | AuthorConnection | AuthorAggregator | AuthorGroupBy | AuthorConnectionId | AuthorConnectionCreated_at | AuthorConnectionUpdated_at | AuthorConnectionName | AuthorConnectionBook | createAuthorPayload | updateAuthorPayload | deleteAuthorPayload | BannerHero | BannerHeroConnection | BannerHeroAggregator | BannerHeroGroupBy | BannerHeroConnectionId | BannerHeroConnectionCreated_at | BannerHeroConnectionUpdated_at | BannerHeroConnectionImage | BannerHeroConnectionUrl | createBannerHeroPayload | updateBannerHeroPayload | deleteBannerHeroPayload | Cabecalho | updateCabecalhoPayload | deleteCabecalhoPayload | CartasDeCristo | updateCartasDeCristoPayload | deleteCartasDeCristoPayload | Categorias | CategoriasConnection | CategoriasAggregator | CategoriasGroupBy | CategoriasConnectionId | CategoriasConnectionCreated_at | CategoriasConnectionUpdated_at | CategoriasConnectionName | CategoriasConnectionSlug | createCategoriaPayload | updateCategoriaPayload | deleteCategoriaPayload | Contact | ContactConnection | ContactAggregator | ContactGroupBy | ContactConnectionId | ContactConnectionCreated_at | ContactConnectionUpdated_at | ContactConnectionName | ContactConnectionEmail | ContactConnectionSubject | ContactConnectionMessage | createContactPayload | updateContactPayload | deleteContactPayload | Home | updateHomePayload | deleteHomePayload | Livro | LivroConnection | LivroAggregator | LivroAggregatorSum | LivroAggregatorAvg | LivroAggregatorMin | LivroAggregatorMax | LivroGroupBy | LivroConnectionId | LivroConnectionCreated_at | LivroConnectionUpdated_at | LivroConnectionName | LivroConnectionSlug | LivroConnectionDescription | LivroConnectionParticulars | LivroConnectionPrice | LivroConnectionStock | LivroConnectionDimensions | LivroConnectionActive | LivroConnectionPromoPrice | LivroConnectionSku | LivroConnectionGtin | LivroConnectionNcm | LivroConnectionSeoDescription | createLivroPayload | updateLivroPayload | deleteLivroPayload | Newsletter | NewsletterConnection | NewsletterAggregator | NewsletterGroupBy | NewsletterConnectionId | NewsletterConnectionCreated_at | NewsletterConnectionUpdated_at | NewsletterConnectionEmail | NewsletterConnectionName | createNewsletterPayload | updateNewsletterPayload | deleteNewsletterPayload | OrderStatus | OrderStatusConnection | OrderStatusAggregator | OrderStatusGroupBy | OrderStatusConnectionId | OrderStatusConnectionCreated_at | OrderStatusConnectionUpdated_at | OrderStatusConnectionName | createOrderStatusPayload | updateOrderStatusPayload | deleteOrderStatusPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionPaymentBrand | OrderConnectionCardLastFour | OrderConnectionComments | OrderConnectionTotalInCents | OrderConnectionShipping | OrderConnectionTotal | OrderConnectionPaymentUrl | OrderConnectionStatus | createOrderPayload | updateOrderPayload | deleteOrderPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionTitle | PostConnectionContent | PostConnectionCover | PostConnectionExcerpt | PostConnectionUser | PostConnectionSlug | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | PrivacyPolicy | updatePrivacyPolicyPayload | deletePrivacyPolicyPayload | Rodape | updateRodapePayload | deleteRodapePayload | Shipping | ShippingConnection | ShippingAggregator | ShippingAggregatorSum | ShippingAggregatorAvg | ShippingAggregatorMin | ShippingAggregatorMax | ShippingGroupBy | ShippingConnectionId | ShippingConnectionCreated_at | ShippingConnectionUpdated_at | ShippingConnectionService | ShippingConnectionEstimatedDelivery | ShippingConnectionCarrier | ShippingConnectionPrice | ShippingConnectionHashId | createShippingPayload | updateShippingPayload | deleteShippingPayload | TermsOfUse | updateTermsOfUsePayload | deleteTermsOfUsePayload | EmailDesignerEmailTemplate | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionFullName | createUserPayload | updateUserPayload | deleteUserPayload | ComponentCartasBooks | ComponentCartasDownloadsGroup | ComponentHomeBanner | ComponentHomeProductGroup | ComponentOrderOrderProduct | ComponentOrderShippingAddress | ComponentPageHeaderLink | ComponentPageLinks | ComponentPageSocialLink | ComponentPageSocial | ComponentProductDimensions
 
 input InputID {
   id: ID!
@@ -2209,6 +2304,9 @@ type Query {
   newsletter(id: ID!, publicationState: PublicationState): Newsletter
   newsletters(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Newsletter!]!
   newslettersConnection(sort: String, limit: Int, start: Int, where: JSON): NewsletterConnection
+  orderStatus(id: ID!, publicationState: PublicationState): OrderStatus
+  orderStatuses(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [OrderStatus!]!
+  orderStatusesConnection(sort: String, limit: Int, start: Int, where: JSON): OrderStatusConnection
   order(id: ID!, publicationState: PublicationState): Order
   orders(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Order!]!
   ordersConnection(sort: String, limit: Int, start: Int, where: JSON): OrderConnection
@@ -2258,6 +2356,9 @@ type Mutation {
   createNewsletter(input: createNewsletterInput): createNewsletterPayload
   updateNewsletter(input: updateNewsletterInput): updateNewsletterPayload
   deleteNewsletter(input: deleteNewsletterInput): deleteNewsletterPayload
+  createOrderStatus(input: createOrderStatusInput): createOrderStatusPayload
+  updateOrderStatus(input: updateOrderStatusInput): updateOrderStatusPayload
+  deleteOrderStatus(input: deleteOrderStatusInput): deleteOrderStatusPayload
   createOrder(input: createOrderInput): createOrderPayload
   updateOrder(input: updateOrderInput): updateOrderPayload
   deleteOrder(input: deleteOrderInput): deleteOrderPayload

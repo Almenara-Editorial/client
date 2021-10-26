@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { ENUM_ORDER_STATUS, ENUM_COMPONENTPAGESOCIAL_NAME } from "./globalTypes";
+import { ENUM_COMPONENTPAGESOCIAL_NAME } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: QueryOrders
@@ -50,11 +50,16 @@ export interface QueryOrders_orders_books {
   quantity: number;
 }
 
+export interface QueryOrders_orders_status {
+  __typename: "OrderStatus";
+  name: string | null;
+}
+
 export interface QueryOrders_orders {
   __typename: "Order";
   id: string;
   books: (QueryOrders_orders_books | null)[] | null;
-  status: ENUM_ORDER_STATUS | null;
+  status: QueryOrders_orders_status | null;
   total: number;
   created_at: any;
   paymentUrl: string | null;

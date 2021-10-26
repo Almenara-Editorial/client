@@ -110,7 +110,7 @@ export type ApiOrder = {
   paymentBrand: string
   cardLastFour: string
   total: string
-  status: string
+  status: { name: string }
   comments: string
   books: ApiOrderProduct[]
   totalInCents: number
@@ -136,7 +136,7 @@ export function orderMapper(order: ApiOrder): OrderModel {
         promoPrice: product.book.promoPrice
       })) || [],
     createdAt: format(new Date(order.created_at), 'dd/MM/yyyy'),
-    status: order.status,
+    status: order.status.name,
     id: order.id.toString(),
     payment: order.payment,
     shipping: {
@@ -175,6 +175,6 @@ export function ordersMapper(
     paymentUrl: order.paymentUrl,
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     total: formatToCurrency(Number(order.total)),
-    status: order.status || ''
+    status: order.status?.name || ''
   }))
 }

@@ -16,13 +16,6 @@ export enum ENUM_COMPONENTPAGESOCIAL_NAME {
   youtube = "youtube",
 }
 
-export enum ENUM_ORDER_STATUS {
-  Aprovado = "Aprovado",
-  Pendente = "Pendente",
-  Processando = "Processando",
-  Rejeitado = "Rejeitado",
-}
-
 export interface ContactInput {
   name: string;
   email: string;
