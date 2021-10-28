@@ -22,9 +22,11 @@ export const QUERY_ORDERS = gql`
       status {
         name
       }
-      total
+      payment {
+        total
+        documentUrl
+      }
       created_at
-      paymentUrl
     }
     rodape {
       ...Footer

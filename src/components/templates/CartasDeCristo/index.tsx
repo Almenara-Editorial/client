@@ -2,20 +2,23 @@ import {
   BooksDescription,
   HeroBanner,
   Quote,
-  BooksGroup
+  BooksGroup,
+  BooksDownloads
 } from '@/components/cartas-de-cristo'
 import { NewsletterSignup } from '@/components/newsletter'
-import { ProductCardModel } from '@/models'
+import { DownloadItem, ProductCardModel } from '@/models'
 import { Container } from './styles'
 
 export type CartasDeCristoTemplateProps = {
   quote: string
   books: ProductCardModel[]
+  downloadItems: DownloadItem[]
 }
 
 export function CartasDeCristoTemplate({
   quote,
-  books
+  books,
+  downloadItems
 }: CartasDeCristoTemplateProps) {
   return (
     <Container>
@@ -23,6 +26,7 @@ export function CartasDeCristoTemplate({
       <Quote quote={quote} />
       <BooksDescription />
       <BooksGroup books={books} />
+      <BooksDownloads downloadItems={downloadItems} />
       <NewsletterSignup />
     </Container>
   )

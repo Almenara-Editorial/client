@@ -20,6 +20,14 @@ export const QUERY_CARTAS = gql`
       }
     }
 
+    downloads {
+      id
+      name
+      file {
+        url
+      }
+    }
+
     rodape {
       ...Footer
     }

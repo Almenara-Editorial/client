@@ -6,7 +6,12 @@ import {
   CartasDeCristoTemplate,
   CartasDeCristoTemplateProps
 } from '@/components/templates'
-import { commonDataMapper, initializeApollo, productsMapper } from '@/utils'
+import {
+  commonDataMapper,
+  getImageUrl,
+  initializeApollo,
+  productsMapper
+} from '@/utils'
 import {
   QueryCartas,
   QueryCartas_cartasDeCristo_books_books
@@ -29,6 +34,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       initialApolloState: apolloClient.cache.extract(),
       quote: data.cartasDeCristo?.quote,
+      downloadItems: data.downloads?.map((item) => ({
+        title: item?.name,
+        file: getImageUrl(item?.file[0]?.url)
+      })),
       books:
         productsMapper(
           data.cartasDeCristo?.books

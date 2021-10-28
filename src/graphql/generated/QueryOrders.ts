@@ -55,14 +55,19 @@ export interface QueryOrders_orders_status {
   name: string | null;
 }
 
+export interface QueryOrders_orders_payment {
+  __typename: "ComponentOrderPayment";
+  total: number | null;
+  documentUrl: string | null;
+}
+
 export interface QueryOrders_orders {
   __typename: "Order";
   id: string;
   books: (QueryOrders_orders_books | null)[] | null;
   status: QueryOrders_orders_status | null;
-  total: number;
+  payment: QueryOrders_orders_payment | null;
   created_at: any;
-  paymentUrl: string | null;
 }
 
 export interface QueryOrders_rodape_links_link {

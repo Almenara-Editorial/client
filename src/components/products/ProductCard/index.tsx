@@ -30,7 +30,7 @@ export const ProductCard = ({
     <Link href={`/produtos/${product.slug}`} as={ProductAnchor}>
       {offPercentage && <OffPercentage>-{offPercentage}%</OffPercentage>}
       <ProductCardThumbnail
-        muted={!product.stock || product.stock === 0}
+        muted={!product.stock || product.stock < 1}
         src={product.imageSrc[0]}
       />
       <Text>
@@ -50,7 +50,7 @@ export const ProductCard = ({
         )}
       </Text>
     </Link>
-    {(!product.stock || product.stock === 0) && (
+    {(!product.stock || product.stock < 1) && (
       <Anchor size="sm" align="center" color="primary">
         Avise-me quando chegar
       </Anchor>

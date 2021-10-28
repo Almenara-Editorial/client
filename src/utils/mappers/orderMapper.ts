@@ -172,9 +172,9 @@ export function ordersMapper(
           quantity: book?.quantity
         } as OrderProductModel)
     ),
-    paymentUrl: order.paymentUrl,
+    paymentUrl: order?.payment?.documentUrl,
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    total: formatToCurrency(Number(order.total)),
+    total: formatToCurrency(Number(order?.payment?.total)),
     status: order.status?.name || ''
   }))
 }

@@ -54,6 +54,18 @@ export interface QueryCartas_cartasDeCristo {
   books: QueryCartas_cartasDeCristo_books | null;
 }
 
+export interface QueryCartas_downloads_file {
+  __typename: "UploadFile";
+  url: string;
+}
+
+export interface QueryCartas_downloads {
+  __typename: "Download";
+  id: string;
+  name: string | null;
+  file: QueryCartas_downloads_file[];
+}
+
 export interface QueryCartas_rodape_links_link {
   __typename: "ComponentPageHeaderLink";
   id: string;
@@ -83,5 +95,6 @@ export interface QueryCartas_rodape {
 export interface QueryCartas {
   cabecalho: QueryCartas_cabecalho | null;
   cartasDeCristo: QueryCartas_cartasDeCristo | null;
+  downloads: QueryCartas_downloads[];
   rodape: QueryCartas_rodape | null;
 }
