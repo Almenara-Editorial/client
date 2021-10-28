@@ -5,6 +5,7 @@ export const Container = styled.button`
   position: absolute;
   top: 0.8rem;
   right: 0.8rem;
+  z-index: var(--layer-base);
 
   display: flex;
   align-items: center;

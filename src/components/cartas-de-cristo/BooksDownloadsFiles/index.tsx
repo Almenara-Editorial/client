@@ -11,6 +11,7 @@ export const BooksDownloadsFiles = ({
 }: BooksDownloadsFilesProps) => {
   return (
     <Container>
+      <p>Clique em cada um dos links para iniciar o download dos arquivos:</p>
       {downloadItems.map((item) => (
         <Item
           key={item.title}

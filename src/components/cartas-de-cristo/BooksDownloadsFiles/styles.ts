@@ -1,6 +1,13 @@
 import styled from 'styled-components'
 
-export const Container = styled.div``
+export const Container = styled.div`
+  padding: 4.8rem;
+
+  p {
+    font-size: var(--font-sm);
+    margin-bottom: 1.2rem;
+  }
+`
 
 export const Item = styled.a`
   display: flex;
@@ -8,7 +15,6 @@ export const Item = styled.a`
   gap: 1.2rem;
   text-decoration: none !important;
   color: var(--color-primary-500);
-  padding: 4.8rem;
 
   i {
     font-size: 2rem;
