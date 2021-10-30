@@ -689,6 +689,7 @@ type Livro {
   gtin: String
   ncm: String
   seoDescription: String
+  wishlist: Wishlist
   image(sort: String, limit: Int, start: Int, where: JSON): [UploadFile!]!
   categorias(sort: String, limit: Int, start: Int, where: JSON): [Categorias!]!
   authors(sort: String, limit: Int, start: Int, where: JSON): [Author!]!
@@ -750,6 +751,7 @@ type LivroGroupBy {
   gtin: [LivroConnectionGtin]
   ncm: [LivroConnectionNcm]
   seoDescription: [LivroConnectionSeoDescription]
+  wishlist: [LivroConnectionWishlist]
 }
 
 type LivroConnectionId {
@@ -832,6 +834,11 @@ type LivroConnectionSeoDescription {
   connection: LivroConnection
 }
 
+type LivroConnectionWishlist {
+  key: ID
+  connection: LivroConnection
+}
+
 input LivroInput {
   name: String!
   slug: String!
@@ -849,6 +856,7 @@ input LivroInput {
   ncm: String
   seoDescription: String
   authors: [ID]
+  wishlist: ID
   created_by: ID
   updated_by: ID
 }
@@ -870,6 +878,7 @@ input editLivroInput {
   ncm: String
   seoDescription: String
   authors: [ID]
+  wishlist: ID
   created_by: ID
   updated_by: ID
 }
@@ -1695,6 +1704,91 @@ type deleteTermsOfUsePayload {
   termsOfUse: TermsOfUse
 }
 
+type Wishlist {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  user: UsersPermissionsUser
+  books(sort: String, limit: Int, start: Int, where: JSON): [Livro!]!
+}
+
+type WishlistConnection {
+  values: [Wishlist]
+  groupBy: WishlistGroupBy
+  aggregate: WishlistAggregator
+}
+
+type WishlistAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type WishlistGroupBy {
+  id: [WishlistConnectionId]
+  created_at: [WishlistConnectionCreated_at]
+  updated_at: [WishlistConnectionUpdated_at]
+  user: [WishlistConnectionUser]
+}
+
+type WishlistConnectionId {
+  key: ID
+  connection: WishlistConnection
+}
+
+type WishlistConnectionCreated_at {
+  key: DateTime
+  connection: WishlistConnection
+}
+
+type WishlistConnectionUpdated_at {
+  key: DateTime
+  connection: WishlistConnection
+}
+
+type WishlistConnectionUser {
+  key: ID
+  connection: WishlistConnection
+}
+
+input WishlistInput {
+  user: ID
+  books: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editWishlistInput {
+  user: ID
+  books: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createWishlistInput {
+  data: WishlistInput
+}
+
+type createWishlistPayload {
+  wishlist: Wishlist
+}
+
+input updateWishlistInput {
+  where: InputID
+  data: editWishlistInput
+}
+
+type updateWishlistPayload {
+  wishlist: Wishlist
+}
+
+input deleteWishlistInput {
+  where: InputID
+}
+
+type deleteWishlistPayload {
+  wishlist: Wishlist
+}
+
 type EmailDesignerEmailTemplate {
   id: ID!
   created_at: DateTime!
@@ -2081,6 +2175,7 @@ type UsersPermissionsUser {
   blocked: Boolean
   role: UsersPermissionsRole
   fullName: String
+  wishlist: Wishlist
 }
 
 type UsersPermissionsUserConnection {
@@ -2105,6 +2200,7 @@ type UsersPermissionsUserGroupBy {
   blocked: [UsersPermissionsUserConnectionBlocked]
   role: [UsersPermissionsUserConnectionRole]
   fullName: [UsersPermissionsUserConnectionFullName]
+  wishlist: [UsersPermissionsUserConnectionWishlist]
 }
 
 type UsersPermissionsUserConnectionId {
@@ -2157,6 +2253,11 @@ type UsersPermissionsUserConnectionFullName {
   connection: UsersPermissionsUserConnection
 }
 
+type UsersPermissionsUserConnectionWishlist {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
 input UserInput {
   username: String!
   email: String!
@@ -2168,6 +2269,7 @@ input UserInput {
   blocked: Boolean
   role: ID
   fullName: String
+  wishlist: ID
   created_by: ID
   updated_by: ID
 }
@@ -2183,6 +2285,7 @@ input editUserInput {
   blocked: Boolean
   role: ID
   fullName: String
+  wishlist: ID
   created_by: ID
   updated_by: ID
 }
@@ -2473,7 +2576,7 @@ input editComponentProductDimensionInput {
   boxWeight: Float
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Author | AuthorConnection | AuthorAggregator | AuthorGroupBy | AuthorConnectionId | AuthorConnectionCreated_at | AuthorConnectionUpdated_at | AuthorConnectionName | AuthorConnectionBook | createAuthorPayload | updateAuthorPayload | deleteAuthorPayload | BannerHero | BannerHeroConnection | BannerHeroAggregator | BannerHeroGroupBy | BannerHeroConnectionId | BannerHeroConnectionCreated_at | BannerHeroConnectionUpdated_at | BannerHeroConnectionImage | BannerHeroConnectionUrl | createBannerHeroPayload | updateBannerHeroPayload | deleteBannerHeroPayload | Cabecalho | updateCabecalhoPayload | deleteCabecalhoPayload | CartasDeCristo | updateCartasDeCristoPayload | deleteCartasDeCristoPayload | Categorias | CategoriasConnection | CategoriasAggregator | CategoriasGroupBy | CategoriasConnectionId | CategoriasConnectionCreated_at | CategoriasConnectionUpdated_at | CategoriasConnectionName | CategoriasConnectionSlug | createCategoriaPayload | updateCategoriaPayload | deleteCategoriaPayload | Contact | ContactConnection | ContactAggregator | ContactGroupBy | ContactConnectionId | ContactConnectionCreated_at | ContactConnectionUpdated_at | ContactConnectionName | ContactConnectionEmail | ContactConnectionSubject | ContactConnectionMessage | createContactPayload | updateContactPayload | deleteContactPayload | Download | DownloadConnection | DownloadAggregator | DownloadAggregatorSum | DownloadAggregatorAvg | DownloadAggregatorMin | DownloadAggregatorMax | DownloadGroupBy | DownloadConnectionId | DownloadConnectionCreated_at | DownloadConnectionUpdated_at | DownloadConnectionName | DownloadConnectionTimes | createDownloadPayload | updateDownloadPayload | deleteDownloadPayload | Home | updateHomePayload | deleteHomePayload | Livro | LivroConnection | LivroAggregator | LivroAggregatorSum | LivroAggregatorAvg | LivroAggregatorMin | LivroAggregatorMax | LivroGroupBy | LivroConnectionId | LivroConnectionCreated_at | LivroConnectionUpdated_at | LivroConnectionName | LivroConnectionSlug | LivroConnectionDescription | LivroConnectionParticulars | LivroConnectionPrice | LivroConnectionStock | LivroConnectionDimensions | LivroConnectionActive | LivroConnectionPromoPrice | LivroConnectionSku | LivroConnectionGtin | LivroConnectionNcm | LivroConnectionSeoDescription | createLivroPayload | updateLivroPayload | deleteLivroPayload | Newsletter | NewsletterConnection | NewsletterAggregator | NewsletterGroupBy | NewsletterConnectionId | NewsletterConnectionCreated_at | NewsletterConnectionUpdated_at | NewsletterConnectionEmail | NewsletterConnectionName | createNewsletterPayload | updateNewsletterPayload | deleteNewsletterPayload | OrderStatus | OrderStatusConnection | OrderStatusAggregator | OrderStatusGroupBy | OrderStatusConnectionId | OrderStatusConnectionCreated_at | OrderStatusConnectionUpdated_at | OrderStatusConnectionName | createOrderStatusPayload | updateOrderStatusPayload | deleteOrderStatusPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionComments | OrderConnectionTotalInCents | OrderConnectionShipping | OrderConnectionStatus | OrderConnectionPayment | createOrderPayload | updateOrderPayload | deleteOrderPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionTitle | PostConnectionContent | PostConnectionCover | PostConnectionExcerpt | PostConnectionUser | PostConnectionSlug | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | PrivacyPolicy | updatePrivacyPolicyPayload | deletePrivacyPolicyPayload | Rodape | updateRodapePayload | deleteRodapePayload | ShippingServices | ShippingServicesConnection | ShippingServicesAggregator | ShippingServicesGroupBy | ShippingServicesConnectionId | ShippingServicesConnectionCreated_at | ShippingServicesConnectionUpdated_at | ShippingServicesConnectionName | ShippingServicesConnectionSlug | ShippingServicesConnectionActive | createShippingServicePayload | updateShippingServicePayload | deleteShippingServicePayload | Shipping | ShippingConnection | ShippingAggregator | ShippingAggregatorSum | ShippingAggregatorAvg | ShippingAggregatorMin | ShippingAggregatorMax | ShippingGroupBy | ShippingConnectionId | ShippingConnectionCreated_at | ShippingConnectionUpdated_at | ShippingConnectionEstimatedDelivery | ShippingConnectionCarrier | ShippingConnectionPrice | ShippingConnectionHashId | ShippingConnectionService | createShippingPayload | updateShippingPayload | deleteShippingPayload | TermsOfUse | updateTermsOfUsePayload | deleteTermsOfUsePayload | EmailDesignerEmailTemplate | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionFullName | createUserPayload | updateUserPayload | deleteUserPayload | ComponentCartasBooks | ComponentCartasDownloadsGroup | ComponentHomeBanner | ComponentHomeProductGroup | ComponentOrderOrderProduct | ComponentOrderPayment | ComponentOrderShippingAddress | ComponentPageHeaderLink | ComponentPageLinks | ComponentPageSocialLink | ComponentPageSocial | ComponentProductDimensions
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Author | AuthorConnection | AuthorAggregator | AuthorGroupBy | AuthorConnectionId | AuthorConnectionCreated_at | AuthorConnectionUpdated_at | AuthorConnectionName | AuthorConnectionBook | createAuthorPayload | updateAuthorPayload | deleteAuthorPayload | BannerHero | BannerHeroConnection | BannerHeroAggregator | BannerHeroGroupBy | BannerHeroConnectionId | BannerHeroConnectionCreated_at | BannerHeroConnectionUpdated_at | BannerHeroConnectionImage | BannerHeroConnectionUrl | createBannerHeroPayload | updateBannerHeroPayload | deleteBannerHeroPayload | Cabecalho | updateCabecalhoPayload | deleteCabecalhoPayload | CartasDeCristo | updateCartasDeCristoPayload | deleteCartasDeCristoPayload | Categorias | CategoriasConnection | CategoriasAggregator | CategoriasGroupBy | CategoriasConnectionId | CategoriasConnectionCreated_at | CategoriasConnectionUpdated_at | CategoriasConnectionName | CategoriasConnectionSlug | createCategoriaPayload | updateCategoriaPayload | deleteCategoriaPayload | Contact | ContactConnection | ContactAggregator | ContactGroupBy | ContactConnectionId | ContactConnectionCreated_at | ContactConnectionUpdated_at | ContactConnectionName | ContactConnectionEmail | ContactConnectionSubject | ContactConnectionMessage | createContactPayload | updateContactPayload | deleteContactPayload | Download | DownloadConnection | DownloadAggregator | DownloadAggregatorSum | DownloadAggregatorAvg | DownloadAggregatorMin | DownloadAggregatorMax | DownloadGroupBy | DownloadConnectionId | DownloadConnectionCreated_at | DownloadConnectionUpdated_at | DownloadConnectionName | DownloadConnectionTimes | createDownloadPayload | updateDownloadPayload | deleteDownloadPayload | Home | updateHomePayload | deleteHomePayload | Livro | LivroConnection | LivroAggregator | LivroAggregatorSum | LivroAggregatorAvg | LivroAggregatorMin | LivroAggregatorMax | LivroGroupBy | LivroConnectionId | LivroConnectionCreated_at | LivroConnectionUpdated_at | LivroConnectionName | LivroConnectionSlug | LivroConnectionDescription | LivroConnectionParticulars | LivroConnectionPrice | LivroConnectionStock | LivroConnectionDimensions | LivroConnectionActive | LivroConnectionPromoPrice | LivroConnectionSku | LivroConnectionGtin | LivroConnectionNcm | LivroConnectionSeoDescription | LivroConnectionWishlist | createLivroPayload | updateLivroPayload | deleteLivroPayload | Newsletter | NewsletterConnection | NewsletterAggregator | NewsletterGroupBy | NewsletterConnectionId | NewsletterConnectionCreated_at | NewsletterConnectionUpdated_at | NewsletterConnectionEmail | NewsletterConnectionName | createNewsletterPayload | updateNewsletterPayload | deleteNewsletterPayload | OrderStatus | OrderStatusConnection | OrderStatusAggregator | OrderStatusGroupBy | OrderStatusConnectionId | OrderStatusConnectionCreated_at | OrderStatusConnectionUpdated_at | OrderStatusConnectionName | createOrderStatusPayload | updateOrderStatusPayload | deleteOrderStatusPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionComments | OrderConnectionTotalInCents | OrderConnectionShipping | OrderConnectionStatus | OrderConnectionPayment | createOrderPayload | updateOrderPayload | deleteOrderPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionTitle | PostConnectionContent | PostConnectionCover | PostConnectionExcerpt | PostConnectionUser | PostConnectionSlug | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | PrivacyPolicy | updatePrivacyPolicyPayload | deletePrivacyPolicyPayload | Rodape | updateRodapePayload | deleteRodapePayload | ShippingServices | ShippingServicesConnection | ShippingServicesAggregator | ShippingServicesGroupBy | ShippingServicesConnectionId | ShippingServicesConnectionCreated_at | ShippingServicesConnectionUpdated_at | ShippingServicesConnectionName | ShippingServicesConnectionSlug | ShippingServicesConnectionActive | createShippingServicePayload | updateShippingServicePayload | deleteShippingServicePayload | Shipping | ShippingConnection | ShippingAggregator | ShippingAggregatorSum | ShippingAggregatorAvg | ShippingAggregatorMin | ShippingAggregatorMax | ShippingGroupBy | ShippingConnectionId | ShippingConnectionCreated_at | ShippingConnectionUpdated_at | ShippingConnectionEstimatedDelivery | ShippingConnectionCarrier | ShippingConnectionPrice | ShippingConnectionHashId | ShippingConnectionService | createShippingPayload | updateShippingPayload | deleteShippingPayload | TermsOfUse | updateTermsOfUsePayload | deleteTermsOfUsePayload | Wishlist | WishlistConnection | WishlistAggregator | WishlistGroupBy | WishlistConnectionId | WishlistConnectionCreated_at | WishlistConnectionUpdated_at | WishlistConnectionUser | createWishlistPayload | updateWishlistPayload | deleteWishlistPayload | EmailDesignerEmailTemplate | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionFullName | UsersPermissionsUserConnectionWishlist | createUserPayload | updateUserPayload | deleteUserPayload | ComponentCartasBooks | ComponentCartasDownloadsGroup | ComponentHomeBanner | ComponentHomeProductGroup | ComponentOrderOrderProduct | ComponentOrderPayment | ComponentOrderShippingAddress | ComponentPageHeaderLink | ComponentPageLinks | ComponentPageSocialLink | ComponentPageSocial | ComponentProductDimensions
 
 input InputID {
   id: ID!
@@ -2534,6 +2637,9 @@ type Query {
   shippings(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Shipping!]!
   shippingsConnection(sort: String, limit: Int, start: Int, where: JSON): ShippingConnection
   termsOfUse(publicationState: PublicationState): TermsOfUse
+  wishlist(id: ID!, publicationState: PublicationState): Wishlist
+  wishlists(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Wishlist!]!
+  wishlistsConnection(sort: String, limit: Int, start: Int, where: JSON): WishlistConnection
   files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile!]!
   filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
   role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
@@ -2595,6 +2701,9 @@ type Mutation {
   deleteShipping(input: deleteShippingInput): deleteShippingPayload
   updateTermsOfUse(input: updateTermsOfUseInput): updateTermsOfUsePayload
   deleteTermsOfUse: deleteTermsOfUsePayload
+  createWishlist(input: createWishlistInput): createWishlistPayload
+  updateWishlist(input: updateWishlistInput): updateWishlistPayload
+  deleteWishlist(input: deleteWishlistInput): deleteWishlistPayload
   """Delete one file"""
   deleteFile(input: deleteFileInput): deleteFilePayload
   """Create a new role"""

@@ -16,6 +16,7 @@ export const Popover = styled.div`
   position: absolute;
   top: calc(100% + var(--space-sm));
   right: 0;
+  z-index: var(--layer-popover);
 
   min-width: 100%;
   border-radius: var(--radius-lg);

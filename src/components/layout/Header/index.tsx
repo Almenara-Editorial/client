@@ -33,10 +33,10 @@ export const Header = ({ header }: HeaderProps) => {
   }, [])
 
   useEffect(() => {
-    console.log(
-      lastScrollPosition >= scrollPosition ||
-        (scrollPosition > 0 && scrollPosition === lastScrollPosition)
-    )
+    // console.log(
+    //   lastScrollPosition >= scrollPosition ||
+    //     (scrollPosition > 0 && scrollPosition === lastScrollPosition)
+    // )
   }, [lastScrollPosition, scrollPosition])
 
   return (

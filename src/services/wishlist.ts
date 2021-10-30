@@ -2,19 +2,19 @@ import { api } from './api'
 import { withAuthHeader } from '@/utils'
 
 export type UpdateUserValues = {
-  fullName: string
+  products: number[]
 }
 
 export type UpdateUserReturn = {
-  fullName: string
+  products: number[]
 }
 
-export async function updateUser(
+export async function updateWishlist(
   body: UpdateUserValues,
   token: string
 ): Promise<UpdateUserReturn> {
   const { data } = await api.put<UpdateUserReturn>(
-    '/users',
+    '/user',
     body,
     withAuthHeader(token)
   )

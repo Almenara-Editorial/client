@@ -34,4 +34,8 @@ export const Container = styled.button`
       animation: ${addToWishlistAnimation} 0.4s ease;
     }
   }
+
+  &[data-is-loading='true'] {
+    pointer-events: none;
+  }
 `

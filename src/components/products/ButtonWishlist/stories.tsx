@@ -16,6 +16,7 @@ export const Basic: Story = () => {
 
   return (
     <ButtonWishlist
+      productId="1"
       isInWishlist={isInWishlist}
       onClick={() => setIsInWishlist((state) => !state)}
     />

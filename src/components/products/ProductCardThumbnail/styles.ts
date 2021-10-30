@@ -23,14 +23,14 @@ export const Container = styled.div`
     &:before {
       position: absolute;
       top: 50%;
-      left: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
       content: 'Indisponível';
       text-align: center;
-      padding: 0.2rem;
+      padding: 0.2rem 3.2rem;
       font-weight: var(--body-bold);
       font-size: var(--font-sm);
-      width: 100%;
-      transform: translateY(-50%);
+      width: fit-content;
       color: var(--color-white);
       z-index: var(--layer-base);
       background-color: var(--color-secondary-500);

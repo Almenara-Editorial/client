@@ -43,12 +43,23 @@ export interface UsersPermissionsRegisterInput {
   fullName: string;
 }
 
+export interface WishlistInput {
+  user?: string | null;
+  books?: (string | null)[] | null;
+  created_by?: string | null;
+  updated_by?: string | null;
+}
+
 export interface createContactInput {
   data?: ContactInput | null;
 }
 
 export interface createNewsletterInput {
   data?: NewsletterInput | null;
+}
+
+export interface createWishlistInput {
+  data?: WishlistInput | null;
 }
 
 export interface editUserInput {
@@ -62,6 +73,14 @@ export interface editUserInput {
   blocked?: boolean | null;
   role?: string | null;
   fullName?: string | null;
+  wishlist?: string | null;
+  created_by?: string | null;
+  updated_by?: string | null;
+}
+
+export interface editWishlistInput {
+  user?: string | null;
+  books?: (string | null)[] | null;
   created_by?: string | null;
   updated_by?: string | null;
 }
@@ -69,6 +88,11 @@ export interface editUserInput {
 export interface updateUserInput {
   where?: InputID | null;
   data?: editUserInput | null;
+}
+
+export interface updateWishlistInput {
+  where?: InputID | null;
+  data?: editWishlistInput | null;
 }
 
 //==============================================================

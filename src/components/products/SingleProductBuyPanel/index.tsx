@@ -12,6 +12,7 @@ import { useCart } from '@/contexts'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { SingleProductAuthors } from '../SingleProductAuthors'
+import { Session } from 'next-auth'
 
 export type SingleProductBuyPanelProps = Pick<
   SingleProductModel,
@@ -75,7 +76,7 @@ export const SingleProductBuyPanel = ({
             </Button>
           )}
         </QuantityBuy>
-        <ButtonWishlist isInWishlist={false} />
+        <ButtonWishlist isInWishlist={false} productId={id} />
       </Bottom>
     </Container>
   )
