@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 
 import { QUERY_PRIVACY_POLICY } from '@/graphql/queries'
 import { QueryPrivacyPolicy } from '@/graphql/generated/QueryPrivacyPolicy'
@@ -15,7 +15,7 @@ export default function PrivacyPolicy({ content }: PrivacyPolicyProps) {
   return <PrivacyPolicyTemplate content={content} />
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo()
 
   const { data } = await apolloClient.query<QueryPrivacyPolicy>({

@@ -1,5 +1,4 @@
-import { GetServerSideProps } from 'next'
-
+import { GetStaticProps } from 'next'
 import { QUERY_TERMS_OF_USE } from '@/graphql/queries'
 import { QueryTermsOfUse } from '@/graphql/generated/QueryTermsOfUse'
 
@@ -15,7 +14,7 @@ export default function TermsOfUse({ content }: TermsOfUseProps) {
   return <TermsOfUseTemplate content={content} />
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo()
 
   const { data } = await apolloClient.query<QueryTermsOfUse>({
