@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import { CheckoutProducts, CheckoutTotal } from '..'
 import { Container, Title, Row, OrderDetails } from './styles'
 
+// TODO: Improve responsive version
+
 export function Sidebar() {
   const { query } = useRouter()
   const { products: cartProducts, totals, cartLength } = useCart()
@@ -33,16 +35,18 @@ export function Sidebar() {
           </Row>
           <Row>
             <div>Status do pagamento:</div>
-            <div>{createdOrder?.payment.status}</div>
+            <div>{createdOrder?.status}</div>
           </Row>
         </OrderDetails>
         <CheckoutProducts products={createdOrder?.books} />
         <CheckoutTotal
           totals={{
             products: createdOrder?.books.reduce(
-              (total, { quantity, price }) => total + price * quantity,
+              (total, { quantity, price, promoPrice }) =>
+                total + (promoPrice || price) * quantity,
               0
             ),
+            disccounts: 0,
             shipping: createdOrder.shipping.price,
             total: Number(createdOrder.total)
           }}

@@ -1,14 +1,48 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { QueryBookBySlug_livros } from '@/graphql/generated/QueryBookBySlug'
+import {
+  QueryBookBySlug_livros,
+  QueryBookBySlug_livros_disccounts
+} from '@/graphql/generated/QueryBookBySlug'
 import { QueryBooks_livros } from '@/graphql/generated/QueryBooks'
 import { QueryHome_home_productGroup } from '@/graphql/generated/QueryHome'
 import {
   CartItemModel,
   CartProductModel,
+  DisccountModel,
   ProductModel,
   ProductsCardsGroupModel
 } from '@/models'
 import { getImageUrl } from '../get-image-url'
+
+function compareDisccounts(
+  a: QueryBookBySlug_livros_disccounts,
+  b: QueryBookBySlug_livros_disccounts
+) {
+  if (!a?.minQuantity || !b?.minQuantity) return 0
+
+  if (a.minQuantity > b.minQuantity) {
+    return -1
+  }
+  if (a.minQuantity < b.minQuantity) {
+    return 1
+  }
+  return 0
+}
+
+function sortDisccounts(objs: QueryBookBySlug_livros_disccounts[]) {
+  return [...objs].sort(compareDisccounts)
+}
+
+function disccountMapper(
+  disccounts: QueryBookBySlug_livros_disccounts[]
+): DisccountModel[] {
+  if (!disccounts) return []
+
+  return sortDisccounts(disccounts).map((disccount) => ({
+    minQuantity: disccount.minQuantity!,
+    percentage: disccount.percentage! / 100
+  }))
+}
 
 export function productMapper(products: QueryBookBySlug_livros[]) {
   const product = products[0]
@@ -23,7 +57,8 @@ export function productMapper(products: QueryBookBySlug_livros[]) {
     imageSrc: product.image?.map((image) => getImageUrl(image?.src)),
     stock: product.stock,
     description: product.description,
-    particulars: product.particulars
+    particulars: product.particulars,
+    disccounts: disccountMapper(product.disccounts)
   }
 }
 
@@ -40,7 +75,8 @@ export function productsMapper(
     promoPrice: product.promoPrice,
     slug: product.slug,
     imageSrc: product.image?.map((image) => getImageUrl(image?.src)),
-    stock: product.stock
+    stock: product.stock,
+    disccounts: disccountMapper(product.disccounts)
   }))
 }
 
@@ -58,7 +94,8 @@ export function cartProductsMapper(
     slug: product.slug,
     imageSrc: product.image?.map((image) => getImageUrl(image?.src)),
     stock: product.stock,
-    quantity: cartItems.find((item) => item.id === product.id)!.quantity
+    quantity: cartItems.find((item) => item.id === product.id)!.quantity,
+    disccounts: disccountMapper(product.disccounts)
   }))
 }
 

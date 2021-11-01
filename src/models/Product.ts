@@ -1,3 +1,8 @@
+export type DisccountModel = {
+  minQuantity: number
+  percentage: number
+}
+
 export type ProductModel = {
   id: string
   name: string
@@ -9,11 +14,12 @@ export type ProductModel = {
   imageSrc: (string | undefined)[]
   description: string
   particulars: string
+  disccounts: DisccountModel[] | []
 }
 
 export type OrderProductModel = Pick<
   ProductModel,
-  'id' | 'name' | 'price' | 'imageSrc' | 'slug'
+  'id' | 'name' | 'price' | 'imageSrc' | 'slug' | 'promoPrice'
 > & {
   quantity: number
 }

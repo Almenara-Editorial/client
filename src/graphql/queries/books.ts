@@ -60,6 +60,10 @@ export const QUERY_BOOK = gql`
         src: url
         label: alternativeText
       }
+      disccounts {
+        minQuantity
+        percentage
+      }
     }
     rodape {
       ...Footer

@@ -18,12 +18,14 @@ export const CartSummary = () => {
         <div>Estimativa de frete:</div>
         <div>{formatToCurrency(totals.shipping)}</div>
       </Item> */}
-      {/* <Item>
-        <div>Cupom aplicado:</div>
-        <div className="withDisccount">
-          - {formatToCurrency(totals.products)}
-        </div>
-      </Item> */}
+      {totals.disccounts > 0 && (
+        <Item>
+          <div>Total de descontos:</div>
+          <div className="withDisccount">
+            - {formatToCurrency(totals.disccounts)}
+          </div>
+        </Item>
+      )}
       <MediaMatch greaterThan="medium">
         <Hr space="xl" />
       </MediaMatch>

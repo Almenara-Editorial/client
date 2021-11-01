@@ -31,6 +31,12 @@ export interface QueryOrders_orders_books_book_image {
   formats: any | null;
 }
 
+export interface QueryOrders_orders_books_book_disccounts {
+  __typename: "Disccount";
+  minQuantity: number | null;
+  percentage: number;
+}
+
 export interface QueryOrders_orders_books_book {
   __typename: "Livro";
   id: string;
@@ -41,6 +47,7 @@ export interface QueryOrders_orders_books_book {
   promoPrice: number | null;
   authors: QueryOrders_orders_books_book_authors[];
   image: QueryOrders_orders_books_book_image[];
+  disccounts: QueryOrders_orders_books_book_disccounts[];
 }
 
 export interface QueryOrders_orders_books {

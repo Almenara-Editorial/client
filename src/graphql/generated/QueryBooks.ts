@@ -31,6 +31,12 @@ export interface QueryBooks_recommended_image {
   formats: any | null;
 }
 
+export interface QueryBooks_recommended_disccounts {
+  __typename: "Disccount";
+  minQuantity: number | null;
+  percentage: number;
+}
+
 export interface QueryBooks_recommended {
   __typename: "Livro";
   id: string;
@@ -41,6 +47,7 @@ export interface QueryBooks_recommended {
   promoPrice: number | null;
   authors: QueryBooks_recommended_authors[];
   image: QueryBooks_recommended_image[];
+  disccounts: QueryBooks_recommended_disccounts[];
 }
 
 export interface QueryBooks_livros_authors {
@@ -54,6 +61,12 @@ export interface QueryBooks_livros_image {
   formats: any | null;
 }
 
+export interface QueryBooks_livros_disccounts {
+  __typename: "Disccount";
+  minQuantity: number | null;
+  percentage: number;
+}
+
 export interface QueryBooks_livros {
   __typename: "Livro";
   id: string;
@@ -64,6 +77,7 @@ export interface QueryBooks_livros {
   promoPrice: number | null;
   authors: QueryBooks_livros_authors[];
   image: QueryBooks_livros_image[];
+  disccounts: QueryBooks_livros_disccounts[];
 }
 
 export interface QueryBooks_rodape_links_link {

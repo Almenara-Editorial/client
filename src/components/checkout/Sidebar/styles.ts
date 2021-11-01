@@ -41,6 +41,14 @@ export const Row = styled.div`
 
   font-size: var(--font-sm);
 
+  > div:first-child {
+    flex: 1;
+  }
+
+  > div + div {
+    flex: 0;
+  }
+
   & + & {
     margin-top: 1.8rem;
   }

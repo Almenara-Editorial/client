@@ -12,11 +12,17 @@ import { useCart } from '@/contexts'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { SingleProductAuthors } from '../SingleProductAuthors'
-import { Session } from 'next-auth'
 
 export type SingleProductBuyPanelProps = Pick<
   SingleProductModel,
-  'id' | 'name' | 'price' | 'promoPrice' | 'stock' | 'installments' | 'authors'
+  | 'id'
+  | 'name'
+  | 'price'
+  | 'promoPrice'
+  | 'stock'
+  | 'installments'
+  | 'authors'
+  | 'disccounts'
 >
 
 export const SingleProductBuyPanel = ({
@@ -25,6 +31,7 @@ export const SingleProductBuyPanel = ({
   price,
   authors,
   installments,
+  disccounts,
   stock,
   promoPrice
 }: SingleProductBuyPanelProps) => {
@@ -52,6 +59,8 @@ export const SingleProductBuyPanel = ({
       <Hr />
       <Bottom>
         <SingleProductPrice
+          quantity={quantity}
+          disccounts={disccounts}
           price={price}
           promoPrice={promoPrice}
           installments={installments}
@@ -76,7 +85,7 @@ export const SingleProductBuyPanel = ({
             </Button>
           )}
         </QuantityBuy>
-        <ButtonWishlist isInWishlist={false} productId={id} />
+        <ButtonWishlist productId={id} />
       </Bottom>
     </Container>
   )

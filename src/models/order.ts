@@ -94,11 +94,12 @@ export type OrderModel = {
   paymentBrand?: string
   cardLastFour?: string
   status: string
-  total: string
+  total: number
   paymentUrl: string
   books: OrderProductModel[]
   payment: {
     id: string
+    total: number
     status: string
     documentUrl: string
     lastFour: string

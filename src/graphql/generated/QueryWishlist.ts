@@ -18,6 +18,12 @@ export interface QueryWishlist_wishlists_books_image {
   formats: any | null;
 }
 
+export interface QueryWishlist_wishlists_books_disccounts {
+  __typename: "Disccount";
+  minQuantity: number | null;
+  percentage: number;
+}
+
 export interface QueryWishlist_wishlists_books {
   __typename: "Livro";
   id: string;
@@ -28,6 +34,7 @@ export interface QueryWishlist_wishlists_books {
   promoPrice: number | null;
   authors: QueryWishlist_wishlists_books_authors[];
   image: QueryWishlist_wishlists_books_image[];
+  disccounts: QueryWishlist_wishlists_books_disccounts[];
 }
 
 export interface QueryWishlist_wishlists {

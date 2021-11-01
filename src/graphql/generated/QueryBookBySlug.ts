@@ -31,6 +31,12 @@ export interface QueryBookBySlug_livros_image {
   label: string | null;
 }
 
+export interface QueryBookBySlug_livros_disccounts {
+  __typename: "Disccount";
+  minQuantity: number | null;
+  percentage: number;
+}
+
 export interface QueryBookBySlug_livros {
   __typename: "Livro";
   id: string;
@@ -43,6 +49,7 @@ export interface QueryBookBySlug_livros {
   particulars: string | null;
   description: string;
   image: QueryBookBySlug_livros_image[];
+  disccounts: QueryBookBySlug_livros_disccounts[];
 }
 
 export interface QueryBookBySlug_rodape_links_link {

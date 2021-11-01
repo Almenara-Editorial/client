@@ -31,6 +31,12 @@ export interface QueryCartas_cartasDeCristo_books_books_image {
   formats: any | null;
 }
 
+export interface QueryCartas_cartasDeCristo_books_books_disccounts {
+  __typename: "Disccount";
+  minQuantity: number | null;
+  percentage: number;
+}
+
 export interface QueryCartas_cartasDeCristo_books_books {
   __typename: "Livro";
   id: string;
@@ -41,6 +47,7 @@ export interface QueryCartas_cartasDeCristo_books_books {
   promoPrice: number | null;
   authors: QueryCartas_cartasDeCristo_books_books_authors[];
   image: QueryCartas_cartasDeCristo_books_books_image[];
+  disccounts: QueryCartas_cartasDeCristo_books_books_disccounts[];
 }
 
 export interface QueryCartas_cartasDeCristo_books {

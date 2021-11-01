@@ -20,9 +20,12 @@ export const CheckoutProductCard = ({ product }: CheckoutProductCardProps) => (
           muted
           quantity={product.quantity}
           price={product.price}
+          promoPrice={product.promoPrice}
         />
 
-        <ProductCardPrice price={product.price * product.quantity} />
+        <ProductCardPrice
+          price={(product?.promoPrice || product?.price) * product.quantity}
+        />
       </div>
     </Infos>
   </Container>

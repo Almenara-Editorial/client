@@ -20,6 +20,12 @@ export interface MutationCreateWishlist_createWishlist_wishlist_books_image {
   formats: any | null;
 }
 
+export interface MutationCreateWishlist_createWishlist_wishlist_books_disccounts {
+  __typename: "Disccount";
+  minQuantity: number | null;
+  percentage: number;
+}
+
 export interface MutationCreateWishlist_createWishlist_wishlist_books {
   __typename: "Livro";
   id: string;
@@ -30,6 +36,7 @@ export interface MutationCreateWishlist_createWishlist_wishlist_books {
   promoPrice: number | null;
   authors: MutationCreateWishlist_createWishlist_wishlist_books_authors[];
   image: MutationCreateWishlist_createWishlist_wishlist_books_image[];
+  disccounts: MutationCreateWishlist_createWishlist_wishlist_books_disccounts[];
 }
 
 export interface MutationCreateWishlist_createWishlist_wishlist {

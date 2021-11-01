@@ -42,6 +42,12 @@ export interface QueryHome_home_productGroup_livros_image {
   formats: any | null;
 }
 
+export interface QueryHome_home_productGroup_livros_disccounts {
+  __typename: "Disccount";
+  minQuantity: number | null;
+  percentage: number;
+}
+
 export interface QueryHome_home_productGroup_livros {
   __typename: "Livro";
   id: string;
@@ -52,6 +58,7 @@ export interface QueryHome_home_productGroup_livros {
   promoPrice: number | null;
   authors: QueryHome_home_productGroup_livros_authors[];
   image: QueryHome_home_productGroup_livros_image[];
+  disccounts: QueryHome_home_productGroup_livros_disccounts[];
 }
 
 export interface QueryHome_home_productGroup_link {

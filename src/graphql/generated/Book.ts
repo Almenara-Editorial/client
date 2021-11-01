@@ -18,6 +18,12 @@ export interface Book_image {
   formats: any | null;
 }
 
+export interface Book_disccounts {
+  __typename: "Disccount";
+  minQuantity: number | null;
+  percentage: number;
+}
+
 export interface Book {
   __typename: "Livro";
   id: string;
@@ -28,4 +34,5 @@ export interface Book {
   promoPrice: number | null;
   authors: Book_authors[];
   image: Book_image[];
+  disccounts: Book_disccounts[];
 }

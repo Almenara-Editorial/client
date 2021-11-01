@@ -9,4 +9,9 @@ export const Container = styled.div`
   & + & {
     margin-top: 2.4rem;
   }
+
+  &[data-is-disccount='true'] {
+    color: var(--color-success-300);
+    font-weight: var(--body-bold);
+  }
 `

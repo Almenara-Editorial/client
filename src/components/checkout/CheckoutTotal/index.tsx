@@ -15,7 +15,16 @@ export const CheckoutTotal = ({ itemsLength, totals }: CheckoutTotalProps) => {
         title={`Subtotal (${itemsLength} itens)`}
         price={totals.products}
       />
-      <CheckoutTotalItem title="Frete" price={totals.shipping} />
+      {totals.shipping > 0 && (
+        <CheckoutTotalItem title="Frete" price={totals.shipping} />
+      )}
+      {totals?.disccounts > 0 && (
+        <CheckoutTotalItem
+          title="Total de descontos"
+          price={totals.disccounts}
+          isDisccount
+        />
+      )}
       <Hr space="lg" />
       <CheckoutTotalSum total={totals.total} />
     </Container>

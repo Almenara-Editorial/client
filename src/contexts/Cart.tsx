@@ -57,6 +57,7 @@ export function CartProvider({ children }: CartProviderProps) {
   const [totals, setTotals] = useState<CartTotalModel>({
     products: 0,
     shipping: 0,
+    disccounts: 0,
     total: 0
   })
   const { data, loading: loadingProducts } = useQueryProducs({
@@ -134,16 +135,27 @@ export function CartProvider({ children }: CartProviderProps) {
   }, [updateIsLoading, loadingProducts])
 
   useEffect(() => {
-    const productsTotal = products
-      .map(
-        (product) => (product.promoPrice || product.price) * product.quantity
+    let productsTotal = 0
+    let disccounts = 0
+
+    products.forEach((product) => {
+      const productTotal =
+        (product.promoPrice || product.price) * product.quantity
+
+      const disccount = product.disccounts.find(
+        (disccount) => product.quantity >= disccount.minQuantity
       )
-      .reduce((total, curr) => curr + total, 0)
+
+      disccounts += productTotal * (disccount?.percentage || 0)
+      productsTotal += productTotal
+    })
+    console.log(disccounts)
 
     setTotals({
       products: productsTotal,
       shipping: shippingTotal,
-      total: productsTotal + shippingTotal
+      disccounts,
+      total: productsTotal + shippingTotal - disccounts
     })
   }, [products, shippingTotal])
 

@@ -15,5 +15,9 @@ export const BOOK_FRAGMENT = gql`
       src: url
       formats
     }
+    disccounts {
+      minQuantity
+      percentage
+    }
   }
 `

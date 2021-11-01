@@ -17,7 +17,11 @@ export function OrderProductCard({ product }: OrderProductCardProps) {
       <ProductCardThumbnail src={product.imageSrc[0]} />
       <div className="infos">
         <ProductCardName textAlign="left" name={product.name} />
-        <ProductCardPrice quantity={product.quantity} price={product.price} />
+        <ProductCardPrice
+          quantity={product.quantity}
+          price={product.price}
+          promoPrice={product.promoPrice}
+        />
       </div>
     </Link>
   )

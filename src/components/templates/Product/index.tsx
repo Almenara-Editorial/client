@@ -19,6 +19,7 @@ export function ProductTemplate({ product }: ProductTemplateProps) {
           <SingleProductImage images={product.imageSrc} />
           <SingleProductBuyPanel
             id={product.id}
+            disccounts={product.disccounts}
             authors={product.authors}
             name={product.name}
             price={product.price}
