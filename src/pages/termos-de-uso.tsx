@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next'
 import { QUERY_TERMS_OF_USE } from '@/graphql/queries'
 import { QueryTermsOfUse } from '@/graphql/generated/QueryTermsOfUse'
-
 import {
   TermsOfUseTemplate,
   TermsOfUseTemplateProps
