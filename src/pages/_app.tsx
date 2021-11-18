@@ -12,7 +12,7 @@ import { CartProvider } from '@/contexts'
 import { Provider } from 'next-auth/client'
 
 import '@/styles/react-slick.css'
-import { MercadoPago } from '@/components/shared'
+import { MercadoPago, PayPal } from '@/components/shared'
 import { colors } from '@/styles/colors'
 
 function App({ Component, pageProps }: AppProps) {
@@ -36,6 +36,7 @@ function App({ Component, pageProps }: AppProps) {
             <link rel="apple-touch-icon" href="/img/icon-512.png" />
           </Head>
           <MercadoPago />
+          <PayPal />
           {pathname !== '/checkout' ? (
             <Layout header={pageProps.header} footer={pageProps.footer}>
               <Component {...pageProps} />

@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
   interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mp: any
+    paypal: any
   }
 }
 
 window.mp = window.mp || {}
+window.paypal = window.paypal || {}

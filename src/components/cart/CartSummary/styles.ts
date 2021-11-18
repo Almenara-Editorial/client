@@ -43,3 +43,8 @@ export const Total = styled.div`
   font-weight: var(--body-bold);
   margin-bottom: var(--space-xl);
 `
+export const PaymentButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+`

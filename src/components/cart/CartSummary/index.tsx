@@ -1,8 +1,9 @@
+import { PayPalButton } from '@/components/checkout'
 import { MediaMatch } from '@/components/layout'
 import { ButtonLink, Hr, Link } from '@/components/shared'
 import { useCart } from '@/contexts'
 import { formatToCurrency } from '@/utils'
-import { Container, Item, Title, Total } from './styles'
+import { Container, Item, Title, Total, PaymentButtons } from './styles'
 
 export const CartSummary = () => {
   const { cartItems, totals } = useCart()
@@ -36,7 +37,10 @@ export const CartSummary = () => {
         <div>Total</div>
         <div>{formatToCurrency(totals.total)}</div>
       </Total>
-      <ButtonLink href="/checkout">Continuar para Checkout</ButtonLink>
+      <PaymentButtons>
+        <ButtonLink href="/checkout">Continuar para Checkout</ButtonLink>
+        <PayPalButton />
+      </PaymentButtons>
       <Link href="/produtos">Continuar comprando</Link>
     </Container>
   )
