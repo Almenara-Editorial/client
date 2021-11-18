@@ -11,13 +11,14 @@ export type LinkProps = Omit<NextLinkProps, 'as'> &
 export const Link = ({
   children,
   size = 'rg',
+  href = '#',
   as = Anchor,
   className,
   color = 'neutral',
   ...rest
 }: LinkProps) => {
   return (
-    <NextLink {...rest} passHref>
+    <NextLink {...rest} href={href} passHref>
       <UnstyledAnchor color={color} size={size} as={as} className={className}>
         {children}
       </UnstyledAnchor>
