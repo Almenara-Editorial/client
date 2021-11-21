@@ -32,6 +32,7 @@ export interface UsersPermissionsRegisterInput {
   email: string;
   password: string;
   fullName: string;
+  documentNumber?: string | null;
 }
 
 export interface WishlistInput {
@@ -65,6 +66,8 @@ export interface editUserInput {
   role?: string | null;
   fullName?: string | null;
   wishlist?: string | null;
+  pedidos?: (string | null)[] | null;
+  documentNumber?: string | null;
   created_by?: string | null;
   updated_by?: string | null;
 }

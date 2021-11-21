@@ -3,10 +3,12 @@ import { withAuthHeader } from '@/utils'
 
 export type UpdateUserValues = {
   fullName: string
+  documentNumber: string
 }
 
 export type UpdateUserReturn = {
   fullName: string
+  documentNumber: string
 }
 
 export async function updateUser(

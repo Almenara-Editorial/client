@@ -6,16 +6,19 @@ import { ErrorMessage } from '@/components/form/ErrorMessage'
 import { RHFForm, RHFTextField } from '@/components/hook-form'
 import { useState } from 'react'
 import { FieldsWrapper, TextField } from '@/components/form'
-import { DefaultSession, Session } from 'next-auth'
+import { Session } from 'next-auth'
 import { ButtonGroup } from './styles'
 import { updateUser } from '@/services'
+import { cpfCnpjMask } from '@/constants/masks'
+import { QueryUser_me } from '@/graphql/generated/QueryUser'
 
 type AccountSettingsFormValues = {
   fullName: string
+  documentNumber: string
 }
 
 type AccountSettingsFormProps = {
-  user: DefaultSession['user']
+  user: QueryUser_me
   session: Session | null
 }
 
@@ -28,7 +31,8 @@ export const AccountSettingsForm = ({
   const formMethods = useForm<AccountSettingsFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
-      fullName: (user?.name as string) || ''
+      fullName: (user?.fullName as string) || '',
+      documentNumber: (user?.documentNumber as string) || ''
     }
   })
   const {
@@ -41,7 +45,8 @@ export const AccountSettingsForm = ({
       .then((data) => {
         setFormSuccess('Atualizado')
         reset({
-          fullName: data.fullName
+          fullName: data.fullName,
+          documentNumber: data.documentNumber
         })
       })
       .catch(() => setFormError('Ocorreu um erro ao atualizar o perfil'))
@@ -51,6 +56,11 @@ export const AccountSettingsForm = ({
     <RHFForm {...formMethods} onSubmit={onSubmit}>
       <FieldsWrapper>
         <RHFTextField label="Nome completo" name="fullName" />
+        <RHFTextField
+          label="CPF/CNPJ"
+          name="documentNumber"
+          mask={cpfCnpjMask}
+        />
         <TextField label="E-mail" disabled value={user?.email || ''} />
         <ButtonGroup>
           <ButtonLink

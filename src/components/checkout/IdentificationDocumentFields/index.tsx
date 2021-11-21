@@ -1,6 +1,7 @@
 import { FieldsRow } from '@/components/form'
 import { RHFTextField } from '@/components/hook-form'
 import { RHFSelect } from '@/components/hook-form/Select'
+import { cpfCnpjMask } from '@/constants/masks'
 import { useMercadoPago } from '@/hooks'
 
 export function IdentificationDocumentFields() {
@@ -23,7 +24,7 @@ export function IdentificationDocumentFields() {
         labelStyle="static"
         label="Número do documento"
         name="identificationNumber"
-        mask={['999.999.999-99', '99. 999. 999/9999-99']}
+        mask={cpfCnpjMask}
       />
     </FieldsRow>
   )

@@ -1,9 +1,10 @@
 import { Container, Title } from './styles'
 import { AccountSettingsForm } from '@/components/account'
-import { DefaultSession, Session } from 'next-auth'
+import { Session } from 'next-auth'
+import { QueryUser_me } from '@/graphql/generated/QueryUser'
 
 export type AccountSettingsTemplateProps = {
-  user: DefaultSession['user']
+  user: QueryUser_me
   session: Session | null
 }
 

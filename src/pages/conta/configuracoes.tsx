@@ -7,6 +7,8 @@ import {
   AccountSettingsTemplateProps
 } from '@/components/templates'
 import { loadCommonMenus } from '@/services'
+import { QUERY_USER } from '@/graphql/queries'
+import { QueryUser } from '@/graphql/generated/QueryUser'
 
 type AccountSettingsProps = AccountSettingsTemplateProps
 
@@ -30,12 +32,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: {}
     }
 
+  const { data } = await apolloClient.query<QueryUser>({
+    query: QUERY_USER,
+    context: { session }
+  })
+
   const commonMenus = await loadCommonMenus()
 
   return {
     props: {
       session,
-      user: session.user,
+      user: data.me,
       initialApolloState: apolloClient.cache.extract(),
       ...commonMenus
     }
