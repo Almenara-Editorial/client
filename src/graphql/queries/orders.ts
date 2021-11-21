@@ -1,15 +1,10 @@
 import { gql } from '@apollo/client'
-import { BOOK_FRAGMENT, FOOTER_FRAGMENT, HEADER_FRAGMENT } from '../fragments'
+import { BOOK_FRAGMENT } from '../fragments'
 
 export const QUERY_ORDERS = gql`
-  ${FOOTER_FRAGMENT}
-  ${HEADER_FRAGMENT}
   ${BOOK_FRAGMENT}
 
   query QueryOrders($limit: Int, $start: Int, $where: JSON, $sort: String) {
-    cabecalho {
-      ...Header
-    }
     orders(limit: $limit, start: $start, where: $where, sort: $sort) {
       id
       books {
@@ -27,9 +22,6 @@ export const QUERY_ORDERS = gql`
         documentUrl
       }
       created_at
-    }
-    rodape {
-      ...Footer
     }
   }
 `

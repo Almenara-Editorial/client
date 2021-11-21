@@ -1,8 +1,7 @@
-import { commonDataMapper, initializeApollo } from '@/utils'
+import { initializeApollo } from '@/utils'
 import { GetServerSideProps } from 'next'
-import { QUERY_BOOKS } from '@/graphql/queries'
-import { QueryBooks, QueryBooksVariables } from '@/graphql/generated/QueryBooks'
 import { SignInTemplate } from '@/components/templates'
+import { loadCommonMenus } from '@/services'
 
 export default function SignIn() {
   return <SignInTemplate />
@@ -11,17 +10,12 @@ export default function SignIn() {
 export const getServerSideProps: GetServerSideProps = async () => {
   const apolloClient = initializeApollo()
 
-  const { data } = await apolloClient.query<QueryBooks, QueryBooksVariables>({
-    query: QUERY_BOOKS,
-    variables: {
-      limit: 1
-    }
-  })
+  const commonMenus = await loadCommonMenus()
 
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
-      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
+      ...commonMenus
     }
   }
 }

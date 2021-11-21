@@ -1,5 +1,6 @@
 import { PostCardGroup } from '@/components/blog/PostCardGroup'
 import { PostModel } from '@/models'
+import Head from 'next/head'
 import { Container, Title } from './styles'
 
 export type BlogTemplateProps = {
@@ -8,9 +9,14 @@ export type BlogTemplateProps = {
 
 export function BlogTemplate({ posts }: BlogTemplateProps) {
   return (
-    <Container>
-      <Title>Blog</Title>
-      <PostCardGroup posts={posts} />
-    </Container>
+    <>
+      <Head>
+        <title>Almenara Editorial - Blog</title>
+      </Head>
+      <Container>
+        <Title>Blog</Title>
+        <PostCardGroup posts={posts} />
+      </Container>
+    </>
   )
 }

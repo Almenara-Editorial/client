@@ -1,4 +1,4 @@
-import { commonDataMapper, initializeApollo } from '@/utils'
+import { initializeApollo } from '@/utils'
 import { GetServerSideProps } from 'next'
 import { OrdersTemplate } from '@/components/templates'
 import { AccountLayout } from '@/components/layout'
@@ -10,6 +10,7 @@ import {
 import { QUERY_ORDERS } from '@/graphql/queries/orders'
 import { ordersMapper } from '@/utils/mappers'
 import { OrderModel } from '@/models/order'
+import { loadCommonMenus } from '@/services'
 
 type OrdersProps = {
   orders: OrderModel[]
@@ -37,12 +38,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       sort: 'id:desc'
     }
   })
+  const commonMenus = await loadCommonMenus()
 
   return {
     props: {
       orders: ordersMapper(data.orders),
       initialApolloState: apolloClient.cache.extract(),
-      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
+      ...commonMenus
     }
   }
 }

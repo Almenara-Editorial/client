@@ -1,15 +1,7 @@
 import { gql } from '@apollo/client'
-import { FOOTER_FRAGMENT, HEADER_FRAGMENT } from '../fragments'
 
 export const QUERY_BLOG = gql`
-  ${HEADER_FRAGMENT}
-  ${FOOTER_FRAGMENT}
-
   query QueryBlog {
-    cabecalho {
-      ...Header
-    }
-
     posts {
       id
       title
@@ -24,20 +16,11 @@ export const QUERY_BLOG = gql`
         lastname
       }
     }
-
-    rodape {
-      ...Footer
-    }
   }
 `
 
 export const QUERY_POST = gql`
-  ${HEADER_FRAGMENT}
-  ${FOOTER_FRAGMENT}
   query QueryPostBySlug($slug: String) {
-    cabecalho {
-      ...Header
-    }
     posts(where: { slug: $slug }) {
       id
       title
@@ -52,9 +35,6 @@ export const QUERY_POST = gql`
         firstname
         lastname
       }
-    }
-    rodape {
-      ...Footer
     }
   }
 `

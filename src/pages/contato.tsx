@@ -1,11 +1,8 @@
 import Head from 'next/head'
-import { GetServerSideProps } from 'next'
 
-import { QUERY_COMMON } from '@/graphql/queries'
-
-import { commonDataMapper, initializeApollo } from '@/utils'
-import { QueryCommon } from '@/graphql/generated/QueryCommon'
+import { initializeApollo } from '@/utils'
 import { ContactTemplate } from '@/components/templates'
+import { loadCommonMenus } from '@/services'
 
 export default function Contact() {
   return (
@@ -18,17 +15,15 @@ export default function Contact() {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export async function getStaticProps() {
   const apolloClient = initializeApollo()
-
-  const { data } = await apolloClient.query<QueryCommon>({
-    query: QUERY_COMMON
-  })
+  const commonMenus = await loadCommonMenus()
 
   return {
+    revalidate: 10,
     props: {
       initialApolloState: apolloClient.cache.extract(),
-      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
+      ...commonMenus
     }
   }
 }

@@ -7,15 +7,6 @@
 // START Enums and Input Objects
 //==============================================================
 
-export enum ENUM_COMPONENTPAGESOCIAL_NAME {
-  email = "email",
-  facebook = "facebook",
-  instagram = "instagram",
-  telegram = "telegram",
-  whatsapp = "whatsapp",
-  youtube = "youtube",
-}
-
 export interface ContactInput {
   name: string;
   email: string;

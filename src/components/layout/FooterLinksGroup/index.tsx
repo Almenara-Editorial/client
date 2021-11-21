@@ -1,9 +1,9 @@
 import { Link } from '@/components/shared'
-import { LinkGroupModel } from '@/models'
+import { DropdownModel } from '@/models'
 import { Container, Title, Anchor } from './styles'
 
 type FooterLinksGroupProps = {
-  linksGroup: LinkGroupModel
+  linksGroup: Omit<DropdownModel, 'type'>
 }
 
 export const FooterLinksGroup = ({ linksGroup }: FooterLinksGroupProps) => (

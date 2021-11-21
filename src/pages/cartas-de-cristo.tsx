@@ -6,16 +6,12 @@ import {
   CartasDeCristoTemplate,
   CartasDeCristoTemplateProps
 } from '@/components/templates'
-import {
-  commonDataMapper,
-  getImageUrl,
-  initializeApollo,
-  productsMapper
-} from '@/utils'
+import { getImageUrl, initializeApollo, productsMapper } from '@/utils'
 import {
   QueryCartas,
   QueryCartas_cartasDeCristo_books_books
 } from '@/graphql/generated/QueryCartas'
+import { loadCommonMenus } from '@/services'
 
 type CartasDeCristoProps = CartasDeCristoTemplateProps
 
@@ -29,6 +25,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await apolloClient.query<QueryCartas>({
     query: QUERY_CARTAS
   })
+  const commonMenus = await loadCommonMenus()
 
   return {
     props: {
@@ -43,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
           data.cartasDeCristo?.books
             ?.books as QueryCartas_cartasDeCristo_books_books[]
         ) || [],
-      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
+      ...commonMenus
     }
   }
 }

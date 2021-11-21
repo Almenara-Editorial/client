@@ -13,7 +13,7 @@ export const PayPalButton = () => {
 
   useEffect(() => {
     window.paypal
-      .Buttons({
+      ?.Buttons({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         createOrder: (data: any, actions: any, err: any) => {
           return actions.order.create({

@@ -4,8 +4,9 @@ import {
   QueryBookBySlugVariables
 } from '@/graphql/generated/QueryBookBySlug'
 import { QUERY_BOOK } from '@/graphql/queries'
+import { loadCommonMenus } from '@/services'
 import { initializeApollo } from '@/utils'
-import { commonDataMapper, productMapper } from '@/utils/mappers'
+import { productMapper } from '@/utils/mappers'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 
@@ -44,13 +45,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
       slug: slug.toString()
     }
   })
+  const commonMenus = await loadCommonMenus()
 
   return {
-    revalidate: 60,
+    revalidate: 10,
     props: {
       product: productMapper(data.livros),
       initialApolloState: apolloClient.cache.extract(),
-      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
+      ...commonMenus
     }
   }
 }

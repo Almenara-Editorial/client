@@ -1,7 +1,4 @@
 export * from './productMapper'
 export * from './bannersMapper'
-export * from './footerMapper'
-export * from './commonDataMapper'
 export * from './orderMapper'
-export * from './headerMapper'
 export * from './postsMapper'

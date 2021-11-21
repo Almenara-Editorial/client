@@ -1,27 +1,18 @@
-// QUERY_POST
-
 import { PostTemplate, PostTemplateProps } from '@/components/templates'
 import {
   QueryPostBySlug,
   QueryPostBySlugVariables
 } from '@/graphql/generated/QueryPostBySlug'
 import { QUERY_POST } from '@/graphql/queries'
+import { loadCommonMenus } from '@/services'
 import { initializeApollo } from '@/utils'
-import { commonDataMapper, postMapper } from '@/utils/mappers'
+import { postMapper } from '@/utils/mappers'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Head from 'next/head'
 
 type PostProps = PostTemplateProps
 
 export default function Post({ post }: PostProps) {
-  return (
-    <>
-      <Head>
-        <title>{post.title} - Almenara Editorial</title>
-      </Head>
-      <PostTemplate post={post} />
-    </>
-  )
+  return <PostTemplate post={post} />
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -46,13 +37,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
       slug: slug.toString()
     }
   })
+  const commonMenus = await loadCommonMenus()
 
   return {
-    revalidate: 60,
+    revalidate: 10,
     props: {
       post: postMapper(data.posts[0]),
       initialApolloState: apolloClient.cache.extract(),
-      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
+      ...commonMenus
     }
   }
 }

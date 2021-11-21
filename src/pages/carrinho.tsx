@@ -1,10 +1,11 @@
 import { productsMapper } from '@/utils/mappers'
-import { commonDataMapper, initializeApollo, parseQueryToWhere } from '@/utils'
+import { initializeApollo, parseQueryToWhere } from '@/utils'
 import { GetServerSideProps } from 'next'
 import { QUERY_BOOKS } from '@/graphql/queries'
 import { QueryBooks, QueryBooksVariables } from '@/graphql/generated/QueryBooks'
 import { CartTemplate, CartTemplateProps } from '@/components/templates'
 import { filterMapper } from '@/utils/mappers/fillterMapper'
+import { loadCommonMenus } from '@/services'
 
 type CartProps = CartTemplateProps
 
@@ -28,6 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       }
     }
   })
+  const commonMenus = await loadCommonMenus()
 
   return {
     props: {
@@ -35,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       products: productsMapper(data.livros),
       filters: filterMapper({ categories: data.categorias }),
       initialApolloState: apolloClient.cache.extract(),
-      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
+      ...commonMenus
     }
   }
 }

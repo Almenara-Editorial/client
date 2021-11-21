@@ -4,10 +4,11 @@ import {
   GenericPageTemplate,
   GenericPageTemplateProps
 } from '@/components/templates'
-import { commonDataMapper, initializeApollo } from '@/utils'
+import { initializeApollo } from '@/utils'
 import { QUERY_PAGE } from '@/graphql/queries/page'
 import { QueryPage, QueryPageVariables } from '@/graphql/generated/QueryPage'
 import Head from 'next/head'
+import { loadCommonMenus } from '@/services'
 
 type GenericPageProps = GenericPageTemplateProps
 
@@ -31,6 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const apolloClient = initializeApollo()
   const path = context.params?.path
+  const commonMenus = await loadCommonMenus()
 
   const { data } = await apolloClient.query<QueryPage, QueryPageVariables>({
     query: QUERY_PAGE,
@@ -45,9 +47,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       initialApolloState: apolloClient.cache.extract(),
       page: data.pages[0] || null,
-      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
+      ...commonMenus
     },
     notFound: !data.pages[0],
-    revalidate: 20
+    revalidate: 10
   }
 }

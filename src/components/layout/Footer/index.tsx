@@ -7,9 +7,9 @@ export type FooterProps = { footer: FooterModel }
 export const Footer = ({ footer }: FooterProps) => (
   <Container>
     <Wrapper>
-      <FooterLinksGroups linksGroups={footer?.linksGroups} />
+      <FooterLinksGroups body={footer?.body} />
       <FooterCopyright />
-      <FooterSocialLinks social={footer?.social} />
+      {/* <FooterSocialLinks social={footer?.social} /> */}
     </Wrapper>
   </Container>
 )

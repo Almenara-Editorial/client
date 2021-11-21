@@ -1,13 +1,11 @@
 import { GetServerSideProps } from 'next'
 
-import { QUERY_COMMON } from '@/graphql/queries'
-
 import { WishlistTemplate, WishlistTemplateProps } from '@/components/templates'
-import { commonDataMapper, initializeApollo, productsMapper } from '@/utils'
+import { initializeApollo, productsMapper } from '@/utils'
 import { QUERY_WISHLIST } from '@/graphql/queries/wishlist'
 import { QueryWishlist } from '@/graphql/generated/QueryWishlist'
-import { QueryCommon } from '@/graphql/generated/QueryCommon'
 import { protectedRoutes } from '@/utils/protectedRoutes'
+import { loadCommonMenus } from '@/services'
 
 type WishlistProps = WishlistTemplateProps
 
@@ -26,19 +24,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       identifier: session?.user?.email
     }
   })
-
-  const { data: commonData } = await apolloClient.query<QueryCommon>({
-    query: QUERY_COMMON
-  })
+  const commonMenus = await loadCommonMenus()
 
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
       products: productsMapper(data.wishlists[0]?.books),
-      ...commonDataMapper({
-        header: commonData.cabecalho,
-        footer: commonData.rodape
-      })
+      ...commonMenus
     }
   }
 }
