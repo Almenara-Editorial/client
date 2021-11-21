@@ -9,7 +9,7 @@ import { HeaderAccount } from '../HeaderAccount'
 import { useRouter } from 'next/router'
 
 type MenuProps = {
-  links: HeaderModel['links']
+  links: HeaderModel['body']
 }
 
 export const Menu = ({ links }: MenuProps) => {
@@ -40,13 +40,21 @@ export const Menu = ({ links }: MenuProps) => {
           <SearchForm />
           <HeaderAccount withoutDropdown />
           <ul>
-            {links?.map((link) => (
-              <li key={link.name}>
-                <Link href={link.url} as={Anchor}>
-                  {link.name}
-                </Link>
-              </li>
-            ))}
+            {links?.map((link) =>
+              link.type !== 'dropdown' ? (
+                <li key={link.name}>
+                  <Link href={link.url} as={Anchor}>
+                    {link.name}
+                  </Link>
+                </li>
+              ) : (
+                <li key={link.title}>
+                  <Link href={link.title} as={Anchor}>
+                    {link.title}
+                  </Link>
+                </li>
+              )
+            )}
           </ul>
         </Wrapper>
       </Dialog>

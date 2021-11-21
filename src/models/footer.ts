@@ -1,8 +1,4 @@
-export type LinkModel = {
-  id?: string
-  name: string
-  url: string
-}
+import { LinkModel } from './link'
 
 export type SocialModel = {
   name: string

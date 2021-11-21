@@ -1,12 +1,9 @@
 import { HomeTemplate, HomeTemplateProps } from '@/components/templates'
 import { QueryHome } from '@/graphql/generated/QueryHome'
 import { QUERY_HOME } from '@/graphql/queries'
+import { loadCommonMenus } from '@/services'
 import { initializeApollo } from '@/utils'
-import {
-  productsGroupsMapper,
-  bannersMapper,
-  commonDataMapper
-} from '@/utils/mappers'
+import { productsGroupsMapper, bannersMapper } from '@/utils/mappers'
 
 type HomeProps = HomeTemplateProps
 
@@ -20,14 +17,15 @@ export async function getStaticProps() {
   const { data } = await apolloClient.query<QueryHome>({
     query: QUERY_HOME
   })
+  const commonMenus = await loadCommonMenus()
 
   return {
-    revalidate: 60,
+    revalidate: 10,
     props: {
       slides: bannersMapper(data.home?.banner),
       productsGroups: productsGroupsMapper(data.home?.productGroup),
       initialApolloState: apolloClient.cache.extract(),
-      ...commonDataMapper({ header: data.cabecalho, footer: data.rodape })
+      ...commonMenus
     }
   }
 }

@@ -1,5 +1,10 @@
-import { LinkModel } from './footer'
+import { DropdownModel } from './dropdown'
+import { LinkModel } from './link'
+
+type Body = (LinkModel | DropdownModel)[]
 
 export type HeaderModel = {
-  links: LinkModel[]
+  id: number
+  name: string
+  body: Body
 }
