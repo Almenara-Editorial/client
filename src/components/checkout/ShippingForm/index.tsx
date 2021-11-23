@@ -1,4 +1,9 @@
-import { RHFForm, RHFTextField, RHFRadioGroup } from '@/components/hook-form'
+import {
+  RHFForm,
+  RHFTextField,
+  RHFRadioGroup,
+  RHFCheckbox
+} from '@/components/hook-form'
 import { useCart, useCheckoutForm } from '@/contexts'
 import { getAddressByCep, loadShippingOptionsByZipCode } from '@/services'
 import { ShippingOptionModel, ShippingValues } from '@/models'
@@ -101,6 +106,11 @@ export function ShippingForm() {
           />
         </FieldsRow>
         <RHFTextField label="Estado:" name="state" disabled={isLoading} />
+        <RHFCheckbox
+          label="Salvar endereço para próximas compras."
+          name="saveAddress"
+          disabled={isLoading}
+        />
       </FieldsWrapper>
       <SectionTitle title="Opções de entrega:" />
       {shippingOptions && shippingOptions.length > 0 ? (

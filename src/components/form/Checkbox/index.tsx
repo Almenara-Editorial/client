@@ -1,18 +1,19 @@
 import { Checkmark } from '@/components/icons'
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, useState } from 'react'
 import { Container } from './styles'
 
-type CheckboxProps = Omit<
+export type CheckboxProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'onChange' | 'value'
 > & {
   value: boolean
+  label: string
   onChange?: (value: boolean) => void
 }
 
 export const Checkbox = ({
   value,
-  children,
+  label,
   onChange,
   ...rest
 }: CheckboxProps) => {
@@ -30,7 +31,7 @@ export const Checkbox = ({
         {...rest}
       />
       <span>{value && <Checkmark />}</span>
-      {children}
+      {label}
     </Container>
   )
 }
