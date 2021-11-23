@@ -58,7 +58,16 @@ export function PaymentForm() {
               </Item>
             ) : null,
           value: payment.id
-        }))
+        })),
+        {
+          title: (
+            <Item>
+              <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_74x46.jpg" />
+              Paypal
+            </Item>
+          ),
+          value: 'paypal'
+        }
       ]}
     />
   )

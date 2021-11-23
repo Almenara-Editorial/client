@@ -8,6 +8,8 @@ export const Item = styled.div`
 
   img {
     width: 3rem;
+    height: 3rem;
+    object-fit: contain;
   }
 `
 
