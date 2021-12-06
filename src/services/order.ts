@@ -38,7 +38,7 @@ export async function createOrder({
         lastFour: order.payment?.lastFour,
         paymentBrand: order.payment?.id,
         payer: {
-          email: order.payment?.cardHolderEmail || order.payment?.payer.email,
+          email: order.payment?.cardHolderEmail || order.payment?.payer?.email,
           firstName: order.payment?.payer?.firstName || '',
           lastName: order.payment?.payer?.lastName || '',
           identification: {

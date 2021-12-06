@@ -74,7 +74,8 @@ export function CartProvider({ children }: CartProviderProps) {
       debouncedCartItems
         ? cartProductsMapper(data?.livros, debouncedCartItems)
         : [],
-    [debouncedCartItems, data?.livros]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data?.livros]
   )
 
   const removeProductFromCart = useCallback(

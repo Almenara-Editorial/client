@@ -3,6 +3,7 @@ import {
   Boleto,
   DinnersClub,
   Mastercard,
+  Paypal,
   Visa,
   Wallet
 } from '@/components/icons'
@@ -25,6 +26,7 @@ const paymentIconMatcher = {
   bolbradesco: Boleto,
   visa: Visa,
   dinners: DinnersClub,
+  paypal: Paypal,
   master: Mastercard,
   amex: AmericanExpress,
   other: Wallet
@@ -36,7 +38,8 @@ const paymentNameMatcher = {
   dinners: '',
   master: '',
   amex: '',
-  other: ''
+  other: '',
+  paypal: 'Paypal'
 }
 
 export const PaymentCard = ({ paymentId, lastFour }: PaymentCardProps) => {

@@ -83,6 +83,8 @@ export function ReviewForm() {
           <RHFTextArea label="Observações para o pedido:" name="comments" />
         </FieldsWrapper>
         <StepsButtons
+          hideConfirmButton={payment?.id === "paypal"}
+          showPaypalButton={payment?.id === "paypal"}
           nextStepButtonText="Confirmar pedido"
           isLoadingNextStep={isSubmitting}
         />

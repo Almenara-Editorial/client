@@ -15,7 +15,7 @@ export const PayPalButton = () => {
     window.paypal
       ?.Buttons({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        createOrder: (data: any, actions: any, err: any) => {
+        createOrder: (data: any, actions: any) => {
           return actions.order.create({
             intent: 'CAPTURE',
             purchase_units: [

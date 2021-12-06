@@ -1,7 +1,6 @@
 import { format } from 'date-fns'
 import { QueryOrders_orders } from '@/graphql/generated/QueryOrders'
 import { OrderModel } from '@/models/order'
-import { formatToCurrency } from '../format-to-currency'
 import { getImageUrl } from '../get-image-url'
 import { OrderProductModel } from '@/models'
 

@@ -1,4 +1,3 @@
-import { PayPalButton } from '@/components/checkout'
 import { MediaMatch } from '@/components/layout'
 import { ButtonLink, Hr, Link } from '@/components/shared'
 import { useCart } from '@/contexts'
@@ -39,7 +38,6 @@ export const CartSummary = () => {
       </Total>
       <PaymentButtons>
         <ButtonLink href="/checkout">Continuar para Checkout</ButtonLink>
-        <PayPalButton />
       </PaymentButtons>
       <Link href="/produtos">Continuar comprando</Link>
     </Container>

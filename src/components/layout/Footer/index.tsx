@@ -1,4 +1,4 @@
-import { FooterLinksGroups, FooterCopyright, FooterSocialLinks } from '..'
+import { FooterLinksGroups, FooterCopyright } from '..'
 import { FooterModel } from '@/models'
 import { Container, Wrapper } from './styles'
 

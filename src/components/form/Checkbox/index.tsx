@@ -1,5 +1,5 @@
 import { Checkmark } from '@/components/icons'
-import { InputHTMLAttributes, useState } from 'react'
+import { InputHTMLAttributes } from 'react'
 import { Container } from './styles'
 
 export type CheckboxProps = Omit<
@@ -7,7 +7,7 @@ export type CheckboxProps = Omit<
   'onChange' | 'value'
 > & {
   value: boolean
-  label: string
+  label?: string
   onChange?: (value: boolean) => void
 }
 
